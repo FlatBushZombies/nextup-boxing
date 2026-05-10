@@ -4,6 +4,8 @@ import { AboutClub } from "@/components/AboutClub"
 import { TrainingPrograms } from "@/components/TrainingPrograms"
 import { FeaturedFighters } from "@/components/FeaturedFighters"
 import { ClubAchievements } from "@/components/ClubAchievements"
+import { UpcomingMatches } from "@/components/UpcomingMatches"
+import { PreviousResults } from "@/components/PreviousResults"
 import { ScheduleClasses } from "@/components/ScheduleClasses"
 import { UpcomingEvents } from "@/components/UpcomingEvents"
 import { Merchandise } from "@/components/Merchandise"
@@ -14,45 +16,53 @@ import { Footer } from "@/components/Footer"
 
 export default function Home() {
   return (
-    <main className="bg-white">
-      {/* 1. Hero — Cinematic full-viewport, Forging Tomorrow's Champions */}
-      <HeroSection />
-
-      {/* Fixed navbar — appears after hero scroll */}
+    <>
+      {/* Always-visible Ring Magazine-style navbar */}
       <Navbar />
 
-      {/* 2. About the Club — Editorial split layout */}
-      <AboutClub />
+      <main className="bg-white">
+        {/* 1. Hero — Cinematic, Forging Tomorrow's Champions */}
+        <HeroSection />
 
-      {/* 3. Training Programs — 4 premium program cards, dark section */}
-      <TrainingPrograms />
+        {/* 2. About the Club — Editorial split layout */}
+        <AboutClub />
 
-      {/* 4. Featured Fighters — Athlete profile cards, white section */}
-      <FeaturedFighters />
+        {/* 3. Training Programs — 4 program cards, dark section */}
+        <TrainingPrograms />
 
-      {/* 5. Club Rankings & Achievements — dark section with timeline */}
-      <ClubAchievements />
+        {/* 4. Featured Fighters — Athlete profiles, white section */}
+        <FeaturedFighters />
 
-      {/* 6. Schedule & Classes — weekly timetable, white section */}
-      <ScheduleClasses />
+        {/* 5. Club Rankings & Achievements — dark, timeline */}
+        <ClubAchievements />
 
-      {/* 7. Upcoming Events — secondary section, white */}
-      <UpcomingEvents />
+        {/* 6. Upcoming Matches — Ring Magazine fight card style */}
+        <UpcomingMatches />
 
-      {/* 8. Merchandise — dark section, product grid */}
-      <Merchandise />
+        {/* 7. Previous Results — tabular dark results section */}
+        <PreviousResults />
 
-      {/* 9. News & Articles — magazine-style cards, white section */}
-      <NewsArticles />
+        {/* 8. Schedule & Classes — weekly timetable */}
+        <ScheduleClasses />
 
-      {/* 10. Membership CTA — pricing tiers + email strip */}
-      <MembershipCTA />
+        {/* 9. Upcoming Events — event posters + countdown */}
+        <UpcomingEvents />
 
-      {/* 11. Sponsors & Partners — dual marquee ticker, dark section */}
-      <SponsorsStrip />
+        {/* 10. Merchandise — product grid, dark section */}
+        <Merchandise />
 
-      {/* 12. Footer — editorial masthead */}
-      <Footer />
-    </main>
+        {/* 11. News & Articles — magazine-style cards */}
+        <NewsArticles />
+
+        {/* 12. Membership CTA — pricing tiers + email strip */}
+        <MembershipCTA />
+
+        {/* 13. Sponsors & Partners — dual marquee ticker */}
+        <SponsorsStrip />
+
+        {/* 14. Footer — editorial masthead */}
+        <Footer />
+      </main>
+    </>
   )
 }

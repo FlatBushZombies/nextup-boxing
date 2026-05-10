@@ -24,7 +24,7 @@ export function HeroSection() {
   }
 
   return (
-    <section ref={ref} id="hero" className="relative h-screen min-h-[700px] flex items-end overflow-hidden bg-[#0d1124]">
+    <section ref={ref} id="hero" className="relative min-h-screen flex items-end overflow-hidden bg-[#0d1124]">
       {/* Parallax Background */}
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
         <Image
@@ -48,8 +48,8 @@ export function HeroSection() {
         }}
       />
 
-      {/* Top rule */}
-      <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c5203a]" />
+      {/* Spacer for fixed navbar height */}
+      <div className="sr-only" />
 
       {/* Vertical side label */}
       <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden xl:flex flex-col items-center gap-3">
@@ -61,10 +61,10 @@ export function HeroSection() {
         <div className="h-16 w-px bg-gradient-to-b from-transparent via-[#b8962e]/30 to-transparent" />
       </div>
 
-      {/* Main content */}
+      {/* Main content — padded top for navbar */}
       <motion.div
         style={{ y: contentY, opacity }}
-        className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pb-20 sm:pb-28"
+        className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-[180px] pb-20 sm:pb-28"
       >
         <motion.div
           initial={{ opacity: 0, x: -30 }}
