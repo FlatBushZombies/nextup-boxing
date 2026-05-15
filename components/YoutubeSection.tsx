@@ -1,8 +1,8 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
-import { Play, ArrowUpRight, AlertCircle } from "lucide-react"
+import { motion, useInView } from "framer-motion"
+import { AlertCircle, ArrowUpRight, Play } from "lucide-react"
 
 type YoutubeFeedVideo = {
   id: string
@@ -61,9 +61,9 @@ function FeaturedCard({
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.1 }}
-      className="group relative block overflow-hidden rounded-xl border border-white/5 bg-black/40 p-2 backdrop-blur-sm"
+      className="editorial-surface-dark block overflow-hidden p-3"
     >
-      <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-black ring-1 ring-white/10 shadow-[0_0_40px_rgba(197,32,58,0.15)]">
+      <div className="relative aspect-video w-full overflow-hidden rounded-[1.15rem] bg-black ring-1 ring-white/10 shadow-[0_0_40px_rgba(197,32,58,0.15)]">
         {embedUrl ? (
           <iframe
             src={embedUrl}
@@ -81,24 +81,22 @@ function FeaturedCard({
 
       <div className="mt-6 px-4 pb-4">
         <div className="mb-4 flex items-center gap-3">
-          <div className="rounded-sm bg-[#c5203a] px-3 py-1">
-            <span className="text-[10px] font-black uppercase tracking-[0.25em] text-white">
-              Latest Upload
-            </span>
+          <div className="rounded-full bg-[#c5203a] px-4 py-2">
+            <span className="editorial-meta text-white">Latest Upload</span>
           </div>
         </div>
 
         <h3
-          className="mb-3 leading-tight tracking-wide text-white"
+          className="mb-3 leading-tight tracking-[0.03em] text-white"
           style={{
             fontFamily: "var(--font-bebas), Impact, sans-serif",
-            fontSize: "clamp(1.75rem, 4vw, 2.75rem)",
+            fontSize: "clamp(1.85rem, 4vw, 2.9rem)",
           }}
         >
           {activeVideo?.title ?? "NextUp Boxing Channel"}
         </h3>
 
-        <p className="max-w-2xl text-sm font-light leading-relaxed text-white/60 md:text-base">
+        <p className="editorial-body max-w-2xl text-sm text-white/62 md:text-base">
           {activeVideo
             ? `Published ${formatPublishedDate(activeVideo.publishedAt)}. Browse the latest uploads from the official NextUp Boxing channel.`
             : "Watch the latest uploads, highlights, and behind-the-scenes coverage directly from the official channel."}
@@ -127,14 +125,14 @@ function SmallCard({
       initial={{ opacity: 0, x: 30 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-      className={`group flex w-full cursor-pointer items-start gap-4 rounded-lg border-b border-l-2 px-3 py-4 text-left transition-all duration-300 last:border-0 hover:bg-white/5 ${
-        isActive ? "border-l-[#c5203a] bg-white/5" : "border-l-transparent"
+      className={`group flex w-full cursor-pointer items-start gap-4 rounded-2xl border border-transparent px-3 py-4 text-left transition-all duration-300 hover:bg-white/5 ${
+        isActive ? "border-white/8 bg-white/5" : ""
       }`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <div
-        className="relative flex-shrink-0 overflow-hidden rounded-md bg-[#0d1124]"
+        className="relative flex-shrink-0 overflow-hidden rounded-xl bg-[#0d1124]"
         style={{ width: "9rem", aspectRatio: "16/9" }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -145,41 +143,32 @@ function SmallCard({
         />
         <div
           className={`absolute inset-0 transition-colors duration-300 ${
-            isActive ? "bg-transparent" : "bg-[#0d1124]/40 group-hover:bg-[#0d1124]/10"
+            isActive ? "bg-transparent" : "bg-[#0d1124]/42 group-hover:bg-[#0d1124]/12"
           }`}
         />
 
         <div className="absolute inset-0 flex items-center justify-center">
           <div
-            className="flex items-center justify-center rounded-full backdrop-blur-sm transition-all duration-300"
+            className="flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-sm transition-all duration-300"
             style={{
-              width: "2.5rem",
-              height: "2.5rem",
               background: isActive || hovered ? "rgba(197,32,58,0.9)" : "rgba(255,255,255,0.15)",
-              transform: isActive || hovered ? "scale(1.1)" : "scale(1)",
+              transform: isActive || hovered ? "scale(1.08)" : "scale(1)",
             }}
           >
-            <Play
-              className="ml-px text-white"
-              fill="white"
-              style={{ width: "0.8rem", height: "0.8rem" }}
-            />
+            <Play className="ml-px h-3.5 w-3.5 text-white" fill="white" />
           </div>
         </div>
       </div>
 
       <div className="min-w-0 flex-1 pt-1">
-        <div className="mb-2 inline-block rounded-sm bg-[#1e2d5e] px-1.5 py-px">
-          <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-white">
-            {formatPublishedDate(video.publishedAt)}
-          </span>
+        <div className="mb-2 inline-flex rounded-full bg-[#1e2d5e] px-3 py-1">
+          <span className="editorial-meta text-white">{formatPublishedDate(video.publishedAt)}</span>
         </div>
 
         <h4
           className={`line-clamp-2 text-sm font-semibold leading-snug transition-colors duration-300 ${
-            isActive ? "text-[#c5203a]" : "text-white/90 group-hover:text-white"
+            isActive ? "text-[#f2ccd3]" : "text-white/90 group-hover:text-white"
           }`}
-          style={{ fontFamily: "var(--font-sans), system-ui, sans-serif" }}
         >
           {video.title}
         </h4>
@@ -237,9 +226,7 @@ export function YoutubeSection() {
 
   const activeVideo = videos.find((video) => video.id === activeVideoId) ?? videos[0] ?? null
   const activeIndex = activeVideo ? videos.findIndex((video) => video.id === activeVideo.id) : 0
-  const playlist = activeVideo
-    ? videos.filter((video) => video.id !== activeVideo.id)
-    : videos.slice(1)
+  const playlist = activeVideo ? videos.filter((video) => video.id !== activeVideo.id) : videos.slice(1)
 
   return (
     <section
@@ -249,7 +236,7 @@ export function YoutubeSection() {
       style={{ background: "#080c18" }}
     >
       <div
-        className="absolute top-0 left-1/2 h-[40vh] w-[60vw] -translate-x-1/2 pointer-events-none"
+        className="pointer-events-none absolute left-1/2 top-0 h-[40vh] w-[60vw] -translate-x-1/2"
         style={{
           background: "radial-gradient(ellipse, rgba(197,32,58,0.06) 0%, transparent 70%)",
           filter: "blur(60px)",
@@ -268,7 +255,7 @@ export function YoutubeSection() {
         }}
       />
 
-      <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#1e2d5e] via-[#c5203a] to-[#b8962e]" />
+      <div className="absolute left-0 right-0 top-0 h-[3px] bg-gradient-to-r from-[#1e2d5e] via-[#c5203a] to-[#b8962e]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -280,43 +267,26 @@ export function YoutubeSection() {
           <div>
             <div className="mb-3 flex items-center gap-3">
               <span className="h-px w-10 bg-[#c5203a]" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#c5203a]">
-                NextUp Boxing Network
-              </span>
+              <span className="section-eyebrow text-[#c5203a]">NextUp Boxing Network</span>
             </div>
 
-            <div className="flex items-center gap-4">
-              <h2
-                className="uppercase leading-none text-white"
-                style={{
-                  fontFamily: "var(--font-bebas), Impact, sans-serif",
-                  fontSize: "clamp(2.5rem, 5vw, 4rem)",
-                  letterSpacing: "0.03em",
-                }}
-              >
-                Featured Content
-              </h2>
-            </div>
+            <h2
+              className="uppercase leading-none text-white"
+              style={{
+                fontFamily: "var(--font-bebas), Impact, sans-serif",
+                fontSize: "clamp(2.7rem, 5vw, 4.2rem)",
+                letterSpacing: "0.03em",
+              }}
+            >
+              Featured Content
+            </h2>
           </div>
 
           <a
             href={channelUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex flex-shrink-0 items-center gap-2.5 rounded-md px-6 py-3 text-sm font-bold uppercase tracking-[0.15em] transition-all duration-300"
-            style={{
-              background: "rgba(255, 0, 0, 0.1)",
-              border: "1px solid rgba(255, 0, 0, 0.3)",
-              color: "#fff",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(255, 0, 0, 0.2)"
-              e.currentTarget.style.borderColor = "rgba(255, 0, 0, 0.5)"
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "rgba(255, 0, 0, 0.1)"
-              e.currentTarget.style.borderColor = "rgba(255, 0, 0, 0.3)"
-            }}
+            className="editorial-button inline-flex flex-shrink-0 items-center gap-2.5 rounded-full border border-red-500/30 bg-red-500/10 px-6 py-3 text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-red-500/45 hover:bg-red-500/18"
           >
             <Play fill="white" className="h-4 w-4 text-white" />
             Subscribe on YouTube
@@ -330,23 +300,19 @@ export function YoutubeSection() {
           className="mb-12 h-px origin-left bg-gradient-to-r from-[#c5203a]/50 via-white/10 to-transparent"
         />
 
-        <div className="grid gap-8 lg:grid-cols-[1fr_400px] lg:gap-12">
+        <div className="grid gap-8 lg:grid-cols-[1fr_390px] lg:gap-12">
           <div className="flex flex-col">
-            <FeaturedCard
-              activeVideo={activeVideo}
-              activeIndex={activeIndex}
-              playlistId={playlistId}
-            />
+            <FeaturedCard activeVideo={activeVideo} activeIndex={activeIndex} playlistId={playlistId} />
 
             {status === "error" && errorMessage ? (
-              <div className="mt-4 flex items-center gap-2 rounded-xl border border-[#c5203a]/20 bg-[#c5203a]/8 px-4 py-3 text-sm text-white/70">
+              <div className="mt-4 flex items-center gap-2 rounded-2xl border border-[#c5203a]/20 bg-[#c5203a]/8 px-4 py-3 text-sm text-white/70">
                 <AlertCircle className="h-4 w-4 flex-shrink-0 text-[#c5203a]" />
                 {errorMessage}
               </div>
             ) : null}
           </div>
 
-          <div className="flex h-full flex-col rounded-xl border border-white/5 bg-[#0d1124]/40 p-5 shadow-2xl backdrop-blur-md">
+          <div className="editorial-surface-dark flex h-full flex-col p-5">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -354,9 +320,7 @@ export function YoutubeSection() {
               className="mb-6 flex items-center gap-3 px-1"
             >
               <div className="h-2 w-2 animate-pulse rounded-full bg-[#c5203a]" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-white">
-                Up Next
-              </span>
+              <span className="editorial-meta text-white">Up Next</span>
             </motion.div>
 
             <div
@@ -367,7 +331,7 @@ export function YoutubeSection() {
                 Array.from({ length: 3 }).map((_, index) => (
                   <div
                     key={index}
-                    className="h-[108px] animate-pulse rounded-lg border border-white/5 bg-white/5"
+                    className="h-[108px] animate-pulse rounded-2xl border border-white/5 bg-white/5"
                   />
                 ))
               ) : playlist.length > 0 ? (
@@ -381,7 +345,7 @@ export function YoutubeSection() {
                   />
                 ))
               ) : (
-                <div className="rounded-lg border border-white/5 bg-white/5 px-4 py-6 text-sm leading-relaxed text-white/55">
+                <div className="rounded-2xl border border-white/5 bg-white/5 px-4 py-6 text-sm leading-relaxed text-white/55">
                   Latest uploads will populate here automatically from the connected YouTube channel.
                 </div>
               )}
@@ -394,13 +358,10 @@ export function YoutubeSection() {
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.55 }}
-              className="group mt-6 flex items-center justify-center gap-2 border-t border-white/5 pt-6 text-xs font-bold uppercase tracking-[0.2em] text-white/40 transition-all duration-300 hover:text-white"
+              className="editorial-button group mt-6 flex items-center justify-center gap-2 border-t border-white/5 pt-6 text-white/42 transition-all duration-300 hover:text-white"
             >
               View All on YouTube
-              <ArrowUpRight
-                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                style={{ width: "0.8rem", height: "0.8rem" }}
-              />
+              <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </motion.a>
           </div>
         </div>

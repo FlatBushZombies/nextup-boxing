@@ -1,8 +1,8 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { AlertCircle, ExternalLink, Heart, Loader2, MessageCircle, Play } from "lucide-react"
-import { useEffect, useState } from "react"
 
 type InstagramReel = {
   id: string
@@ -120,7 +120,7 @@ export function SocialWall() {
       />
 
       <div
-        className="absolute top-0 left-1/2 h-[300px] w-[600px] -translate-x-1/2 pointer-events-none"
+        className="pointer-events-none absolute left-1/2 top-0 h-[300px] w-[600px] -translate-x-1/2"
         style={{
           background: "radial-gradient(ellipse, rgba(197, 32, 58, 0.08) 0%, transparent 70%)",
         }}
@@ -136,9 +136,7 @@ export function SocialWall() {
         >
           <div className="mb-6 flex items-center justify-center gap-3">
             <span className="h-px w-10 bg-[#c5203a]" />
-            <span className="text-[#c5203a] text-[10px] font-bold uppercase tracking-[0.35em]">
-              Social Wall
-            </span>
+            <span className="section-eyebrow text-[#c5203a]">Social Wall</span>
             <span className="h-px w-10 bg-[#c5203a]" />
           </div>
 
@@ -150,21 +148,12 @@ export function SocialWall() {
               color: "white",
             }}
           >
-            Follow The{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, #c5203a 0%, #b8962e 60%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              Action
-            </span>
+            Follow The <span className="bg-gradient-to-r from-[#c5203a] to-[#d4ae44] bg-clip-text text-transparent">Action</span>
           </h2>
 
-          <p className="mx-auto max-w-lg text-sm leading-relaxed text-white/40 sm:text-base">
-            Live reels from our Instagram account, refreshed from the server when Instagram credentials are connected.
+          <p className="editorial-body mx-auto max-w-lg text-sm text-white/46 sm:text-base">
+            Live reels from our Instagram account, refreshed from the server when Instagram
+            credentials are connected.
           </p>
         </motion.div>
 
@@ -173,11 +162,7 @@ export function SocialWall() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-10 flex flex-col items-center justify-between gap-4 rounded-xl px-6 py-4 sm:flex-row"
-          style={{
-            background: "rgba(255,255,255,0.04)",
-            border: "1px solid rgba(255,255,255,0.06)",
-          }}
+          className="editorial-surface-dark mb-10 flex flex-col items-center justify-between gap-4 px-6 py-5 sm:flex-row"
         >
           <div className="flex items-center gap-4">
             <div
@@ -189,7 +174,7 @@ export function SocialWall() {
             >
               <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-[#0d1124]">
                 <span
-                  className="text-xl font-bold text-white"
+                  className="text-xl font-semibold text-white"
                   style={{ fontFamily: "var(--font-bebas), Impact, sans-serif" }}
                 >
                   NUB
@@ -199,9 +184,9 @@ export function SocialWall() {
 
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-sm font-bold text-white">@{feed.handle}</span>
+                <span className="text-sm font-semibold text-white">@{feed.handle}</span>
                 <span
-                  className="rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.2em]"
+                  className="rounded-full px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.18em]"
                   style={{
                     background:
                       "linear-gradient(135deg, #f09433 0%, #dc2743 50%, #bc1888 100%)",
@@ -211,9 +196,7 @@ export function SocialWall() {
                   Reels
                 </span>
               </div>
-              <p className="mt-0.5 text-xs text-white/35">
-                Next Up Boxing - Official League Account
-              </p>
+              <p className="mt-1 text-xs text-white/38">Next Up Boxing - Official League Account</p>
             </div>
           </div>
 
@@ -221,19 +204,19 @@ export function SocialWall() {
             href={feed.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-2 rounded-lg px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+            className="editorial-button group flex items-center gap-2 rounded-full px-5 py-3 text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
             style={{
               background:
                 "linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
             }}
           >
             Follow
-            <ExternalLink className="h-3 w-3 opacity-50 transition-opacity group-hover:opacity-100" />
+            <ExternalLink className="h-3.5 w-3.5 opacity-60 transition-opacity group-hover:opacity-100" />
           </a>
         </motion.div>
 
         {status === "error" && errorMessage ? (
-          <div className="mb-8 flex items-start gap-3 rounded-xl border border-[#c5203a]/20 bg-[#c5203a]/8 px-4 py-3 text-sm text-white/70">
+          <div className="mb-8 flex items-start gap-3 rounded-2xl border border-[#c5203a]/20 bg-[#c5203a]/8 px-4 py-3 text-sm text-white/70">
             <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#c5203a]" />
             <span>{errorMessage}</span>
           </div>
@@ -244,7 +227,7 @@ export function SocialWall() {
             ? Array.from({ length: 6 }).map((_, index) => (
                 <div
                   key={index}
-                  className="aspect-[9/16] animate-pulse rounded-xl border border-white/5 bg-white/5"
+                  className="aspect-[9/16] animate-pulse rounded-[1.4rem] border border-white/5 bg-white/5"
                 />
               ))
             : feed.reels.map((post, index) => (
@@ -257,7 +240,7 @@ export function SocialWall() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.08 }}
-                  className="group relative aspect-[9/16] cursor-pointer overflow-hidden rounded-xl"
+                  className="group relative aspect-[9/16] cursor-pointer overflow-hidden rounded-[1.4rem] border border-white/6"
                   style={{
                     background: gradients[index % gradients.length],
                   }}
@@ -292,26 +275,26 @@ export function SocialWall() {
                     }}
                   />
 
-                  <div className="absolute top-3 right-3 z-10">
-                    <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white/15 backdrop-blur-sm transition-all duration-300 group-hover:bg-white/25">
+                  <div className="absolute right-3 top-3 z-10">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 backdrop-blur-sm transition-all duration-300 group-hover:bg-white/25">
                       <Play className="h-3 w-3 fill-white text-white" />
                     </div>
                   </div>
 
-                  <div className="absolute top-3 left-3 z-10 rounded-full bg-black/30 px-2 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-white/85 backdrop-blur-sm">
+                  <div className="editorial-meta absolute left-3 top-3 z-10 rounded-full bg-black/30 px-3 py-1 text-white/85 backdrop-blur-sm">
                     {formatPublishedDate(post.timestamp)}
                   </div>
 
                   <div className="absolute inset-x-0 bottom-0 z-10 p-3">
-                    <p className="mb-2 line-clamp-3 text-[10px] leading-tight text-white">
+                    <p className="mb-2 line-clamp-3 text-[0.67rem] leading-tight text-white">
                       {post.caption || "Watch the latest reel from Next Up Boxing."}
                     </p>
                     <div className="flex items-center gap-3">
-                      <span className="flex items-center gap-1 text-[9px] text-white/70">
+                      <span className="flex items-center gap-1 text-[0.62rem] text-white/70">
                         <Heart className="h-3 w-3" />
                         {formatCompactCount(post.likeCount)}
                       </span>
-                      <span className="flex items-center gap-1 text-[9px] text-white/70">
+                      <span className="flex items-center gap-1 text-[0.62rem] text-white/70">
                         <MessageCircle className="h-3 w-3" />
                         {formatCompactCount(post.commentsCount)}
                       </span>
@@ -322,8 +305,9 @@ export function SocialWall() {
         </div>
 
         {status !== "loading" && feed.reels.length === 0 ? (
-          <div className="mt-8 rounded-xl border border-white/5 bg-white/5 px-5 py-6 text-center text-sm leading-relaxed text-white/55">
-            Connect the Instagram Graph API credentials in `.env.local` to show live reels from @{feed.handle}.
+          <div className="mt-8 rounded-2xl border border-white/5 bg-white/5 px-5 py-6 text-center text-sm leading-relaxed text-white/55">
+            Connect the Instagram Graph API credentials in `.env.local` to show live reels from
+            @{feed.handle}.
           </div>
         ) : null}
 
@@ -334,20 +318,12 @@ export function SocialWall() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2"
         >
-          <div
-            className="rounded-xl p-6"
-            style={{
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.06)",
-            }}
-          >
+          <div className="editorial-surface-dark p-6">
             <div className="mb-4 flex items-center gap-3">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/60">
-                Live Feed Status
-              </span>
+              <span className="section-eyebrow text-white/60">Live Feed Status</span>
             </div>
 
-            <div className="flex items-start gap-3 rounded-lg border border-white/6 bg-white/4 px-4 py-4">
+            <div className="flex items-start gap-3 rounded-2xl border border-white/6 bg-white/[0.04] px-4 py-4">
               {status === "loading" ? (
                 <Loader2 className="mt-0.5 h-4 w-4 flex-shrink-0 animate-spin text-[#b8962e]" />
               ) : status === "ready" ? (
@@ -367,18 +343,18 @@ export function SocialWall() {
                 <p className="mt-1 text-sm leading-relaxed text-white/45">
                   {status === "ready"
                     ? "The reels grid is using live media returned by the Instagram Graph API."
-                    : errorMessage || "Add your Instagram business account ID and access token in `.env.local` to power the live reels wall."}
+                    : errorMessage ||
+                      "Add your Instagram business account ID and access token in `.env.local` to power the live reels wall."}
                 </p>
               </div>
             </div>
           </div>
 
           <div
-            className="flex flex-col items-center justify-center rounded-xl p-8 text-center"
+            className="editorial-surface-dark flex flex-col items-center justify-center p-8 text-center"
             style={{
               background:
                 "linear-gradient(135deg, rgba(197, 32, 58, 0.08) 0%, rgba(30, 45, 94, 0.08) 50%, rgba(184, 150, 46, 0.06) 100%)",
-              border: "1px solid rgba(255,255,255,0.06)",
             }}
           >
             <div
@@ -390,7 +366,7 @@ export function SocialWall() {
             >
               <div className="flex h-full w-full items-center justify-center rounded-full bg-[#0d1124]">
                 <span
-                  className="text-2xl font-bold text-white"
+                  className="text-2xl font-semibold text-white"
                   style={{ fontFamily: "var(--font-bebas), Impact, sans-serif" }}
                 >
                   IG
@@ -402,28 +378,29 @@ export function SocialWall() {
               className="mb-3 text-white uppercase"
               style={{
                 fontFamily: "var(--font-bebas), Impact, sans-serif",
-                fontSize: "clamp(1.8rem, 3vw, 2.5rem)",
+                fontSize: "clamp(1.9rem, 3vw, 2.6rem)",
               }}
             >
               Don&apos;t Miss A Moment
             </h3>
 
-            <p className="mb-8 max-w-sm text-sm leading-relaxed text-white/35">
-              Follow @{feed.handle} for exclusive behind-the-scenes content, fight night announcements, fighter profiles, and real-time updates.
+            <p className="editorial-body mb-8 max-w-sm text-sm text-white/40">
+              Follow @{feed.handle} for exclusive behind-the-scenes content, fight night
+              announcements, fighter profiles, and real-time updates.
             </p>
 
             <a
               href={feed.profileUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 rounded-lg px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+              className="editorial-button group inline-flex items-center gap-3 rounded-full px-8 py-4 text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_54px_rgba(220,39,67,0.28)]"
               style={{
                 background:
                   "linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
               }}
             >
               Follow on Instagram
-              <ExternalLink className="h-4 w-4 opacity-50 transition-opacity group-hover:opacity-100" />
+              <ExternalLink className="h-4 w-4 opacity-60 transition-opacity group-hover:opacity-100" />
             </a>
           </div>
         </motion.div>
@@ -433,7 +410,7 @@ export function SocialWall() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-10 flex items-center justify-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] text-white/20"
+          className="editorial-meta mt-10 flex items-center justify-center gap-3 text-white/22"
         >
           <span className="h-px w-8 bg-white/10" />
           Follow All The Action

@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useEffect, useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
 import { Menu, X } from "lucide-react"
 
@@ -9,7 +9,8 @@ const navLinks = [
   { label: "Fights", href: "#events" },
   { label: "Rankings", href: "#rankings" },
   { label: "Live", href: "#livestream" },
-  { label: "About", href: "#about" },
+  { label: "Magazine", href: "#magazine" },
+  { label: "Social", href: "#social-wall" },
 ]
 
 export function Navbar() {
@@ -20,159 +21,119 @@ export function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
     }
+
     window.addEventListener("scroll", handleScroll, { passive: true })
-    handleScroll() // Check initial state
+    handleScroll()
+
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const shellClass = scrolled ? "navbar-editorial text-white" : "navbar-white text-[#0d1124]"
+  const brandTone = scrolled ? "text-[#b8962e]/70" : "text-[#1e2d5e]/65"
+  const metaTone = scrolled ? "text-white/35" : "text-[#0d1124]/40"
+  const linkTone = scrolled ? "text-white/65 hover:text-white" : "text-[#0d1124]/65 hover:text-[#0d1124]"
+  const logoFilter = scrolled ? "brightness(1)" : "brightness(0.5)"
+  const ctaClass = scrolled
+    ? "bg-[#c5203a] text-white hover:bg-[#a01830] hover:shadow-[0_18px_40px_rgba(197,32,58,0.28)]"
+    : "bg-[#1e2d5e] text-white hover:bg-[#141f45] hover:shadow-[0_18px_40px_rgba(30,45,94,0.24)]"
+
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out"
       id="main-navbar"
-      style={{
-        backgroundColor: scrolled ? 'rgba(13, 17, 36, 0.97)' : 'rgba(255, 255, 255, 0.97)',
-        borderBottom: scrolled
-          ? '1px solid rgba(184, 150, 46, 0.15)'
-          : '1px solid rgba(0, 0, 0, 0.06)',
-        boxShadow: scrolled
-          ? '0 4px 30px rgba(0, 0, 0, 0.3)'
-          : '0 1px 10px rgba(0, 0, 0, 0.04)',
-        backdropFilter: 'blur(20px) saturate(1.5)',
-        WebkitBackdropFilter: 'blur(20px) saturate(1.5)',
-      }}
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ease-out ${shellClass}`}
     >
-      {/* Top accent line */}
       <div
-        className="h-[3px] transition-all duration-500"
-        style={{
-          background: scrolled
-            ? '#c5203a'
-            : 'linear-gradient(90deg, #1e2d5e 0%, #c5203a 50%, #b8962e 100%)',
-        }}
+        className={`h-[3px] transition-all duration-500 ${
+          scrolled ? "bg-[#c5203a]" : "bg-gradient-to-r from-[#1e2d5e] via-[#c5203a] to-[#b8962e]"
+        }`}
       />
 
-      {/* Ticker bar — desktop only */}
       <div
-        className="hidden lg:block overflow-hidden transition-all duration-500"
-        style={{
-          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.05)' : '1px solid rgba(0,0,0,0.06)',
-        }}
+        className={`hidden overflow-hidden transition-all duration-500 lg:block ${
+          scrolled ? "border-b border-white/6" : "border-b border-black/6"
+        }`}
       >
-        <div className="max-w-7xl mx-auto px-8 py-1.5 flex items-center justify-between">
-          <span
-            className="text-[10px] font-bold uppercase tracking-[0.3em] transition-colors duration-500"
-            style={{ color: scrolled ? 'rgba(184, 150, 46, 0.7)' : 'rgba(30, 45, 94, 0.6)' }}
-          >
-            Next Up Boxing League
-          </span>
-          <span
-            className="text-[10px] font-medium uppercase tracking-[0.2em] transition-colors duration-500"
-            style={{ color: scrolled ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.35)' }}
-          >
-            Fight Night &nbsp;·&nbsp; June 6, 2026 &nbsp;·&nbsp; Madison Square Garden &nbsp;·&nbsp; 7:00 PM EST
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-2">
+          <span className={`section-eyebrow ${brandTone}`}>Next Up Boxing League</span>
+          <span className={`text-[0.72rem] font-medium uppercase tracking-[0.2em] ${metaTone}`}>
+            Fight Night | June 6, 2026 | Madison Square Garden | 7:00 PM EST
           </span>
         </div>
       </div>
 
-      {/* Main nav row */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14 sm:h-16">
-          {/* Logo */}
-          <a href="#" className="flex items-center group">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
+          <a href="#hero" className="group flex items-center">
             <Image
               src="/logo.png"
               alt="NextUp Boxing"
               width={120}
               height={60}
-              className="w-[90px] sm:w-[110px] h-auto transition-all duration-500 group-hover:scale-105"
-              style={{
-                filter: scrolled ? 'brightness(1)' : 'brightness(0.5)',
-              }}
+              className="h-auto w-[92px] transition-transform duration-500 group-hover:scale-[1.03] sm:w-[112px]"
+              style={{ filter: logoFilter }}
             />
           </a>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-0.5">
+          <div className="hidden items-center gap-1 md:flex">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="relative px-5 py-2 text-[11px] font-bold uppercase tracking-[0.25em] transition-colors duration-500 group"
-                style={{
-                  color: scrolled ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.55)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = scrolled ? '#ffffff' : '#000000'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = scrolled ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.55)'
-                }}
+                className={`group relative rounded-full px-5 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.24em] transition-all duration-300 ${linkTone}`}
               >
                 {link.label}
-                <span className="absolute bottom-1 left-5 right-5 h-px bg-[#c5203a] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                <span className="absolute inset-x-5 bottom-1 h-px origin-left scale-x-0 bg-[#c5203a] transition-transform duration-300 group-hover:scale-x-100" />
               </a>
             ))}
           </div>
 
-          {/* CTA + mobile toggle */}
           <div className="flex items-center gap-3">
             <a
               href="#livestream"
-              className="hidden sm:inline-flex items-center gap-2 px-5 py-2 text-white text-[11px] font-bold uppercase tracking-[0.2em] rounded transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
-              style={{
-                backgroundColor: scrolled ? '#c5203a' : '#1e2d5e',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = scrolled ? '#a01830' : '#141f45'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = scrolled ? '#c5203a' : '#1e2d5e'
-              }}
+              className={`editorial-button hidden items-center gap-2 rounded-full px-5 py-2.5 transition-all duration-300 hover:-translate-y-0.5 sm:inline-flex ${ctaClass}`}
             >
               <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-70" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white" />
               </span>
               Watch Live
             </a>
 
-            {/* Mobile toggle */}
             <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 transition-colors duration-500"
-              style={{ color: scrolled ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.6)' }}
+              onClick={() => setMobileOpen((open) => !open)}
+              className={`rounded-full p-2 transition-colors duration-300 md:hidden ${
+                scrolled ? "text-white/75 hover:text-white" : "text-[#0d1124]/70 hover:text-[#0d1124]"
+              }`}
               aria-label="Toggle menu"
             >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
-        {mobileOpen && (
+        {mobileOpen ? (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden"
-            style={{
-              borderTop: scrolled ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(0,0,0,0.06)',
-              backgroundColor: scrolled ? 'rgba(13, 17, 36, 0.98)' : 'rgba(255, 255, 255, 0.98)',
-            }}
+            className={`overflow-hidden border-t md:hidden ${
+              scrolled ? "border-white/8 bg-[#0d1124]/98" : "border-black/6 bg-white/98"
+            }`}
           >
-            <div className="px-4 py-4 space-y-0.5">
+            <div className="space-y-1 px-4 py-4">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center px-4 py-3 text-[11px] font-bold uppercase tracking-[0.25em] rounded transition-colors"
-                  style={{
-                    color: scrolled ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.55)',
-                  }}
+                  className={`block rounded-2xl px-4 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.24em] transition-colors duration-300 ${
+                    scrolled
+                      ? "text-white/70 hover:bg-white/5 hover:text-white"
+                      : "text-[#0d1124]/70 hover:bg-[#1e2d5e]/5 hover:text-[#0d1124]"
+                  }`}
                 >
                   {link.label}
                 </a>
@@ -180,17 +141,17 @@ export function Navbar() {
               <a
                 href="#livestream"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center gap-2 mt-3 px-5 py-3 bg-[#c5203a] text-white text-[11px] font-bold uppercase tracking-[0.2em] rounded"
+                className="editorial-button mt-3 flex items-center justify-center gap-2 rounded-full bg-[#c5203a] px-5 py-3 text-white transition-all duration-300 hover:bg-[#a01830]"
               >
                 <span className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-70" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white" />
                 </span>
                 Watch Live
               </a>
             </div>
           </motion.div>
-        )}
+        ) : null}
       </AnimatePresence>
     </nav>
   )

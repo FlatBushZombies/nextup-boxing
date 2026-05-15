@@ -29,9 +29,7 @@ export function SponsorsStrip() {
         className="flex items-center justify-center gap-4 py-8"
       >
         <span className="h-px w-16 bg-[#b8962e]/25" />
-        <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-white/30">
-          Official Partners &amp; Sponsors
-        </span>
+        <span className="section-eyebrow text-white/30">Official Partners &amp; Sponsors</span>
         <span className="h-px w-16 bg-[#b8962e]/25" />
       </motion.div>
 

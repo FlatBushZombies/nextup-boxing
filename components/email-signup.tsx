@@ -91,15 +91,15 @@ export function EmailSignup({
       className={cn(
         "w-full",
         variant === "hero"
-          ? "rounded-2xl border border-white/10 bg-black/25 p-3 shadow-[0_24px_60px_rgba(0,0,0,0.35)] backdrop-blur-md"
-          : "glass rounded-2xl p-3",
+          ? "editorial-surface-dark p-3"
+          : "editorial-surface-light p-3",
         className
       )}
     >
       <div className="mb-3 px-1">
         <p
           className={cn(
-            "text-xs font-bold uppercase tracking-[0.28em]",
+            "section-eyebrow",
             variant === "hero" ? "text-[#b8962e]" : "text-primary"
           )}
         >
@@ -140,10 +140,10 @@ export function EmailSignup({
               }
             }}
             className={cn(
-              "h-14 pl-12 pr-4",
+              "h-14 rounded-full pl-12 pr-4 font-medium shadow-none",
               variant === "hero"
                 ? "border-white/10 bg-white/5 text-white placeholder:text-white/35 focus-visible:border-[#b8962e]/60 focus-visible:ring-[#b8962e]/20"
-                : "border-white/10 bg-white/50 text-primary placeholder:text-muted-foreground"
+                : "border-[#0d1124]/10 bg-white/75 text-primary placeholder:text-muted-foreground"
             )}
             aria-invalid={fieldError ? true : undefined}
             aria-describedby="email-signup-feedback"
@@ -156,10 +156,10 @@ export function EmailSignup({
           type="submit"
           disabled={isLoading}
           className={cn(
-            "h-14 px-7 font-bold uppercase tracking-[0.15em]",
+            "editorial-button h-14 rounded-full px-7",
             variant === "hero"
-              ? "bg-[#b8962e] text-[#0d1124] hover:bg-[#a7862b]"
-              : "bg-primary text-primary-foreground hover:bg-primary/90"
+              ? "bg-[#b8962e] text-[#0d1124] hover:bg-[#a7862b] hover:shadow-[0_20px_45px_rgba(184,150,46,0.25)]"
+              : "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_20px_45px_rgba(30,45,94,0.16)]"
           )}
         >
           {isLoading ? (

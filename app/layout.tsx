@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Geist_Mono, Bebas_Neue } from 'next/font/google'
+import { Sora, Geist_Mono, Bebas_Neue } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const inter = Inter({ 
+const sora = Sora({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-sora",
   display: "swap",
 });
 
@@ -49,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${geistMono.variable} ${bebasNeue.variable} bg-white`}>
+    <html lang="en" className={`${sora.variable} ${geistMono.variable} ${bebasNeue.variable} bg-white`}>
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
