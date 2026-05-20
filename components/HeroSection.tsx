@@ -112,44 +112,6 @@ export function HeroSection() {
         </motion.div>
       </div>
 
-      <div className="relative z-20 shrink-0 border-t border-[#b8962e]/20 bg-[#1e2d5e] shadow-[0_-10px_30px_rgba(0,0,0,0.16)]">
-        <div className="flex h-auto flex-col items-stretch md:h-[92px] md:flex-row">
-          <div className="relative shrink-0 overflow-hidden bg-[#c5203a] px-6 py-4 text-white md:w-[220px] md:py-0">
-            <div className="relative z-10 flex h-full flex-col justify-center">
-              <span className="editorial-meta mb-1 text-white/90">June 6</span>
-              <span
-                className="text-2xl uppercase leading-none tracking-[0.06em] text-white"
-                style={{ fontFamily: "var(--font-bebas), Impact, sans-serif" }}
-              >
-                Fight Card
-              </span>
-            </div>
-            <div className="absolute bottom-0 right-[-20px] top-0 w-10 -skew-x-[20deg] bg-black/10" />
-          </div>
-
-          <div
-            className="flex flex-1 items-center gap-2 overflow-x-auto p-2"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            <style dangerouslySetInnerHTML={{ __html: "::-webkit-scrollbar { display: none; }" }} />
-
-            {fightPreview.map((fight) => (
-              <div
-                key={fight.matchup}
-                className="relative flex h-[76px] w-[232px] flex-shrink-0 flex-col justify-between rounded-2xl border border-white/10 bg-white/96 px-4 py-3 shadow-[0_10px_24px_rgba(13,17,36,0.18)]"
-              >
-                <div className="mb-1.5 flex items-center justify-between text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-[#0d1124]/46">
-                  <span className="truncate pr-2 text-[#c5203a]">{fight.division}</span>
-                  <span className="shrink-0 text-[#1e2d5e]/55">{fight.slot}</span>
-                </div>
-                <div className="text-sm font-semibold uppercase tracking-[0.08em] text-[#0d1124]">
-                  {fight.matchup}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
     </section>
   )
 }

@@ -62,7 +62,8 @@ export function Navbar() {
   }, [])
 
   const shellClass = scrolled ? "navbar-editorial text-white" : "bg-transparent text-white"
-  const ctaClass = "bg-[#c5203a] text-white hover:bg-[#a01830] hover:shadow-[0_18px_40px_rgba(197,32,58,0.28)]"
+  const signInClass =
+    "editorial-button inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-black shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100"
 
   return (
     <nav
@@ -114,10 +115,7 @@ export function Navbar() {
 
           {/* Right Actions */}
           <div className="z-10 flex flex-shrink-0 items-center gap-3">
-            <a
-              href="#signin"
-              className={`editorial-button hidden items-center gap-2 rounded-full bg-white px-5 py-2.5 text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 sm:inline-flex shadow-sm`}
-            >
+            <a href="#signin" className={signInClass}>
               <User className="h-4 w-4" />
               Sign in
             </a>
@@ -159,15 +157,12 @@ export function Navbar() {
                 </a>
               ))}
               <a
-                href="#livestream"
+                href="#signin"
                 onClick={() => setMobileOpen(false)}
-                className="editorial-button mt-3 flex items-center justify-center gap-2 rounded-full bg-[#c5203a] px-5 py-3 text-white transition-all duration-300 hover:bg-[#a01830]"
+                className={`${signInClass} mt-3 w-full justify-center`}
               >
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-70" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white" />
-                </span>
-                Watch Live
+                <User className="h-4 w-4" />
+                Sign in
               </a>
             </div>
           </motion.div>
