@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Menu, X, User } from "lucide-react"
 
 const navLinks = [
@@ -20,6 +21,9 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("hero")
   const [scrollProgress, setScrollProgress] = useState(0)
+  const pathname = usePathname()
+
+  const isHome = pathname === "/" || pathname === ""
 
   const getHash = (url: string) => {
     const idx = url.indexOf('#')
@@ -70,7 +74,9 @@ export function Navbar() {
     }
   }, [])
 
-  const shellClass = scrolled ? "navbar-editorial text-white shadow-lg" : "bg-transparent text-white"
+  // Keep navbar solid dark on sub-pages (like /boxers) and transparent on home page when unscrolled
+  const isSolid = scrolled || !isHome
+  const shellClass = isSolid ? "navbar-editorial text-white shadow-lg" : "bg-transparent text-white"
   const signInClass =
     "editorial-button inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-black shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100"
 
@@ -81,7 +87,7 @@ export function Navbar() {
     >
       <div
         className={`h-[3px] transition-all duration-500 ${
-          scrolled ? "bg-[#c5203a]" : "bg-transparent"
+          isSolid ? "bg-[#c5203a]" : "bg-transparent"
         }`}
       />
 
