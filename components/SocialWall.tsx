@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Heart, MessageCircle, Play, ExternalLink, Film, Award, Flame, User, X, Check, Share2, Eye } from "lucide-react"
+import { Heart, MessageCircle, Play, ExternalLink, X, Check, Share2 } from "lucide-react"
 
 type MockReel = {
   id: string
@@ -148,71 +148,101 @@ export function SocialWall() {
   const posts = MOCK_REELS
   const featuredPost = posts[0]
   const gridPosts = posts.slice(1)
+  const [topLeftPost, topCenterPost, topRightPost, sidePost, tallPost] = gridPosts
+
+  const renderFeedTile = (
+    post: MockReel,
+    className: string,
+    imageClassName: string,
+    captionLength: number
+  ) => (
+    <motion.button
+      key={post.id}
+      type="button"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      onClick={() => setSelectedReel(post)}
+      className={`group relative overflow-hidden rounded-[1.65rem] border border-slate-200/70 bg-slate-950 text-left text-white shadow-[0_24px_50px_rgba(15,23,42,0.14)] transition-transform duration-500 hover:-translate-y-1 ${className}`}
+    >
+      <div className={`relative h-full min-h-[220px] overflow-hidden ${imageClassName}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={post.mediaUrl}
+          alt={post.caption}
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
+        <div className="absolute left-4 top-4 rounded-full bg-black/60 px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.22em] text-white">
+          {post.duration}
+        </div>
+        <div className="absolute inset-x-0 bottom-0 p-4">
+          <p className="line-clamp-3 text-sm font-black uppercase leading-tight tracking-[0.06em] text-white">
+            {post.caption.length > captionLength ? `${post.caption.slice(0, captionLength)}...` : post.caption}
+          </p>
+          <div className="mt-3 flex flex-wrap items-center gap-2 text-[0.66rem] font-bold uppercase tracking-[0.18em] text-white/75">
+            <span>{post.views} views</span>
+            <span>{post.commentsCount} comments</span>
+          </div>
+        </div>
+      </div>
+    </motion.button>
+  )
 
   return (
     <section
       id="social-wall"
-      className="relative overflow-hidden bg-white py-20 sm:py-28 border-y border-gray-100"
+      className="relative overflow-hidden border-y border-gray-100 bg-white py-20 sm:py-28"
     >
-      {/* Sleek editorial layout grid background */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.4]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(13, 17, 36, 0.02) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(13, 17, 36, 0.02) 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-        }}
-      />
-
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mb-12 text-center"
+          className="mb-10"
         >
-          <div className="inline-flex items-center gap-3 rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-[0.68rem] font-bold uppercase tracking-[0.3em] text-slate-800 shadow-sm">
-            <span className="text-[#c5203a]">NEXTUP</span>
-            SOCIAL WALL
+          <div className="flex flex-wrap items-end gap-x-4 gap-y-2">
+            <span className="font-display text-[clamp(2.25rem,5vw,3.9rem)] font-black uppercase leading-none tracking-tight text-[#0d1124]">
+              NEXTUP
+            </span>
+            <span className="pb-1 font-sans text-[clamp(1rem,2vw,1.5rem)] font-black uppercase tracking-[0.26em] text-[#c5203a]">
+              SOCIAL WALL
+            </span>
           </div>
 
-          <h2 className="mx-auto mb-4 max-w-3xl font-display text-[clamp(2.5rem,6vw,4.8rem)] font-black uppercase tracking-tight text-[#0d1124]">
-            Follow the Feed
-          </h2>
-
-          <p className="mx-auto max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
             Real-time highlights from @nextupboxingleague — fight week, training, promos, and the behind-the-scenes energy that keeps the league moving.
           </p>
         </motion.div>
 
-        <div className="mb-10 grid gap-6 lg:grid-cols-[1.35fr_0.85fr]">
+        <div className="grid auto-rows-[110px] gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 xl:auto-rows-[104px]">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="group relative overflow-hidden rounded-[2rem] bg-slate-950 text-white shadow-[0_30px_80px_rgba(15,23,42,0.2)]"
+            className="group relative row-span-4 overflow-hidden rounded-[2rem] bg-slate-950 text-white shadow-[0_30px_80px_rgba(15,23,42,0.2)] md:col-span-2 xl:col-span-2 xl:row-span-4"
           >
-            <div className="relative h-[520px] overflow-hidden">
+            <div className="relative h-full min-h-[440px] overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={featuredPost.mediaUrl}
                 alt={featuredPost.caption}
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6">
-                <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-[0.65rem] uppercase tracking-[0.18em] text-white/80">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.26),transparent_48%)]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/32 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7">
+                <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-white/80">
                   @nextupboxingleague
                 </span>
-                <h3 className="max-w-lg text-4xl font-black uppercase tracking-tight text-white sm:text-5xl">
-                  {featuredPost.caption.length > 70 ? `${featuredPost.caption.slice(0, 70)}...` : featuredPost.caption}
+                <h3 className="max-w-lg text-3xl font-black uppercase tracking-tight text-white sm:text-[2.65rem]">
+                  {featuredPost.caption.length > 78 ? `${featuredPost.caption.slice(0, 78)}...` : featuredPost.caption}
                 </h3>
 
-                <div className="mt-6 flex flex-wrap items-center gap-3 text-[0.8rem] uppercase tracking-[0.18em] text-white/70">
+                <div className="mt-6 flex flex-wrap items-center gap-3 text-[0.74rem] font-bold uppercase tracking-[0.2em] text-white/70">
                   <span>{featuredPost.views} views</span>
                   <span>{featuredPost.duration}</span>
                   <span>{featuredPost.likeCount} likes</span>
@@ -221,93 +251,128 @@ export function SocialWall() {
             </div>
           </motion.div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            {gridPosts.map((post, index) => (
-              <motion.div
-                key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
-                onClick={() => setSelectedReel(post)}
-                className={`group relative overflow-hidden rounded-[1.75rem] border border-slate-200/70 bg-slate-950 text-white shadow-xl transition-transform duration-500 hover:-translate-y-1 ${
-                  index === gridPosts.length - 1 ? "sm:col-span-2" : ""
-                }`}
-              >
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={post.mediaUrl}
-                    alt={post.caption}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
-                  <div className="absolute left-4 top-4 rounded-full bg-black/50 px-3 py-1 text-[0.65rem] uppercase tracking-[0.18em] text-white">
-                    {post.duration}
+          {topLeftPost && renderFeedTile(
+            topLeftPost,
+            "row-span-2 md:row-span-2 xl:col-start-3 xl:row-start-1 xl:row-span-2",
+            "aspect-square",
+            62
+          )}
+
+          {topCenterPost && renderFeedTile(
+            topCenterPost,
+            "row-span-2 md:row-span-2 xl:col-start-4 xl:row-start-1 xl:row-span-2",
+            "aspect-square",
+            56
+          )}
+
+          {topRightPost && renderFeedTile(
+            topRightPost,
+            "row-span-2 md:row-span-2 xl:col-start-5 xl:row-start-1 xl:row-span-2",
+            "aspect-[4/5]",
+            54
+          )}
+
+          {sidePost && renderFeedTile(
+            sidePost,
+            "row-span-2 md:col-span-1 xl:col-start-3 xl:row-start-3 xl:row-span-2",
+            "aspect-[4/5]",
+            52
+          )}
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="hidden rounded-[1.75rem] border border-slate-200/80 bg-white xl:col-start-4 xl:row-start-3 xl:block xl:row-span-3"
+          >
+            <div className="flex h-full flex-col justify-between p-6">
+              <div>
+                <p className="text-[0.62rem] font-bold uppercase tracking-[0.34em] text-slate-400">
+                  Official Account
+                </p>
+                <p className="mt-3 text-2xl font-black uppercase tracking-tight text-slate-950">
+                  @nextupboxingleague
+                </p>
+                <p className="mt-4 text-sm leading-6 text-slate-500">
+                  124.6K followers. 320 posts. Live updates from fight week, training, promos, and every moment around the league.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="grid grid-cols-3 gap-2">
+                  <div className="rounded-2xl bg-slate-50 px-3 py-4 text-center">
+                    <p className="text-xl font-black text-[#0d1124]">124.6K</p>
+                    <p className="mt-1 text-[0.55rem] font-bold uppercase tracking-[0.22em] text-slate-400">Followers</p>
                   </div>
-                  <div className="absolute inset-x-0 bottom-0 p-4">
-                    <p className="line-clamp-3 text-sm font-semibold uppercase tracking-[0.08em] text-white">
-                      {post.caption.length > 90 ? `${post.caption.slice(0, 90)}...` : post.caption}
-                    </p>
-                    <div className="mt-3 flex flex-wrap items-center gap-2 text-[0.7rem] uppercase tracking-[0.18em] text-white/70">
-                      <span>{post.views} views</span>
-                      <span>{post.commentsCount} comments</span>
-                    </div>
+                  <div className="rounded-2xl bg-slate-50 px-3 py-4 text-center">
+                    <p className="text-xl font-black text-[#0d1124]">320</p>
+                    <p className="mt-1 text-[0.55rem] font-bold uppercase tracking-[0.22em] text-slate-400">Posts</p>
+                  </div>
+                  <div className="rounded-2xl bg-slate-50 px-3 py-4 text-center">
+                    <p className="text-xl font-black text-[#0d1124]">Live</p>
+                    <p className="mt-1 text-[0.55rem] font-bold uppercase tracking-[0.22em] text-slate-400">Hourly</p>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+
+                <a
+                  href="https://www.instagram.com/nextupboxingleague/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center rounded-full bg-[#0d1124] px-6 py-3 text-sm font-bold uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-[#1e2d41]"
+                >
+                  Follow on Instagram
+                </a>
+              </div>
+            </div>
+          </motion.div>
+
+          {tallPost && renderFeedTile(
+            tallPost,
+            "row-span-3 md:col-span-2 lg:col-span-2 xl:col-start-5 xl:row-start-3 xl:col-span-1 xl:row-span-3",
+            "aspect-[4/7] h-full",
+            70
+          )}
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="rounded-[1.75rem] border border-slate-200/80 bg-white shadow-[0_24px_50px_rgba(15,23,42,0.08)] md:col-span-2 lg:col-span-2 xl:col-span-2 xl:row-span-2"
+          >
+            <div className="flex h-full flex-col justify-between gap-6 p-6 sm:p-7">
+              <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <p className="text-[0.62rem] font-bold uppercase tracking-[0.34em] text-slate-400">
+                    Verified Feed
+                  </p>
+                  <p className="mt-3 text-3xl font-black uppercase tracking-tight text-slate-950">
+                    @nextupboxingleague
+                  </p>
+                </div>
+                <span className="inline-flex w-fit rounded-full border border-slate-200 px-4 py-2 text-[0.65rem] font-bold uppercase tracking-[0.24em] text-slate-500">
+                  Synchronized & Verified Feed
+                </span>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="rounded-[1.35rem] bg-slate-50 px-4 py-4 text-center">
+                  <p className="text-3xl font-black text-[#0d1124]">124.6K</p>
+                  <p className="mt-1 text-[0.62rem] font-bold uppercase tracking-[0.24em] text-slate-400">Followers</p>
+                </div>
+                <div className="rounded-[1.35rem] bg-slate-50 px-4 py-4 text-center">
+                  <p className="text-3xl font-black text-[#0d1124]">320</p>
+                  <p className="mt-1 text-[0.62rem] font-bold uppercase tracking-[0.24em] text-slate-400">Posts</p>
+                </div>
+                <div className="rounded-[1.35rem] bg-slate-50 px-4 py-4 text-center">
+                  <p className="text-3xl font-black text-[#0d1124]">Live</p>
+                  <p className="mt-1 text-[0.62rem] font-bold uppercase tracking-[0.24em] text-slate-400">Updated Hourly</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="rounded-[2rem] border border-slate-200/70 bg-slate-50 p-8 shadow-lg"
-        >
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.35em] text-slate-500">Official Account</p>
-              <p className="mt-2 text-3xl font-black uppercase tracking-tight text-slate-950">@nextupboxingleague</p>
-            </div>
-            <a
-              href="https://www.instagram.com/nextupboxingleague/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-[#0d1124] px-6 py-3 text-sm font-bold uppercase tracking-[0.2em] text-white transition-all duration-300 hover:bg-[#1e2d41]"
-            >
-              Follow on Instagram
-            </a>
-          </div>
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            <div className="rounded-3xl bg-white/90 p-4 text-center shadow-sm">
-              <p className="text-3xl font-black text-[#0d1124]">124.6K</p>
-              <p className="mt-1 text-xs uppercase tracking-[0.25em] text-slate-500">Followers</p>
-            </div>
-            <div className="rounded-3xl bg-white/90 p-4 text-center shadow-sm">
-              <p className="text-3xl font-black text-[#0d1124]">320</p>
-              <p className="mt-1 text-xs uppercase tracking-[0.25em] text-slate-500">Posts</p>
-            </div>
-            <div className="rounded-3xl bg-white/90 p-4 text-center shadow-sm">
-              <p className="text-3xl font-black text-[#0d1124]">Live</p>
-              <p className="mt-1 text-xs uppercase tracking-[0.25em] text-slate-500">Updated Hourly</p>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 flex items-center justify-center gap-3 font-sans text-[0.7rem] font-bold uppercase tracking-[0.25em] text-gray-300"
-        >
-          <span className="h-px w-8 bg-gray-200" />
-          Synchronized & Verified Feed
-          <span className="h-px w-8 bg-gray-200" />
-        </motion.div>
       </div>
 
       {/* Spectacular Lightbox Viewer Modal */}

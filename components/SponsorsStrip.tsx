@@ -17,7 +17,7 @@ export function SponsorsStrip() {
   const isInView = useInView(ref, { once: true, margin: "-50px" })
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-white py-0">
+    <section ref={ref} className="relative overflow-hidden bg-black py-0">
       {/* Top brand gradient rule */}
       <div className="h-[3px] bg-gradient-to-r from-[#1e2d5e] via-[#b8962e] to-[#c5203a]" />
 
@@ -29,7 +29,7 @@ export function SponsorsStrip() {
         className="flex items-center justify-center gap-4 py-8"
       >
         <span className="h-px w-16 bg-[#b8962e]/25" />
-        <span className="section-eyebrow text-gray-500">Official Partners &amp; Sponsors</span>
+        <span className="section-eyebrow text-white">Official Partners &amp; Sponsors</span>
         <span className="h-px w-16 bg-[#b8962e]/25" />
       </motion.div>
 
@@ -47,7 +47,7 @@ export function SponsorsStrip() {
               className="flex-shrink-0 flex items-center mx-10 sm:mx-14"
             >
               <span
-                className="font-black uppercase text-gray-300 hover:text-[#b8962e] transition-colors duration-500 cursor-default select-none"
+                className="font-black uppercase text-white hover:text-[#b8962e] transition-colors duration-500 cursor-default select-none"
                 style={{
                   fontFamily: 'var(--font-bebas), Impact, sans-serif',
                   fontSize: 'clamp(1.1rem, 3vw, 1.6rem)',
@@ -76,7 +76,7 @@ export function SponsorsStrip() {
               className="flex-shrink-0 flex items-center mx-10 sm:mx-14"
             >
               <span
-                className="font-black uppercase text-gray-400 hover:text-[#c5203a] transition-colors duration-500 cursor-default select-none"
+                className="font-black uppercase text-white hover:text-[#c5203a] transition-colors duration-500 cursor-default select-none"
                 style={{
                   fontFamily: 'var(--font-bebas), Impact, sans-serif',
                   fontSize: 'clamp(0.9rem, 2.5vw, 1.25rem)',
