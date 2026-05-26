@@ -23,6 +23,9 @@ export default function Home() {
         <SocialWall />
       </ScrollReveal>
       <ScrollReveal delay={0.08}>
+        <YoutubeSection />
+      </ScrollReveal>
+      <ScrollReveal delay={0.08}>
         <MagazineSection />
       </ScrollReveal>
       <ScrollReveal delay={0.12}>

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { motion, useInView } from "framer-motion"
-import { AlertCircle, ArrowUpRight, Play } from "lucide-react"
+import { AlertCircle, ArrowUpRight, Play, Radio, Ticket, ExternalLink } from "lucide-react"
 
 type YoutubeFeedVideo = {
   id: string
@@ -11,11 +11,22 @@ type YoutubeFeedVideo = {
   url: string
 }
 
+type YoutubeLiveStream = {
+  id: string
+  title: string
+  isLive: boolean
+  url: string
+  thumbnailUrl: string
+}
+
 type YoutubeApiPayload = {
   channelUrl: string
   channelId: string | null
   playlistId: string | null
   videos: YoutubeFeedVideo[]
+  liveStream: YoutubeLiveStream | null
+  isNewYorkUser: boolean
+  ticketPurchaseUrl: string
   error?: string
 }
 
@@ -40,7 +51,106 @@ function formatPublishedDate(value: string) {
   }).format(publishedDate)
 }
 
-function FeaturedCard({
+// Live Stream Banner for NY users
+function LiveStreamRestricted({ ticketPurchaseUrl }: { ticketPurchaseUrl: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="relative overflow-hidden rounded-lg border border-[#c5203a]/30 bg-gradient-to-br from-[#0a1628] via-[#0d1e3a] to-[#0a1628]"
+    >
+      {/* Animated background grid */}
+      <div className="absolute inset-0 opacity-20">
+        <div
+          className="h-full w-full"
+          style={{
+            backgroundImage: `linear-gradient(rgba(197,32,58,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(197,32,58,0.1) 1px, transparent 1px)`,
+            backgroundSize: "40px 40px",
+          }}
+        />
+      </div>
+
+      <div className="relative flex flex-col items-center justify-center px-8 py-16 text-center">
+        {/* Pulsing live indicator */}
+        <div className="mb-6 flex items-center gap-3">
+          <div className="relative">
+            <div className="absolute inset-0 animate-ping rounded-full bg-[#c5203a] opacity-75" />
+            <Radio className="relative h-8 w-8 text-[#c5203a]" />
+          </div>
+          <span className="text-sm font-bold uppercase tracking-widest text-[#c5203a]">
+            Live Now
+          </span>
+        </div>
+
+        <h3 className="mb-4 text-2xl font-bold text-white md:text-3xl">
+          Live Stream Unavailable in Your Region
+        </h3>
+        
+        <p className="mb-8 max-w-md text-white/60">
+          Due to broadcasting restrictions, live streams are not available for viewers in New York. 
+          Get your tickets to watch the event live in person!
+        </p>
+
+        <a
+          href={ticketPurchaseUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#c5203a] to-[#e63950] px-8 py-4 font-bold uppercase tracking-wider text-white shadow-lg shadow-[#c5203a]/25 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#c5203a]/40"
+        >
+          <Ticket className="h-5 w-5" />
+          Purchase Tickets
+          <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </a>
+      </div>
+    </motion.div>
+  )
+}
+
+// Live Stream Player Component
+function LiveStreamPlayer({ liveStream }: { liveStream: YoutubeLiveStream }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="relative overflow-hidden rounded-lg"
+    >
+      {/* Live indicator banner */}
+      <div className="absolute left-0 right-0 top-0 z-10 flex items-center justify-between bg-gradient-to-r from-[#c5203a] to-[#e63950] px-4 py-2">
+        <div className="flex items-center gap-2">
+          <div className="relative flex items-center justify-center">
+            <span className="absolute inline-flex h-3 w-3 animate-ping rounded-full bg-white opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
+          </div>
+          <span className="text-sm font-bold uppercase tracking-wider text-white">
+            Live Now
+          </span>
+        </div>
+        <Radio className="h-5 w-5 text-white" />
+      </div>
+
+      <div className="aspect-video w-full bg-black pt-10">
+        <iframe
+          src={`https://www.youtube.com/embed/${liveStream.id}?autoplay=1&rel=0&modestbranding=1`}
+          title={liveStream.title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="h-full w-full border-0"
+        />
+      </div>
+
+      {/* Title bar below video - red accent like big3.com */}
+      <div className="bg-[#c5203a] px-4 py-3">
+        <h3 className="truncate text-sm font-bold uppercase tracking-wide text-white md:text-base">
+          {liveStream.title}
+        </h3>
+      </div>
+    </motion.div>
+  )
+}
+
+// Featured Video Player - Main large video on the left
+function FeaturedVideoPlayer({
   activeVideo,
   activeIndex,
   playlistId,
@@ -62,13 +172,14 @@ function FeaturedCard({
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.1 }}
-      className="editorial-surface-dark block overflow-hidden p-3"
+      className="relative overflow-hidden rounded-lg"
     >
-      <div className="relative aspect-video w-full overflow-hidden rounded-[1.15rem] bg-black ring-1 ring-white/10 shadow-[0_0_40px_rgba(197,32,58,0.15)]">
+      {/* Video container */}
+      <div className="relative aspect-video w-full overflow-hidden bg-[#0a0e1a]">
         {embedUrl ? (
           <iframe
             src={embedUrl}
-            title={activeVideo?.title ?? "NextUp Boxing uploads"}
+            title={activeVideo?.title ?? "Channel uploads"}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             className="h-full w-full border-0"
@@ -80,34 +191,18 @@ function FeaturedCard({
         )}
       </div>
 
-      <div className="mt-6 px-4 pb-4">
-        <div className="mb-4 flex items-center gap-3">
-          <div className="rounded-full bg-[#c5203a] px-4 py-2">
-            <span className="editorial-meta text-white">Latest Upload</span>
-          </div>
-        </div>
-
-        <h3
-          className="mb-3 leading-tight tracking-[0.03em] text-white"
-          style={{
-            fontFamily: "var(--font-bebas), Impact, sans-serif",
-            fontSize: "clamp(1.85rem, 4vw, 2.9rem)",
-          }}
-        >
-          {activeVideo?.title ?? "NextUp Boxing Channel"}
+      {/* Red accent title bar - matches big3.com style */}
+      <div className="bg-[#c5203a] px-5 py-4">
+        <h3 className="truncate text-sm font-bold uppercase tracking-wider text-white md:text-base lg:text-lg">
+          {activeVideo?.title ?? "Featured Content"}
         </h3>
-
-        <p className="editorial-body max-w-2xl text-sm text-white/62 md:text-base">
-          {activeVideo
-            ? `Published ${formatPublishedDate(activeVideo.publishedAt)}. Browse the latest uploads from the official NextUp Boxing channel.`
-            : "Watch the latest uploads, highlights, and behind-the-scenes coverage directly from the official channel."}
-        </p>
       </div>
     </motion.div>
   )
 }
 
-function SmallCard({
+// Video Thumbnail Card for the sidebar
+function VideoThumbnailCard({
   video,
   index,
   isActive,
@@ -125,54 +220,60 @@ function SmallCard({
       onClick={onClick}
       initial={{ opacity: 0, x: 30 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-      className={`group flex w-full cursor-pointer items-start gap-4 rounded-2xl border border-transparent px-3 py-4 text-left transition-all duration-300 hover:bg-white/5 ${
-        isActive ? "border-white/8 bg-white/5" : ""
+      transition={{ duration: 0.5, delay: 0.1 + index * 0.08 }}
+      className={`group flex w-full cursor-pointer items-start gap-3 rounded-lg p-2 text-left transition-all duration-300 ${
+        isActive 
+          ? "bg-[#c5203a]/10 ring-1 ring-[#c5203a]/30" 
+          : "hover:bg-white/5"
       }`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
+      {/* Thumbnail */}
       <div
-        className="relative flex-shrink-0 overflow-hidden rounded-xl bg-[#0d1124]"
-        style={{ width: "9rem", aspectRatio: "16/9" }}
+        className="relative flex-shrink-0 overflow-hidden rounded-md bg-[#0a0e1a]"
+        style={{ width: "120px", aspectRatio: "16/9" }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={ytThumb(video.id, "hqdefault")}
           alt={video.title}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
+        
+        {/* Overlay */}
         <div
-          className={`absolute inset-0 transition-colors duration-300 ${
-            isActive ? "bg-transparent" : "bg-[#0d1124]/42 group-hover:bg-[#0d1124]/12"
+          className={`absolute inset-0 transition-all duration-300 ${
+            isActive || hovered ? "bg-transparent" : "bg-[#0a0e1a]/30"
           }`}
         />
 
+        {/* Play button overlay */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div
-            className="flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-sm transition-all duration-300"
-            style={{
-              background: isActive || hovered ? "rgba(197,32,58,0.9)" : "rgba(255,255,255,0.15)",
-              transform: isActive || hovered ? "scale(1.08)" : "scale(1)",
-            }}
+            className={`flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300 ${
+              isActive || hovered
+                ? "scale-100 bg-[#c5203a] opacity-100"
+                : "scale-90 bg-white/20 opacity-70"
+            }`}
           >
-            <Play className="ml-px h-3.5 w-3.5 text-white" fill="white" />
+            <Play className="ml-0.5 h-3 w-3 text-white" fill="white" />
           </div>
         </div>
       </div>
 
-      <div className="min-w-0 flex-1 pt-1">
-        <div className="mb-2 inline-flex rounded-full bg-[#1e2d5e] px-3 py-1">
-          <span className="editorial-meta text-white">{formatPublishedDate(video.publishedAt)}</span>
-        </div>
-
+      {/* Video info */}
+      <div className="min-w-0 flex-1">
         <h4
-          className={`line-clamp-2 text-sm font-semibold leading-snug transition-colors duration-300 ${
-            isActive ? "text-[#f2ccd3]" : "text-white/90 group-hover:text-white"
+          className={`mb-1 line-clamp-2 text-sm font-semibold leading-tight transition-colors duration-300 ${
+            isActive ? "text-white" : "text-white/80 group-hover:text-white"
           }`}
         >
           {video.title}
         </h4>
+        <p className="text-xs text-white/40">
+          {formatPublishedDate(video.publishedAt)}
+        </p>
       </div>
     </motion.button>
   )
@@ -184,6 +285,9 @@ export function YoutubeSection() {
   const [channelUrl, setChannelUrl] = useState(DEFAULT_CHANNEL_URL)
   const [playlistId, setPlaylistId] = useState<string | null>(null)
   const [videos, setVideos] = useState<YoutubeFeedVideo[]>([])
+  const [liveStream, setLiveStream] = useState<YoutubeLiveStream | null>(null)
+  const [isNewYorkUser, setIsNewYorkUser] = useState(false)
+  const [ticketPurchaseUrl, setTicketPurchaseUrl] = useState("")
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null)
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading")
   const [errorMessage, setErrorMessage] = useState("")
@@ -206,11 +310,14 @@ export function YoutubeSection() {
         setChannelUrl(data.channelUrl || DEFAULT_CHANNEL_URL)
         setPlaylistId(data.playlistId)
         setVideos(data.videos)
+        setLiveStream(data.liveStream)
+        setIsNewYorkUser(data.isNewYorkUser)
+        setTicketPurchaseUrl(data.ticketPurchaseUrl)
         setActiveVideoId((currentVideoId) => currentVideoId ?? data.videos[0]?.id ?? null)
         setErrorMessage(data.error || "")
         setStatus(response.ok ? "ready" : "error")
-      } catch (err: any) {
-        if (err.name === "AbortError") return
+      } catch (err: unknown) {
+        if (err instanceof Error && err.name === "AbortError") return
         if (!isMounted) return
         setStatus("error")
         setErrorMessage("We couldn't load the latest uploads right now.")
@@ -229,117 +336,124 @@ export function YoutubeSection() {
 
   const activeVideo = videos.find((video) => video.id === activeVideoId) ?? videos[0] ?? null
   const activeIndex = activeVideo ? videos.findIndex((video) => video.id === activeVideo.id) : 0
-  const playlist = activeVideo ? videos.filter((video) => video.id !== activeVideo.id) : videos.slice(1)
 
   return (
     <section
       id="youtube"
       ref={ref}
-      className="relative overflow-hidden py-24 sm:py-32"
-      style={{ background: "#080c18" }}
+      className="relative overflow-hidden py-16 sm:py-24"
+      style={{ background: "linear-gradient(180deg, #0a1628 0%, #0d1e3a 50%, #0a1628 100%)" }}
     >
+      {/* Background grid pattern */}
       <div
-        className="pointer-events-none absolute left-1/2 top-0 h-[40vh] w-[60vw] -translate-x-1/2"
+        className="pointer-events-none absolute inset-0 opacity-5"
         style={{
-          background: "radial-gradient(ellipse, rgba(197,32,58,0.06) 0%, transparent 70%)",
-          filter: "blur(60px)",
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+          backgroundSize: "60px 60px",
         }}
       />
 
+      {/* Gradient orbs */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="pointer-events-none absolute -left-40 top-1/4 h-80 w-80 rounded-full opacity-20"
         style={{
-          backgroundImage:
-            'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 512 512\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.75\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\' opacity=\'0.04\'/%3E%3C/svg%3E")',
-          backgroundRepeat: "repeat",
-          backgroundSize: "256px",
-          mixBlendMode: "overlay",
-          opacity: 0.6,
+          background: "radial-gradient(circle, rgba(197,32,58,0.4) 0%, transparent 70%)",
+          filter: "blur(80px)",
         }}
       />
-
-      <div className="absolute left-0 right-0 top-0 h-[3px] bg-gradient-to-r from-[#1e2d5e] via-[#c5203a] to-[#b8962e]" />
+      <div
+        className="pointer-events-none absolute -right-40 bottom-1/4 h-80 w-80 rounded-full opacity-20"
+        style={{
+          background: "radial-gradient(circle, rgba(30,45,94,0.6) 0%, transparent 70%)",
+          filter: "blur(80px)",
+        }}
+      />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-12 flex flex-col justify-between gap-6 sm:flex-row sm:items-end"
+          className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"
         >
           <div>
-            <div className="mb-3 flex items-center gap-3">
-              <span className="h-px w-10 bg-[#c5203a]" />
-              <span className="section-eyebrow text-[#c5203a]">NextUp Boxing Network</span>
-            </div>
-
-            <h2
-              className="uppercase leading-none text-white"
-              style={{
-                fontFamily: "var(--font-bebas), Impact, sans-serif",
-                fontSize: "clamp(2.7rem, 5vw, 4.2rem)",
-                letterSpacing: "0.03em",
-              }}
-            >
-              Featured Content
+            <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-widest text-[#c5203a]">
+              On YouTube
+            </span>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+              Latest Videos
             </h2>
           </div>
-
-          <a
-            href={channelUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="editorial-button inline-flex flex-shrink-0 items-center gap-2.5 rounded-full border border-red-500/30 bg-red-500/10 px-6 py-3 text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-red-500/45 hover:bg-red-500/18"
-          >
-            <Play fill="white" className="h-4 w-4 text-white" />
-            Subscribe on YouTube
-          </a>
         </motion.div>
 
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={isInView ? { scaleX: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-12 h-px origin-left bg-gradient-to-r from-[#c5203a]/50 via-white/10 to-transparent"
-        />
+        {/* Live Stream Section - Show if there's a live stream */}
+        {liveStream && (
+          <div className="mb-10">
+            {isNewYorkUser ? (
+              <LiveStreamRestricted ticketPurchaseUrl={ticketPurchaseUrl} />
+            ) : (
+              <LiveStreamPlayer liveStream={liveStream} />
+            )}
+          </div>
+        )}
 
-        <div className="grid gap-8 lg:grid-cols-[1fr_390px] lg:gap-12">
+        {/* Main Content Grid - Big3.com style layout */}
+        <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
+          {/* Left: Featured Video */}
           <div className="flex flex-col">
-            <FeaturedCard activeVideo={activeVideo} activeIndex={activeIndex} playlistId={playlistId} />
+            <FeaturedVideoPlayer
+              activeVideo={activeVideo}
+              activeIndex={activeIndex}
+              playlistId={playlistId}
+            />
 
             {status === "error" && errorMessage ? (
-              <div className="mt-4 flex items-center gap-2 rounded-2xl border border-[#c5203a]/20 bg-[#c5203a]/8 px-4 py-3 text-sm text-white/70">
+              <div className="mt-4 flex items-center gap-2 rounded-lg border border-[#c5203a]/20 bg-[#c5203a]/10 px-4 py-3 text-sm text-white/70">
                 <AlertCircle className="h-4 w-4 flex-shrink-0 text-[#c5203a]" />
                 {errorMessage}
               </div>
             ) : null}
           </div>
 
-          <div className="editorial-surface-dark flex h-full flex-col p-5">
+          {/* Right: Video Playlist Sidebar */}
+          <div className="flex flex-col rounded-lg bg-[#0a0e1a]/80 p-4 backdrop-blur-sm">
+            {/* Sidebar Header */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="mb-6 flex items-center gap-3 px-1"
+              className="mb-4 flex items-center gap-2 border-b border-white/10 pb-4"
             >
-              <div className="h-2 w-2 animate-pulse rounded-full bg-[#c5203a]" />
-              <span className="editorial-meta text-white">Up Next</span>
+              <div className="flex h-6 w-6 items-center justify-center rounded bg-[#c5203a]">
+                <Play className="h-3 w-3 text-white" fill="white" />
+              </div>
+              <span className="text-sm font-semibold uppercase tracking-wider text-white/80">
+                More Videos
+              </span>
             </motion.div>
 
+            {/* Video List */}
             <div
-              className="flex flex-1 flex-col gap-2 overflow-y-auto pr-2"
-              style={{ scrollbarWidth: "thin", scrollbarColor: "#c5203a transparent" }}
+              className="flex flex-1 flex-col gap-2 overflow-y-auto"
+              style={{ maxHeight: "400px", scrollbarWidth: "thin", scrollbarColor: "#c5203a transparent" }}
             >
               {status === "loading" ? (
-                Array.from({ length: 3 }).map((_, index) => (
+                Array.from({ length: 4 }).map((_, index) => (
                   <div
                     key={index}
-                    className="h-[108px] animate-pulse rounded-2xl border border-white/5 bg-white/5"
-                  />
+                    className="flex gap-3 rounded-lg bg-white/5 p-2"
+                  >
+                    <div className="h-[67px] w-[120px] animate-pulse rounded-md bg-white/10" />
+                    <div className="flex-1 space-y-2 pt-1">
+                      <div className="h-4 w-full animate-pulse rounded bg-white/10" />
+                      <div className="h-3 w-20 animate-pulse rounded bg-white/5" />
+                    </div>
+                  </div>
                 ))
-              ) : playlist.length > 0 ? (
-                playlist.map((video, index) => (
-                  <SmallCard
+              ) : videos.length > 0 ? (
+                videos.map((video, index) => (
+                  <VideoThumbnailCard
                     key={video.id}
                     video={video}
                     index={index}
@@ -348,29 +462,28 @@ export function YoutubeSection() {
                   />
                 ))
               ) : (
-                <div className="rounded-2xl border border-white/5 bg-white/5 px-4 py-6 text-sm leading-relaxed text-white/55">
-                  Latest uploads will populate here automatically from the connected YouTube channel.
+                <div className="rounded-lg bg-white/5 px-4 py-6 text-sm text-white/50">
+                  Latest uploads will appear here from the connected YouTube channel.
                 </div>
               )}
             </div>
 
+            {/* Watch More Button - Big3.com style */}
             <motion.a
               href={channelUrl}
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.55 }}
-              className="editorial-button group mt-6 flex items-center justify-center gap-2 border-t border-white/5 pt-6 text-white/42 transition-all duration-300 hover:text-white"
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="group mt-4 flex items-center justify-center gap-2 rounded-lg bg-[#1e2d5e] py-3 text-sm font-bold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#2a3f7a]"
             >
-              View All on YouTube
-              <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              Watch More on YouTube
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </motion.a>
           </div>
         </div>
       </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#c5203a]/50 to-transparent" />
     </section>
   )
 }

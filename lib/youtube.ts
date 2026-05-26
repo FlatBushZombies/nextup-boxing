@@ -7,11 +7,20 @@ export type YoutubeFeedVideo = {
   url: string
 }
 
+export type YoutubeLiveStream = {
+  id: string
+  title: string
+  isLive: boolean
+  url: string
+  thumbnailUrl: string
+}
+
 export type YoutubeFeedPayload = {
   channelUrl: string
   channelId: string | null
   playlistId: string | null
   videos: YoutubeFeedVideo[]
+  liveStream: YoutubeLiveStream | null
 }
 
 // Use Strong Island Fight Night YouTube channel by default for this event
@@ -131,11 +140,64 @@ export async function fetchYoutubeFeed(limit = 5): Promise<YoutubeFeedPayload> {
   }
 
   const feedXml = await feedResponse.text()
+  
+  // Check for live stream
+  const liveStream = await fetchLiveStream(channelId)
 
   return {
     channelUrl,
     channelId,
     playlistId,
     videos: parseFeed(feedXml).slice(0, limit),
+    liveStream,
+  }
+}
+
+async function fetchLiveStream(channelId: string): Promise<YoutubeLiveStream | null> {
+  try {
+    // Fetch the channel's live page to check for active streams
+    const livePageUrl = `https://www.youtube.com/channel/${channelId}/live`
+    const response = await fetch(livePageUrl, {
+      headers: {
+        "user-agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      },
+      next: { revalidate: 60 }, // Check more frequently for live content
+    })
+
+    if (!response.ok) {
+      return null
+    }
+
+    const html = await response.text()
+    
+    // Check if there's an active live stream
+    const isLive = html.includes('"isLive":true') || html.includes('"isLiveNow":true')
+    
+    if (!isLive) {
+      return null
+    }
+
+    // Extract video ID from the live page
+    const videoIdMatch = html.match(/"videoId":"([\w-]+)"/)
+    const titleMatch = html.match(/"title":\{"runs":\[\{"text":"([^"]+)"\}/)
+    
+    if (!videoIdMatch?.[1]) {
+      return null
+    }
+
+    const videoId = videoIdMatch[1]
+    const title = titleMatch?.[1] ? decodeXml(titleMatch[1]) : "Live Stream"
+
+    return {
+      id: videoId,
+      title,
+      isLive: true,
+      url: `https://www.youtube.com/watch?v=${videoId}`,
+      thumbnailUrl: `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+    }
+  } catch (error) {
+    console.error("Failed to fetch live stream:", error)
+    return null
   }
 }
