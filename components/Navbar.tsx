@@ -100,7 +100,7 @@ export function Navbar() {
       {/* Top Accent Line */}
       <div
         className={`h-[3px] transition-all duration-500 ${
-          isSolid ? "bg-[#c5203a]" : "bg-transparent"
+          isSolid ? "bg-[#0d1124]" : "bg-transparent"
         }`}
       />
 
@@ -118,7 +118,7 @@ export function Navbar() {
             className={`absolute z-20 transition-all duration-500 ease-in-out ${
               scrolled
                 ? "left-0 top-1/2 -translate-y-1/2"
-                : "left-1/2 -translate-x-1/2 -top-6"
+                : "left-1/2 -translate-x-1/2 -top-5 md:-top-7"
             }`}
           >
             <Link href="/#hero" className="group flex items-center">
@@ -148,7 +148,7 @@ export function Navbar() {
             className={`hidden xl:flex absolute items-center transition-all duration-500 ease-in-out z-10 pointer-events-auto ${
               scrolled
                 ? "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-4 lg:gap-8"
-                : "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-8"
+                : "left-1/2 bottom-2 -translate-x-1/2 gap-8"
             }`}
           >
             {navLinks.map((link) => (
