@@ -17,7 +17,7 @@ export default function Home() {
     <main className="min-h-screen w-screen overflow-x-hidden bg-white">
       <Navbar />
       <HeroSection />
-      <EventsSection />
+      {/* <EventsSection /> */}
       <ChampionsSection />
       <ScrollReveal delay={0.04}>
         <SocialWall />

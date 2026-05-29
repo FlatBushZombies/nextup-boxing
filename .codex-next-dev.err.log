@@ -1,0 +1,1287 @@
+⚠ Slow filesystem detected. The benchmark took 252ms. If C:\Users\gamerrdotcom\Desktop\nextup-boxing\.next/dev is a network drive, consider moving it to a local folder.
+See more: https://nextjs.org/docs/app/guides/local-development
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "/champions/NAIJALIE_RODRIGUEZ_106_WOMENS_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/BRADLEY_BELT_198_ADC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: Client network socket disconnected before secure TLS connection was established
+      at ignore-listed frames {
+    code: 'ECONNRESET',
+    path: undefined,
+    host: 'www.youtube.com',
+    port: 443,
+    localAddress: null
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: Client network socket disconnected before secure TLS connection was established
+      at ignore-listed frames {
+    code: 'ECONNRESET',
+    path: undefined,
+    host: 'www.youtube.com',
+    port: 443,
+    localAddress: null
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: Client network socket disconnected before secure TLS connection was established
+      at ignore-listed frames {
+    code: 'ECONNRESET',
+    path: undefined,
+    host: 'www.youtube.com',
+    port: 443,
+    localAddress: null
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: Client network socket disconnected before secure TLS connection was established
+      at ignore-listed frames {
+    code: 'ECONNRESET',
+    path: undefined,
+    host: 'www.youtube.com',
+    port: 443,
+    localAddress: null
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+[browser] Image with src "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/BRADLEY_BELT_198_ADC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/NAIJALIE_RODRIGUEZ_106_WOMENS_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/nextupmagcover.jpg" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Image with src "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+TypeError: fetch failed
+    at ignore-listed frames {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+TypeError: fetch failed
+    at ignore-listed frames {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+⨯ Error: failed to pipe response
+    at ignore-listed frames {
+  [cause]: TypeError: fetch failed
+      at ignore-listed frames {
+    [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+        at ignore-listed frames {
+      code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+    }
+  }
+}
+TypeError: fetch failed
+    at ignore-listed frames {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+[browser] Image with src "/usa-boxing-metro-logo.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+TypeError: fetch failed
+    at ignore-listed frames {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+TypeError: fetch failed
+    at ignore-listed frames {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+⨯ Error: failed to pipe response
+    at ignore-listed frames {
+  [cause]: TypeError: fetch failed
+      at ignore-listed frames {
+    [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+        at ignore-listed frames {
+      code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+    }
+  }
+}
+TypeError: fetch failed
+    at ignore-listed frames {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:28:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load Instagram reels: Error: Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID.
+    at fetchInstagramReels (lib\instagram.ts:63:11)
+    at GET (app\api\instagram\reels\route.ts:13:46)
+  61 |
+  62 |   if (!accessToken || !businessAccountId) {
+> 63 |     throw new Error(
+     |           ^
+  64 |       "Instagram is not configured. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCO...
+  65 |     )
+  66 |   }
+TypeError: fetch failed
+    at ignore-listed frames {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+TypeError: fetch failed
+    at ignore-listed frames {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+⨯ Error: failed to pipe response
+    at ignore-listed frames {
+  [cause]: TypeError: fetch failed
+      at ignore-listed frames {
+    [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+        at ignore-listed frames {
+      code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+    }
+  }
+}
+TypeError: fetch failed
+    at ignore-listed frames {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}

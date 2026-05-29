@@ -622,15 +622,21 @@ function ChampionCard({ boxer }: { boxer: BoxerData }) {
           {boxer.firstName}<br />{boxer.lastName}
         </h2>
         <p className="weight-cat">{boxer.weightClass}</p>
+        <p className="mt-2 text-xs font-bold uppercase tracking-[0.14em] text-[#d4ae44]">{boxer.titles}</p>
       </div>
 
       {/* Hover overlay */}
       <div className="hover-overlay">
-        <p className="trophy-text">{boxer.titles}</p>
-        <p className="mt-3 text-sm uppercase tracking-[0.18em] text-white/80">{boxer.record}</p>
-        <p className="mt-2 text-xs text-white/70">
-          {boxer.wins} wins • {boxer.kos} KOs • {boxer.losses} losses
+        <h3
+          className="text-4xl uppercase leading-none text-white"
+          style={{ fontFamily: "var(--font-bebas)" }}
+        >
+          {boxer.firstName} {boxer.lastName}
+        </h3>
+        <p className="mb-4 mt-2 text-xs font-bold uppercase tracking-[0.18em] text-white/80">
+          {boxer.weightClass}
         </p>
+        <p className="trophy-text">{boxer.titles}</p>
         <Link href={`/boxers/${boxer.id}`}>
           <button>SEE PROFILE</button>
         </Link>

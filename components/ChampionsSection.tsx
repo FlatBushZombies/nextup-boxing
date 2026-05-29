@@ -2,10 +2,9 @@
 
 import { useRef, useEffect } from "react"
 import Image from "next/image"
-import Link from "next/link"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { Trophy, ChevronRight, ChevronLeft, Users } from "lucide-react"
+import { Users } from "lucide-react"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -14,54 +13,48 @@ const champions = [
     id: 1,
     firstName: "ARTURO",
     lastName: "ACEVEDO",
-    weightClass: "121 LBS",
-    titles: ["SBC"],
-    stats: { win: 0, loss: 0, draw: 0, kos: 0 },
+    weightClass: "Super-Bantamweight",
+    championship: "SBC Champion",
     image: "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.png",
   },
   {
     id: 2,
     firstName: "XAVIER",
     lastName: "WILCHER",
-    weightClass: "198 LBS",
-    titles: ["SBC"],
-    stats: { win: 0, loss: 0, draw: 0, kos: 0 },
+    weightClass: "Cruiserweight",
+    championship: "SBC Champion",
     image: "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.png",
   },
   {
     id: 3,
     firstName: "JADEN",
     lastName: "HARVEY",
-    weightClass: "165 LBS",
-    titles: ["DAWG"],
-    stats: { win: 0, loss: 0, draw: 0, kos: 0 },
+    weightClass: "Super-Middleweight",
+    championship: "DAWG Champion",
     image: "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.png",
   },
   {
     id: 4,
     firstName: "BRADLEY",
     lastName: "BELT",
-    weightClass: "198 LBS",
-    titles: ["ADC"],
-    stats: { win: 0, loss: 0, draw: 0, kos: 0 },
+    weightClass: "Cruiserweight",
+    championship: "ADC Champion",
     image: "/champions/BRADLEY_BELT_198_ADC_CHAMPION.png",
   },
   {
     id: 5,
     firstName: "NAIJALIE",
     lastName: "RODRIGUEZ",
-    weightClass: "106 LBS",
-    titles: ["WOMENS SBC"],
-    stats: { win: 0, loss: 0, draw: 0, kos: 0 },
+    weightClass: "Women's Light-Flyweight",
+    championship: "Women's SBC Champion",
     image: "/champions/NAIJALIE_RODRIGUEZ_106_WOMENS_SBC_CHAMPION.png",
   }, 
    {
     id: 6,
-    firstName: "KELVIN",
+    firstName: "KEVIN",
     lastName: "TORRES",
-    weightClass: "165 LBS",
-    titles: ["SBC"],
-    stats: { win: 0, loss: 0, draw: 0, kos: 0 },
+    weightClass: "Super-Middleweight",
+    championship: "SBC Champion",
     image: "/champions/KEVIN_TORRES_165_SBC_CHAMPION.png",
   },
 ]
@@ -227,19 +220,19 @@ export function ChampionsSection() {
   return (
     <section
       ref={sectionRef}
-      className="bg-gradient-to-br from-[#0a1628] via-[#0d1e3a] to-[#0a1628] py-16 w-full overflow-hidden border-t border-[#b8962e]/20"
+      className="bg-gradient-to-br from-[#0a1628] via-[#0d1e3a] to-[#0a1628] py-12 sm:py-16 w-full overflow-hidden border-t border-[#b8962e]/20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div
           ref={headerRef}
-          className="relative mb-12 flex flex-col items-center justify-center text-center"
+          className="relative mb-8 sm:mb-12 flex flex-col items-center justify-center text-center"
         >
-          <div className="champ-line-left absolute top-1/2 left-0 right-1/2 h-px bg-[#b8962e] opacity-40 z-0 mr-20" />
+          <div className="champ-line-left absolute top-1/2 left-0 right-1/2 h-px bg-[#b8962e] opacity-40 z-0 mr-14 sm:mr-20" />
 
-          <div className="champ-line-right absolute top-1/2 left-1/2 right-0 h-px bg-[#b8962e] opacity-40 z-0 ml-20" />
+          <div className="champ-line-right absolute top-1/2 left-1/2 right-0 h-px bg-[#b8962e] opacity-40 z-0 ml-14 sm:ml-20" />
 
-          <div className="relative z-10 mx-auto flex flex-col items-center justify-center gap-3 px-8 py-2 text-center">
+          <div className="relative z-10 mx-auto flex flex-col items-center justify-center gap-3 px-5 sm:px-8 py-2 text-center">
             <Image
               src="/logo.png"
               alt="Logo"
@@ -250,7 +243,7 @@ export function ChampionsSection() {
             />
 
             <h2
-              className="text-4xl md:text-5xl uppercase tracking-widest text-white"
+              className="text-4xl md:text-5xl uppercase text-white"
               style={{ fontFamily: "var(--font-bebas), sans-serif" }}
             >
               <span className="text-[#b8962e]">Champions</span>
@@ -261,94 +254,39 @@ export function ChampionsSection() {
         {/* Cards */}
         <div
           ref={cardsRef}
-          className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 place-items-center"
+          className="relative grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3"
         >
   
           {champions.map((fighter) => (
             <div
               key={fighter.id}
-              className="champ-card flex flex-col transform transition-transform hover:-translate-y-1 hover:shadow-2xl"
+              className="champ-card w-full transform overflow-hidden bg-[#050912] shadow-[0_18px_45px_rgba(0,0,0,0.45)] transition-transform hover:-translate-y-1 hover:shadow-2xl"
             >
-              {/* Image */}
-              <div className="relative h-[170px] w-full bg-gradient-to-b from-[#d4ae44] to-[#b8962e] overflow-hidden">
-                <div className="card-img absolute inset-0 flex items-end justify-center">
-                  <div className="relative h-[145px] w-[85%]">
-                    <Image
-                      src={fighter.image}
-                      alt={`${fighter.firstName} ${fighter.lastName}`}
-                      fill
-                      className="object-contain object-bottom drop-shadow-2xl"
-                    />
-                  </div>
-                </div>
-
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent" />
-
-                <div className="absolute bottom-3 left-0 right-0 text-center px-2">
-                  <div
-                    className="uppercase tracking-widest text-sm md:text-[0.9rem] drop-shadow-lg"
-                    style={{ fontFamily: "var(--font-bebas), sans-serif" }}
-                  >
-                    <span className="text-white font-normal">
-                      {fighter.firstName}{" "}
-                    </span>
-
-                    <span className="text-[#b8962e] font-bold">
-                      {fighter.lastName}
-                    </span>
-                  </div>
-
-                  <div className="text-[10px] font-semibold text-gray-300 tracking-[0.12em] mb-1 uppercase drop-shadow-sm">
-                    {fighter.weightClass}
-                  </div>
-
-                  <div className="flex flex-wrap items-center justify-center gap-3">
-                    {fighter.titles.map((title, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-center gap-1 text-[11px] font-bold text-[#b8962e] tracking-wider uppercase drop-shadow-md"
-                      >
-                        <Trophy className="h-3.5 w-3.5 text-[#c5203a]" />
-                        {title}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              <div className="relative aspect-[4/5] w-full">
+                <Image
+                  src={fighter.image}
+                  alt={`${fighter.firstName} ${fighter.lastName}`}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover"
+                />
               </div>
 
-              {/* Stats */}
-              <div className="grid grid-cols-4 text-center border-b border-[#1e2d5e]/20">
-                <div className="bg-[#b8962e] py-1.5 text-[10px] font-bold text-white uppercase tracking-wider">
-                  WIN
-                </div>
-
-                <div className="bg-[#b8962e] py-1.5 text-[10px] font-bold text-white uppercase tracking-wider border-l border-[#c9a435]">
-                  LOSS
-                </div>
-
-                <div className="bg-[#b8962e] py-1.5 text-[10px] font-bold text-white uppercase tracking-wider border-l border-[#c9a435]">
-                  DRAW
-                </div>
-
-                <div className="bg-[#b8962e] py-1.5 text-[10px] font-bold text-white uppercase tracking-wider border-l border-[#c9a435]">
-                  KOs
-                </div>
-
-                <div className="bg-[#1a1a1a] py-2 text-[13px] font-bold text-white">
-                  {fighter.stats.win}
-                </div>
-
-                <div className="bg-[#1a1a1a] py-2 text-[13px] font-bold text-white border-l border-white/10">
-                  {fighter.stats.loss}
-                </div>
-
-                <div className="bg-[#1a1a1a] py-2 text-[13px] font-bold text-white border-l border-white/10">
-                  {fighter.stats.draw}
-                </div>
-
-                <div className="bg-[#1a1a1a] py-2 text-[13px] font-bold text-white border-l border-white/10">
-                  {fighter.stats.kos}
-                </div>
+              <div className="border-t border-[#b8962e]/25 bg-[#050912] px-3 py-3 text-center sm:px-5 sm:py-4">
+                <h3
+                  className="text-2xl uppercase leading-none text-white sm:text-3xl"
+                  style={{ fontFamily: "var(--font-bebas), sans-serif" }}
+                >
+                  {fighter.firstName}
+                  <br />
+                  {fighter.lastName}
+                </h3>
+                <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.12em] text-[#c5203a] sm:text-xs sm:tracking-[0.2em]">
+                  {fighter.weightClass}
+                </p>
+                <p className="mt-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#b8962e] sm:mt-2 sm:text-sm sm:tracking-[0.16em]">
+                  {fighter.championship}
+                </p>
               </div>
             </div>
           ))}
@@ -363,22 +301,22 @@ export function ChampionsSection() {
         {/* Bottom Banner */}
         <div
           ref={bannerRef}
-          className="mt-12 relative w-full overflow-hidden bg-gradient-to-r from-[#b8962e] to-[#d4ae44] px-6 py-4 flex flex-col items-center justify-center shadow-[0_15px_30px_rgba(0,0,0,0.4)]"
+          className="mt-10 sm:mt-12 relative w-full overflow-hidden bg-[#050912] px-4 sm:px-6 py-4 flex flex-col items-center justify-center shadow-[0_15px_30px_rgba(0,0,0,0.4)]"
         >
           <div
             className="absolute inset-0 opacity-10 pointer-events-none"
             style={{
               backgroundImage:
-                "repeating-linear-gradient(45deg, #000 0, #000 2px, transparent 2px, transparent 12px)",
+                "repeating-linear-gradient(45deg, #c5203a 0, #c5203a 2px, transparent 2px, transparent 12px)",
             }}
           />
 
-          <div className="relative z-10 flex flex-col items-center md:items-start mb-6 md:mb-0">
-            <div className="flex items-center gap-3 text-white mb-3 drop-shadow-md">
-              <Users className="h-7 w-7" />
+          <div className="relative z-10 flex flex-col items-center md:items-start mb-4 md:mb-0">
+            <div className="flex items-center gap-2 sm:gap-3 text-white mb-3 drop-shadow-md">
+              <Users className="h-6 w-6 sm:h-7 sm:w-7" />
 
               <span
-                className="text-4xl font-bold uppercase tracking-wider"
+                className="text-3xl sm:text-4xl font-bold uppercase"
                 style={{ fontFamily: "var(--font-bebas), sans-serif" }}
               >
                 FIGHTERS
@@ -387,13 +325,13 @@ export function ChampionsSection() {
 
           </div>
 
-          <div className="relative z-10 flex w-full items-end justify-center gap-2 md:gap-8 overflow-x-auto pb-1 scrollbar-hide">
+          <div className="relative z-10 flex w-full items-end justify-start gap-3 overflow-x-auto pb-1 sm:justify-center md:gap-8 scrollbar-hide">
             {bannerFighters.map((bf) => (
               <div
                 key={bf.id}
-                className="banner-fighter flex flex-col items-center shrink-0 w-[80px] md:w-[110px]"
+                className="banner-fighter flex flex-col items-center shrink-0 w-[72px] sm:w-[88px] md:w-[110px]"
               >
-                <div className="relative h-[90px] md:h-[120px] w-full mb-1">
+                <div className="relative h-[82px] sm:h-[100px] md:h-[120px] w-full mb-1">
                   <Image
                     src={bf.image}
                     alt={bf.name}
@@ -404,7 +342,7 @@ export function ChampionsSection() {
 
                 <div className="w-full border-t-2 border-black/30 pt-1.5 text-center">
                   <span
-                    className="text-[12px] md:text-[14px] font-bold text-black uppercase tracking-wider"
+                    className="text-[12px] md:text-[14px] font-bold text-white uppercase tracking-wider"
                     style={{ fontFamily: "var(--font-bebas), sans-serif" }}
                   >
                     {bf.name}

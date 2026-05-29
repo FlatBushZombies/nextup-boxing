@@ -132,58 +132,43 @@ export function HeroSection() {
         <motion.div
           ref={textRef}
           style={{ y, opacity }}
-          className="absolute left-[5%] bottom-8 flex max-w-[26rem] flex-col items-start gap-6 text-left sm:left-[6.5%] sm:bottom-10 lg:left-[8%] lg:bottom-16 xl:left-[9%]"
+          className="absolute left-[5%] bottom-8 flex max-w-[30rem] flex-col items-start gap-6 text-left sm:left-[6.5%] sm:bottom-10 lg:left-[8%] lg:bottom-16 xl:left-[9%]"
         >
-            {/* Event badge */}
-            <div className="animate-text mb-4 flex items-center gap-3">
-              <span className="inline-flex items-center gap-2 rounded-sm border border-[#c5203a]/40 bg-[#c5203a]/20 px-3 py-1.5">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#c5203a]" />
-
-                <span className="text-[0.65rem] font-bold tracking-[0.2em] text-white/90">
-                  MAIN EVENT
-                </span>
-              </span>
-
-              <span className="text-[0.65rem] font-bold tracking-[0.2em] text-white/50">
-                12 ROUNDS
-              </span>
-            </div>
-
             {/* Event details */}
             <div className="animate-text mb-6 flex flex-col items-start gap-2">
               <span
-                className="text-sm uppercase tracking-[0.35em] text-white/70"
+                className="text-base uppercase tracking-[0.35em] text-white/70 sm:text-lg"
                 style={{ fontFamily: "var(--font-bebas)" }}
               >
                 Sat
               </span>
 
               <span
-                className="text-[2.75rem] font-bold uppercase leading-[0.9] tracking-[0.1em] text-white sm:text-[3.75rem]"
+                className="text-[3.25rem] font-bold uppercase leading-[0.9] tracking-[0.1em] text-white sm:text-[4.5rem] lg:text-[5rem]"
                 style={{ fontFamily: "var(--font-bebas), Impact, sans-serif" }}
               >
                 June
               </span>
 
               <span
-                className="text-[2.75rem] font-bold uppercase leading-[0.9] tracking-[0.1em] text-white sm:text-[3.75rem]"
+                className="text-[3.25rem] font-bold uppercase leading-[0.9] tracking-[0.1em] text-white sm:text-[4.5rem] lg:text-[5rem]"
                 style={{ fontFamily: "var(--font-bebas), Impact, sans-serif" }}
               >
                 6th
               </span>
 
               <span
-                className="text-lg font-bold uppercase tracking-[0.3em] text-[#c5203a]"
+                className="text-xl font-bold uppercase tracking-[0.3em] text-[#c5203a] sm:text-2xl"
                 style={{ fontFamily: "var(--font-bebas)" }}
               >
                 Stereo Garden
               </span>
 
-              <span className="text-sm uppercase tracking-[0.18em] text-white/60">
+              <span className="text-base uppercase tracking-[0.18em] text-white/60">
                 9 Railroad Ave Patchogue NY
               </span>
 
-              <span className="text-sm uppercase tracking-[0.25em] text-[#b8962e]">
+              <span className="text-base uppercase tracking-[0.25em] text-[#b8962e]">
                 Door open 4PM
               </span>
             </div>
