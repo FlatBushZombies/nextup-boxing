@@ -97,22 +97,6 @@ const MOCK_REELS: MockReel[] = [
       { user: "ring_side_ricky", text: "Chills down my spine just watching this." }
     ],
     platform: "tiktok"
-  },
-  {
-    id: "reel-6",
-    caption: "IT'S OFFICIAL. 🎙️ Contract signed. Press conference face-off heated up. Tempers flared between Steele and Harrison. The rivalry is real. #NextUpBoxing #SteeleHarrison #PressConference #Rivalry",
-    permalink: "https://www.instagram.com/nextupboxingleague/",
-    mediaUrl: "https://assets.mixkit.co/videos/preview/mixkit-man-training-his-punches-on-a-punching-bag-40226-large.mp4",
-    timestamp: "2026-05-10T11:00:00Z",
-    likeCount: 6150,
-    category: "promos",
-    duration: "0:35",
-    commentsList: [
-      { user: "fight_guru", text: "They actually had to be separated! The tension is highly volatile." },
-      { user: "jess_sports", text: "Steele looked completely unbothered. Mind games." },
-      { user: "heavy_hitter_box", text: "Can't wait to see this erupt in the ring." }
-    ],
-    platform: "instagram"
   }
 ]
 

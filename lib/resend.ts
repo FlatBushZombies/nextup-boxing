@@ -13,6 +13,8 @@ type ResendSendResponse = {
   error?: {
     message?: string
   }
+  message?: string
+  statusCode?: number
 }
 
 function getResendConfig() {
@@ -45,6 +47,76 @@ function buildEmailCopy(reminderType: "sevenDay" | "oneDay") {
     intro:
       "You joined the notification list, and fight night is now close. Here are the key event details.",
   }
+}
+
+/**
+ * Sends an email using the Resend API with fallback to onboarding@resend.dev
+ * if the configured domain is not verified.
+ */
+async function sendResendEmail({
+  apiKey,
+  fromEmail,
+  toEmail,
+  subject,
+  html,
+}: {
+  apiKey: string
+  fromEmail: string
+  toEmail: string
+  subject: string
+  html: string
+}) {
+  const makeRequest = async (sender: string) => {
+    return await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: sender,
+        to: [toEmail],
+        subject,
+        html,
+      }),
+    })
+  }
+
+  let response = await makeRequest(fromEmail)
+  let data = (await response.json()) as ResendSendResponse
+
+  // Check for 403 validation error (domain unverified)
+  const isUnverifiedDomain =
+    response.status === 403 &&
+    (data.message?.toLowerCase().includes("domain is not verified") ||
+      data.error?.message?.toLowerCase().includes("domain is not verified"))
+
+  if (isUnverifiedDomain && !fromEmail.includes("onboarding@resend.dev")) {
+    console.warn(
+      `Resend domain in "${fromEmail}" is unverified. Retrying with fallback sender "onboarding@resend.dev"...`
+    )
+    
+    // Retry with onboarding@resend.dev
+    // Preserve the display name if present, e.g. "Next Up Boxing <ringside@...>" -> "Next Up Boxing <onboarding@resend.dev>"
+    let fallbackFrom = "onboarding@resend.dev"
+    const displayNameMatch = fromEmail.match(/^([^<]+)</)
+    if (displayNameMatch) {
+      fallbackFrom = `${displayNameMatch[1].trim()} <onboarding@resend.dev>`
+    }
+
+    response = await makeRequest(fallbackFrom)
+    data = (await response.json()) as ResendSendResponse
+  }
+
+  if (!response.ok || data.error) {
+    const errorMsg =
+      data.error?.message ||
+      data.message ||
+      `Resend failed with status ${response.status}.`
+    throw new Error(errorMsg)
+  }
+
+  return data.id
 }
 
 export async function sendReminderEmail({
@@ -93,29 +165,13 @@ export async function sendReminderEmail({
     </div>
   `
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from: fromEmail,
-      to: [email],
-      subject: copy.subject,
-      html,
-    }),
+  return await sendResendEmail({
+    apiKey,
+    fromEmail,
+    toEmail: email,
+    subject: copy.subject,
+    html,
   })
-
-  const data = (await response.json()) as ResendSendResponse
-
-  if (!response.ok || data.error) {
-    throw new Error(
-      data.error?.message || `Resend failed with status ${response.status}.`
-    )
-  }
-
-  return data.id
 }
 
 export async function sendPremiumWelcomeEmail({
@@ -125,19 +181,16 @@ export async function sendPremiumWelcomeEmail({
   email: string
   name: string
 }) {
-  const { apiKey, fromEmail, siteUrl } = getResendConfig()
-  const eventUrl = new URL(EVENT_CONFIG.homepagePath, siteUrl).toString()
+  const { apiKey, fromEmail } = getResendConfig()
+  const youtubeUrl = process.env.YOUTUBE_CHANNEL_URL?.trim() || "https://www.youtube.com/@NextUpBoxing"
 
   const html = `
     <div style="background:#0d1124;padding:48px 16px;font-family:Inter,Arial,sans-serif;color:#ffffff;min-height:100%;">
       <div style="max-width:600px;margin:0 auto;background:#161c36;border:1px solid rgba(212,174,68,0.2);border-radius:24px;overflow:hidden;box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
         <div style="height:6px;background:linear-gradient(90deg, #1e2d5e, #c5203a, #d4ae44);"></div>
         <div style="padding:40px 32px;">
-          <p style="margin:0 0 12px;font-size:11px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:#d4ae44;">
-            PREMIUM FIGHT CLUB ACCESS
-          </p>
           <h1 style="margin:0 0 20px;font-size:36px;line-height:0.95;font-family:Impact,'Arial Narrow Bold',sans-serif;text-transform:uppercase;letter-spacing:0.02em;color:#ffffff;">
-            WELCOME TO THE INNER CIRCLE
+            WELCOME TO NEXTUP BOXING
           </h1>
           <p style="margin:0 0 24px;font-size:18px;font-weight:600;color:#ffffff;">
             Hello ${name},
@@ -151,13 +204,14 @@ export async function sendPremiumWelcomeEmail({
               EVENT DETAILS
             </p>
             <p style="margin:0 0 8px;font-size:18px;font-weight:700;color:#ffffff;">
-              ${EVENT_CONFIG.displayDate}
+              Sat June 6th
             </p>
             <p style="margin:0 0 8px;font-size:15px;color:rgba(255,255,255,0.85);">
               Starts at ${EVENT_CONFIG.displayTime}
             </p>
-            <p style="margin:0;font-size:15px;color:rgba(255,255,255,0.65);">
-              Venue: ${EVENT_CONFIG.venue}, ${EVENT_CONFIG.city}
+            <p style="margin:0;font-size:15px;color:rgba(255,255,255,0.65);line-height:1.4;">
+              Venue: Stereo Garden<br />
+              9 Railroad Ave Patchogue NY
             </p>
           </div>
           
@@ -166,8 +220,8 @@ export async function sendPremiumWelcomeEmail({
           </p>
           
           <div style="text-align:center;">
-            <a href="${eventUrl}" style="display:inline-block;background:#c5203a;color:#ffffff;text-decoration:none;padding:16px 32px;border-radius:999px;font-size:14px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;box-shadow:0 4px 12px rgba(197,32,58,0.3);">
-              GO TO FIGHT HUB
+            <a href="${youtubeUrl}" style="display:inline-block;background:#c5203a;color:#ffffff;text-decoration:none;padding:16px 32px;border-radius:999px;font-size:14px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;box-shadow:0 4px 12px rgba(197,32,58,0.3);">
+              GO TO STREAM
             </a>
           </div>
         </div>
@@ -180,27 +234,11 @@ export async function sendPremiumWelcomeEmail({
     </div>
   `
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from: fromEmail,
-      to: [email],
-      subject: `Locked In: ${EVENT_CONFIG.name} is Approaching!`,
-      html,
-    }),
+  return await sendResendEmail({
+    apiKey,
+    fromEmail,
+    toEmail: email,
+    subject: `Locked In: ${EVENT_CONFIG.name} is Approaching!`,
+    html,
   })
-
-  const data = (await response.json()) as ResendSendResponse
-
-  if (!response.ok || data.error) {
-    throw new Error(
-      data.error?.message || `Resend failed with status ${response.status}.`
-    )
-  }
-
-  return data.id
 }

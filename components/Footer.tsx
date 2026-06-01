@@ -56,7 +56,7 @@ export function Footer() {
           overflow: hidden;
           background: var(--bg);
           color: #fff;
-          font-family: 'General', sans-serif;
+          font-family: var(--font-sans);
         }
 
         .nub-top-border {

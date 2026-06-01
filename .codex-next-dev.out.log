@@ -33,3 +33,10 @@
  GET / 200 in 3.9s (next.js: 892ms, application-code: 3.0s)
  GET / 200 in 521ms (next.js: 9ms, application-code: 512ms)
  POST /api/premium-subscribe 503 in 2.4s (next.js: 805ms, application-code: 1603ms)
+  Reload env: .env.local
+  Reload env: .env.local
+  Reload env: .env.local
+  Reload env: .env.local
+  Reload env: .env.local
+  Reload env: .env.local
+  Reload env: .env.local
