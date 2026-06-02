@@ -25,9 +25,9 @@ export default function Home() {
       <ScrollReveal delay={0.08}>
         <YoutubeSection />
       </ScrollReveal>
-      <ScrollReveal delay={0.08}>
-        <MagazineSection />
-      </ScrollReveal>
+      {/* <ScrollReveal delay={0.08}>
+       { <MagazineSection /> }
+      </ScrollReveal> */}
       <ScrollReveal delay={0.12}>
         <SponsorsStrip />
       </ScrollReveal>

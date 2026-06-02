@@ -236,10 +236,12 @@ export function SocialWall() {
                 : typeof r.like_count === "number"
                   ? r.like_count
                   : 0,
-            category: "promos" as const,
-            duration: "0:30",
-            commentsList: [],
-            platform: (["instagram", "tiktok", "youtube"][idx % 3]) as "instagram" | "tiktok" | "youtube"
+            category: (r.category as "promos" | "training" | "behind-the-scenes" | undefined) ??
+              (["promos", "training", "behind-the-scenes"][idx % 3]) as "promos" | "training" | "behind-the-scenes",
+            duration: String(r.duration ?? "0:30"),
+            commentsList: Array.isArray(r.commentsList) ? r.commentsList : [],
+            platform: (r.platform as "instagram" | "tiktok" | "youtube" | undefined) ??
+              (["instagram", "tiktok", "youtube"][idx % 3]) as "instagram" | "tiktok" | "youtube"
           })) as MockReel[]
 
           setPosts(mapped)

@@ -16,20 +16,15 @@ export async function GET() {
     console.error("Failed to load Instagram reels:", error)
 
     const { handle, profileUrl } = getInstagramPublicConfig()
-    const isMissingConfig =
-      error instanceof Error &&
-      error.message.includes("Instagram is not configured")
 
     return NextResponse.json(
       {
         handle,
         profileUrl,
         reels: [],
-        error: isMissingConfig
-          ? "Instagram live reels are not configured yet. Add INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_BUSINESS_ACCOUNT_ID to enable them."
-          : "We couldn't load the latest Instagram reels right now.",
+        error: "We couldn't load the latest Instagram feed right now.",
       },
-      { status: isMissingConfig ? 503 : 500 }
+      { status: 500 }
     )
   }
 }

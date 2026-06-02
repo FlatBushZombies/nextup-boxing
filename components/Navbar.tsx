@@ -13,7 +13,7 @@ import { PremiumModal } from "@/components/PremiumModal"
 const navLinks = [
   { label: "Home", href: "/#hero" },
   { label: "Boxers", href: "/boxers" },
-  { label: "Stream", href: "/#livestream" },
+  { label: "Stream", href: "/#youtube" },
   { label: "Rankings", href: "/rankings" },
   { label: "Social", href: "/#social-wall" },
 ]

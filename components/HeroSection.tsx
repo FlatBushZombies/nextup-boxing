@@ -132,20 +132,20 @@ export function HeroSection() {
         <motion.div
           ref={textRef}
           style={{ y, opacity }}
-          className="absolute inset-x-4 bottom-6 flex max-w-[calc(100vw-2rem)] flex-col items-start gap-4 text-left sm:inset-x-auto sm:left-[6.5%] sm:bottom-10 sm:max-w-[30rem] sm:gap-6 lg:left-[8%] lg:bottom-16 xl:left-[9%]"
+          className="absolute inset-x-3 bottom-5 flex max-w-[calc(100vw-1.5rem)] flex-col items-start gap-5 text-left sm:inset-x-auto sm:left-[6%] sm:bottom-10 sm:max-w-[36rem] sm:gap-7 md:left-[7%] md:max-w-[40rem] lg:left-[8%] lg:bottom-16 xl:left-[9%]"
         >
             {/* Event details */}
             <div className="animate-text mb-6 flex flex-col items-start gap-2 select-none">
               {/* Date Eyebrow */}
               <div className="flex items-center gap-3">
                 <span
-                  className="bg-[#c5203a] px-3.5 py-1 text-xs font-black uppercase tracking-[0.25em] text-white shadow-md"
+                  className="bg-[#c5203a] px-4 py-1.5 text-sm font-black uppercase tracking-[0.25em] text-white shadow-md sm:text-base"
                   style={{ fontFamily: "var(--font-bebas)" }}
                 >
                   SAT
                 </span>
                 <span
-                  className="text-2xl font-black uppercase tracking-[0.15em] text-white"
+                  className="text-[1.8rem] font-black uppercase tracking-[0.15em] text-white sm:text-[2.2rem] md:text-[2.4rem]"
                   style={{ fontFamily: "var(--font-bebas)" }}
                 >
                   JUNE 6TH
@@ -154,7 +154,7 @@ export function HeroSection() {
 
               {/* League Name */}
               <span
-                className="text-lg font-extrabold uppercase tracking-[0.25em] text-[#b8962e] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] sm:text-xl"
+                className="text-[1.35rem] font-extrabold uppercase tracking-[0.22em] text-[#b8962e] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] sm:text-[1.5rem] md:text-[1.7rem]"
                 style={{ fontFamily: "var(--font-oswald), sans-serif" }}
               >
                 Next up boxing
@@ -162,7 +162,7 @@ export function HeroSection() {
 
               {/* Event Title */}
               <h1
-                className="mt-1 text-[2.75rem] font-black uppercase leading-[0.9] tracking-[0.02em] text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.95)] min-[380px]:text-[3.25rem] sm:text-[4.5rem] lg:text-[5rem]"
+                className="mt-1 text-[3.3rem] font-black uppercase leading-[0.86] tracking-[0.02em] text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.95)] min-[380px]:text-[3.9rem] sm:text-[5.4rem] md:text-[5.8rem] lg:text-[6rem]"
                 style={{ fontFamily: "var(--font-bebas), Impact, sans-serif" }}
               >
                 strong island
@@ -175,7 +175,7 @@ export function HeroSection() {
               <div className="mt-3 inline-flex items-center gap-2 border-l-4 border-[#b8962e] bg-[#0d1124]/80 px-4 py-2 backdrop-blur-md shadow-lg">
                 <span className="h-2.5 w-2.5 rounded-full bg-[#b8962e] animate-pulse" />
                 <span
-                  className="text-sm font-black uppercase tracking-[0.25em] text-white sm:text-base"
+                  className="text-base font-black uppercase tracking-[0.25em] text-white sm:text-lg md:text-xl"
                   style={{ fontFamily: "var(--font-bebas)" }}
                 >
                   5 pm sharp
@@ -189,7 +189,7 @@ export function HeroSection() {
                 href="https://www.simpletix.com/e/strong-island-fight-night-11-tickets-254611"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex min-h-11 flex-1 items-center justify-center overflow-hidden bg-[#b8962e] px-4 py-3 text-center text-xs font-bold text-[#0d1124] transition-all duration-300 hover:shadow-[0_0_25px_rgba(184,150,46,0.4)] min-[380px]:text-sm sm:flex-none sm:px-6"
+                className="group relative flex min-h-11 flex-1 items-center justify-center overflow-hidden bg-[#b8962e] px-4 py-3 text-center text-sm font-bold text-[#0d1124] transition-all duration-300 hover:shadow-[0_0_25px_rgba(184,150,46,0.4)] min-[380px]:text-base sm:flex-none sm:px-6"
               >
                 <span className="editorial-button relative z-10">
                   GET TICKETS
@@ -200,7 +200,7 @@ export function HeroSection() {
 
               <a
                 href="#youtube"
-                className="group relative flex min-h-11 flex-1 items-center justify-center overflow-hidden border-2 border-white/30 bg-transparent px-4 py-3 text-center text-xs font-bold text-white transition-all duration-300 hover:border-white min-[380px]:text-sm sm:flex-none sm:px-6"
+                className="group relative flex min-h-11 flex-1 items-center justify-center overflow-hidden border-2 border-white/30 bg-transparent px-4 py-3 text-center text-sm font-bold text-white transition-all duration-300 hover:border-white min-[380px]:text-base sm:flex-none sm:px-6"
               >
                 <span className="editorial-button relative z-10">
                   WATCH ON NEXTUP
