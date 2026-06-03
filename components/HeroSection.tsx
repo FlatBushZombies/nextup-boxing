@@ -132,7 +132,7 @@ export function HeroSection() {
         <motion.div
           ref={textRef}
           style={{ y, opacity }}
-          className="absolute inset-x-3 bottom-5 flex max-w-[calc(100vw-1.5rem)] flex-col items-start gap-5 text-left sm:inset-x-auto sm:left-[6%] sm:bottom-10 sm:max-w-[36rem] sm:gap-7 md:left-[7%] md:max-w-[40rem] lg:left-[8%] lg:bottom-16 xl:left-[9%]"
+          className="absolute inset-x-4 bottom-5 flex max-w-[calc(100vw-2rem)] flex-col items-start gap-5 text-left sm:inset-x-auto sm:left-[6%] sm:bottom-10 sm:max-w-[36rem] sm:gap-7 md:left-[7%] md:max-w-[40rem] lg:left-[8%] lg:bottom-16 xl:left-[9%]"
         >
             {/* Event details */}
             <div className="animate-text mb-6 flex flex-col items-start gap-2 select-none">
@@ -184,12 +184,12 @@ export function HeroSection() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="animate-text relative z-30 flex w-full flex-wrap items-center gap-3 sm:w-auto">
+            <div className="animate-text relative z-30 flex w-full flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:w-auto">
               <a
                 href="https://www.simpletix.com/e/strong-island-fight-night-11-tickets-254611"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex min-h-11 flex-1 items-center justify-center overflow-hidden bg-[#b8962e] px-4 py-3 text-center text-sm font-bold text-[#0d1124] transition-all duration-300 hover:shadow-[0_0_25px_rgba(184,150,46,0.4)] min-[380px]:text-base sm:flex-none sm:px-6"
+                className="group relative flex min-h-11 w-full sm:w-auto items-center justify-center overflow-hidden bg-[#b8962e] px-4 py-3 text-center text-sm font-bold text-[#0d1124] transition-all duration-300 hover:shadow-[0_0_25px_rgba(184,150,46,0.4)] min-[380px]:text-base sm:px-6"
               >
                 <span className="editorial-button relative z-10">
                   GET TICKETS
@@ -200,7 +200,7 @@ export function HeroSection() {
 
               <a
                 href="#youtube"
-                className="group relative flex min-h-11 flex-1 items-center justify-center overflow-hidden border-2 border-white/30 bg-transparent px-4 py-3 text-center text-sm font-bold text-white transition-all duration-300 hover:border-white min-[380px]:text-base sm:flex-none sm:px-6"
+                className="group relative flex min-h-11 w-full sm:w-auto items-center justify-center overflow-hidden border-2 border-white/30 bg-transparent px-4 py-3 text-center text-sm font-bold text-white transition-all duration-300 hover:border-white min-[380px]:text-base sm:px-6"
               >
                 <span className="editorial-button relative z-10">
                   WATCH ON NEXTUP

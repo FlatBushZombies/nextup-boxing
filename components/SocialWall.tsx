@@ -210,6 +210,17 @@ export function SocialWall() {
   const [posts, setPosts] = useState<MockReel[]>(MOCK_REELS)
   const [isError, setIsError] = useState<string | null>(null)
 
+  useEffect(() => {
+    if (selectedReel) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [selectedReel])
+
   const POLL_INTERVAL_MS = 30_000
 
   useEffect(() => {

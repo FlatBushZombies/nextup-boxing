@@ -149,9 +149,13 @@
     @apply bg-white text-foreground;
     font-feature-settings: "kern" 1, "liga" 1;
     letter-spacing: 0;
+    max-width: 100%;
+    overflow-x: hidden;
   }
   html {
     scroll-behavior: smooth;
+    max-width: 100%;
+    overflow-x: hidden;
   }
   h1, h2, h3 {
     font-family: var(--font-display);

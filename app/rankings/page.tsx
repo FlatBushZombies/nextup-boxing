@@ -68,7 +68,7 @@ export default function RankingsPage() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.45, duration: 0.5 }}
-              className="absolute -top-3 -right-6 rotate-[12deg] bg-[#b8962e] text-[#05070f] font-black uppercase text-xs tracking-widest px-3 py-1.5 shadow-lg rounded-sm sm:-top-5 sm:-right-8"
+              className="absolute -top-3 -right-2 rotate-[12deg] bg-[#b8962e] text-[#05070f] font-black uppercase text-xs tracking-widest px-3 py-1.5 shadow-lg rounded-sm sm:-top-5 sm:-right-8"
               style={{ fontFamily: "var(--font-bebas)" }}
             >
               COMING SOON
