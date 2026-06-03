@@ -1,0 +1,1376 @@
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+⨯ Failed to write image to cache HVZMsVkR9x-YiPY9xx0CtARZJzkBF7ntewBoCX-O770 Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache Vx5jUFVZ-PJdp2mDLnp7vvMQJl-9TyKLVnSORJdCLT8 Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+[browser] Image with src "/logo-footer.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Autoplay was prevented by browser policy: NotSupportedError: The element has no supported sources. (components/SocialWall.tsx:177:17)
+[browser] Autoplay was prevented by browser policy: NotSupportedError: The element has no supported sources. (components/SocialWall.tsx:177:17)
+[browser] Autoplay was prevented by browser policy: NotSupportedError: The element has no supported sources. (components/SocialWall.tsx:177:17)
+[browser] Autoplay was prevented by browser policy: NotSupportedError: The element has no supported sources. (components/SocialWall.tsx:177:17)
+[browser] Autoplay was prevented by browser policy: NotSupportedError: The element has no supported sources. (components/SocialWall.tsx:177:17)
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+⨯ Failed to write image to cache iv--Jcs2NQCXK3ZBv0YUvqdgW5yCUE_QB_Mg5BFNWxg Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache FdYfyMJKa6zt_0Sg4SFjWDn5haDeoKqgjB-BFuyF2pU Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: Client network socket disconnected before secure TLS connection was established
+      at ignore-listed frames {
+    code: 'ECONNRESET',
+    path: undefined,
+    host: 'www.youtube.com',
+    port: 443,
+    localAddress: null
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: Client network socket disconnected before secure TLS connection was established
+      at ignore-listed frames {
+    code: 'ECONNRESET',
+    path: undefined,
+    host: 'www.youtube.com',
+    port: 443,
+    localAddress: null
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+⨯ Failed to write image to cache 7PbN5ok6lio-iti0yt1jJPcWa2gVBsZrVrwRGGr4f94 Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache SM-1eGIOCmbINk6HGEk3eyPFytRCXueictIC0NfI0b4 Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache A-YzqREGlZ8QmhR8iVCVwml4yhJ_fzxGIZZYRMZd6_0 Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache w-YDHzqieo9p9YWau7aFAHpcuMqlMqyBHJAhUt3zOUc Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache wmcXBVqohBDmRzq79HsVO7VeTFjYonKgEdExkiNnL0Y Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache yW6zm-QUNEbm2gumKcjlO5dGoC8JidEZczlAM9h4sDM Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache HBsy7YJ1BZAEBxTIMbfdQM4iHhYQkHFadDxI3q4r1M0 Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache rOn8xhK_GRqEB69S0YFOH_wOokiXCCwpsFq42ddZm48 Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache c5M9Fhlo8Ey9xxtnUbyIWWKXkBNsTyKPIRyDUt4Z898 Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache CumNjVLtAbZvzwAzlXti5vqnD_QhbC4haaUa6_4-O6A Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache p5UdJyV6767PtuA8sZsji4EVx9eBSZU3QbBiOuGny48 Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache 0PgsazbTfzXpE7CEPxzQ8dyI-XCdL_swcEgVJ9ctb2U Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache JUiyDaY9ORXaL8lBOex8t1_eTpZgJJ5HuZ2TA0yCFNs Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache tVTiaQdS99djyCa53FARZHslrB8947LeYach85PCwis Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+⨯ Failed to write image to cache yc41_vi2dybLmG8mL1YdEv1KXF6BjANF3a8ufrjtcHA Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache 3UmtwUf5r7ZOc-wl-kPO2cQToCJwTSCwHViuqQpNRI8 Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+[browser] Image with src "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/NAIJALIE_RODRIGUEZ_106_WOMENS_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/BRADLEY_BELT_198_ADC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/KEVIN_TORRES_165_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/KIAMAL_EVELYN_132_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache HVZMsVkR9x-YiPY9xx0CtARZJzkBF7ntewBoCX-O770 Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache Vx5jUFVZ-PJdp2mDLnp7vvMQJl-9TyKLVnSORJdCLT8 Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache FdYfyMJKa6zt_0Sg4SFjWDn5haDeoKqgjB-BFuyF2pU Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+[browser] Image with src "/logo-footer.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[browser] Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly. (<anonymous>)
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: AggregateError: 
+      at ignore-listed frames {
+    code: 'ETIMEDOUT',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+⨯ Failed to write image to cache c5M9Fhlo8Ey9xxtnUbyIWWKXkBNsTyKPIRyDUt4Z898 Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache CumNjVLtAbZvzwAzlXti5vqnD_QhbC4haaUa6_4-O6A Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: AggregateError: 
+      at ignore-listed frames {
+    code: 'ETIMEDOUT',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+[browser] Autoplay was prevented by browser policy: NotSupportedError: Failed to load because no supported source was found. (components/SocialWall.tsx:177:17)
+[browser] Autoplay was prevented by browser policy: NotSupportedError: Failed to load because no supported source was found. (components/SocialWall.tsx:177:17)
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: AggregateError: 
+      at ignore-listed frames {
+    code: 'ETIMEDOUT',
+    [errors]: [ [Error], [Error] ]
+  }
+}
+⨯ Failed to write image to cache p5UdJyV6767PtuA8sZsji4EVx9eBSZU3QbBiOuGny48 Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+[browser] Autoplay was prevented by browser policy: NotSupportedError: Failed to load because no supported source was found. (components/SocialWall.tsx:177:17)
+[browser] Autoplay was prevented by browser policy: NotSupportedError: Failed to load because no supported source was found. (components/SocialWall.tsx:177:17)
+[browser] Autoplay was prevented by browser policy: NotSupportedError: Failed to load because no supported source was found. (components/SocialWall.tsx:177:17)
+[browser] Image with src "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+[browser] Image with src "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+⨯ Failed to write image to cache 0PgsazbTfzXpE7CEPxzQ8dyI-XCdL_swcEgVJ9ctb2U Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache JUiyDaY9ORXaL8lBOex8t1_eTpZgJJ5HuZ2TA0yCFNs Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+[browser] Image with src "/champions/NAIJALIE_RODRIGUEZ_106_WOMENS_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+[browser] Image with src "/champions/BRADLEY_BELT_198_ADC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection: Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ unhandledRejection:  Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+⨯ Failed to write image to cache tVTiaQdS99djyCa53FARZHslrB8947LeYach85PCwis Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache yc41_vi2dybLmG8mL1YdEv1KXF6BjANF3a8ufrjtcHA Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+⨯ Failed to write image to cache 3UmtwUf5r7ZOc-wl-kPO2cQToCJwTSCwHViuqQpNRI8 Error: LRUCache: calculateSize returned 0, but size must be > 0. Items with size 0 would never be evicted, causing unbounded cache growth.
+    at ignore-listed frames
+[browser] Image with src "/champions/KEVIN_TORRES_165_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+[browser] Image with src "/champions/KIAMAL_EVELYN_132_SBC_CHAMPION.png" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Instagram public feed fallback failed: TypeError: fetch failed
+    at async fetchInstagramPublicFeed (lib\instagram.ts:100:20)
+    at async fetchInstagramReels (lib\instagram.ts:176:12)
+    at async GET (app\api\instagram\reels\route.ts:13:21)
+   98 |   const { handle, profileUrl } = getInstagramConfig()
+   99 |
+> 100 |   const response = await fetch(
+      |                    ^
+  101 |     `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURICompone...
+  102 |     {
+  103 |       headers: { {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}
+Failed to load YouTube feed: TypeError: fetch failed
+    at async fetchYoutubeFeed (lib\youtube.ts:131:24)
+    at async GET (app\api\youtube\route.ts:48:21)
+  129 |   }
+  130 |
+> 131 |   const feedResponse = await fetch(
+      |                        ^
+  132 |     `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
+  133 |     {
+  134 |       next: { revalidate: 900 }, {
+  [cause]: Error: unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca
+      at ignore-listed frames {
+    code: 'UNABLE_TO_VERIFY_LEAF_SIGNATURE'
+  }
+}

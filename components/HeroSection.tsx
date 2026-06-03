@@ -100,7 +100,7 @@ export function HeroSection() {
     <section
       ref={ref}
       id="hero"
-      className="relative flex min-h-[140dvh] flex-col overflow-hidden bg-[#0d1124] sm:h-[100dvh] sm:min-h-[700px]"
+      className="relative flex min-h-[100dvh] flex-col overflow-hidden bg-[#0d1124] sm:h-[100dvh] sm:min-h-[700px]"
     >
       {/* Futuristic background effects */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -128,7 +128,7 @@ export function HeroSection() {
       </div>
 
       {/* Main content */}
-      <div className="relative z-20 mx-auto flex min-h-[115dvh] w-full max-w-7xl items-center justify-center px-4 pb-8 pt-28 sm:block sm:h-full sm:min-h-0 sm:px-8 sm:pb-0 sm:pt-0 lg:px-16">
+      <div className="relative z-20 mx-auto flex min-h-[100dvh] w-full max-w-7xl items-center justify-center px-4 pb-8 pt-28 sm:block sm:h-full sm:min-h-0 sm:px-8 sm:pb-0 sm:pt-0 lg:px-16">
         <motion.div
           ref={textRef}
           style={{ y, opacity }}
