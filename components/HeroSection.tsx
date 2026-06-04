@@ -1,18 +1,11 @@
 "use client"
 
-import { useRef, useEffect } from "react"
+import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import Image from "next/image"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-
-gsap.registerPlugin(ScrollTrigger)
 
 export function HeroSection() {
   const ref = useRef<HTMLElement | null>(null)
-  const textRef = useRef<HTMLDivElement>(null)
-  const imageRef = useRef<HTMLDivElement>(null)
-  const statsRef = useRef<HTMLDivElement>(null)
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -23,78 +16,6 @@ export function HeroSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.6, 1], [1, 1, 0.6])
   const scale = useTransform(scrollYProgress, [0, 0.3], [1.04, 1])
   const imageY = useTransform(scrollYProgress, [0, 1], [0, 30])
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Text animation with stagger
-      gsap.fromTo(
-        textRef.current?.querySelectorAll(".animate-text") || [],
-        {
-          y: 50,
-          opacity: 0,
-          clipPath: "inset(0 0 100% 0)",
-        },
-        {
-          y: 0,
-          opacity: 1,
-          clipPath: "inset(0 0 0% 0)",
-          duration: 0.9,
-          stagger: 0.1,
-          ease: "power4.out",
-          delay: 0.3,
-        },
-      )
-
-      // Image reveal
-      gsap.fromTo(
-        imageRef.current,
-        {
-          clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)",
-          scale: 1.1,
-        },
-        {
-          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-          scale: 1,
-          duration: 1.2,
-          ease: "power4.inOut",
-          delay: 0.2,
-        },
-      )
-
-      // Stats counter animation
-      const stats = statsRef.current?.querySelectorAll(".stat-number")
-
-      stats?.forEach((stat) => {
-        const target = parseInt(stat.getAttribute("data-value") || "0")
-
-        gsap.fromTo(
-          stat,
-          { textContent: 0 },
-          {
-            textContent: target,
-            duration: 2,
-            ease: "power2.out",
-            snap: { textContent: 1 },
-            scrollTrigger: {
-              trigger: stat,
-              start: "top 80%",
-              toggleActions: "play none none reverse",
-            },
-          },
-        )
-      })
-
-      // Diagonal lines animation
-      gsap.to(".diagonal-line", {
-        x: "100%",
-        duration: 20,
-        repeat: -1,
-        ease: "none",
-      })
-    }, ref)
-
-    return () => ctx.revert()
-  }, [])
 
   return (
     <section
@@ -130,8 +51,10 @@ export function HeroSection() {
       {/* Main content */}
       <div className="relative z-20 mx-auto flex min-h-[100dvh] w-full max-w-7xl items-center justify-center px-4 pb-8 pt-28 sm:block sm:h-full sm:min-h-0 sm:px-8 sm:pb-0 sm:pt-0 lg:px-16">
         <motion.div
-          ref={textRef}
           style={{ y, opacity }}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
           className="relative z-30 flex w-full max-w-[calc(100vw-2rem)] flex-col items-start gap-4 text-left sm:absolute sm:inset-x-auto sm:left-[6%] sm:bottom-10 sm:w-auto sm:max-w-[36rem] sm:gap-7 md:left-[7%] md:max-w-[40rem] lg:left-[8%] lg:bottom-16 xl:left-[9%]"
         >
             {/* Event details */}
@@ -203,7 +126,7 @@ export function HeroSection() {
                 className="group relative flex min-h-11 w-full sm:w-auto items-center justify-center overflow-hidden border-2 border-white/30 bg-transparent px-4 py-3 text-center text-sm font-bold text-white transition-all duration-300 hover:border-white min-[380px]:text-base sm:px-6"
               >
                 <span className="editorial-button relative z-10">
-                  WATCH ON NEXTUP
+                  FREE LIVESTREAM
                 </span>
 
                 <div className="absolute inset-0 translate-x-[-100%] bg-white/10 transition-transform duration-300 group-hover:translate-x-0" />
@@ -214,7 +137,6 @@ export function HeroSection() {
 
       {/* Full Background Cover Image */}
       <motion.div
-        ref={imageRef}
         style={{ y: imageY }}
         className="pointer-events-none absolute inset-0 z-[1]"
       >
@@ -244,7 +166,7 @@ export function HeroSection() {
           className="relative h-full w-full"
         >
           <Image
-            src="/hero-boxers.png"
+            src="/hero-boxers.webp"
             alt="Main event fighters image"
             fill
             priority

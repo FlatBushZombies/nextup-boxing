@@ -3,13 +3,9 @@
 import { useRef, useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
 import { ChevronDown, Search, X } from "lucide-react"
-
-gsap.registerPlugin(ScrollTrigger)
 
 // Boxers data - World Champions
 const worldChampions = [
@@ -17,7 +13,7 @@ const worldChampions = [
     id: 1,
     firstName: "Arturo",
     lastName: "Acevedo",
-    image: "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.png",
+    image: "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.webp",
     weightClass: "Super-Bantamweight",
     titles: "SBC SUPER-BANTAMWEIGHT CHAMPION",
     record: "23-1-0",
@@ -29,7 +25,7 @@ const worldChampions = [
     id: 2,
     firstName: "Bradley",
     lastName: "Belt",
-    image: "/champions/BRADLEY_BELT_198_ADC_CHAMPION.png",
+    image: "/champions/BRADLEY_BELT_198_ADC_CHAMPION.webp",
     weightClass: "Cruiserweight",
     titles: "ADC CRUISERWEIGHT CHAMPION",
     record: "26-0-0",
@@ -41,7 +37,7 @@ const worldChampions = [
     id: 3,
     firstName: "Jaden",
     lastName: "Harvey",
-    image: "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.png",
+    image: "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.webp",
     weightClass: "Super-Middleweight",
     titles: "DAWG SUPER-MIDDLEWEIGHT CHAMPION",
     record: "22-2-0",
@@ -53,7 +49,7 @@ const worldChampions = [
     id: 4,
     firstName: "Kevin",
     lastName: "Torres",
-    image: "/champions/KEVIN_TORRES_165_SBC_CHAMPION.png",
+    image: "/champions/KEVIN_TORRES_165_SBC_CHAMPION.webp",
     weightClass: "Super-Middleweight",
     titles: "SBC SUPER-MIDDLEWEIGHT CHAMPION",
     record: "24-1-0",
@@ -65,7 +61,7 @@ const worldChampions = [
     id: 5,
     firstName: "Kiamal",
     lastName: "Evelyn",
-    image: "/champions/KIAMAL_EVELYN_132_SBC_CHAMPION.png",
+    image: "/champions/KIAMAL_EVELYN_132_SBC_CHAMPION.webp",
     weightClass: "Super-Featherweight",
     titles: "SBC SUPER-FEATHERWEIGHT CHAMPION",
     record: "19-0-0",
@@ -77,7 +73,7 @@ const worldChampions = [
     id: 6,
     firstName: "Naijalie",
     lastName: "Rodriguez",
-    image: "/champions/NAIJALIE_RODRIGUEZ_106_WOMENS_SBC_CHAMPION.png",
+    image: "/champions/NAIJALIE_RODRIGUEZ_106_WOMENS_SBC_CHAMPION.webp",
     weightClass: "Women’s Light-Flyweight",
     titles: "WOMENS SBC LIGHT-FLYWEIGHT CHAMPION",
     record: "18-0-0",
@@ -89,7 +85,7 @@ const worldChampions = [
     id: 7,
     firstName: "Reese",
     lastName: "Mistretta",
-    image: "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.png",
+    image: "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.webp",
     weightClass: "Light-Heavyweight",
     titles: "SBC LIGHT-HEAVYWEIGHT CHAMPION",
     record: "25-2-0",
@@ -101,7 +97,7 @@ const worldChampions = [
     id: 8,
     firstName: "Xavier",
     lastName: "Wilcher",
-    image: "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.png",
+    image: "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.webp",
     weightClass: "Cruiserweight",
     titles: "SBC CRUISERWEIGHT CHAMPION",
     record: "28-1-0",
@@ -167,84 +163,105 @@ export default function BoxersPage() {
     })
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Banner parallax
-      const bannerImg = bannerRef.current?.querySelector<HTMLImageElement>("img")
-      if (bannerImg) {
-        gsap.to(bannerImg, {
-          y: 100,
-          ease: "none",
-          scrollTrigger: {
-            trigger: bannerRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          }
-        })
+    let ctx: any = null
+    let cancelled = false
+
+    async function initGSAP() {
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+      ])
+
+      if (cancelled) {
+        return
       }
 
-      // Champions cards stagger reveal
-      const championCards = championsRef.current?.querySelectorAll(".champion-card")
-      if (championCards) {
+      gsap.registerPlugin(ScrollTrigger)
+
+      ctx = gsap.context(() => {
+        // Banner parallax
+        const bannerImg = bannerRef.current?.querySelector<HTMLImageElement>("img")
+        if (bannerImg) {
+          gsap.to(bannerImg, {
+            y: 100,
+            ease: "none",
+            scrollTrigger: {
+              trigger: bannerRef.current,
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          })
+        }
+
+        // Champions cards stagger reveal
+        const championCards = championsRef.current?.querySelectorAll(".champion-card")
+        if (championCards) {
+          gsap.fromTo(
+            championCards,
+            { opacity: 0, y: 60, scale: 0.95 },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: championsRef.current,
+                start: "top 75%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          )
+        }
+
+        // All boxers cards stagger
+        const boxerCards = allBoxersRef.current?.querySelectorAll(".boxer-card")
+        if (boxerCards) {
+          gsap.fromTo(
+            boxerCards,
+            { opacity: 0, y: 40 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              stagger: 0.05,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: allBoxersRef.current,
+                start: "top 80%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          )
+        }
+
+        // Vertical title animation
         gsap.fromTo(
-          championCards,
-          { opacity: 0, y: 60, scale: 0.95 },
+          ".vertical-title",
+          { opacity: 0, x: -30 },
           {
             opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            stagger: 0.1,
+            x: 0,
+            duration: 1,
             ease: "power3.out",
             scrollTrigger: {
-              trigger: championsRef.current,
-              start: "top 75%",
-              toggleActions: "play none none reverse"
-            }
-          }
-        )
-      }
-
-      // All boxers cards stagger
-      const boxerCards = allBoxersRef.current?.querySelectorAll(".boxer-card")
-      if (boxerCards) {
-        gsap.fromTo(
-          boxerCards,
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.05,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: allBoxersRef.current,
+              trigger: ".vertical-title",
               start: "top 80%",
-              toggleActions: "play none none reverse"
-            }
+              toggleActions: "play none none reverse",
+            },
           }
         )
-      }
+      })
+    }
 
-      // Vertical title animation
-      gsap.fromTo(
-        ".vertical-title",
-        { opacity: 0, x: -30 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".vertical-title",
-            start: "top 80%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      )
-    })
+    initGSAP()
 
-    return () => ctx.revert()
+    return () => {
+      cancelled = true
+      ctx?.revert?.()
+    }
   }, [])
 
   return (
@@ -258,7 +275,7 @@ export default function BoxersPage() {
       >
         <div className="absolute inset-0">
           <Image
-            src="/boxers/banner-bg.jpg"
+            src="/boxers/banner-bg.webp"
             alt="Boxing ring atmosphere"
             fill
             className="object-cover opacity-50"
@@ -303,7 +320,7 @@ export default function BoxersPage() {
                   className="text-5xl lg:text-7xl font-black uppercase text-outline-white-heavy"
                   style={{ fontFamily: "var(--font-bebas)" }}
                 >
-                  WORLD<br />CHAMPIONS
+                  NEXTUP<br />CHAMPIONS
                 </h2>
               </div>
             </div>
@@ -506,12 +523,11 @@ function BoxerCard({ boxer }: { boxer: BoxerData }) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
-    <Link href={`/boxers/${boxer.id}`}>
-      <div 
-        className="boxer-card relative aspect-[3/4] bg-[#f5f5f5] overflow-hidden group cursor-pointer"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
+    <div 
+      className="boxer-card relative aspect-[3/4] bg-[#f5f5f5] overflow-hidden group cursor-pointer"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
         {boxer.image ? (
           <div className="absolute inset-0">
             <Image
@@ -549,7 +565,6 @@ function BoxerCard({ boxer }: { boxer: BoxerData }) {
             isHovered ? "bg-[#c5203a]/20" : ""
           }`}
         />
-      </div>
-    </Link>
+    </div>
   )
 }

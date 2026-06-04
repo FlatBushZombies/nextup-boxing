@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist_Mono, Bebas_Neue, Montserrat, Oswald, Barlow_Condensed, Azeret_Mono } from 'next/font/google'
+import { Geist_Mono, Bebas_Neue, Montserrat, Oswald } from 'next/font/google'
 import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
@@ -58,19 +58,6 @@ const oswald = Oswald({
   display: 'swap',
 })
 
-const barlowCondensed = Barlow_Condensed({
-  subsets: ['latin'],
-  variable: '--font-barlow-condensed',
-  weight: ['400', '500', '600', '700', '800', '900'],
-  display: 'swap',
-})
-
-const azeretMono = Azeret_Mono({
-  subsets: ['latin'],
-  variable: '--font-azeret-mono',
-  weight: ['300', '400', '500'],
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   title: 'Next Up Boxing League | June 6, 2026',
@@ -102,7 +89,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${helveticaNow.variable} ${geistMono.variable} ${bebasNeue.variable} ${montserrat.variable} ${oswald.variable} ${barlowCondensed.variable} ${azeretMono.variable} bg-white`}
+      className={`${helveticaNow.variable} ${geistMono.variable} ${bebasNeue.variable} ${montserrat.variable} ${oswald.variable} bg-white`}
     >
       <body className="overflow-x-hidden font-sans antialiased">
         {children}

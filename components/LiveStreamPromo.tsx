@@ -1,8 +1,6 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { ArrowDown, Play, Radio, ScanLine, Sparkles, Zap } from "lucide-react"
 
 const factoids = [
@@ -115,87 +113,106 @@ export function LiveStreamPromo() {
   }, [prefersReducedMotion, videoReady])
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
+    let ctx: any = null
+    let cancelled = false
 
-    const section = sectionRef.current
-    const intro = introRef.current
-    const frame = frameRef.current
-    const scanline = scanlineRef.current
-    const progressBar = progressBarRef.current
+    async function initGsap() {
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+        import("gsap"),
+        import("gsap/ScrollTrigger"),
+      ])
 
-    if (!section || !intro || !frame || !scanline || !progressBar) {
-      return
-    }
+      if (cancelled) {
+        return
+      }
 
-    if (prefersReducedMotion) {
-      gsap.set([intro, frame], { clearProps: "all" })
-      gsap.set(scanline, { opacity: 0.16 })
-      gsap.set(progressBar, { scaleX: 1, transformOrigin: "left center" })
-      return
-    }
+      gsap.registerPlugin(ScrollTrigger)
 
-    const context = gsap.context(() => {
-      gsap.set(intro, { y: 48, opacity: 0.3 })
-      gsap.set(frame, { y: 72, scale: 0.92 })
-      gsap.set(scanline, { opacity: 0.18 })
-      gsap.set(progressBar, { scaleX: 0, transformOrigin: "left center" })
+      const section = sectionRef.current
+      const intro = introRef.current
+      const frame = frameRef.current
+      const scanline = scanlineRef.current
+      const progressBar = progressBarRef.current
 
-      gsap.to(intro, {
-        y: 0,
-        opacity: 1,
-        ease: "none",
-        scrollTrigger: {
+      if (!section || !intro || !frame || !scanline || !progressBar) {
+        return
+      }
+
+      if (prefersReducedMotion) {
+        gsap.set([intro, frame], { clearProps: "all" })
+        gsap.set(scanline, { opacity: 0.16 })
+        gsap.set(progressBar, { scaleX: 1, transformOrigin: "left center" })
+        return
+      }
+
+      ctx = gsap.context(() => {
+        gsap.set(intro, { y: 48, opacity: 0.3 })
+        gsap.set(frame, { y: 72, scale: 0.92 })
+        gsap.set(scanline, { opacity: 0.18 })
+        gsap.set(progressBar, { scaleX: 0, transformOrigin: "left center" })
+
+        gsap.to(intro, {
+          y: 0,
+          opacity: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1.1,
+          },
+        })
+
+        gsap.to(frame, {
+          y: -42,
+          scale: 1.04,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1.1,
+          },
+        })
+
+        ScrollTrigger.create({
           trigger: section,
           start: "top top",
           end: "bottom bottom",
           scrub: 1.1,
-        },
-      })
+          onUpdate: (self) => {
+            const normalizedProgress = clamp((self.progress - 0.08) / 0.84, 0, 1)
+            const video = videoRef.current
 
-      gsap.to(frame, {
-        y: -42,
-        scale: 1.04,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 1.1,
-        },
-      })
+            gsap.set(scanline, {
+              opacity: gsap.utils.interpolate(0.18, 0.08, normalizedProgress),
+            })
+            gsap.set(progressBar, { scaleX: normalizedProgress, transformOrigin: "left center" })
 
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1.1,
-        onUpdate: (self) => {
-          const normalizedProgress = clamp((self.progress - 0.08) / 0.84, 0, 1)
-          const video = videoRef.current
+            setScrubProgress(normalizedProgress)
 
-          gsap.set(scanline, {
-            opacity: gsap.utils.interpolate(0.18, 0.08, normalizedProgress),
-          })
-          gsap.set(progressBar, { scaleX: normalizedProgress, transformOrigin: "left center" })
+            if (!video || !duration) {
+              return
+            }
 
-          setScrubProgress(normalizedProgress)
+            const nextTime = normalizedProgress * Math.max(duration - 0.12, 0)
 
-          if (!video || !duration) {
-            return
-          }
+            if (Math.abs(video.currentTime - nextTime) > 0.04) {
+              video.currentTime = nextTime
+            }
 
-          const nextTime = normalizedProgress * Math.max(duration - 0.12, 0)
+            setCurrentTime(nextTime)
+          },
+        })
+      }, section)
+    }
 
-          if (Math.abs(video.currentTime - nextTime) > 0.04) {
-            video.currentTime = nextTime
-          }
+    initGsap()
 
-          setCurrentTime(nextTime)
-        },
-      })
-    }, section)
-
-    return () => context.revert()
+    return () => {
+      cancelled = true
+      ctx?.revert?.()
+    }
   }, [duration, prefersReducedMotion])
 
   const activeBeat = useMemo(() => {

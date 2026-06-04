@@ -132,6 +132,7 @@ function LiveStreamPlayer({ liveStream, isVisible }: { liveStream: YoutubeLiveSt
 
       <div className="aspect-video w-full bg-black pt-10">
         <iframe
+          loading="lazy"
           src={`https://www.youtube.com/embed/${liveStream.id}?autoplay=1&rel=0&modestbranding=1`}
           title={liveStream.title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -179,6 +180,7 @@ function FeaturedVideoPlayer({
       <div className="relative aspect-video w-full overflow-hidden bg-[#0a0e1a]">
         {embedUrl ? (
           <iframe
+            loading="lazy"
             src={embedUrl}
             title={activeVideo?.title ?? "Channel uploads"}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -345,7 +347,7 @@ export function YoutubeSection() {
     <section
       id="youtube"
       ref={ref}
-      className="relative overflow-hidden py-16 sm:py-24"
+      className="relative overflow-hidden py-16 sm:py-24 scroll-mt-28"
       style={{ background: "linear-gradient(180deg, #0a1628 0%, #0d1e3a 50%, #0a1628 100%)" }}
     >
       {/* Background grid pattern */}

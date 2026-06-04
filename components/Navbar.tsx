@@ -33,7 +33,30 @@ export function Navbar() {
     return idx !== -1 ? url.substring(idx + 1) : ""
   }
 
+  const getSectionFromHref = (href: string) => {
+    const hash = getHash(href)
+
+    if (hash) {
+      return hash
+    }
+
+    const path = href.split("?")[0].split("#")[0]
+    const trimmed = path.replace(/^\/+|\/+$/g, "")
+
+    return trimmed || "hero"
+  }
+
+  const normalizePathname = (pathnameValue: string | null) => {
+    if (!pathnameValue || pathnameValue === "/") {
+      return "hero"
+    }
+
+    const trimmed = pathnameValue.replace(/^\/+|\/+$/g, "")
+    return trimmed || "hero"
+  }
+
   useEffect(() => {
+    setActiveSection(normalizePathname(pathname))
     const handleScroll = () => {
       const scrollTop = window.scrollY
       const maxScroll =
@@ -83,7 +106,7 @@ export function Navbar() {
       observer.disconnect()
       window.removeEventListener("scroll", handleScroll)
     }
-  }, [])
+  }, [pathname])
 
   const isSolid = scrolled || !isHome
 
@@ -151,34 +174,39 @@ export function Navbar() {
           <motion.div
             layout
             transition={{ type: "spring", stiffness: 120, damping: 18 }}
-            className={`hidden xl:flex absolute items-center transition-all duration-500 ease-in-out z-10 pointer-events-auto ${
+            className={`hidden xl:flex absolute items-center transition-all duration-500 ease-in-out z-30 pointer-events-auto ${
               scrolled
                 ? "left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-4 lg:gap-8"
                 : "left-1/2 bottom-2 -translate-x-1/2 gap-8"
             }`}
           >
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                aria-current={
-                  activeSection === getHash(link.href)
-                    ? "page"
-                    : undefined
-                }
-                className="group relative px-2 py-2.5 text-[0.75rem] font-semibold uppercase tracking-[0.2em] transition-all duration-300 text-white drop-shadow-md hover:text-white/80 pointer-events-auto"
-              >
-                {link.label}
+            {navLinks.map((link) => {
+              const linkHash = getSectionFromHref(link.href)
 
-                <span
-                  className={`absolute inset-x-0 bottom-0 h-[2px] origin-left bg-[#c5203a] transition-transform duration-300 ${
-                    activeSection === getHash(link.href)
-                      ? "scale-x-100"
-                      : "scale-x-0 group-hover:scale-x-100"
-                  }`}
-                />
-              </Link>
-            ))}
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  aria-current={
+                    activeSection === linkHash ? "page" : undefined
+                  }
+                  onClick={() => {
+                    setActiveSection(linkHash)
+                  }}
+                  className="group relative px-2 py-2.5 text-[0.75rem] font-semibold uppercase tracking-[0.2em] transition-all duration-300 text-white drop-shadow-md hover:text-white/80 pointer-events-auto"
+                >
+                  {link.label}
+
+                  <span
+                    className={`absolute inset-x-0 bottom-0 h-[2px] origin-left bg-[#c5203a] transition-transform duration-300 ${
+                      activeSection === linkHash
+                        ? "scale-x-100"
+                        : "scale-x-0 group-hover:scale-x-100"
+                    }`}
+                  />
+                </Link>
+              )
+            })}
           </motion.div>
 
           {/* Right Actions */}
@@ -236,25 +264,30 @@ export function Navbar() {
             className="overflow-hidden border-t border-white/10 bg-[#0d1124]/98 xl:hidden backdrop-blur-xl"
           >
             <div className="space-y-1 px-4 py-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  aria-current={
-                    activeSection === getHash(link.href)
-                      ? "page"
-                      : undefined
-                  }
-                  className={`block rounded-xl px-4 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.2em] transition-colors duration-300 ${
-                    activeSection === getHash(link.href)
-                      ? "bg-white/10 text-white"
-                      : "text-white/70 hover:bg-white/5 hover:text-white"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const linkHash = getSectionFromHref(link.href)
+
+                return (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => {
+                      setMobileOpen(false)
+                      setActiveSection(linkHash)
+                    }}
+                    aria-current={
+                      activeSection === linkHash ? "page" : undefined
+                    }
+                    className={`block rounded-xl px-4 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.2em] transition-colors duration-300 ${
+                      activeSection === linkHash
+                        ? "bg-white/10 text-white"
+                        : "text-white/70 hover:bg-white/5 hover:text-white"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                )
+              })}
 
               {/* Sign In inside dropdown */}
               <button
