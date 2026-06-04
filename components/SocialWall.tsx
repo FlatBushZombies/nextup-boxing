@@ -106,7 +106,6 @@ const isVideoUrl = (url: string) => {
     url.includes(".mp4") ||
     url.includes("video") ||
     url.includes("fbcdn") ||
-    url.includes("cdninstagram") ||
     url.startsWith("blob:")
   )
 }
@@ -173,8 +172,12 @@ const AutoplayVideo = ({ src, className }: { src: string; className?: string }) 
     video.defaultMuted = true
 
     const attemptPlay = () => {
-      video.play().catch((err) => {
-        console.warn("Autoplay was prevented by browser policy:", err)
+      video.play().catch((err: any) => {
+        // Suppress known browser policy errors (NotSupportedError, NotAllowedError)
+        // These are expected and don't break functionality
+        if (err.name !== "NotSupportedError" && err.name !== "NotAllowedError") {
+          console.warn("Video playback error:", err.message)
+        }
       })
     }
 
@@ -197,6 +200,11 @@ const AutoplayVideo = ({ src, className }: { src: string; className?: string }) 
       loop
       muted
       playsInline
+      crossOrigin="anonymous"
+      preload="metadata"
+      onError={() => {
+        // Silently handle video load errors - expected for external video sources
+      }}
       className={className}
     />
   )
@@ -221,9 +229,11 @@ export function SocialWall() {
     }
   }, [selectedReel])
 
-  const POLL_INTERVAL_MS = 30_000
+  const shouldUseInstagramApi = process.env.NEXT_PUBLIC_USE_INSTAGRAM_API === "true"
 
   useEffect(() => {
+    if (!shouldUseInstagramApi) return
+
     let isMounted = true
     const controller = new AbortController()
 
@@ -238,7 +248,7 @@ export function SocialWall() {
           const mapped = data.reels.map((r: Record<string, unknown>, idx: number) => ({
             id: String(r.id ?? ""),
             caption: String(r.caption ?? ""),
-            permalink: String(r.permalink ?? data.profileUrl ?? "https://www.instagram.com/"),
+            permalink: String(r.permalink ?? data.profileUrl ?? "https://www.instagram.com/nextupboxingleague/"),
             mediaUrl: String(r.mediaUrl ?? r.thumbnailUrl ?? r.media_url ?? r.thumbnail_url ?? ""),
             timestamp: String(r.timestamp ?? ""),
             likeCount:
@@ -257,24 +267,23 @@ export function SocialWall() {
           setPosts(mapped)
           setApiMessage(null)
         } else {
-          setApiMessage("Showing curated Instagram highlights while the API connection is pending.")
+          setApiMessage("Loading latest Instagram highlights...")
         }
       } catch (err: unknown) {
         if (err instanceof Error && err.name === "AbortError") return
-        setApiMessage("Showing curated Instagram highlights while the API connection is pending.")
+        setApiMessage("Showing recent Instagram highlights while loading latest...")
       }
     }
 
     loadReels()
-    const id = setInterval(loadReels, POLL_INTERVAL_MS)
+    const id = setInterval(loadReels, 30_000)
 
     return () => {
       isMounted = false
       controller.abort()
       clearInterval(id)
     }
-  }, [])
-
+  }, [shouldUseInstagramApi])
   const handleLike = (id: string, e: React.MouseEvent) => {
     e.stopPropagation()
     e.preventDefault()
