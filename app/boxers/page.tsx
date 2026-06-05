@@ -295,7 +295,7 @@ export default function BoxersPage() {
             className="text-5xl md:text-7xl lg:text-8xl font-black uppercase text-white leading-[0.95]"
             style={{ fontFamily: "var(--font-bebas)" }}
           >
-            EXTRAORDINARY<br />TALENT
+            NEXT UP BOXING LEAGUE<br />CURRENT CHAMPIONS
           </h1>
         </div>
 
@@ -320,7 +320,7 @@ export default function BoxersPage() {
                   className="text-5xl lg:text-7xl font-black uppercase text-outline-white-heavy"
                   style={{ fontFamily: "var(--font-bebas)" }}
                 >
-                  NEXTUP BOXING LEAGUE<br /> CURRENT CHAMPIONS
+                  NEXT UP BOXING LEAGUE<br />CHAMPIONS
                 </h2>
               </div>
             </div>
