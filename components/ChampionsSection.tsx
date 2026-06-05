@@ -68,28 +68,14 @@ function getFighterNumberFromImage(imagePath: string) {
 function BoxerSilhouette() {
   return (
     <div className="relative flex h-[220px] w-[220px] items-center justify-center rounded-[2rem] border border-[#b8962e]/15 bg-gradient-to-br from-[#101623] via-[#0b1121] to-[#05070f] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.45)] sm:h-[240px] sm:w-[240px]">
-      <svg viewBox="0 0 240 240" className="h-full w-full">
-        <defs>
-          <linearGradient id="silhouette-gradient" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stopColor="#b8962e" stopOpacity="0.28" />
-            <stop offset="100%" stopColor="#ffffff" stopOpacity="0.08" />
-          </linearGradient>
-        </defs>
-
-        <circle cx="120" cy="44" r="30" fill="url(#silhouette-gradient)" />
-        <path
-          d="M70 94C70 64 90 48 120 48s50 16 50 46v16c0 14-8 28-23 34-5 2-11 2-17 0-15-6-22-20-22-34V94z"
-          fill="url(#silhouette-gradient)"
+      <div className="relative h-full w-full overflow-hidden rounded-[1.8rem] bg-[#070a14]">
+        <Image
+          src="/boxer-shadow.png"
+          alt="Boxers silhouette"
+          fill
+          className="object-cover object-center opacity-95"
         />
-        <path
-          d="M54 118c-18 12-16 40 4 52l20-15c-6-18-4-30-2-35-6-2-13 0-22-2zM186 118c18 12 16 40-4 52l-20-15c6-18 4-30 2-35 6-2 13 0 22-2z"
-          fill="url(#silhouette-gradient)"
-        />
-        <path
-          d="M90 148c6 24 22 50 30 70 8-20 24-46 30-70 16-4 34-12 36-32 6 0 18 8 18 24 0 24-16 44-38 56-22 12-48 12-70 0-22-12-38-32-38-56 0-16 12-24 18-24 2 20 20 28 36 32z"
-          fill="url(#silhouette-gradient)"
-        />
-      </svg>
+      </div>
     </div>
   )
 }

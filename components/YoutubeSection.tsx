@@ -1,8 +1,7 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { motion, useInView } from "framer-motion"
-import { AlertCircle, ArrowUpRight, Play, Radio, Ticket, ExternalLink } from "lucide-react"
+import { useEffect, useState } from "react"
+import { AlertCircle, ArrowUpRight, Play } from "lucide-react"
 
 type YoutubeFeedVideo = {
   id: string
@@ -11,23 +10,11 @@ type YoutubeFeedVideo = {
   url: string
 }
 
-type YoutubeLiveStream = {
-  id: string
-  title: string
-  isLive: boolean
-  url: string
-  thumbnailUrl: string
-}
-
 type YoutubeApiPayload = {
   channelUrl: string
   channelId: string | null
   playlistId: string | null
   videos: YoutubeFeedVideo[]
-  liveStream: YoutubeLiveStream | null
-  isNewYorkUser: boolean
-  hasRestrictedLiveStream: boolean
-  ticketPurchaseUrl: string
   error?: string
 }
 
@@ -52,105 +39,6 @@ function formatPublishedDate(value: string) {
   }).format(publishedDate)
 }
 
-// Live Stream Banner for NY users
-function LiveStreamRestricted({ ticketPurchaseUrl, isVisible }: { ticketPurchaseUrl: string; isVisible: boolean }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-      transition={{ duration: 0.55 }}
-      className="relative overflow-hidden rounded-lg border border-[#c5203a]/30 bg-gradient-to-br from-[#0a1628] via-[#0d1e3a] to-[#0a1628]"
-    >
-      {/* Animated background grid */}
-      <div className="absolute inset-0 opacity-20">
-        <div
-          className="h-full w-full"
-          style={{
-            backgroundImage: `linear-gradient(rgba(197,32,58,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(197,32,58,0.1) 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
-      </div>
-
-      <div className="relative flex flex-col items-center justify-center px-8 py-16 text-center">
-        {/* Pulsing live indicator */}
-        <div className="mb-6 flex items-center gap-3">
-          <div className="relative">
-            <div className="absolute inset-0 animate-ping rounded-full bg-[#c5203a] opacity-75" />
-            <Radio className="relative h-8 w-8 text-[#c5203a]" />
-          </div>
-          <span className="text-sm font-bold uppercase tracking-widest text-[#c5203a]">
-            Live Now
-          </span>
-        </div>
-
-        <h3 className="mb-4 text-2xl font-bold text-white md:text-3xl">
-          Not streaming in New York
-        </h3>
-
-        <p className="mb-8 max-w-md text-white/60">
-          Not streaming in New York, but the rest of the event is still available to watch. Get your tickets to watch the event live in person!
-        </p>
-
-        <a
-          href={ticketPurchaseUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#c5203a] to-[#e63950] px-8 py-4 font-bold uppercase tracking-wider text-white shadow-lg shadow-[#c5203a]/25 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#c5203a]/40"
-        >
-          <Ticket className="h-5 w-5" />
-          Purchase Tickets
-          <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-        </a>
-      </div>
-    </motion.div>
-  )
-}
-
-// Live Stream Player Component
-function LiveStreamPlayer({ liveStream, isVisible }: { liveStream: YoutubeLiveStream; isVisible: boolean }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={isVisible ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5 }}
-      className="relative overflow-hidden rounded-lg"
-    >
-      {/* Live indicator banner */}
-      <div className="absolute left-0 right-0 top-0 z-10 flex items-center justify-between bg-gradient-to-r from-[#c5203a] to-[#e63950] px-4 py-2">
-        <div className="flex items-center gap-2">
-          <div className="relative flex items-center justify-center">
-            <span className="absolute inline-flex h-3 w-3 animate-ping rounded-full bg-white opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
-          </div>
-          <span className="text-sm font-bold uppercase tracking-wider text-white">
-            Live Now
-          </span>
-        </div>
-        <Radio className="h-5 w-5 text-white" />
-      </div>
-
-      <div className="aspect-video w-full bg-black pt-10">
-        <iframe
-          loading="lazy"
-          src={`https://www.youtube-nocookie.com/embed/${liveStream.id}?autoplay=1&mute=1&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1`}
-          title={liveStream.title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          className="h-full w-full border-0"
-        />
-      </div>
-
-      {/* Title bar below video - red accent like big3.com */}
-      <div className="bg-[#c5203a] px-4 py-3">
-        <h3 className="truncate text-sm font-bold uppercase tracking-wide text-white md:text-base">
-          {liveStream.title}
-        </h3>
-      </div>
-    </motion.div>
-  )
-}
-
 // Featured Video Player - Main large video on the left
 function FeaturedVideoPlayer({
   activeVideo,
@@ -170,12 +58,7 @@ function FeaturedVideoPlayer({
       : null
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay: 0.1 }}
-      className="relative overflow-hidden rounded-lg"
-    >
+    <div className="relative overflow-hidden rounded-lg border border-white/10 bg-[#0a0e1a]">
       {/* Video container */}
       <div className="relative aspect-video w-full overflow-hidden bg-[#0a0e1a]">
         {embedUrl ? (
@@ -200,7 +83,7 @@ function FeaturedVideoPlayer({
           {activeVideo?.title ?? "Featured Content"}
         </h3>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
@@ -219,11 +102,8 @@ function VideoThumbnailCard({
   const [hovered, setHovered] = useState(false)
 
   return (
-    <motion.button
+    <button
       onClick={onClick}
-      initial={{ opacity: 0, x: 30 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.5, delay: 0.1 + index * 0.08 }}
       className={`group flex w-full cursor-pointer items-start gap-3 rounded-lg p-2 text-left transition-all duration-300 ${
         isActive 
           ? "bg-[#c5203a]/10 ring-1 ring-[#c5203a]/30" 
@@ -278,20 +158,14 @@ function VideoThumbnailCard({
           {formatPublishedDate(video.publishedAt)}
         </p>
       </div>
-    </motion.button>
+    </button>
   )
 }
 
 export function YoutubeSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-80px" })
   const [channelUrl, setChannelUrl] = useState(DEFAULT_CHANNEL_URL)
   const [playlistId, setPlaylistId] = useState<string | null>(null)
   const [videos, setVideos] = useState<YoutubeFeedVideo[]>([])
-  const [liveStream, setLiveStream] = useState<YoutubeLiveStream | null>(null)
-  const [isNewYorkUser, setIsNewYorkUser] = useState(false)
-  const [hasRestrictedLiveStream, setHasRestrictedLiveStream] = useState(false)
-  const [ticketPurchaseUrl, setTicketPurchaseUrl] = useState("")
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null)
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading")
   const [errorMessage, setErrorMessage] = useState("")
@@ -299,7 +173,6 @@ export function YoutubeSection() {
   useEffect(() => {
     let isMounted = true
     const controller = new AbortController()
-    const POLL_INTERVAL_MS = 60_000
 
     async function loadVideos() {
       try {
@@ -314,10 +187,6 @@ export function YoutubeSection() {
         setChannelUrl(data.channelUrl || DEFAULT_CHANNEL_URL)
         setPlaylistId(data.playlistId)
         setVideos(data.videos)
-        setLiveStream(data.liveStream)
-        setIsNewYorkUser(data.isNewYorkUser)
-        setHasRestrictedLiveStream(Boolean(data.hasRestrictedLiveStream))
-        setTicketPurchaseUrl(data.ticketPurchaseUrl)
         setActiveVideoId((currentVideoId) => currentVideoId ?? data.videos[0]?.id ?? null)
         setErrorMessage(data.error || "")
         setStatus(response.ok ? "ready" : "error")
@@ -330,23 +199,19 @@ export function YoutubeSection() {
     }
 
     loadVideos()
-    const id = setInterval(loadVideos, POLL_INTERVAL_MS)
 
     return () => {
       isMounted = false
       controller.abort()
-      clearInterval(id)
     }
   }, [])
 
   const activeVideo = videos.find((video) => video.id === activeVideoId) ?? videos[0] ?? null
   const activeIndex = activeVideo ? videos.findIndex((video) => video.id === activeVideo.id) : 0
-  const shouldShowTicketGate = isNewYorkUser && hasRestrictedLiveStream
 
   return (
     <section
       id="youtube"
-      ref={ref}
       className="relative overflow-hidden py-16 sm:py-24 scroll-mt-28"
       style={{ background: "linear-gradient(180deg, #0a1628 0%, #0d1e3a 50%, #0a1628 100%)" }}
     >
@@ -377,12 +242,7 @@ export function YoutubeSection() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"
-        >
+        <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
             <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-widest text-[#c5203a]">
               On YouTube
@@ -391,18 +251,7 @@ export function YoutubeSection() {
               Latest Videos
             </h2>
           </div>
-        </motion.div>
-
-        {/* Live Stream Section - New York users receive only the ticket gate */}
-        {(liveStream || shouldShowTicketGate) && (
-          <div className="mb-10">
-            {shouldShowTicketGate ? (
-              <LiveStreamRestricted ticketPurchaseUrl={ticketPurchaseUrl} isVisible={isInView} />
-            ) : (
-              liveStream && <LiveStreamPlayer liveStream={liveStream} isVisible={isInView} />
-            )}
-          </div>
-        )}
+        </div>
 
         {/* Main Content Grid - Big3.com style layout */}
         <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
@@ -425,19 +274,14 @@ export function YoutubeSection() {
           {/* Right: Video Playlist Sidebar */}
           <div className="flex flex-col rounded-lg bg-[#0a0e1a]/80 p-4 backdrop-blur-sm">
             {/* Sidebar Header */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              className="mb-4 flex items-center gap-2 border-b border-white/10 pb-4"
-            >
+            <div className="mb-4 flex items-center gap-2 border-b border-white/10 pb-4">
               <div className="flex h-6 w-6 items-center justify-center rounded bg-[#c5203a]">
                 <Play className="h-3 w-3 text-white" fill="white" />
               </div>
               <span className="text-sm font-semibold uppercase tracking-wider text-white/80">
                 More Videos
               </span>
-            </motion.div>
+            </div>
 
             {/* Video List */}
             <div
@@ -450,10 +294,10 @@ export function YoutubeSection() {
                     key={index}
                     className="flex gap-3 rounded-lg bg-white/5 p-2"
                   >
-                    <div className="h-[67px] w-[120px] animate-pulse rounded-md bg-white/10" />
+                    <div className="h-[67px] w-[120px] rounded-md bg-white/10" />
                     <div className="flex-1 space-y-2 pt-1">
-                      <div className="h-4 w-full animate-pulse rounded bg-white/10" />
-                      <div className="h-3 w-20 animate-pulse rounded bg-white/5" />
+                      <div className="h-4 w-full rounded bg-white/10" />
+                      <div className="h-3 w-20 rounded bg-white/5" />
                     </div>
                   </div>
                 ))
@@ -475,18 +319,15 @@ export function YoutubeSection() {
             </div>
 
             {/* Watch More Button - Big3.com style */}
-            <motion.a
+            <a
               href={channelUrl}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.5 }}
               className="group mt-4 flex items-center justify-center gap-2 rounded-lg bg-[#1e2d5e] py-3 text-sm font-bold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#2a3f7a]"
             >
               Watch More on YouTube
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </motion.a>
+            </a>
           </div>
         </div>
       </div>
