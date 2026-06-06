@@ -12,9 +12,10 @@ export default function Home() {
     <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-white">
       <Navbar />
       <HeroSection />
-      <YoutubeSection />
+      <NextUpLiveStream />
       <ChampionsSection />
       { /* <SocialWall /> */ }
+      <YoutubeSection />
       <SponsorsStrip />
       <Footer />
     </main>
