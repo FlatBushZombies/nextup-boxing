@@ -273,14 +273,14 @@ export function YoutubeSection() {
               On YouTube
             </span>
             <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-              Latest Videos
+              Next Up Official Stream
             </h2>
           </div>
         </div>
 
         {/* Main Content Grid - Big3.com style layout */}
-        <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
-          {/* Left: Featured Video */}
+        <div className="grid gap-6">
+          {/* Featured Video covering full width */}
           <div className="flex flex-col">
             <FeaturedVideoPlayer
               activeVideo={activeVideo}
@@ -294,65 +294,6 @@ export function YoutubeSection() {
                 {errorMessage}
               </div>
             ) : null}
-          </div>
-
-          {/* Right: Video Playlist Sidebar */}
-          <div className="flex flex-col rounded-lg bg-[#0a0e1a]/80 p-4 backdrop-blur-sm">
-            {/* Sidebar Header */}
-            <div className="mb-4 flex items-center gap-2 border-b border-white/10 pb-4">
-              <div className="flex h-6 w-6 items-center justify-center rounded bg-[#c5203a]">
-                <Play className="h-3 w-3 text-white" fill="white" />
-              </div>
-              <span className="text-sm font-semibold uppercase tracking-wider text-white/80">
-                More Videos
-              </span>
-            </div>
-
-            {/* Video List */}
-            <div
-              className="flex flex-1 flex-col gap-2 overflow-y-auto"
-              style={{ maxHeight: "400px", scrollbarWidth: "thin", scrollbarColor: "#c5203a transparent" }}
-            >
-              {status === "loading" ? (
-                Array.from({ length: 4 }).map((_, index) => (
-                  <div
-                    key={index}
-                    className="flex gap-3 rounded-lg bg-white/5 p-2"
-                  >
-                    <div className="h-[67px] w-[120px] rounded-md bg-white/10" />
-                    <div className="flex-1 space-y-2 pt-1">
-                      <div className="h-4 w-full rounded bg-white/10" />
-                      <div className="h-3 w-20 rounded bg-white/5" />
-                    </div>
-                  </div>
-                ))
-              ) : videos.length > 0 ? (
-                videos.map((video, index) => (
-                  <VideoThumbnailCard
-                    key={video.id}
-                    video={video}
-                    index={index}
-                    isActive={video.id === activeVideo?.id}
-                    onClick={() => setActiveVideoId(video.id)}
-                  />
-                ))
-              ) : (
-                <div className="rounded-lg bg-white/5 px-4 py-6 text-sm text-white/50">
-                  Latest uploads will appear here from the connected YouTube channel.
-                </div>
-              )}
-            </div>
-
-            {/* Watch More Button - Big3.com style */}
-            <a
-              href={channelUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group mt-4 flex items-center justify-center gap-2 rounded-lg bg-[#1e2d5e] py-3 text-sm font-bold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#2a3f7a]"
-            >
-              Watch More on YouTube
-              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
           </div>
         </div>
       </div>

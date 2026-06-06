@@ -15,7 +15,6 @@ export default function Home() {
       <YoutubeSection />
       <ChampionsSection />
       { /* <SocialWall /> */ }
-      <YoutubeSection />
       <SponsorsStrip />
       <Footer />
     </main>
