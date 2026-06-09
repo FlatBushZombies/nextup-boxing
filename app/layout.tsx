@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Geist_Mono, Bebas_Neue, Montserrat, Oswald } from 'next/font/google'
 import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
+import { AuthProvider } from '@/lib/auth-context'
 import './globals.css'
 
 const helveticaNow = localFont({
@@ -60,17 +61,25 @@ const oswald = Oswald({
 
 
 export const metadata: Metadata = {
-  title: 'Next Up Boxing League | June 6, 2026',
-  description: 'Witness the future of boxing. Sign up for exclusive livestream access to the most anticipated boxing event of 2026.',
-  keywords: ['boxing', 'next up boxing league', 'livestream', 'boxing event', 'june 2026'],
+  title: 'Next Up Boxing League - Showcasing Elite Amateurs™',
+  description:
+    'Witness the future of boxing. Sign up for exclusive livestream access and event highlights.',
+  keywords: [
+    'boxing',
+    'next up boxing league',
+    'livestream',
+    'boxing event',
+    '2026',
+  ],
   openGraph: {
-    title: 'Next Up Boxing League | June 6, 2026',
-    description: 'Witness the future of boxing. Sign up for exclusive livestream access to the most anticipated boxing event of 2026.',
+    title: 'Next Up Boxing League - Showcasing Elite Amateurs™',
+    description:
+      'Witness the future of boxing. Sign up for exclusive livestream access and event highlights.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Next Up Boxing League | June 6, 2026',
+    title: 'Next Up Boxing League - Showcasing Elite Amateurs™',
     description: 'Witness the future of boxing. Sign up for exclusive livestream access.',
   },
 }
@@ -92,7 +101,7 @@ export default function RootLayout({
       className={`${helveticaNow.variable} ${geistMono.variable} ${bebasNeue.variable} ${montserrat.variable} ${oswald.variable} bg-white`}
     >
       <body className="overflow-x-hidden font-sans antialiased">
-        {children}
+        <AuthProvider>{children}</AuthProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
