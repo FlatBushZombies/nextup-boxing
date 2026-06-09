@@ -6,6 +6,7 @@ import { SponsorsStrip } from "@/components/SponsorsStrip"
 import { Footer } from "@/components/Footer"
 import { SocialWall } from "@/components/SocialWall"
 import { NextUpLiveStream } from "@/components/NextUpLiveStream"
+import { MagazineSection } from "@/components/magazine/magaine-section"
 
 export default function Home() {
   return (
@@ -14,7 +15,8 @@ export default function Home() {
       <HeroSection />
       <NextUpLiveStream />
       <ChampionsSection />
-      { /* <SocialWall /> */ }
+      <SocialWall /> 
+      <MagazineSection />
       <YoutubeSection />
       <SponsorsStrip />
       <Footer />
