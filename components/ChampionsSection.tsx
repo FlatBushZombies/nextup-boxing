@@ -67,14 +67,14 @@ function getFighterNumberFromImage(imagePath: string) {
 
 function BoxerSilhouette() {
   return (
-    <div className="relative flex h-[220px] w-[220px] items-center justify-center rounded-[2rem] border border-[#b8962e]/15 bg-gradient-to-br from-[#101623] via-[#0b1121] to-[#05070f] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.45)] sm:h-[240px] sm:w-[240px]">
-      <div className="relative h-full w-full overflow-hidden rounded-[1.8rem] bg-[#070a14]">
+    <div className="relative flex h-[220px] w-[220px] items-center justify-center border border-secondary/20 bg-[#0d1124] p-4 shadow-[0_15px_40px_rgba(0,0,0,0.5)] sm:h-[240px] sm:w-[240px]">
+      <div className="relative h-full w-full overflow-hidden bg-[#05070f]">
         <Image
           src="/boxer-shadow.png"
           alt="Boxers silhouette"
           fill
           sizes="(min-width: 640px) 240px, 220px"
-          className="object-cover object-center opacity-95"
+          className="object-cover object-center opacity-90 grayscale"
         />
       </div>
     </div>
@@ -83,68 +83,64 @@ function BoxerSilhouette() {
 
 export function ChampionsSection() {
   return (
-    <section className="bg-gradient-to-br from-[#0a1628] via-[#0d1e3a] to-[#0a1628] py-12 sm:py-16 w-full overflow-hidden border-t border-[#b8962e]/20">
+    <section className="bg-gradient-to-b from-[#0a0f1d] to-[#05070f] py-16 w-full overflow-hidden border-t border-secondary/20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div
-          className="relative mb-8 sm:mb-12 flex flex-col items-center justify-center text-center"
-        >
-          <div className="champ-line-left absolute top-1/2 left-0 right-1/2 h-px bg-[#b8962e] opacity-40 z-0 mr-14 sm:mr-20" />
-
-          <div className="champ-line-right absolute top-1/2 left-1/2 right-0 h-px bg-[#b8962e] opacity-40 z-0 ml-14 sm:ml-20" />
-
-          <div className="relative z-10 mx-auto flex flex-col items-center justify-center gap-1 sm:gap-2 px-5 sm:px-8 py-1 text-center">
+        <div className="relative mb-12 flex flex-col items-center justify-center text-center">
+          <div className="relative z-10 mx-auto flex flex-col items-center justify-center gap-3 px-5 py-1 text-center">
             <Image
               src="/logo-footer.png"
               alt="Logo"
-              width={220}
-              height={110}
-              className="max-w-[260px] object-contain"
+              width={160}
+              height={80}
+              className="max-w-[180px] object-contain opacity-95"
             />
 
             <h2
-              className="text-4xl md:text-5xl uppercase text-white"
-              style={{ fontFamily: "var(--font-bebas), sans-serif" }}
+              className="text-4xl md:text-5xl uppercase text-white font-display tracking-wider"
             >
-              <span className="text-[#b8962e]">Current Champions</span>
+              Current <span className="text-secondary">Champions</span>
             </h2>
+            <div className="h-[3px] w-16 bg-accent mt-2" />
           </div>
         </div>
 
         {/* Cards */}
         <div
-          className="relative mx-auto grid w-full max-w-[60rem] grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4"
+          className="relative mx-auto grid w-full max-w-[62rem] grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4"
         >
-  
           {champions.map((fighter) => {
             const fighterNumber = getFighterNumberFromImage(fighter.image)
 
             return (
               <div
                 key={fighter.image}
-                className="champ-card w-full transform overflow-hidden rounded-[1.6rem] border border-[#b8962e]/65 bg-gradient-to-b from-[#21190c] via-[#070b14] to-[#050912] p-1 shadow-[0_18px_45px_rgba(0,0,0,0.45),0_0_28px_rgba(184,150,46,0.12)] transition-transform hover:-translate-y-1 hover:border-[#d4ae44]/85 hover:shadow-2xl sm:rounded-[2rem] sm:p-1.5"
+                className="group relative w-full overflow-hidden bg-[#0d1124] transition-all duration-300 hover:shadow-[0_20px_50px_rgba(0,0,0,0.6)] border-b-4 border-secondary border-t border-x border-white/5"
               >
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[1.25rem] bg-[#050912] sm:rounded-[1.6rem]">
+                <div className="relative aspect-[3/4] w-full overflow-hidden">
                   <Image
                     src={fighter.image}
                     alt={`${fighter.firstName} ${fighter.lastName}`}
                     fill
                     sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 50vw"
-                    className="scale-[1.015] object-cover"
+                    className="scale-[1.015] object-cover transition-transform duration-500 group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0d1124] via-transparent to-transparent opacity-85" />
                 </div>
 
-                <div className="mt-1 rounded-b-[1.2rem] border-t border-[#b8962e]/25 bg-gradient-to-b from-[#07101f]/95 to-[#050912]/95 px-3 py-3 text-center sm:rounded-b-[1.55rem] sm:px-5 sm:py-4">
+                <div className="relative p-4 text-left bg-[#0d1124]">
                   <h3
-                    className="text-2xl uppercase leading-none text-white sm:text-3xl"
-                    style={{ fontFamily: "var(--font-bebas), sans-serif" }}
+                    className="text-lg leading-tight text-white font-display tracking-wide uppercase font-black"
                   >
                     {fighter.firstName}
                     <br />
-                    {fighter.lastName}
+                    <span className="text-secondary">{fighter.lastName}</span>
                   </h3>
-                  <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#b8962e] sm:text-sm sm:tracking-[0.16em]">
-                    {fighterNumber ? `${fighterNumber} ${fighter.championship}` : fighter.championship}
+                  <p className="mt-2 text-[11px] font-bold uppercase tracking-wider text-accent">
+                    {fighterNumber ? `${fighterNumber} LBS | ${fighter.championship}` : fighter.championship}
+                  </p>
+                  <p className="mt-0.5 text-[9px] font-medium uppercase tracking-widest text-white/55">
+                    {fighter.weightClass}
                   </p>
                 </div>
               </div>
@@ -154,18 +150,18 @@ export function ChampionsSection() {
 
         {/* Dots */}
         <div
-          className="mt-8 flex justify-center gap-2"
+          className="mt-10 flex justify-center gap-2"
         >
-          <div className="h-2 w-2 rounded-full bg-white shadow-sm" />
-          <div className="h-2 w-2 rounded-full border border-white bg-transparent" />
+          <div className="h-2 w-2 rounded-full bg-secondary shadow-sm" />
+          <div className="h-2 w-2 rounded-full border border-white/20 bg-transparent" />
         </div>
 
         {/* Bottom Banner */}
         <div
-          className="mt-10 sm:mt-12 relative w-full overflow-hidden bg-[#050912] px-4 sm:px-6 py-4 flex flex-col items-center justify-center shadow-[0_15px_30px_rgba(0,0,0,0.4)]"
+          className="mt-12 relative w-full overflow-hidden bg-[#0a0e1a] px-4 sm:px-6 py-8 flex flex-col items-center justify-center border border-white/5 shadow-2xl"
         >
           <div
-            className="absolute inset-0 opacity-10 pointer-events-none"
+            className="absolute inset-0 opacity-5 pointer-events-none"
             style={{
               backgroundImage:
                 "repeating-linear-gradient(45deg, #c5203a 0, #c5203a 2px, transparent 2px, transparent 12px)",
@@ -173,27 +169,25 @@ export function ChampionsSection() {
           />
 
           <div className="relative z-10 mb-4 flex flex-col items-center">
-            <div className="flex items-center gap-2 sm:gap-3 text-white mb-3 drop-shadow-md">
-              <Users className="h-6 w-6 sm:h-7 sm:w-7" />
+            <div className="flex items-center gap-2 sm:gap-3 text-white mb-2 drop-shadow-md">
+              <Users className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
 
               <span
-                className="text-3xl sm:text-4xl font-bold uppercase"
-                style={{ fontFamily: "var(--font-bebas), sans-serif" }}
+                className="text-2xl sm:text-3xl font-black uppercase font-display tracking-wider"
               >
-                rising stars/ contenders
+                rising stars / contenders
               </span>
             </div>
-
           </div>
 
           <div className="relative z-10 flex w-full flex-col items-center justify-center gap-4 pb-1">
             <BoxerSilhouette />
 
             <div className="max-w-[24rem] text-center">
-              <p className="text-xs uppercase tracking-[0.3em] text-[#b8962e] sm:text-sm">
+              <p className="text-xs uppercase tracking-[0.25em] text-secondary font-bold font-sans">
                 The next wave of talent
               </p>
-              <p className="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-white/80 sm:text-base">
+              <p className="mt-1 text-sm font-semibold uppercase tracking-[0.15em] text-white/70 sm:text-base font-display">
                 Rising Stars &amp; Contenders
               </p>
             </div>

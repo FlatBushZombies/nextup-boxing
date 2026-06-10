@@ -249,10 +249,8 @@ export function LiveStreamPromo() {
               </div>
 
               <div
-                className="pointer-events-none mb-4 select-none text-white/[0.04] uppercase"
+                className="pointer-events-none mb-4 select-none text-white/[0.04] uppercase font-display text-[clamp(4.6rem,16vw,11rem)]"
                 style={{
-                  fontFamily: "var(--font-bebas), Impact, sans-serif",
-                  fontSize: "clamp(4.6rem, 16vw, 11rem)",
                   lineHeight: 0.9,
                 }}
               >
@@ -260,11 +258,7 @@ export function LiveStreamPromo() {
               </div>
 
               <h2
-                className="relative mb-6 uppercase leading-[0.86]"
-                style={{
-                  fontFamily: "var(--font-bebas), Impact, sans-serif",
-                  fontSize: "clamp(3.4rem, 7vw, 6.8rem)",
-                }}
+                className="relative mb-6 uppercase leading-[0.86] font-display text-[clamp(3.4rem,7vw,6.8rem)]"
               >
                 <span className="block text-white">Control The</span>
                 <span className="block bg-gradient-to-r from-[#c5203a] via-[#d4ae44] to-[#f5d98b] bg-clip-text text-transparent">
@@ -300,12 +294,7 @@ export function LiveStreamPromo() {
                     className="rounded-[1.25rem] border border-white/8 bg-white/[0.03] px-4 py-4 backdrop-blur-sm transition-colors duration-300 hover:border-[#d4ae44]/28"
                   >
                     <div
-                      className="mb-1 text-[#d4ae44]"
-                      style={{
-                        fontFamily: "var(--font-bebas), Impact, sans-serif",
-                        fontSize: "1.25rem",
-                        letterSpacing: "0.06em",
-                      }}
+                      className="mb-1 text-[#d4ae44] font-sans font-bold text-sm tracking-wider uppercase"
                     >
                       {fact.label}
                     </div>

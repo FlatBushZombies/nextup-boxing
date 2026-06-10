@@ -83,12 +83,7 @@ export function Rankings() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="uppercase leading-[0.88]"
-              style={{
-                fontFamily: "var(--font-bebas), Impact, sans-serif",
-                fontSize: "clamp(3rem, 7vw, 6rem)",
-                color: "#ffffff",
-              }}
+              className="uppercase leading-[0.88] font-display text-[clamp(3rem, 7vw, 6rem)] text-white"
             >
               Pound For
               <span className="block text-[#c5203a]">Pound</span>
@@ -150,10 +145,8 @@ export function Rankings() {
 
               <div className="flex w-16 flex-shrink-0 items-center justify-center">
                 <span
-                  className="tabular-nums leading-none"
+                  className="tabular-nums leading-none font-display text-[clamp(2rem,4vw,3rem)]"
                   style={{
-                    fontFamily: "var(--font-bebas), Impact, sans-serif",
-                    fontSize: "clamp(2rem, 4vw, 3rem)",
                     color: fighter.champion ? "#b8962e" : "rgba(255,255,255,0.35)",
                   }}
                 >

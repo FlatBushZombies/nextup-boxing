@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist_Mono, Bebas_Neue, Montserrat, Oswald } from 'next/font/google'
+import { Geist_Mono, Bebas_Neue, Barlow_Condensed } from 'next/font/google'
 import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
 import { AuthProvider } from '@/lib/auth-context'
@@ -41,22 +41,13 @@ const geistMono = Geist_Mono({
 const bebasNeue = Bebas_Neue({
   weight: '400',
   subsets: ['latin'],
-  variable: '--font-bebas',
-  display: 'swap',
+  variable: '--font-bebas-neue',
 })
 
-const montserrat = Montserrat({
+const barlowCondensed = Barlow_Condensed({
+  weight: ['400', '500', '600', '700', '800', '900'],
   subsets: ['latin'],
-  variable: '--font-montserrat',
-  weight: ['800', '900'],
-  display: 'swap',
-})
-
-const oswald = Oswald({
-  subsets: ['latin'],
-  variable: '--font-oswald',
-  weight: ['600', '700'],
-  display: 'swap',
+  variable: '--font-barlow-condensed',
 })
 
 
@@ -98,7 +89,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${helveticaNow.variable} ${geistMono.variable} ${bebasNeue.variable} ${montserrat.variable} ${oswald.variable} bg-white`}
+      className={`${helveticaNow.variable} ${geistMono.variable} ${bebasNeue.variable} ${barlowCondensed.variable} bg-white`}
     >
       <body className="overflow-x-hidden font-sans antialiased">
         <AuthProvider>{children}</AuthProvider>

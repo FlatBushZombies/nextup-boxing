@@ -52,11 +52,7 @@ export function ContentSection() {
               </span>
             </div>
             <h2
-              className="uppercase leading-[0.9] text-[#1e2d5e]"
-              style={{
-                fontFamily: 'var(--font-bebas), Impact, sans-serif',
-                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
-              }}
+              className="uppercase leading-[0.9] text-[#1e2d5e] font-heading font-medium text-[clamp(2.5rem,5vw,4rem)] tracking-tight"
             >
               Premium Experience
             </h2>

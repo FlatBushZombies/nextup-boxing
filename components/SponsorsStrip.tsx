@@ -11,16 +11,16 @@ export function SponsorsStrip() {
     <section className="relative overflow-hidden bg-[#080c18] py-0">
 
 
-      <div className="h-[3px] bg-gradient-to-r from-[#1e2d5e] via-[#b8962e] to-[#c5203a]" />
+      <div className="h-[3px] bg-gradient-to-r from-primary via-secondary to-accent" />
 
       <div
         className="flex items-center justify-center gap-4 px-4 py-8 text-center sm:px-0"
       >
-        <span className="hidden h-px w-16 bg-[#b8962e]/25 sm:block" />
-        <span className="section-eyebrow block max-w-[17rem] text-center text-white sm:max-w-none">
+        <span className="hidden h-px w-16 bg-secondary/25 sm:block" />
+        <span className="section-eyebrow block max-w-[17rem] text-center text-white sm:max-w-none font-display font-black tracking-widest text-sm">
           Official Partners and Sponsors
         </span>
-        <span className="hidden h-px w-16 bg-[#b8962e]/25 sm:block" />
+        <span className="hidden h-px w-16 bg-secondary/25 sm:block" />
       </div>
 
       <div
@@ -37,7 +37,7 @@ export function SponsorsStrip() {
                 href={sponsor.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="sponsor-ticker-item"
+                className="sponsor-ticker-item font-display font-black tracking-wider text-white/90"
               >
                 {sponsor.name}
                 <span className="sponsor-ticker-gem" aria-hidden="true" />
@@ -47,7 +47,7 @@ export function SponsorsStrip() {
         </div>
       </div>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-[#b8962e]/30 to-transparent" />
+      <div className="h-px bg-gradient-to-r from-transparent via-secondary/30 to-transparent" />
     </section>
   )
 }

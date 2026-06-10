@@ -286,23 +286,22 @@ export default function BoxersPage() {
         
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6 lg:px-8">
           <h1 
-            className="text-5xl md:text-7xl lg:text-8xl font-black uppercase text-white leading-[0.95]"
-            style={{ fontFamily: "var(--font-bebas)" }}
+            className="text-5xl md:text-7xl lg:text-8xl font-black uppercase text-white leading-[0.95] font-display"
           >
             NEXT UP BOXING LEAGUE<br />CURRENT CHAMPIONS
           </h1>
         </div>
 
         {/* Diagonal accent line */}
-        <div className="absolute right-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#c5203a] via-[#c5203a] to-transparent" />
+        <div className="absolute right-0 top-0 bottom-0 w-1 bg-gradient-to-b from-accent via-accent to-transparent" />
       </section>
 
       {/* World Champions Section */}
       <section className="world-champions relative">
         {/* Background effects */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#1e2d5e]/20 rounded-full blur-[150px]" />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#c5203a]/10 rounded-full blur-[120px]" />
+          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px]" />
+          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[120px]" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
@@ -311,8 +310,7 @@ export default function BoxersPage() {
             <div className="vertical-title lg:w-20 flex-shrink-0">
               <div className="vertical-title-container">
                 <h2 
-                  className="text-5xl lg:text-7xl font-black uppercase text-outline-white-heavy"
-                  style={{ fontFamily: "var(--font-bebas)" }}
+                  className="text-5xl lg:text-7xl font-black uppercase text-outline-white-heavy font-display"
                 >
                   NEXT UP BOXING LEAGUE<br />CHAMPIONS
                 </h2>
@@ -337,8 +335,7 @@ export default function BoxersPage() {
           {/* Header with filters */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
             <h2 
-              className="text-4xl md:text-5xl font-black uppercase text-[#0d1124]"
-              style={{ fontFamily: "var(--font-bebas)" }}
+              className="text-4xl md:text-5xl font-black uppercase text-ink font-display"
             >
               Rising Stars/Contenders
             </h2>
@@ -471,42 +468,29 @@ function getChampionTitleFromImage(image: string) {
 }
 
 function ChampionCard({ boxer }: { boxer: BoxerData }) {
-  const [isHovered, setIsHovered] = useState(false)
   const championTitle = getChampionTitleFromImage(boxer.image)
 
   return (
     <div 
-      className="champion-card boxer-card-mr group"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="champion-card group relative w-full overflow-hidden bg-[#0d1124] transition-all duration-300 hover:shadow-[0_20px_50px_rgba(0,0,0,0.6)] border-b-4 border-secondary border-t border-x border-white/5"
     >
-      <div className="image-wrap">
+      <div className="image-wrap relative aspect-[3/4] w-full overflow-hidden">
         <Image
           src={boxer.image}
           alt={`${boxer.firstName} ${boxer.lastName}`}
           fill
-          className="object-cover object-top transition-transform duration-600"
+          className="scale-[1.015] object-cover object-top transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
+        <div className="gradient-overlay absolute inset-0 bg-gradient-to-t from-[#0d1124] via-transparent to-transparent opacity-85" />
       </div>
-      <div className="gradient-overlay" />
       
-      <div className="card-text">
-        <h2>
-          {boxer.firstName}<br />{boxer.lastName}
+      <div className="relative p-4 text-left bg-[#0d1124]">
+        <h2 className="text-lg leading-tight text-white font-display tracking-wide uppercase font-black">
+          {boxer.firstName}<br /><span className="text-secondary">{boxer.lastName}</span>
         </h2>
-        <p className="mt-2 text-xs font-bold uppercase tracking-[0.14em] text-[#d4ae44]">{championTitle}</p>
-      </div>
-
-      {/* Hover overlay */}
-      <div className="hover-overlay">
-        <h3
-          className="text-4xl uppercase leading-none text-white"
-          style={{ fontFamily: "var(--font-bebas)" }}
-        >
-          {boxer.firstName} {boxer.lastName}
-        </h3>
-        <p className="trophy-text">{championTitle}</p>
+        <p className="mt-2 text-[11px] font-bold uppercase tracking-wider text-accent">{championTitle}</p>
+        <p className="mt-0.5 text-[9px] font-medium uppercase tracking-widest text-white/55">{boxer.weightClass}</p>
       </div>
     </div>
   )
@@ -518,7 +502,7 @@ function BoxerCard({ boxer }: { boxer: BoxerData }) {
 
   return (
     <div 
-      className="boxer-card relative aspect-[3/4] bg-[#f5f5f5] overflow-hidden group cursor-pointer"
+      className="boxer-card relative aspect-[3/4] bg-[#0d1124] overflow-hidden group cursor-pointer border border-white/5 border-b-2 border-b-secondary/50"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -533,21 +517,20 @@ function BoxerCard({ boxer }: { boxer: BoxerData }) {
             />
           </div>
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
+          <div className="absolute inset-0 flex items-center justify-center bg-[#101424]">
             <div className="text-center px-4">
-              <p className="text-gray-600 font-bold">{boxer.firstName} {boxer.lastName}</p>
+              <p className="text-white font-bold font-display uppercase">{boxer.firstName} {boxer.lastName}</p>
             </div>
           </div>
         )}
         
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
         
         {/* Text content */}
         <div className="absolute bottom-0 left-0 right-0 p-4">
           <h3 
-            className="text-xl md:text-2xl font-black uppercase text-white leading-[0.95]"
-            style={{ fontFamily: "var(--font-bebas)" }}
+            className="text-xl md:text-2xl font-black uppercase text-white leading-[0.95] font-display"
           >
             {boxer.firstName}<br />{boxer.lastName}
           </h3>
@@ -555,8 +538,8 @@ function BoxerCard({ boxer }: { boxer: BoxerData }) {
 
         {/* Hover effect - red tint */}
         <div 
-          className={`absolute inset-0 bg-[#c5203a]/0 transition-colors duration-300 ${
-            isHovered ? "bg-[#c5203a]/20" : ""
+          className={`absolute inset-0 bg-accent/0 transition-colors duration-300 ${
+            isHovered ? "bg-accent/20" : ""
           }`}
         />
     </div>

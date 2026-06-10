@@ -90,7 +90,6 @@ export function SplashSection() {
           >
             <h1
               className="font-display text-[clamp(4rem,15vw,10rem)] leading-[0.85] tracking-tight text-[#1e2d5e] uppercase"
-              style={{ fontFamily: 'var(--font-bebas), Impact, sans-serif' }}
             >
               The Future
             </h1>
@@ -104,7 +103,6 @@ export function SplashSection() {
             <span
               className="font-display text-[clamp(4rem,15vw,10rem)] leading-[0.85] tracking-tight uppercase"
               style={{
-                fontFamily: 'var(--font-bebas), Impact, sans-serif',
                 color: '#c5203a',
               }}
             >

@@ -67,9 +67,9 @@ function FeaturedVideoPlayer({
       : null
 
   return (
-    <div className="relative overflow-hidden rounded-lg border border-white/10 bg-[#0a0e1a]">
+    <div className="relative overflow-hidden border border-white/10 bg-[#05070f] shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
       {/* Video container */}
-      <div className="relative aspect-video w-full overflow-hidden bg-[#0a0e1a]">
+      <div className="relative aspect-video w-full overflow-hidden bg-black">
         {embedUrl ? (
           <iframe
             loading="lazy"
@@ -80,15 +80,15 @@ function FeaturedVideoPlayer({
             className="h-full w-full border-0"
           />
         ) : (
-          <div className="flex h-full items-center justify-center px-6 text-center text-white/55">
+          <div className="flex h-full items-center justify-center px-6 text-center text-white/40 font-sans">
             Channel videos will appear here once the YouTube feed is available.
           </div>
         )}
       </div>
 
-      {/* Red accent title bar - matches big3.com style */}
-      <div className="bg-[#c5203a] px-5 py-4">
-        <h3 className="truncate text-sm font-bold uppercase tracking-wider text-white md:text-base lg:text-lg">
+      {/* Accent title bar */}
+      <div className="bg-accent px-5 py-4 border-t border-white/5">
+        <h3 className="truncate text-base font-black uppercase tracking-wider text-white md:text-lg lg:text-xl font-display">
           {activeVideo?.title ?? "Featured Content"}
         </h3>
       </div>
@@ -113,9 +113,9 @@ function VideoThumbnailCard({
   return (
     <button
       onClick={onClick}
-      className={`group flex w-full cursor-pointer items-start gap-3 rounded-lg p-2 text-left transition-all duration-300 ${
+      className={`group flex w-full cursor-pointer items-start gap-3 p-2 text-left transition-all duration-300 ${
         isActive 
-          ? "bg-[#c5203a]/10 ring-1 ring-[#c5203a]/30" 
+          ? "bg-accent/10 ring-1 ring-accent/30" 
           : "hover:bg-white/5"
       }`}
       onMouseEnter={() => setHovered(true)}
@@ -123,7 +123,7 @@ function VideoThumbnailCard({
     >
       {/* Thumbnail */}
       <div
-        className="relative flex-shrink-0 overflow-hidden rounded-md bg-[#0a0e1a]"
+        className="relative flex-shrink-0 overflow-hidden bg-[#05070f]"
         style={{ width: "120px", aspectRatio: "16/9" }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -138,7 +138,7 @@ function VideoThumbnailCard({
         {/* Overlay */}
         <div
           className={`absolute inset-0 transition-all duration-300 ${
-            isActive || hovered ? "bg-transparent" : "bg-[#0a0e1a]/30"
+            isActive || hovered ? "bg-transparent" : "bg-[#05070f]/30"
           }`}
         />
 
@@ -147,7 +147,7 @@ function VideoThumbnailCard({
           <div
             className={`flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300 ${
               isActive || hovered
-                ? "scale-100 bg-[#c5203a] opacity-100"
+                ? "scale-100 bg-accent opacity-100"
                 : "scale-90 bg-white/20 opacity-70"
             }`}
           >
@@ -160,12 +160,12 @@ function VideoThumbnailCard({
       <div className="min-w-0 flex-1">
         <h4
           className={`mb-1 line-clamp-2 text-sm font-semibold leading-tight transition-colors duration-300 ${
-            isActive ? "text-white" : "text-white/80 group-hover:text-white"
+            isActive ? "text-white font-sans" : "text-white/80 group-hover:text-white font-sans"
           }`}
         >
           {video.title}
         </h4>
-        <p className="text-xs text-white/40">
+        <p className="text-xs text-white/40 font-sans">
           {formatPublishedDate(video.publishedAt)}
         </p>
       </div>
@@ -238,28 +238,28 @@ export function NextUpLiveStream() {
   const activeIndex = activeVideo ? videos.findIndex((video) => video.id === activeVideo.id) : 0
 
   return (
-    <section id="youtube" className="relative overflow-hidden bg-white py-16 sm:py-24 scroll-mt-28">
+    <section id="youtube" className="relative overflow-hidden bg-[#0d1124] py-16 sm:py-24 scroll-mt-28 border-t border-white/5">
       {/* Background grid pattern */}
       <div
         className="pointer-events-none absolute inset-0 opacity-5"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)`,
           backgroundSize: "60px 60px",
         }}
       />
 
       {/* Gradient orbs */}
       <div
-        className="pointer-events-none absolute -left-40 top-1/4 h-80 w-80 rounded-full opacity-20"
+        className="pointer-events-none absolute -left-40 top-1/4 h-80 w-80 rounded-full opacity-10"
         style={{
-          background: "radial-gradient(circle, rgba(197,32,58,0.4) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(197,32,58,0.3) 0%, transparent 70%)",
           filter: "blur(80px)",
         }}
       />
       <div
-        className="pointer-events-none absolute -right-40 bottom-1/4 h-80 w-80 rounded-full opacity-20"
+        className="pointer-events-none absolute -right-40 bottom-1/4 h-80 w-80 rounded-full opacity-15"
         style={{
-          background: "radial-gradient(circle, rgba(30,45,94,0.6) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(30,45,94,0.4) 0%, transparent 70%)",
           filter: "blur(80px)",
         }}
       />
@@ -268,21 +268,28 @@ export function NextUpLiveStream() {
         {/* Section Header */}
         <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <div className="mb-2 flex items-center gap-3">
-              <div className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold ${isStreamLive ? 'bg-[#c5203a] text-white' : 'bg-gray-200 text-gray-800'}`}>
-                <Radio className="h-4 w-4" />
-                <span>{isStreamLive ? 'Live Now' : 'Scheduled'}</span>
+            <div className="mb-3 flex items-center gap-3">
+              <div className={`inline-flex items-center gap-2 px-3 py-1 text-xs font-black uppercase tracking-wider skew-x-[-10deg] ${isStreamLive ? 'bg-accent text-white' : 'bg-secondary text-ink'}`}>
+                <span className="skew-x-[10deg] flex items-center gap-1.5">
+                  <Radio className="h-3.5 w-3.5" />
+                  <span>{isStreamLive ? 'Live Now' : 'Scheduled'}</span>
+                </span>
               </div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/50 px-3 py-1 text-sm font-semibold text-gray-700">
-                <ShieldCheck className="h-4 w-4 text-gray-700" />
-                <span>Official Broadcast</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 text-xs font-bold uppercase tracking-wider skew-x-[-10deg] bg-white/10 text-white/90">
+                <span className="skew-x-[10deg] flex items-center gap-1.5">
+                  <ShieldCheck className="h-3.5 w-3.5 text-secondary" />
+                  <span>Official Broadcast</span>
+                </span>
               </div>
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl">Next Up Official Stream</h2>
+            <h2 className="text-4xl font-black text-white sm:text-5xl lg:text-6xl font-display uppercase tracking-wide">
+              Next Up <span className="text-secondary">Official Stream</span>
+            </h2>
+            <div className="h-[3px] w-16 bg-accent mt-2" />
           </div>
         </div>
 
-        {/* Main Content Grid - Big3.com style layout */}
+        {/* Main Content Grid */}
         <div className="grid gap-6">
           {/* Featured Video covering full width */}
           <div className="flex flex-col">
@@ -293,8 +300,8 @@ export function NextUpLiveStream() {
             />
 
             {status === "error" && errorMessage ? (
-              <div className="mt-4 flex items-center gap-2 rounded-lg border border-[#c5203a]/20 bg-[#fff1f2] px-4 py-3 text-sm text-gray-700">
-                <AlertCircle className="h-4 w-4 flex-shrink-0 text-[#c5203a]" />
+              <div className="mt-4 flex items-center gap-2 rounded-none border border-accent/25 bg-accent/5 px-4 py-3 text-sm text-white/80">
+                <AlertCircle className="h-4 w-4 flex-shrink-0 text-accent" />
                 {errorMessage}
               </div>
             ) : null}

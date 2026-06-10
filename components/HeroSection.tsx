@@ -41,14 +41,12 @@ export function HeroSection() {
               {/* Date Eyebrow */}
               <div className="flex items-center gap-3">
                 <span
-                  className="bg-[#c5203a] px-3 py-1.5 text-xs font-black uppercase tracking-[0.25em] text-white shadow-md min-[380px]:text-sm sm:px-4 sm:text-base"
-                  style={{ fontFamily: "var(--font-bebas)" }}
+                  className="bg-accent px-3 py-1 text-xs font-black uppercase tracking-[0.15em] text-white shadow-md min-[380px]:text-sm sm:px-4 sm:text-base font-display skew-x-[-12deg] inline-block"
                 >
-                  SAT
+                  <span className="skew-x-[12deg] block">SAT</span>
                 </span>
                 <span
-                  className="text-[1.55rem] font-black uppercase tracking-[0.15em] text-white min-[380px]:text-[1.8rem] sm:text-[2.2rem] md:text-[2.4rem]"
-                  style={{ fontFamily: "var(--font-bebas)" }}
+                  className="text-[1.55rem] font-bold uppercase tracking-[0.1em] text-white min-[380px]:text-[1.8rem] sm:text-[2.2rem] md:text-[2.4rem] font-display"
                 >
                   JUNE 6TH
                 </span>
@@ -56,29 +54,26 @@ export function HeroSection() {
 
               {/* League Name */}
               <span
-                className="text-[1.1rem] font-extrabold uppercase tracking-[0.22em] text-[#b8962e] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] min-[380px]:text-[1.25rem] sm:text-[1.5rem] md:text-[1.7rem]"
-                style={{ fontFamily: "var(--font-oswald), sans-serif" }}
+                className="text-[1.1rem] font-semibold uppercase tracking-[0.18em] text-secondary min-[380px]:text-[1.25rem] sm:text-[1.5rem] md:text-[1.7rem] font-display"
               >
                 Next up boxing league
               </span>
 
               {/* Event Title */}
               <h1
-                className="mt-1 text-[2.95rem] font-black uppercase leading-[0.86] tracking-[0.02em] text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.95)] min-[380px]:text-[3.35rem] sm:text-[5.4rem] md:text-[5.8rem] lg:text-[6rem]"
-                style={{ fontFamily: "var(--font-bebas), Impact, sans-serif" }}
+                className="mt-1 text-[3.2rem] font-black uppercase leading-[0.9] tracking-[0.01em] text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.95)] min-[380px]:text-[3.8rem] sm:text-[5.6rem] md:text-[6rem] lg:text-[6.5rem] font-display"
               >
                 strong island
-                <span className="block text-[#c5203a] drop-shadow-[0_2px_8px_rgba(197,32,58,0.4)]">
+                <span className="block text-accent drop-shadow-[0_2px_8px_rgba(197,32,58,0.4)]">
                   fight night 11
                 </span>
               </h1>
 
               {/* Time Info */}
-              <div className="mt-2 inline-flex items-center gap-2 border-l-4 border-[#b8962e] bg-[#0d1124]/80 px-4 py-2 backdrop-blur-md shadow-lg sm:mt-3">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#b8962e] animate-pulse" />
+              <div className="mt-2 inline-flex items-center gap-2 border-l-4 border-secondary bg-ink/85 px-4 py-2 backdrop-blur-md shadow-lg sm:mt-3">
+                <span className="h-2.5 w-2.5 rounded-full bg-secondary animate-pulse" />
                 <span
-                  className="text-sm font-black uppercase tracking-[0.25em] text-white min-[380px]:text-base sm:text-lg md:text-xl"
-                  style={{ fontFamily: "var(--font-bebas)" }}
+                  className="text-sm font-semibold uppercase tracking-[0.2em] text-white min-[380px]:text-base sm:text-lg md:text-xl font-display"
                 >
                   5 pm sharp
                 </span>
@@ -91,9 +86,9 @@ export function HeroSection() {
                 href="https://www.simpletix.com/e/strong-island-fight-night-11-tickets-254611"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex min-h-11 w-full sm:w-auto items-center justify-center overflow-hidden bg-[#b8962e] px-4 py-3 text-center text-sm font-bold text-[#0d1124] transition-all duration-300 hover:shadow-[0_0_25px_rgba(184,150,46,0.4)] min-[380px]:text-base sm:px-6"
+                className="group relative flex min-h-12 w-full sm:w-auto items-center justify-center overflow-hidden bg-secondary px-6 py-3 text-center text-sm font-bold text-ink transition-all duration-300 hover:shadow-[0_0_20px_rgba(184,150,46,0.3)] min-[380px]:text-base sm:px-8 skew-x-[-8deg] uppercase tracking-wider cursor-pointer"
               >
-                <span className="editorial-button relative z-10">
+                <span className="relative z-10 skew-x-[8deg] font-display text-lg tracking-widest font-black">
                   GET TICKETS
                 </span>
 
@@ -102,9 +97,9 @@ export function HeroSection() {
 
               <a
                 href="#youtube"
-                className="group relative flex min-h-11 w-full sm:w-auto items-center justify-center overflow-hidden border-2 border-white/30 bg-transparent px-4 py-3 text-center text-sm font-bold text-white transition-all duration-300 hover:border-white min-[380px]:text-base sm:px-6"
+                className="group relative flex min-h-12 w-full sm:w-auto items-center justify-center overflow-hidden border-2 border-white/30 bg-transparent px-6 py-3 text-center text-sm font-bold text-white transition-all duration-300 hover:border-white min-[380px]:text-base sm:px-8 skew-x-[-8deg] uppercase tracking-wider cursor-pointer"
               >
-                <span className="editorial-button relative z-10">
+                <span className="relative z-10 skew-x-[8deg] font-display text-lg tracking-widest font-black">
                   FREE LIVESTREAM
                 </span>
 
@@ -118,26 +113,6 @@ export function HeroSection() {
       <div
         className="pointer-events-none absolute inset-0 z-[1]"
       >
-        {/* HUD Frame */}
-        <div className="pointer-events-none absolute inset-0 z-20">
-          {/* Top left */}
-          <div className="absolute left-6 top-6">
-            <div className="h-6 w-6 border-l-2 border-t-2 border-[#c5203a]" />
-
-            <div className="mt-2 h-[2px] w-12 bg-gradient-to-r from-[#c5203a] to-transparent" />
-          </div>
-
-          {/* Bottom right */}
-          <div className="absolute bottom-6 right-6">
-            <div className="ml-auto h-6 w-6 border-b-2 border-r-2 border-[#b8962e]" />
-
-            <div className="ml-auto mt-2 h-[2px] w-12 bg-gradient-to-l from-[#b8962e] to-transparent" />
-          </div>
-
-          {/* Side accent */}
-          <div className="absolute left-0 top-1/3 h-20 w-1 bg-gradient-to-b from-transparent via-[#c5203a] to-transparent" />
-        </div>
-
         {/* Image container - full cover */}
         <div
           className="relative h-full w-full"

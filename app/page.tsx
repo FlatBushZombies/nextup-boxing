@@ -16,9 +16,9 @@ export default function Home() {
       <NextUpLiveStream />
       <ChampionsSection />
       <SocialWall /> 
-      <MagazineSection />
       <YoutubeSection />
       <SponsorsStrip />
+      <MagazineSection />
       <Footer />
     </main>
   )

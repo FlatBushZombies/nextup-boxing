@@ -58,12 +58,7 @@ export function EventBanner() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.15 }}
-              className="mb-6 uppercase leading-[0.88]"
-              style={{
-                fontFamily: "var(--font-bebas), Impact, sans-serif",
-                fontSize: "clamp(3.5rem, 8vw, 7rem)",
-                color: "#1e2d5e",
-              }}
+              className="mb-6 uppercase leading-[0.88] font-display text-[clamp(3.5rem,8vw,7rem)] text-[#1e2d5e]"
             >
               NextUp
               <span className="block text-[#c5203a]">Championship</span>
@@ -113,11 +108,7 @@ export function EventBanner() {
                   <div key={unit.label} className="flex items-end gap-1">
                     <div className="text-center">
                       <div
-                        className="tabular-nums leading-none text-[#1e2d5e]"
-                        style={{
-                          fontFamily: "var(--font-bebas), Impact, sans-serif",
-                          fontSize: "clamp(2.6rem, 6vw, 4.5rem)",
-                        }}
+                        className="tabular-nums leading-none text-[#1e2d5e] font-display text-[clamp(2.6rem,6vw,4.5rem)]"
                       >
                         {unit.value.toString().padStart(2, "0")}
                       </div>
@@ -125,8 +116,7 @@ export function EventBanner() {
                     </div>
                     {index < 3 ? (
                       <span
-                        className="mb-2 text-[#b8962e]/55"
-                        style={{ fontFamily: "var(--font-bebas), Impact, sans-serif", fontSize: "1.5rem" }}
+                        className="mb-2 text-[#b8962e]/55 font-display text-[1.5rem]"
                       >
                         :
                       </span>

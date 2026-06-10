@@ -13,9 +13,9 @@ import { PremiumModal } from "@/components/PremiumModal"
 const navLinks = [
   { label: "Home", href: "/#hero" },
   { label: "Boxers", href: "/boxers" },
-  { label: "Stream", href: "/#youtube" },
+  { label: "Events", href: "/events" },
   { label: "Rankings", href: "/rankings" },
-  { label: "Social", href: "/#social-wall" },
+  { label: "Stream", href: "/#youtube" },
 ]
 
 export function Navbar() {
@@ -122,7 +122,7 @@ export function Navbar() {
     : "bg-transparent text-white"
 
   const signInClass =
-    "editorial-button items-center gap-2 rounded-full bg-white px-5 py-2.5 text-black shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#b8962e] hover:text-black"
+    "editorial-button items-center gap-2 skew-x-[-8deg] bg-white px-5 py-2.5 text-black shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-secondary hover:text-ink"
 
   const toggleMobileMenu = () => {
     setMobileOpen((open) => !open)
@@ -200,12 +200,12 @@ export function Navbar() {
                   onClick={() => {
                     setActiveSection(linkHash)
                   }}
-                  className="group relative px-2 py-2.5 text-[0.75rem] font-semibold uppercase tracking-[0.2em] transition-all duration-300 text-white drop-shadow-md hover:text-white/80 pointer-events-auto"
+                  className="group relative px-2 py-2.5 text-[0.75rem] font-semibold uppercase tracking-[0.2em] transition-all duration-300 text-white drop-shadow-md hover:text-white/80 pointer-events-auto font-display"
                 >
                   {link.label}
 
                   <span
-                    className={`absolute inset-x-0 bottom-0 h-[2px] origin-left bg-[#c5203a] transition-transform duration-300 ${
+                    className={`absolute inset-x-0 bottom-0 h-[2px] origin-left bg-accent transition-transform duration-300 ${
                       activeSection === linkHash
                         ? "scale-x-100"
                         : "scale-x-0 group-hover:scale-x-100"
@@ -231,8 +231,10 @@ export function Navbar() {
               onClick={() => setPremiumOpen(true)}
               className={`${signInClass} hidden xl:inline-flex mr-4 cursor-pointer`}
             >
-              free livestream access
-              <TiLocationArrow size={24} />
+              <span className="skew-x-[8deg] flex items-center gap-2 font-display text-xs font-bold uppercase tracking-wider">
+                free livestream access
+                <TiLocationArrow size={24} />
+              </span>
             </button>
 
             {/* Mobile + Tablet Hamburger ONLY */}
@@ -285,7 +287,7 @@ export function Navbar() {
                     aria-current={
                       activeSection === linkHash ? "page" : undefined
                     }
-                    className={`block rounded-xl px-4 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.2em] transition-colors duration-300 ${
+                    className={`block rounded-none px-4 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.2em] transition-colors duration-300 font-display ${
                       activeSection === linkHash
                         ? "bg-white/10 text-white"
                         : "text-white/70 hover:bg-white/5 hover:text-white"
@@ -304,8 +306,10 @@ export function Navbar() {
                 }}
                 className={`${signInClass} mt-3 flex w-full justify-center cursor-pointer`}
               >
-                <User className="h-4 w-4" />
-                free livestream access
+                <span className="skew-x-[8deg] flex items-center gap-2 font-display text-xs font-bold uppercase tracking-wider">
+                  <User className="h-4 w-4" />
+                  free livestream access
+                </span>
               </button>
             </div>
           </motion.div>
@@ -315,7 +319,7 @@ export function Navbar() {
       {/* Bottom Progress Line */}
       <div className="h-px bg-white/5">
         <motion.div
-          className="h-full origin-left bg-gradient-to-r from-[#1e2d5e] via-[#c5203a] to-[#d4ae44]"
+          className="h-full origin-left bg-gradient-to-r from-primary via-accent to-secondary"
           animate={{ scaleX: Math.max(scrollProgress, 0.02) }}
           transition={{ duration: 0.15, ease: "easeOut" }}
         />

@@ -30,11 +30,11 @@ export function MagazineSection() {
     <section
       id="magazine"
       ref={ref}
-      className="relative overflow-hidden bg-white px-4 py-20 text-[#0d1124] sm:px-6 lg:px-8"
+      className="relative overflow-hidden bg-white px-4 py-20 text-ink sm:px-6 lg:px-8"
     >
-      <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#c5203a]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(197,32,58,0.06),transparent_34%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,17,34,0.03)_1px,transparent_1px)] bg-[size:38px_38px] opacity-10" />
+      <div className="absolute top-0 left-0 right-0 h-[3px] bg-accent" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(197,32,58,0.04),transparent_34%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,17,34,0.02)_1px,transparent_1px)] bg-[size:38px_38px] opacity-10" />
 
       <div className="relative mx-auto max-w-6xl">
         <motion.div
@@ -45,17 +45,16 @@ export function MagazineSection() {
           className="mx-auto max-w-3xl text-center"
         >
           <div className="mb-6 flex items-center justify-center gap-3">
-            <span className="h-px w-12 bg-[#c5203a]" />
-            <span className="section-eyebrow text-[#c5203a]">Magazine</span>
-            <span className="h-px w-12 bg-[#c5203a]" />
+            <span className="h-px w-12 bg-accent" />
+            <span className="section-eyebrow text-accent font-bold">Magazine</span>
+            <span className="h-px w-12 bg-accent" />
           </div>
 
           <h2
-            className="text-[clamp(3.2rem,8vw,6rem)] uppercase leading-[0.88] text-[#0d1124] animate-fade-in"
-            style={{ fontFamily: "var(--font-bebas), Impact, sans-serif" }}
+            className="text-[clamp(3.2rem,8vw,6rem)] uppercase leading-[0.88] text-ink animate-fade-in font-display"
           >
             Inside The
-            <span className="block text-[#b8962e]">Fight Issue</span>
+            <span className="block text-secondary">Fight Issue</span>
           </h2>
 
           <p className="editorial-body mx-auto mt-5 max-w-2xl text-sm text-slate-600 sm:text-base">
@@ -77,16 +76,15 @@ export function MagazineSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-6 flex items-center justify-center gap-3 px-4 py-1.5 rounded-full border border-[#b8962e]/30 bg-[#b8962e]/10 backdrop-blur-sm"
+              className="mt-6 flex items-center justify-center gap-3 px-4 py-1.5 rounded-none border border-secondary/35 bg-secondary/10 backdrop-blur-sm skew-x-[-8deg]"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-[#b8962e] animate-pulse" />
+              <span className="h-1.5 w-1.5 rounded-full bg-secondary animate-pulse" />
               <span
-                className="text-[0.7rem] uppercase tracking-[0.25em] text-[#0d1124] font-bold"
-                style={{ fontFamily: "var(--font-sans), sans-serif" }}
+                className="text-[0.7rem] uppercase tracking-[0.25em] text-ink font-black font-display skew-x-[8deg] block"
               >
                 Digital versions dropping soon
               </span>
-              <span className="h-1.5 w-1.5 rounded-full bg-[#b8962e] animate-pulse" />
+              <span className="h-1.5 w-1.5 rounded-full bg-secondary animate-pulse" />
             </motion.div>
           </motion.div>
         </div>
@@ -98,18 +96,18 @@ export function MagazineSection() {
           transition={{ duration: 0.7, delay: 0.15 }}
           className="mt-16 text-center"
         >
-          <div className="mx-auto flex max-w-2xl flex-col items-center gap-5 border-y border-slate-200/20 px-6 py-8 bg-slate-50/80 backdrop-blur-sm rounded-2xl">
-            <p className="section-eyebrow text-[#b8962e]/90 font-bold uppercase tracking-widest text-xs">Editorial Release</p>
+          <div className="mx-auto flex max-w-2xl flex-col items-center gap-5 border border-ink/10 px-6 py-8 bg-slate-50/50 backdrop-blur-sm rounded-none shadow-md">
+            <p className="section-eyebrow text-secondary font-black uppercase tracking-widest text-xs">Editorial Release</p>
             <p className="editorial-body max-w-xl text-sm text-slate-700 sm:text-base">
               Be first to read each new issue, from cover features and ringside essays to the sharp
               analysis behind boxing&apos;s biggest moments.
             </p>
-            <div className="flex flex-col gap-3 sm:flex-row w-full justify-center">
-              <button className="editorial-button rounded-full bg-[#b8962e] px-8 py-3 text-black font-bold tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9a435] shadow-lg">
-                Read The Issue
+            <div className="flex flex-col gap-3 sm:flex-row w-full justify-center mt-2">
+              <button className="editorial-button bg-secondary px-8 py-3.5 text-ink font-black tracking-widest transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:bg-gold-light skew-x-[-8deg] cursor-pointer">
+                <span className="skew-x-[8deg] block font-display text-sm uppercase">Read The Issue</span>
               </button>
-              <button className="editorial-button rounded-full border border-slate-200 bg-white px-8 py-3 text-[#0d1124] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#b8962e] hover:text-[#b8962e]">
-                Join The List
+              <button className="editorial-button border-2 border-ink bg-white px-8 py-3 text-ink font-black tracking-widest transition-all duration-300 hover:-translate-y-0.5 hover:border-secondary hover:text-secondary skew-x-[-8deg] cursor-pointer">
+                <span className="skew-x-[8deg] block font-display text-sm uppercase">Join The List</span>
               </button>
             </div>
           </div>

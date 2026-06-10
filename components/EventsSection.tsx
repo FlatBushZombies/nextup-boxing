@@ -70,10 +70,7 @@ export function EventsSection() {
                   </span>
 
                   <h3
-                    className="mb-3 text-[2.5rem] leading-[0.9] font-bold tracking-tight text-[#1e2d5e] uppercase italic"
-                    style={{
-                      fontFamily: "var(--font-bebas), Impact, sans-serif",
-                    }}
+                    className="mb-3 text-[2.5rem] leading-[0.9] font-bold tracking-tight text-[#1e2d5e] uppercase italic font-display"
                   >
                     {event.title}
                   </h3>

@@ -427,10 +427,10 @@ export function SocialWall() {
         >
           <div>
             <div className="flex flex-wrap items-end gap-x-3 gap-y-2 sm:gap-x-4">
-              <span className="font-display text-[clamp(2rem,8vw,4.5rem)] font-black uppercase leading-none text-slate-950" style={{ fontFamily: "var(--font-bebas), Impact, sans-serif" }}>
+              <span className="font-display text-[clamp(2rem,8vw,4.5rem)] font-bold uppercase leading-none text-slate-950">
                 NEXTUP
               </span>
-              <span className="pb-0.5 font-sans text-[clamp(1rem,3.5vw,1.75rem)] font-black uppercase tracking-[0.2em] text-[#c5203a] sm:tracking-[0.26em]" style={{ fontFamily: "var(--font-bebas), sans-serif" }}>
+              <span className="pb-0.5 font-sans text-[clamp(1rem,3.5vw,1.75rem)] font-bold uppercase tracking-[0.2em] text-[#c5203a] sm:tracking-[0.26em]">
                 SOCIAL WALL
               </span>
             </div>
