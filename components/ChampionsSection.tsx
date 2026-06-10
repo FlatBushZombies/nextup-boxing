@@ -137,10 +137,7 @@ export function ChampionsSection() {
                     <span className="text-secondary">{fighter.lastName}</span>
                   </h3>
                   <p className="mt-2 text-[11px] font-bold uppercase tracking-wider text-accent">
-                    {fighterNumber ? `${fighterNumber} LBS | ${fighter.championship}` : fighter.championship}
-                  </p>
-                  <p className="mt-0.5 text-[9px] font-medium uppercase tracking-widest text-white/55">
-                    {fighter.weightClass}
+                    {fighterNumber ? `${fighterNumber}  ${fighter.championship}` : fighter.championship}
                   </p>
                 </div>
               </div>

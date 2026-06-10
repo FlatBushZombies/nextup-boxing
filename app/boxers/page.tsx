@@ -490,7 +490,6 @@ function ChampionCard({ boxer }: { boxer: BoxerData }) {
           {boxer.firstName}<br /><span className="text-secondary">{boxer.lastName}</span>
         </h2>
         <p className="mt-2 text-[11px] font-bold uppercase tracking-wider text-accent">{championTitle}</p>
-        <p className="mt-0.5 text-[9px] font-medium uppercase tracking-widest text-white/55">{boxer.weightClass}</p>
       </div>
     </div>
   )
