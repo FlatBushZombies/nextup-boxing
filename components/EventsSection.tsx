@@ -1,6 +1,6 @@
 import Image from "next/image"
-import Link from "next/link"
 import { MapPin, Ticket } from "lucide-react"
+import { Reveal } from "@/components/Reveal"
 
 const events = [
   {
@@ -23,83 +23,73 @@ const events = [
 
 export function EventsSection() {
   return (
-    <section
-      id="events"
-      className="relative w-full scroll-mt-20 overflow-hidden bg-white py-16 md:py-24"
-    >
-      {/* Background TEXT */}
-      <div className="pointer-events-none absolute left-0 right-0 top-10 flex justify-center overflow-hidden">
-        <span className="select-none text-[15rem] font-black leading-none tracking-tighter text-[#f8f8f8] uppercase">
-          EVENTS
-        </span>
+    <section id="events" className="relative w-full scroll-mt-20 overflow-hidden bg-white">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <Reveal as="fade-up" className="mb-10">
+          <h2 className="text-xl md:text-2xl font-medium uppercase tracking-wide text-crimson">
+            Upcoming Events
+          </h2>
+        </Reveal>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mb-12 border-b border-gray-200 pb-4">
-          <div className="flex items-center gap-6">
-            <button className="text-xl font-bold tracking-tight text-[#c5203a] hover:text-black transition-colors">
-              UPCOMING
-            </button>
-          </div>
-        </div>
+      <div className="flex flex-col">
+        {events.map((event, index) => {
+          const isDark = index % 2 === 1
 
-        {/* Event List */}
-        <div className="flex flex-col gap-10">
-          {events.map((event) => (
-            <div
-              key={event.id}
-              className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between"
-            >
-              {/* Image & Info Wrapper */}
-              <div className="flex flex-col gap-6 md:flex-row md:items-center">
-                {/* Image */}
-                <div className="relative h-56 w-full shrink-0 overflow-hidden bg-gray-100 md:h-[180px] md:w-[320px]">
-                  <Image
-                    src={event.image}
-                    alt={event.title}
-                    fill
-                    className="object-cover object-top"
-                  />
-                </div>
+          return (
+            <Reveal key={event.id} as="fade-up" delay={index * 60}>
+              <div className={`${isDark ? "bg-[#111111]" : "bg-white"} border-t border-[#e5e5e5]`}>
+                <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10">
+                  <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+                    {/* Image & Info */}
+                    <div className="flex flex-col gap-6 md:flex-row md:items-center">
+                      <div className="relative h-56 w-full shrink-0 overflow-hidden bg-[#f5f5f5] md:h-[180px] md:w-[320px]">
+                        <Image
+                          src={event.image}
+                          alt={event.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 320px"
+                          className="object-cover object-top"
+                        />
+                      </div>
 
-                {/* Info */}
-                <div className="flex flex-col justify-center">
-                  <span className="mb-1 text-[13px] font-bold text-[#b8962e]">
-                    {event.date}
-                  </span>
+                      <div className="flex flex-col justify-center">
+                        <span className={`mb-1 text-sm font-medium ${isDark ? "text-white/60" : "text-[#707072]"}`}>
+                          {event.date}
+                        </span>
 
-                  <h3
-                    className="mb-3 text-[2.5rem] leading-[0.9] font-bold tracking-tight text-[#1e2d5e] uppercase italic font-display"
-                  >
-                    {event.title}
-                  </h3>
+                        <h3 className={`mb-3 text-2xl md:text-3xl font-medium uppercase tracking-wide ${isDark ? "text-white" : "text-[#111111]"}`}>
+                          {event.title}
+                        </h3>
 
-                  <div className="mb-1 flex items-center gap-1.5 text-[13px] font-medium text-gray-700">
-                    <MapPin className="h-[14px] w-[14px] text-[#c5203a]" />
-                    {event.location}
+                        <div className={`mb-1 flex items-center gap-1.5 text-sm font-normal ${isDark ? "text-white/70" : "text-[#707072]"}`}>
+                          <MapPin className="h-[14px] w-[14px]" />
+                          {event.location}
+                        </div>
+
+                        <span className={`text-sm font-normal ${isDark ? "text-white/50" : "text-[#9e9ea0]"}`}>
+                          {event.broadcaster}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Button */}
+                    <div className="flex w-full shrink-0 md:ml-4 md:w-auto">
+                      <button
+                        className={`flex h-[50px] md:h-[60px] w-full md:w-[180px] items-center justify-center gap-2 rounded-full text-sm font-medium uppercase tracking-wide transition-colors ${
+                          isDark ? "bg-white text-[#111111] hover:bg-[#e5e5e5]" : "bg-[#111111] text-white hover:bg-[#1a1a1a]"
+                        }`}
+                      >
+                        <Ticket className="h-4 w-4" />
+                        Buy Tickets
+                      </button>
+                    </div>
                   </div>
-
-                  <span className="text-[13px] font-medium text-gray-500">
-                    {event.broadcaster}
-                  </span>
                 </div>
               </div>
-
-              {/* Button */}
-              <div className="flex h-[50px] w-full shrink-0 flex-row md:ml-4 md:h-[60px] md:w-auto">
-                <button className="group relative overflow-hidden flex h-full flex-1 items-center justify-center gap-2 bg-[#1e2d5e] px-6 text-[13px] font-bold text-white transition-all duration-300 hover:bg-[#b8962e] hover:text-[#0d1124] hover:shadow-[0_0_25px_rgba(0,0,0,0.2)] md:w-[160px]">
-                  <span className="relative z-10 flex items-center gap-2">
-                    <Ticket className="h-4 w-4" />
-                    BUY TICKETS
-                  </span>
-
-                  <div className="absolute inset-0 translate-x-[-100%] bg-white/10 transition-transform duration-300 group-hover:translate-x-0" />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+            </Reveal>
+          )
+        })}
       </div>
     </section>
   )

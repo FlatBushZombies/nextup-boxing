@@ -1,12 +1,14 @@
+import dynamic from "next/dynamic"
 import { Navbar } from "@/components/Navbar"
 import { HeroSection } from "@/components/HeroSection"
 import { ChampionsSection } from "@/components/ChampionsSection"
 import { YoutubeSection } from "@/components/YoutubeSection"
 import { SponsorsStrip } from "@/components/SponsorsStrip"
 import { Footer } from "@/components/Footer"
-import { SocialWall } from "@/components/SocialWall"
 import { NextUpLiveStream } from "@/components/NextUpLiveStream"
-import { MagazineSection } from "@/components/magazine/magaine-section"
+
+const SocialWall = dynamic(() => import("@/components/SocialWall").then((mod) => mod.SocialWall))
+const MagazineSection = dynamic(() => import("@/components/magazine/magaine-section").then((mod) => mod.MagazineSection))
 
 export default function Home() {
   return (

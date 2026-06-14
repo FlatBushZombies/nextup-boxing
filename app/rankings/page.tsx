@@ -1,9 +1,11 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
-import { Trophy, Search, ArrowUpRight, Check, Play } from "lucide-react"
+import { Reveal } from "@/components/Reveal"
+import { Check } from "lucide-react"
 import Image from "next/image"
 
 const divisions = [
@@ -47,6 +49,74 @@ const championsData = [
     name: "ISAAC BROWN",
     record: "22-0-0",
     image: "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.webp",
+  },
+]
+
+const p4pRankings = [
+  { rank: 1, name: "JEREMY RODRIGUEZ", flag: "🇺🇸", record: "14-0-0", image: "/fighter-1.png" },
+  { rank: 2, name: "TYLER JOHNSON", flag: "🇺🇸", record: "21-2-0", image: "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.webp" },
+  { rank: 3, name: "DMITRI VOLKOV", flag: "🇷🇺", record: "18-1-0", image: "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.webp" },
+  { rank: 4, name: "CARLOS MENDOZA", flag: "🇲🇽", record: "20-1-1", image: "/champions/KEVIN_TORRES_165_SBC_CHAMPION.webp" },
+  { rank: 5, name: "ISAAC BROWN", flag: "🇺🇸", record: "22-0-0", image: "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.webp" },
+]
+
+const methodology = [
+  {
+    label: "FIGHT RESULTS",
+    value: "40%",
+    icon: (
+      <svg className="w-8 h-8 text-white/60 mb-3 mx-auto md:mx-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+      </svg>
+    ),
+  },
+  {
+    label: "OPPONENT QUALITY",
+    value: "25%",
+    icon: (
+      <svg className="w-8 h-8 text-white/60 mb-3 mx-auto md:mx-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <circle cx="12" cy="12" r="6" />
+        <circle cx="12" cy="12" r="2" />
+      </svg>
+    ),
+  },
+  {
+    label: "ACTIVITY LEVEL",
+    value: "15%",
+    icon: (
+      <svg className="w-8 h-8 text-white/60 mb-3 mx-auto md:mx-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2a10 10 0 0 1 7.54 16.59" />
+        <path d="M19 12a7 7 0 0 0-7-7" />
+        <path d="M12 9v3l2 2" />
+        <circle cx="12" cy="12" r="1" />
+      </svg>
+    ),
+  },
+  {
+    label: "RECENCY",
+    value: "10%",
+    icon: (
+      <svg className="w-8 h-8 text-white/60 mb-3 mx-auto md:mx-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+        <line x1="16" y1="2" x2="16" y2="6" />
+        <line x1="8" y1="2" x2="8" y2="6" />
+        <line x1="3" y1="10" x2="21" y2="10" />
+      </svg>
+    ),
+  },
+  {
+    label: "TITLE STATUS",
+    value: "10%",
+    icon: (
+      <svg className="w-8 h-8 text-white/60 mb-3 mx-auto md:mx-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+        <path d="M4 22h16" />
+        <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34" />
+        <path d="M12 2a4 4 0 0 0-4 4v6h8V6a4 4 0 0 0-4-4z" />
+      </svg>
+    ),
   },
 ]
 
@@ -119,33 +189,28 @@ export default function RankingsPage() {
   const tableData = getTableData()
 
   return (
-    <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-[#05070f] text-white">
+    <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-white">
       <Navbar />
 
       {/* 1. HERO HEADER SECTION */}
-      <section className="relative min-h-[60vh] pt-32 pb-16 flex items-center bg-gradient-to-r from-[#03050a] via-[#05070f] to-[#0a0e1a] overflow-hidden border-b border-white/5">
-        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-          <div className="absolute top-1/4 right-0 w-[550px] h-[550px] bg-accent/10 rounded-full blur-[140px] opacity-75" />
-          <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[120px] opacity-50" />
-        </div>
-
+      <section className="relative min-h-[60vh] pt-32 pb-16 flex items-center bg-[#111111] text-white overflow-hidden border-b border-[#e5e5e5]">
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col md:flex-row items-center justify-between gap-12">
-          <div className="flex-1 text-left max-w-2xl">
-            <span className="text-xs font-black uppercase tracking-[0.3em] text-secondary mb-2 block font-display">
-              OFFICIAL ——————
+          <Reveal as="fade-up" className="flex-1 text-left max-w-2xl">
+            <span className="text-xs font-medium uppercase tracking-[0.2em] text-white/60 mb-2 block">
+              Official
             </span>
-            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black uppercase tracking-wide leading-none font-display mb-4">
+            <h1 className="text-6xl sm:text-7xl lg:text-[76px] uppercase tracking-wide leading-none font-display mb-4">
               RANKINGS
             </h1>
-            <p className="text-lg font-black uppercase tracking-[0.1em] text-white font-display mb-3">
-              THE BEST. THE ELITE. THE NEXT UP.
+            <p className="text-base font-medium uppercase tracking-wide text-white mb-3">
+              The Best. The Elite. The Next Up.
             </p>
-            <p className="text-white/60 text-sm sm:text-base leading-relaxed max-w-[46ch] font-sans">
+            <p className="text-white/60 text-sm sm:text-base leading-relaxed max-w-[46ch]">
               Explore the official Next Up Boxing League rankings across all weight divisions. Updated weekly.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="relative w-full md:w-[45%] aspect-[1.1] md:aspect-[1.15] shrink-0 self-end overflow-hidden flex justify-end">
+          <Reveal as="fade-in" delay={120} className="relative w-full md:w-[45%] aspect-[1.1] md:aspect-[1.15] shrink-0 self-end overflow-hidden flex justify-end">
             <div className="relative w-[85%] h-full">
               <Image
                 src="/fighter-1.png"
@@ -153,14 +218,13 @@ export default function RankingsPage() {
                 fill
                 priority
                 sizes="(min-width: 1024px) 40vw, 90vw"
-                className="object-contain object-bottom filter brightness-110 drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)]"
+                className="object-contain object-bottom"
               />
             </div>
-            <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#05070f] to-transparent" />
-          </div>
+          </Reveal>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/10 bg-[#05070f]/90 backdrop-blur-md py-4">
+        <div className="absolute bottom-0 left-0 right-0 z-20 border-t border-[#e5e5e5] bg-[#111111] py-4">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-6 overflow-x-auto scrollbar-hide py-1">
               {divisions.map((div) => {
@@ -169,10 +233,10 @@ export default function RankingsPage() {
                   <button
                     key={div}
                     onClick={() => setActiveDivision(div)}
-                    className={`whitespace-nowrap font-display text-xs font-black tracking-widest uppercase pb-1 border-b-2 transition-all duration-300 cursor-pointer ${
+                    className={`whitespace-nowrap text-xs font-medium tracking-widest uppercase pb-1 border-b-2 transition-colors cursor-pointer ${
                       isActive
-                        ? "border-secondary text-secondary"
-                        : "border-transparent text-white/60 hover:text-white"
+                        ? "border-white text-white"
+                        : "border-transparent text-white/50 hover:text-white"
                     }`}
                   >
                     {div}
@@ -185,277 +249,220 @@ export default function RankingsPage() {
       </section>
 
       {/* 2. TABLE SECTION */}
-      <section className="bg-white text-ink py-16 sm:py-20 border-t border-white/5 relative z-10">
+      <section className="bg-white text-[#111111] py-16 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between border-b-4 border-ink pb-4 mb-6">
-            <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-wide font-display text-ink leading-none">
-              {activeDivision === "ALL DIVISIONS" ? "HEAVYWEIGHT DIVISION" : `${activeDivision} DIVISION`}
+          <Reveal as="fade-up" className="mb-8">
+            <h2 className="text-xl md:text-2xl font-medium uppercase tracking-wide text-gold">
+              {activeDivision === "ALL DIVISIONS" ? "Heavyweight Division" : `${activeDivision} Division`}
             </h2>
-          </div>
+          </Reveal>
 
-          <div className="overflow-x-auto">
+          <Reveal as="fade-up" delay={60} className="overflow-x-auto border border-[#e5e5e5]">
             <table className="w-full text-left border-collapse min-w-[700px]">
               <thead>
-                <tr className="border-b border-ink/10 py-3 text-ink/40">
-                  <th className="py-4 text-[11px] font-black uppercase tracking-widest font-display w-[80px]">RANK</th>
-                  <th className="py-4 text-[11px] font-black uppercase tracking-widest font-display">BOXER</th>
-                  <th className="py-4 text-[11px] font-black uppercase tracking-widest font-display w-[120px]">RECORD</th>
-                  <th className="py-4 text-[11px] font-black uppercase tracking-widest font-display w-[100px]">POINTS</th>
-                  <th className="py-4 text-[11px] font-black uppercase tracking-widest font-display">LAST FIGHT</th>
-                  <th className="py-4 text-[11px] font-black uppercase tracking-widest font-display w-[100px] text-right">CHANGE</th>
+                <tr className="bg-[#111111] text-white">
+                  <th className="py-4 px-4 text-xs font-medium uppercase tracking-widest w-[80px]">Rank</th>
+                  <th className="py-4 px-4 text-xs font-medium uppercase tracking-widest">Boxer</th>
+                  <th className="py-4 px-4 text-xs font-medium uppercase tracking-widest w-[120px]">Record</th>
+                  <th className="py-4 px-4 text-xs font-medium uppercase tracking-widest w-[100px]">Points</th>
+                  <th className="py-4 px-4 text-xs font-medium uppercase tracking-widest">Last Fight</th>
+                  <th className="py-4 px-4 text-xs font-medium uppercase tracking-widest w-[100px] text-right">Change</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-ink/10 font-sans">
-                {tableData.map((boxer: any) => (
-                    <tr key={boxer.rank} className="hover:bg-slate-50 transition-colors group">
-                      <td className="py-5">
-                        <span className={`inline-flex items-center justify-center w-8 h-8 font-display font-black text-sm text-center shadow-sm ${
-                          boxer.rank === 1 ? "bg-secondary text-ink" : boxer.rank === 2 ? "bg-slate-300 text-ink" : boxer.rank === 3 ? "bg-[#c4a482] text-white" : "bg-slate-100 text-ink/75"
-                        }`}>
-                          {boxer.rank}
-                        </span>
-                      </td>
-                      <td className="py-5">
-                        <div className="flex items-center gap-4">
-                          <div className="relative w-10 h-10 overflow-hidden bg-slate-900 border border-ink/5 shrink-0">
-                            <Image src={boxer.image} alt={boxer.name} fill sizes="40px" className="object-cover object-top" />
-                          </div>
-                          <div className="text-left">
-                            <h4 className="font-display font-black tracking-wider text-base text-ink uppercase group-hover:text-accent transition-colors leading-none mb-1">
-                              {boxer.name}
-                            </h4>
-                            <div className="flex items-center gap-1.5 text-xs text-ink/55 font-bold">
-                              <span>{boxer.flag}</span>
-                              <span className="uppercase tracking-wider text-[10px]">{boxer.country}</span>
-                            </div>
+              <tbody>
+                {tableData.map((boxer: any, i: number) => (
+                  <tr key={boxer.rank} className={`${i % 2 === 1 ? "bg-[#f5f5f5]" : "bg-white"} border-t border-[#e5e5e5]`}>
+                    <td className="py-4 px-4">
+                      <span
+                        className={`inline-flex items-center justify-center w-8 h-8 text-sm font-medium border ${
+                          boxer.rank === 1
+                            ? "border-gold bg-gold text-[#111111]"
+                            : "border-[#e5e5e5] bg-white text-[#111111]"
+                        }`}
+                      >
+                        {boxer.rank}
+                      </span>
+                    </td>
+                    <td className="py-4 px-4">
+                      <div className="flex items-center gap-4">
+                        <div className="relative w-10 h-10 overflow-hidden bg-[#111111] shrink-0">
+                          <Image src={boxer.image} alt={boxer.name} fill sizes="40px" className="object-cover object-top" />
+                        </div>
+                        <div className="text-left">
+                          <h4 className="font-medium tracking-wide text-sm text-[#111111] uppercase leading-none mb-1">
+                            {boxer.name}
+                          </h4>
+                          <div className="flex items-center gap-1.5 text-xs text-[#707072]">
+                            <span>{boxer.flag}</span>
+                            <span className="uppercase tracking-wider text-[10px]">{boxer.country}</span>
                           </div>
                         </div>
-                      </td>
-                      <td className="py-5 font-mono text-sm font-bold text-ink">{boxer.record}</td>
-                      <td className="py-5 font-display font-black tracking-wider text-sm text-ink/75">{boxer.points}</td>
-                      <td className="py-5 text-sm text-ink/65 max-w-[280px] truncate">{boxer.lastFight}</td>
-                      <td className="py-5 text-right">
-                        <span className={`inline-block font-display font-black text-xs px-2.5 py-1 ${
-                          boxer.change.includes("↑") ? "text-emerald-600 bg-emerald-50" : boxer.change.includes("↓") ? "text-rose-600 bg-rose-50" : "text-ink/40"
-                        }`}>
-                          {boxer.change}
-                        </span>
-                      </td>
-                    </tr>
-                  )
-                )}
+                      </div>
+                    </td>
+                    <td className="py-4 px-4 font-mono text-sm text-[#111111]">{boxer.record}</td>
+                    <td className="py-4 px-4 text-sm text-[#707072]">{boxer.points}</td>
+                    <td className="py-4 px-4 text-sm text-[#707072] max-w-[280px] truncate">{boxer.lastFight}</td>
+                    <td className="py-4 px-4 text-right">
+                      <span className="inline-block text-xs text-[#707072]">{boxer.change}</span>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
-          </div>
+          </Reveal>
 
           {/* VIEW FULL RANKINGS BUTTON */}
-          <div className="flex justify-center mt-8">
-            <button className="border border-ink/20 bg-white text-ink hover:bg-ink hover:text-white transition-all duration-300 font-display font-black tracking-widest text-xs uppercase px-8 py-3.5 flex items-center gap-2 cursor-pointer">
-              <span>VIEW FULL {activeDivision === "ALL DIVISIONS" ? "HEAVYWEIGHT" : activeDivision} RANKINGS</span>
-              <span className="text-accent">→</span>
+          <Reveal as="fade-up" delay={120} className="flex justify-center mt-8">
+            <button className="inline-flex items-center gap-2 rounded-full border border-[#e5e5e5] px-6 py-3 text-xs font-medium uppercase tracking-wide text-[#111111] hover:border-[#707072] transition-colors cursor-pointer">
+              View Full {activeDivision === "ALL DIVISIONS" ? "Heavyweight" : activeDivision} Rankings
             </button>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* 3. WORLD CHAMPIONS */}
-      <section className="bg-[#05070f] py-16 sm:py-20 border-t border-white/5 relative z-10">
+      <section className="bg-[#111111] py-16 sm:py-20 border-t border-[#e5e5e5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between border-b border-white/10 pb-4 mb-8">
+          <Reveal as="fade-up" className="flex items-end justify-between border-b border-[#e5e5e5] pb-4 mb-8">
             <div className="text-left">
-              <span className="text-xs font-black uppercase tracking-[0.25em] text-secondary mb-1.5 block font-display">WORLD CHAMPIONS</span>
-              <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-wide text-white leading-none font-display">THE KINGS OF THE RING</h2>
+              <span className="text-xs font-medium uppercase tracking-[0.2em] text-white/50 mb-1.5 block">
+                World Champions
+              </span>
+              <h2 className="text-xl md:text-2xl font-medium uppercase tracking-wide text-white leading-none">
+                The Kings of the Ring
+              </h2>
             </div>
-            <button className="flex items-center gap-1 font-display text-xs font-black tracking-widest text-accent uppercase hover:text-accent-dark transition-colors cursor-pointer">
-              <span>VIEW ALL CHAMPIONS</span>
-              <span className="text-accent">→</span>
-            </button>
-          </div>
+            <Link
+              href="/boxers"
+              className="hidden sm:inline-flex items-center rounded-full border border-white/20 px-5 py-2.5 text-xs font-medium uppercase tracking-wide text-white hover:border-white/40 transition-colors"
+            >
+              View All Champions
+            </Link>
+          </Reveal>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-            {championsData.map((champ) => (
-              <div key={champ.division} className="group relative aspect-[3/4] overflow-hidden bg-[#0d1124] border border-white/5">
-                <Image src={champ.image} alt={champ.name} fill sizes="(min-width: 1024px) 20vw, 33vw" className="object-cover object-top transition-transform duration-700 group-hover:scale-105 filter brightness-[0.7]" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 z-10 text-left">
-                  <span className="text-[10px] font-black uppercase tracking-wider text-secondary block font-display mb-1">{champ.division}</span>
-                  <h3 className="text-base font-black uppercase text-white font-display mb-1">{champ.name}</h3>
-                  <span className="text-xs font-bold font-mono text-white/50">{champ.record}</span>
+            {championsData.map((champ, index) => (
+              <Reveal key={champ.division} as="fade-up" delay={index * 60}>
+                <div className="boxer-card-mr aspect-[3/4]">
+                  <div className="image-wrap">
+                    <Image src={champ.image} alt={champ.name} fill sizes="(min-width: 1024px) 20vw, 33vw" className="object-cover object-top" />
+                    <div className="gradient-overlay" />
+                  </div>
+                  <div className="card-text">
+                    <h2>{champ.name}</h2>
+                    <span className="weight-cat champion-badge">{champ.division}</span>
+                  </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* 4. POUND-FOR-POUND TOP 5 */}
-      <section className="bg-white text-ink py-16 border-t border-ink/5 relative z-10">
+      <section className="bg-white text-[#111111] py-16 border-t border-[#e5e5e5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between border-b-4 border-ink pb-4 mb-8">
+          <Reveal as="fade-up" className="flex items-end justify-between border-b border-[#e5e5e5] pb-4 mb-8">
             <div className="text-left">
-              <span className="text-xs font-black uppercase tracking-[0.25em] text-secondary mb-1.5 block font-display">
-                POUND-FOR-POUND TOP 5
+              <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#707072] mb-1.5 block">
+                Pound-for-Pound Top 5
               </span>
-              <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-wide text-ink leading-none font-display">
-                P4P RANKINGS
+              <h2 className="text-xl md:text-2xl font-medium uppercase tracking-wide text-gold leading-none">
+                P4P Rankings
               </h2>
             </div>
-            <button className="flex items-center gap-1 font-display text-xs font-black tracking-widest text-accent uppercase hover:text-accent-dark transition-colors cursor-pointer">
-              <span>VIEW P4P RANKINGS</span>
-              <span className="text-accent">→</span>
+            <button className="hidden sm:inline-flex items-center rounded-full border border-[#e5e5e5] px-5 py-2.5 text-xs font-medium uppercase tracking-wide text-[#111111] hover:border-[#707072] transition-colors cursor-pointer">
+              View P4P Rankings
             </button>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {[
-              { rank: 1, name: "JEREMY RODRIGUEZ", flag: "🇺🇸", record: "14-0-0", image: "/fighter-1.png" },
-              { rank: 2, name: "TYLER JOHNSON", flag: "🇺🇸", record: "21-2-0", image: "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.webp" },
-              { rank: 3, name: "DMITRI VOLKOV", flag: "🇷🇺", record: "18-1-0", image: "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.webp" },
-              { rank: 4, name: "CARLOS MENDOZA", flag: "🇲🇽", record: "20-1-1", image: "/champions/KEVIN_TORRES_165_SBC_CHAMPION.webp" },
-              { rank: 5, name: "ISAAC BROWN", flag: "🇺🇸", record: "22-0-0", image: "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.webp" },
-            ].map((boxer) => (
-              <div
-                key={boxer.rank}
-                className="relative bg-white border border-ink/10 aspect-[3/4] overflow-hidden group flex flex-col justify-end shadow-sm"
-              >
-                {/* Huge rank number in background */}
-                <div className="absolute inset-0 flex items-start justify-start p-4 select-none pointer-events-none z-0">
-                  <span className="text-[120px] font-black leading-none text-slate-100 font-display">
-                    {boxer.rank}
-                  </span>
-                </div>
+            {p4pRankings.map((boxer, index) => (
+              <Reveal key={boxer.rank} as="fade-up" delay={index * 60}>
+                <div className="relative bg-white border border-[#e5e5e5] aspect-[3/4] overflow-hidden flex flex-col justify-end">
+                  {/* Huge rank number in background */}
+                  <div className="absolute inset-0 flex items-start justify-start p-4 select-none pointer-events-none z-0">
+                    <span className={`text-[120px] font-medium leading-none ${boxer.rank === 1 ? "text-gold/25" : "text-[#f5f5f5]"}`}>
+                      {boxer.rank}
+                    </span>
+                  </div>
 
-                {/* Fighter Image overlapping */}
-                <div className="absolute inset-0 z-10 flex items-end justify-center">
-                  <div className="relative w-full h-[85%]">
-                    <Image
-                      src={boxer.image}
-                      alt={boxer.name}
-                      fill
-                      sizes="(min-width: 1024px) 20vw, 50vw"
-                      className="object-contain object-bottom filter brightness-95 group-hover:scale-102 transition-transform duration-500"
-                    />
+                  {/* Fighter Image overlapping */}
+                  <div className="absolute inset-0 z-10 flex items-end justify-center">
+                    <div className="relative w-full h-[85%]">
+                      <Image
+                        src={boxer.image}
+                        alt={boxer.name}
+                        fill
+                        sizes="(min-width: 1024px) 20vw, 50vw"
+                        className="object-contain object-bottom"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Info Overlay at the bottom */}
+                  <div className="relative z-20 p-4 bg-gradient-to-t from-white via-white/95 to-transparent pt-8 text-left border-t border-[#e5e5e5]">
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <span className="text-xs">{boxer.flag}</span>
+                      <h4 className="font-medium tracking-wide text-sm text-[#111111] uppercase leading-none">
+                        {boxer.name}
+                      </h4>
+                    </div>
+                    <span className="text-[10px] font-mono text-[#707072]">{boxer.record}</span>
                   </div>
                 </div>
-
-                {/* Info Overlay at the bottom */}
-                <div className="relative z-20 p-4 bg-gradient-to-t from-white via-white/95 to-transparent pt-8 text-left border-t border-ink/5">
-                  <div className="flex items-center gap-1.5 mb-0.5">
-                    <span className="text-xs">{boxer.flag}</span>
-                    <h4 className="font-display font-black tracking-wider text-sm text-ink uppercase leading-none">
-                      {boxer.name}
-                    </h4>
-                  </div>
-                  <span className="text-[10px] font-bold font-mono text-ink/50">{boxer.record}</span>
-                </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* 5. RANKING METHODOLOGY */}
-      <section className="bg-[#05070f] text-white py-16 border-t border-white/5 relative z-10">
+      <section className="bg-[#111111] text-white py-16 border-t border-[#e5e5e5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12">
           {/* Left Text */}
-          <div className="flex-1 text-left max-w-md">
-            <span className="text-xs font-black uppercase tracking-[0.25em] text-secondary mb-2.5 block font-display">
-              RANKING METHODOLOGY
+          <Reveal as="fade-up" className="flex-1 text-left max-w-md">
+            <span className="text-xs font-medium uppercase tracking-[0.2em] text-white/50 mb-2.5 block">
+              Ranking Methodology
             </span>
-            <p className="text-white/60 text-sm leading-relaxed font-sans">
+            <p className="text-white/60 text-sm leading-relaxed">
               Our rankings are determined by a comprehensive evaluation system that considers fight results, strength of opponents, activity level, and overall dominance in the ring.
             </p>
-          </div>
-          
+          </Reveal>
+
           {/* Right Cards / Indicators */}
-          <div className="flex-1 w-full grid grid-cols-2 min-[500px]:grid-cols-3 lg:grid-cols-5 gap-6">
-            {[
-              {
-                label: "FIGHT RESULTS",
-                value: "40%",
-                icon: (
-                  <svg className="w-8 h-8 text-secondary mb-3 mx-auto md:mx-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                  </svg>
-                )
-              },
-              {
-                label: "OPPONENT QUALITY",
-                value: "25%",
-                icon: (
-                  <svg className="w-8 h-8 text-secondary mb-3 mx-auto md:mx-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <circle cx="12" cy="12" r="6" />
-                    <circle cx="12" cy="12" r="2" />
-                  </svg>
-                )
-              },
-              {
-                label: "ACTIVITY LEVEL",
-                value: "15%",
-                icon: (
-                  <svg className="w-8 h-8 text-secondary mb-3 mx-auto md:mx-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2a10 10 0 0 1 7.54 16.59" />
-                    <path d="M19 12a7 7 0 0 0-7-7" />
-                    <path d="M12 9v3l2 2" />
-                    <circle cx="12" cy="12" r="1" />
-                  </svg>
-                )
-              },
-              {
-                label: "RECENCY",
-                value: "10%",
-                icon: (
-                  <svg className="w-8 h-8 text-secondary mb-3 mx-auto md:mx-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                    <line x1="16" y1="2" x2="16" y2="6" />
-                    <line x1="8" y1="2" x2="8" y2="6" />
-                    <line x1="3" y1="10" x2="21" y2="10" />
-                  </svg>
-                )
-              },
-              {
-                label: "TITLE STATUS",
-                value: "10%",
-                icon: (
-                  <svg className="w-8 h-8 text-secondary mb-3 mx-auto md:mx-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
-                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
-                    <path d="M4 22h16" />
-                    <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34" />
-                    <path d="M12 2a4 4 0 0 0-4 4v6h8V6a4 4 0 0 0-4-4z" />
-                  </svg>
-                )
-              }
-            ].map((m) => (
+          <Reveal as="fade-up" delay={100} className="flex-1 w-full grid grid-cols-2 min-[500px]:grid-cols-3 lg:grid-cols-5 gap-6">
+            {methodology.map((m) => (
               <div key={m.label} className="text-center md:text-left flex flex-col items-center md:items-start">
                 {m.icon}
-                <span className="text-3xl font-black text-secondary font-display block leading-none mb-1">{m.value}</span>
-                <span className="text-[10px] font-black uppercase text-white/50 tracking-wider font-display block">{m.label}</span>
+                <span className="text-2xl font-medium text-white block leading-none mb-1">{m.value}</span>
+                <span className="text-[10px] font-medium uppercase text-white/50 tracking-wider block">{m.label}</span>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* 6. NEWSLETTER / NEVER MISS A MOVE */}
-      <section className="bg-white text-ink py-16 border-t border-ink/5 relative z-10">
+      <section className="bg-white text-[#111111] py-16 border-t border-[#e5e5e5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-10">
           {/* Left Text info */}
-          <div className="flex-1 text-left max-w-lg">
-            <span className="text-xs font-black uppercase tracking-[0.25em] text-secondary mb-2 block font-display">
-              STAY UPDATED
+          <Reveal as="fade-up" className="flex-1 text-left max-w-lg">
+            <span className="text-xs font-medium uppercase tracking-[0.2em] text-[#707072] mb-2 block">
+              Stay Updated
             </span>
-            <h2 className="text-3xl sm:text-4xl font-black uppercase tracking-wide text-ink font-display leading-none mb-3">
-              NEVER MISS A MOVE
+            <h2 className="text-xl md:text-2xl font-medium uppercase tracking-wide text-crimson leading-none mb-3">
+              Never Miss a Move
             </h2>
-            <p className="text-ink/65 text-sm font-sans leading-relaxed">
+            <p className="text-[#707072] text-sm leading-relaxed">
               Get the latest rankings, fight news, and exclusive insights delivered to your inbox.
             </p>
-          </div>
+          </Reveal>
 
           {/* Right newsletter input */}
-          <div className="flex-1 w-full flex flex-col sm:flex-row items-center gap-6 justify-end">
+          <Reveal as="fade-up" delay={100} className="flex-1 w-full flex flex-col sm:flex-row items-center gap-6 justify-end">
             {subscribed ? (
-              <div className="p-4 bg-emerald-50 border border-emerald-500/20 text-emerald-800 text-sm font-semibold w-full max-w-sm text-center">
+              <div className="flex items-center justify-center gap-2 rounded-[24px] border border-[#e5e5e5] bg-[#f5f5f5] px-4 py-3 text-sm text-[#111111] w-full max-w-sm">
+                <Check className="h-4 w-4" />
                 Subscribed successfully!
               </div>
             ) : (
@@ -466,17 +473,17 @@ export default function RankingsPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 border border-ink/20 focus:outline-none focus:border-accent font-sans text-sm text-ink placeholder-ink/40 bg-white"
+                  className="flex-1 px-4 py-3 rounded-[24px] border border-[#e5e5e5] focus:outline-none focus:border-[#707072] text-sm text-[#111111] placeholder-[#9e9ea0] bg-white transition-colors"
                 />
                 <button
                   type="submit"
-                  className="bg-accent hover:bg-accent-dark text-white font-black tracking-widest text-xs uppercase px-6 py-3.5 transition-colors duration-300 font-display cursor-pointer"
+                  className="rounded-full bg-[#111111] hover:bg-[#1a1a1a] text-white font-medium tracking-wide text-xs uppercase px-6 py-3 transition-colors cursor-pointer"
                 >
-                  SUBSCRIBE
+                  Subscribe
                 </button>
               </form>
             )}
-          </div>
+          </Reveal>
         </div>
       </section>
 

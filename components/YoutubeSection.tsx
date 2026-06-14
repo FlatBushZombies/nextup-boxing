@@ -1,7 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Image from "next/image"
 import { AlertCircle, ArrowUpRight, Play } from "lucide-react"
+import { Reveal } from "@/components/Reveal"
 
 type YoutubeFeedVideo = {
   id: string
@@ -48,47 +50,76 @@ function formatPublishedDate(value: string) {
   }).format(publishedDate)
 }
 
-// Featured Video Player - Main large video on the left
+// Featured Video Player - click-to-load facade, iframe only injected after play is pressed
 function FeaturedVideoPlayer({
   activeVideo,
   activeIndex,
   playlistId,
+  isPlaying,
+  onPlay,
 }: {
   activeVideo: YoutubeFeedVideo | null
   activeIndex: number
   playlistId: string | null
+  isPlaying: boolean
+  onPlay: () => void
 }) {
   const embedUrl = activeVideo
     ? playlistId
-      ? `https://www.youtube-nocookie.com/embed/videoseries?list=${playlistId}&index=${Math.max(activeIndex, 0)}&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1`
-      : `https://www.youtube-nocookie.com/embed/${activeVideo.id}?rel=0&modestbranding=1&iv_load_policy=3&playsinline=1`
+      ? `https://www.youtube-nocookie.com/embed/videoseries?list=${playlistId}&index=${Math.max(activeIndex, 0)}&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&autoplay=1`
+      : `https://www.youtube-nocookie.com/embed/${activeVideo.id}?rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&autoplay=1`
     : playlistId
-      ? `https://www.youtube-nocookie.com/embed/videoseries?list=${playlistId}&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1`
+      ? `https://www.youtube-nocookie.com/embed/videoseries?list=${playlistId}&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&autoplay=1`
       : null
 
   return (
-    <div className="relative overflow-hidden rounded-lg border border-white/10 bg-[#0a0e1a]">
+    <div className="relative overflow-hidden border border-[#e5e5e5] bg-[#111111]">
       {/* Video container */}
-      <div className="relative aspect-video w-full overflow-hidden bg-[#0a0e1a]">
+      <div className="relative aspect-video w-full overflow-hidden bg-[#111111]">
         {embedUrl ? (
-          <iframe
-            loading="lazy"
-            src={embedUrl}
-            title={activeVideo?.title ?? "Channel uploads"}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="h-full w-full border-0"
-          />
+          isPlaying ? (
+            <iframe
+              loading="lazy"
+              src={embedUrl}
+              title={activeVideo?.title ?? "Channel uploads"}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="h-full w-full border-0"
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={onPlay}
+              className="group relative block h-full w-full cursor-pointer"
+              aria-label={`Play ${activeVideo?.title ?? "video"}`}
+            >
+              {activeVideo ? (
+                <Image
+                  src={ytThumb(activeVideo.id, "maxresdefault")}
+                  alt={activeVideo.title}
+                  fill
+                  sizes="(min-width: 1024px) 60vw, 100vw"
+                  className="object-cover"
+                />
+              ) : null}
+              <div className="absolute inset-0 bg-[#111111]/30 transition-colors duration-300 group-hover:bg-[#111111]/10" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:scale-105">
+                  <Play className="ml-1 h-6 w-6 fill-[#111111] text-[#111111]" />
+                </div>
+              </div>
+            </button>
+          )
         ) : (
-          <div className="flex h-full items-center justify-center px-6 text-center text-white/55">
+          <div className="flex h-full items-center justify-center px-6 text-center text-sm text-white/60">
             Channel videos will appear here once the YouTube feed is available.
           </div>
         )}
       </div>
 
-      {/* Red accent title bar - matches big3.com style */}
-      <div className="bg-[#c5203a] px-5 py-4">
-        <h3 className="truncate text-sm font-bold uppercase tracking-wider text-white md:text-base lg:text-lg">
+      {/* Title bar */}
+      <div className="border-t border-[#e5e5e5]/10 bg-[#111111] px-5 py-4">
+        <h3 className="truncate text-sm font-medium uppercase tracking-wide text-white md:text-base">
           {activeVideo?.title ?? "Featured Content"}
         </h3>
       </div>
@@ -99,73 +130,50 @@ function FeaturedVideoPlayer({
 // Video Thumbnail Card for the sidebar
 function VideoThumbnailCard({
   video,
-  index,
   isActive,
   onClick,
 }: {
   video: YoutubeFeedVideo
-  index: number
   isActive: boolean
   onClick: () => void
 }) {
-  const [hovered, setHovered] = useState(false)
-
   return (
     <button
       onClick={onClick}
-      className={`group flex w-full cursor-pointer items-start gap-3 rounded-lg p-2 text-left transition-all duration-300 ${
-        isActive 
-          ? "bg-[#c5203a]/10 ring-1 ring-[#c5203a]/30" 
-          : "hover:bg-white/5"
+      className={`group flex w-full cursor-pointer items-start gap-3 p-2 text-left transition-colors duration-300 ${
+        isActive ? "bg-[#f5f5f5]" : "hover:bg-[#f5f5f5]"
       }`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
     >
       {/* Thumbnail */}
-      <div
-        className="relative flex-shrink-0 overflow-hidden rounded-md bg-[#0a0e1a]"
-        style={{ width: "120px", aspectRatio: "16/9" }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+      <div className="relative h-[67px] w-[120px] flex-shrink-0 overflow-hidden bg-[#111111]">
+        <Image
           src={ytThumb(video.id, "hqdefault")}
           alt={video.title}
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-        />
-        
-        {/* Overlay */}
-        <div
-          className={`absolute inset-0 transition-all duration-300 ${
-            isActive || hovered ? "bg-transparent" : "bg-[#0a0e1a]/30"
-          }`}
+          fill
+          sizes="120px"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
 
         {/* Play button overlay */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div
-            className={`flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300 ${
-              isActive || hovered
-                ? "scale-100 bg-[#c5203a] opacity-100"
-                : "scale-90 bg-white/20 opacity-70"
+            className={`flex h-7 w-7 items-center justify-center rounded-full transition-all duration-300 ${
+              isActive ? "bg-white" : "bg-white/80 group-hover:bg-white"
             }`}
           >
-            <Play className="ml-0.5 h-3 w-3 text-white" fill="white" />
+            <Play className="ml-0.5 h-3 w-3 fill-[#111111] text-[#111111]" />
           </div>
         </div>
       </div>
 
       {/* Video info */}
       <div className="min-w-0 flex-1">
-        <h4
-          className={`mb-1 line-clamp-2 text-sm font-semibold leading-tight transition-colors duration-300 ${
-            isActive ? "text-white" : "text-white/80 group-hover:text-white"
-          }`}
-        >
+        <h4 className={`mb-1 line-clamp-2 text-sm font-medium leading-tight transition-colors duration-300 ${
+          isActive ? "text-[#111111]" : "text-[#707072] group-hover:text-[#111111]"
+        }`}>
           {video.title}
         </h4>
-        <p className="text-xs text-white/40">
+        <p className="text-xs text-[#9e9ea0]">
           {formatPublishedDate(video.publishedAt)}
         </p>
       </div>
@@ -180,6 +188,7 @@ export function YoutubeSection() {
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null)
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading")
   const [errorMessage, setErrorMessage] = useState("")
+  const [isPlaying, setIsPlaying] = useState(false)
 
   useEffect(() => {
     let isMounted = true
@@ -234,126 +243,98 @@ export function YoutubeSection() {
   const activeVideo = videos.find((video) => video.id === activeVideoId) ?? videos[0] ?? null
   const activeIndex = activeVideo ? videos.findIndex((video) => video.id === activeVideo.id) : 0
 
+  const selectVideo = (id: string) => {
+    setActiveVideoId(id)
+    setIsPlaying(false)
+  }
+
   return (
     <section
       id="youtube"
-      className="relative overflow-hidden py-16 sm:py-24 scroll-mt-28"
-      style={{ background: "linear-gradient(180deg, #0a1628 0%, #0d1e3a 50%, #0a1628 100%)" }}
+      className="relative overflow-hidden bg-white py-16 sm:py-24 scroll-mt-28 border-t border-[#e5e5e5]"
     >
-      {/* Background grid pattern */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-5"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
-        }}
-      />
-
-      {/* Gradient orbs */}
-      <div
-        className="pointer-events-none absolute -left-40 top-1/4 h-80 w-80 rounded-full opacity-20"
-        style={{
-          background: "radial-gradient(circle, rgba(197,32,58,0.4) 0%, transparent 70%)",
-          filter: "blur(80px)",
-        }}
-      />
-      <div
-        className="pointer-events-none absolute -right-40 bottom-1/4 h-80 w-80 rounded-full opacity-20"
-        style={{
-          background: "radial-gradient(circle, rgba(30,45,94,0.6) 0%, transparent 70%)",
-          filter: "blur(80px)",
-        }}
-      />
-
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-          <div>
-            <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-widest text-[#c5203a]">
-              On YouTube
-            </span>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-              Latest Videos
-            </h2>
-          </div>
-        </div>
+        <Reveal as="fade-up" className="mb-10">
+          <span className="mb-2 block text-xs font-medium uppercase tracking-[0.2em] text-[#707072]">
+            On YouTube
+          </span>
+          <h2 className="text-xl md:text-2xl font-medium uppercase tracking-wide text-crimson">
+            Latest Videos
+          </h2>
+        </Reveal>
 
-        {/* Main Content Grid - Big3.com style layout */}
+        {/* Main Content Grid */}
         <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
           {/* Left: Featured Video */}
-          <div className="flex flex-col">
+          <Reveal as="fade-up" delay={60} className="flex flex-col">
             <FeaturedVideoPlayer
               activeVideo={activeVideo}
               activeIndex={activeIndex}
               playlistId={playlistId}
+              isPlaying={isPlaying}
+              onPlay={() => setIsPlaying(true)}
             />
 
             {status === "error" && errorMessage ? (
-              <div className="mt-4 flex items-center gap-2 rounded-lg border border-[#c5203a]/20 bg-[#c5203a]/10 px-4 py-3 text-sm text-white/70">
-                <AlertCircle className="h-4 w-4 flex-shrink-0 text-[#c5203a]" />
+              <div className="mt-4 flex items-center gap-2 border border-[#e5e5e5] bg-[#f5f5f5] px-4 py-3 text-sm text-[#707072]">
+                <AlertCircle className="h-4 w-4 flex-shrink-0 text-[#111111]" />
                 {errorMessage}
               </div>
             ) : null}
-          </div>
+          </Reveal>
 
           {/* Right: Video Playlist Sidebar */}
-          <div className="flex flex-col rounded-lg bg-[#0a0e1a]/80 p-4 backdrop-blur-sm">
+          <Reveal as="fade-up" delay={120} className="flex flex-col border border-[#e5e5e5] p-4">
             {/* Sidebar Header */}
-            <div className="mb-4 flex items-center gap-2 border-b border-white/10 pb-4">
-              <div className="flex h-6 w-6 items-center justify-center rounded bg-[#c5203a]">
-                <Play className="h-3 w-3 text-white" fill="white" />
+            <div className="mb-4 flex items-center gap-2 border-b border-[#e5e5e5] pb-4">
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#111111]">
+                <Play className="h-3 w-3 fill-white text-white" />
               </div>
-              <span className="text-sm font-semibold uppercase tracking-wider text-white/80">
+              <span className="text-xs font-medium uppercase tracking-wide text-[#111111]">
                 More Videos
               </span>
             </div>
 
             {/* Video List */}
-            <div
-              className="flex flex-1 flex-col gap-2 overflow-y-auto"
-              style={{ maxHeight: "400px", scrollbarWidth: "thin", scrollbarColor: "#c5203a transparent" }}
-            >
+            <div className="flex flex-1 flex-col gap-2 overflow-y-auto" style={{ maxHeight: "400px" }}>
               {status === "loading" ? (
                 Array.from({ length: 4 }).map((_, index) => (
-                  <div
-                    key={index}
-                    className="flex gap-3 rounded-lg bg-white/5 p-2"
-                  >
-                    <div className="h-[67px] w-[120px] rounded-md bg-white/10" />
+                  <div key={index} className="flex gap-3 p-2">
+                    <div className="h-[67px] w-[120px] bg-[#f5f5f5]" />
                     <div className="flex-1 space-y-2 pt-1">
-                      <div className="h-4 w-full rounded bg-white/10" />
-                      <div className="h-3 w-20 rounded bg-white/5" />
+                      <div className="h-4 w-full bg-[#f5f5f5]" />
+                      <div className="h-3 w-20 bg-[#f5f5f5]" />
                     </div>
                   </div>
                 ))
               ) : videos.length > 0 ? (
-                videos.map((video, index) => (
+                videos.map((video) => (
                   <VideoThumbnailCard
                     key={video.id}
                     video={video}
-                    index={index}
                     isActive={video.id === activeVideo?.id}
-                    onClick={() => setActiveVideoId(video.id)}
+                    onClick={() => selectVideo(video.id)}
                   />
                 ))
               ) : (
-                <div className="rounded-lg bg-white/5 px-4 py-6 text-sm text-white/50">
+                <div className="bg-[#f5f5f5] px-4 py-6 text-sm text-[#707072]">
                   Latest uploads will appear here from the connected YouTube channel.
                 </div>
               )}
             </div>
 
-            {/* Watch More Button - Big3.com style */}
+            {/* Watch More Button */}
             <a
               href={channelUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-4 flex items-center justify-center gap-2 rounded-lg bg-[#1e2d5e] py-3 text-sm font-bold uppercase tracking-wider text-white transition-all duration-300 hover:bg-[#2a3f7a]"
+              className="group mt-4 flex items-center justify-center gap-2 rounded-full bg-[#111111] py-3 text-xs font-medium uppercase tracking-wide text-white transition-colors hover:bg-[#1a1a1a]"
             >
               Watch More on YouTube
               <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

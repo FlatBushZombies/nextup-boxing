@@ -15,6 +15,7 @@ const navLinks = [
   { label: "Boxers", href: "/boxers" },
   { label: "Events", href: "/events" },
   { label: "Rankings", href: "/rankings" },
+  { label: "Champions", href: "/champions" },
   { label: "Stream", href: "/#youtube" },
 ]
 
@@ -118,11 +119,11 @@ export function Navbar() {
   const isSolid = scrolled || !isHome
 
   const shellClass = isSolid
-    ? "navbar-editorial text-white shadow-lg"
-    : "bg-transparent text-white"
+    ? "bg-white border-b border-[#e5e5e5]"
+    : "bg-transparent border-b border-transparent"
 
   const signInClass =
-    "editorial-button items-center gap-2 skew-x-[-8deg] bg-white px-5 py-2.5 text-black shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-secondary hover:text-ink"
+    "editorial-button inline-flex items-center gap-2 skew-x-[-8deg] bg-[#111111] px-5 py-2.5 text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1a1a1a]"
 
   const toggleMobileMenu = () => {
     setMobileOpen((open) => !open)
@@ -136,7 +137,7 @@ export function Navbar() {
       {/* Top Accent Line */}
       <div
         className={`h-[3px] transition-all duration-500 ${
-          isSolid ? "bg-[#0d1124]" : "bg-transparent"
+          isSolid ? "bg-crimson" : "bg-transparent"
         }`}
       />
 
@@ -169,10 +170,11 @@ export function Navbar() {
                     ? "w-[80px] sm:w-[90px]"
                     : "w-[100px] sm:w-[120px]"
                 }`}
-                style={{
-                  filter:
-                    "brightness(1) drop-shadow(0 4px 6px rgba(0,0,0,0.3))",
-                }}
+                style={
+                  isSolid
+                    ? undefined
+                    : { filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.3))" }
+                }
               />
             </Link>
           </motion.div>
@@ -189,26 +191,27 @@ export function Navbar() {
           >
             {navLinks.map((link) => {
               const linkHash = getSectionFromHref(link.href)
+              const isActive = activeSection === linkHash
 
               return (
                 <Link
                   key={link.label}
                   href={link.href}
-                  aria-current={
-                    activeSection === linkHash ? "page" : undefined
-                  }
+                  aria-current={isActive ? "page" : undefined}
                   onClick={() => {
                     setActiveSection(linkHash)
                   }}
-                  className="group relative px-2 py-2.5 text-[0.75rem] font-semibold uppercase tracking-[0.2em] transition-all duration-300 text-white drop-shadow-md hover:text-white/80 pointer-events-auto font-display"
+                  className={`group relative px-2 py-2.5 text-[0.75rem] font-semibold uppercase tracking-[0.2em] transition-all duration-300 pointer-events-auto font-display ${
+                    isSolid
+                      ? "text-[#111111] hover:text-[#707072]"
+                      : "text-white drop-shadow-md hover:text-white/80"
+                  }`}
                 >
                   {link.label}
 
                   <span
-                    className={`absolute inset-x-0 bottom-0 h-[2px] origin-left bg-accent transition-transform duration-300 ${
-                      activeSection === linkHash
-                        ? "scale-x-100"
-                        : "scale-x-0 group-hover:scale-x-100"
+                    className={`absolute inset-x-0 bottom-0 h-[2px] origin-left bg-crimson transition-transform duration-300 ${
+                      isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                     }`}
                   />
                 </Link>
@@ -232,8 +235,8 @@ export function Navbar() {
               className={`${signInClass} hidden xl:inline-flex mr-4 cursor-pointer`}
             >
               <span className="skew-x-[8deg] flex items-center gap-2 font-display text-xs font-bold uppercase tracking-wider">
-                free livestream access
-                <TiLocationArrow size={24} />
+                Free Livestream Access
+                <TiLocationArrow size={18} />
               </span>
             </button>
 
@@ -249,14 +252,14 @@ export function Navbar() {
                   toggleMobileMenu()
                 }
               }}
-              className="rounded-full p-2 text-white/90 transition-colors duration-300 hover:text-white xl:hidden drop-shadow-md"
+              className={`rounded-full p-2 transition-colors duration-300 xl:hidden ${
+                isSolid
+                  ? "text-[#111111] hover:text-[#707072]"
+                  : "text-white/90 hover:text-white drop-shadow-md"
+              }`}
               aria-label="Toggle menu"
             >
-              {mobileOpen ? (
-                <X className="h-7 w-7" />
-              ) : (
-                <Menu className="h-7 w-7" />
-              )}
+              {mobileOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
             </button>
           </motion.div>
         </motion.div>
@@ -270,11 +273,12 @@ export function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="overflow-hidden border-t border-white/10 bg-[#0d1124]/98 xl:hidden backdrop-blur-xl"
+            className="overflow-hidden border-t border-[#e5e5e5] bg-white xl:hidden"
           >
             <div className="space-y-1 px-4 py-4">
               {navLinks.map((link) => {
                 const linkHash = getSectionFromHref(link.href)
+                const isActive = activeSection === linkHash
 
                 return (
                   <Link
@@ -284,13 +288,11 @@ export function Navbar() {
                       setMobileOpen(false)
                       setActiveSection(linkHash)
                     }}
-                    aria-current={
-                      activeSection === linkHash ? "page" : undefined
-                    }
-                    className={`block rounded-none px-4 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.2em] transition-colors duration-300 font-display ${
-                      activeSection === linkHash
-                        ? "bg-white/10 text-white"
-                        : "text-white/70 hover:bg-white/5 hover:text-white"
+                    aria-current={isActive ? "page" : undefined}
+                    className={`block border-l-2 px-4 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.2em] transition-colors duration-300 font-display ${
+                      isActive
+                        ? "border-crimson bg-[#f5f5f5] text-[#111111]"
+                        : "border-transparent text-[#707072] hover:bg-[#f5f5f5] hover:text-[#111111]"
                     }`}
                   >
                     {link.label}
@@ -308,7 +310,7 @@ export function Navbar() {
               >
                 <span className="skew-x-[8deg] flex items-center gap-2 font-display text-xs font-bold uppercase tracking-wider">
                   <User className="h-4 w-4" />
-                  free livestream access
+                  Free Livestream Access
                 </span>
               </button>
             </div>
@@ -317,9 +319,9 @@ export function Navbar() {
       </AnimatePresence>
 
       {/* Bottom Progress Line */}
-      <div className="h-px bg-white/5">
+      <div className="h-px bg-[#e5e5e5]">
         <motion.div
-          className="h-full origin-left bg-gradient-to-r from-primary via-accent to-secondary"
+          className="h-full origin-left bg-gradient-to-r from-crimson via-gold to-[#111111]"
           animate={{ scaleX: Math.max(scrollProgress, 0.02) }}
           transition={{ duration: 0.15, ease: "easeOut" }}
         />

@@ -1,53 +1,21 @@
 import type { Metadata, Viewport } from 'next'
-import { Geist_Mono, Bebas_Neue, Barlow_Condensed } from 'next/font/google'
-import localFont from 'next/font/local'
+import { Inter, Bebas_Neue } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { AuthProvider } from '@/lib/auth-context'
 import './globals.css'
 
-const helveticaNow = localFont({
-  src: [
-    {
-      path: '../public/fonts/helveticanowtext-bold-demo.ttf',
-      weight: '700',
-      style: 'normal',
-    },
-    {
-      path: '../public/fonts/helveticanowtext-bolditalic-demo.ttf',
-      weight: '700',
-      style: 'italic',
-    },
-    {
-      path: '../public/fonts/helveticanowtext-black-demo.ttf',
-      weight: '900',
-      style: 'normal',
-    },
-    {
-      path: '../public/fonts/helveticanowtext-blackitalic-demo.ttf',
-      weight: '900',
-      style: 'italic',
-    },
-  ],
-  variable: "--font-helvetica-now",
-  display: "swap",
-  fallback: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
-})
-
-const geistMono = Geist_Mono({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-geist-mono',
+  weight: ['400', '500'],
+  variable: '--font-ui',
+  display: 'swap',
 })
 
 const bebasNeue = Bebas_Neue({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-bebas-neue',
-})
-
-const barlowCondensed = Barlow_Condensed({
-  weight: ['400', '500', '600', '700', '800', '900'],
-  subsets: ['latin'],
-  variable: '--font-barlow-condensed',
+  display: 'swap',
 })
 
 
@@ -76,7 +44,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#1e3a5f',
+  themeColor: '#111111',
   width: 'device-width',
   initialScale: 1,
 }
@@ -89,7 +57,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${helveticaNow.variable} ${geistMono.variable} ${bebasNeue.variable} ${barlowCondensed.variable} bg-white`}
+      className={`${inter.variable} ${bebasNeue.variable} bg-white`}
     >
       <body className="overflow-x-hidden font-sans antialiased">
         <AuthProvider>{children}</AuthProvider>

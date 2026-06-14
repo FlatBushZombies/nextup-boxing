@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 const SOCIAL_LINKS = [
   {
@@ -33,78 +34,94 @@ const SOCIAL_LINKS = [
   },
 ]
 
+const EXPLORE_LINKS = [
+  { label: "Boxers", href: "/boxers" },
+  { label: "Events", href: "/events" },
+  { label: "Rankings", href: "/rankings" },
+  { label: "Champions", href: "/champions" },
+  { label: "Stream", href: "/#youtube" },
+]
+
 export function Footer() {
   return (
-    <>
-
-
-      <footer id="about" className="nub-footer">
-        <div className="nub-top-border" aria-hidden="true" />
-
-        <div className="nub-inner">
-          <div className="nub-grid">
-            <div className="nub-brand">
-              <div className="nub-bracket">
-                <Image
-                  src="/logo-footer.png"
-                  alt="NextUp Boxing"
-                  width={140}
-                  height={56}
-                  className="h-auto w-28 sm:w-36"
-                />
-              </div>
-              <p className="nub-tagline">
-                Premium boxing events, live fight nights, and fighter stories.
-              </p>
-            </div>
-
-            <div className="nub-social-col">
-              <div className="nub-icon-row">
-                {SOCIAL_LINKS.map(({ label, href, icon }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="nub-icon-btn"
-                  >
-                    <span className="nub-icon-cell">{icon}</span>
-                    <span className="nub-icon-label">{label}</span>
-                  </a>
-                ))}
-              </div>
-
-              <a
-                href="https://www.simpletix.com/e/strong-island-fight-night-11-tickets-254611"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="nub-cta"
-              >
-                <span>Buy Tickets — Fight Night 11</span>
-              </a>
+    <footer id="about" className="footer-nike">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-[2fr_1fr_1fr] md:gap-16">
+          {/* Brand */}
+          <div>
+            <Image
+              src="/logo-footer.png"
+              alt="NextUp Boxing"
+              width={140}
+              height={56}
+              className="h-auto w-28 sm:w-32"
+            />
+            <p className="mt-4 max-w-sm text-sm font-normal leading-relaxed text-white/60">
+              Premium boxing events, live fight nights, and fighter stories.
+            </p>
+            <div className="mt-6 flex items-center gap-4">
+              {SOCIAL_LINKS.map(({ label, href, icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="text-white transition-colors hover:text-white/60"
+                >
+                  <span className="block h-5 w-5">{icon}</span>
+                </a>
+              ))}
             </div>
           </div>
 
-          <div className="nub-hud">
-            <div className="nub-hud-left">
-              <span className="nub-hud-gem" aria-hidden="true">◆</span>
-              <span className="nub-copyright">
-                © 2026 NextUp Boxing League. All rights reserved.
-              </span>
-              <div className="nub-hud-sanc">
-                <Image
-                  src="/usa-boxing-metro-logo.png"
-                  alt="USA Boxing Metro"
-                  width={72}
-                  height={28}
-                  className="h-auto opacity-70"
-                />
-              </div>
-            </div>
+          {/* Explore */}
+          <div>
+            <h3 className="text-base font-medium text-white">Explore</h3>
+            <ul className="mt-4 space-y-3">
+              {EXPLORE_LINKS.map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href} className="text-base font-normal text-white/60 transition-colors hover:text-white">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Tickets */}
+          <div>
+            <h3 className="text-base font-medium text-white">Fight Night 11</h3>
+            <p className="mt-4 text-base font-normal text-white/60">
+              Get your tickets for the next event.
+            </p>
+            <a
+              href="https://www.simpletix.com/e/strong-island-fight-night-11-tickets-254611"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex items-center rounded-full bg-gold px-6 py-3 text-xs font-medium uppercase tracking-wide text-[#111111] transition-colors hover:bg-[var(--gold-light)]"
+            >
+              Buy Tickets
+            </a>
           </div>
         </div>
-      </footer>
-    </>
+
+        {/* Bottom bar */}
+        <div className="mt-12 flex flex-col-reverse items-center justify-between gap-6 border-t border-white/10 pt-6 sm:flex-row">
+          <p className="text-xs font-normal text-white/50">
+            © 2026 NextUp Boxing League. All rights reserved.
+          </p>
+          <div className="rounded-full  px-3 py-1.5">
+            <Image
+              src="/usa-boxing-metro-logo.png"
+              alt="USA Boxing Metro"
+              width={72}
+              height={28}
+              className="h-auto opacity-80"
+            />
+          </div>
+        </div>
+      </div>
+    </footer>
   )
 }

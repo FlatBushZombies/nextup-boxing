@@ -1,10 +1,10 @@
 "use client"
 
-import { useRef, useEffect, useState } from "react"
+import { useState } from "react"
 import Image from "next/image"
-import Link from "next/link"
 import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
+import { Reveal } from "@/components/Reveal"
 import { ChevronDown, Search, X } from "lucide-react"
 
 // Boxers data - World Champions
@@ -136,10 +136,6 @@ const weightClasses = [
 const sortOptions = ["A-Z", "Z-A", "Record"]
 
 export default function BoxersPage() {
-  const championsRef = useRef<HTMLDivElement>(null)
-  const allBoxersRef = useRef<HTMLDivElement>(null)
-  const bannerRef = useRef<HTMLDivElement>(null)
-  
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedWeight, setSelectedWeight] = useState("All")
   const [sortBy, setSortBy] = useState("A-Z")
@@ -149,7 +145,7 @@ export default function BoxersPage() {
   // Filter and sort boxers
   const filteredBoxers = allBoxers
     .filter((boxer) => {
-      const matchesSearch = 
+      const matchesSearch =
         boxer.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         boxer.lastName.toLowerCase().includes(searchQuery.toLowerCase())
       const matchesWeight = selectedWeight === "All" || boxer.weightClass === selectedWeight
@@ -162,117 +158,12 @@ export default function BoxersPage() {
       return 0
     })
 
-  useEffect(() => {
-    let ctx: any = null
-    let cancelled = false
-
-    async function initGSAP() {
-      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
-        import("gsap"),
-        import("gsap/ScrollTrigger"),
-      ])
-
-      if (cancelled) {
-        return
-      }
-
-      gsap.registerPlugin(ScrollTrigger)
-
-      ctx = gsap.context(() => {
-        // Banner parallax
-        const bannerImg = bannerRef.current?.querySelector<HTMLImageElement>("img")
-        if (bannerImg) {
-          gsap.to(bannerImg, {
-            y: 100,
-            ease: "none",
-            scrollTrigger: {
-              trigger: bannerRef.current,
-              start: "top top",
-              end: "bottom top",
-              scrub: true,
-            },
-          })
-        }
-
-        // Champions cards stagger reveal
-        const championCards = championsRef.current?.querySelectorAll(".champion-card")
-        if (championCards) {
-          gsap.fromTo(
-            championCards,
-            { opacity: 0, y: 60, scale: 0.95 },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 0.8,
-              stagger: 0.1,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: championsRef.current,
-                start: "top 75%",
-                toggleActions: "play none none reverse",
-              },
-            }
-          )
-        }
-
-        // All boxers cards stagger
-        const boxerCards = allBoxersRef.current?.querySelectorAll(".boxer-card")
-        if (boxerCards) {
-          gsap.fromTo(
-            boxerCards,
-            { opacity: 0, y: 40 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              stagger: 0.05,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: allBoxersRef.current,
-                start: "top 80%",
-                toggleActions: "play none none reverse",
-              },
-            }
-          )
-        }
-
-        // Vertical title animation
-        gsap.fromTo(
-          ".vertical-title",
-          { opacity: 0, x: -30 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: ".vertical-title",
-              start: "top 80%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        )
-      })
-    }
-
-    initGSAP()
-
-    return () => {
-      cancelled = true
-      ctx?.revert?.()
-    }
-  }, [])
-
   return (
     <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-white">
       <Navbar />
 
-      {/* Banner Section - Matchroom Style */}
-      <section 
-        ref={bannerRef}
-        className="relative h-[400px] md:h-[500px] overflow-hidden flex items-center bg-[#05070f]"
-      >
+      {/* Banner Section */}
+      <section className="relative h-[400px] md:h-[500px] overflow-hidden flex items-center bg-[#111111]">
         <div className="absolute inset-0">
           <Image
             src="/boxers/banner-bg.webp"
@@ -280,48 +171,38 @@ export default function BoxersPage() {
             fill
             className="object-cover opacity-50"
             priority
+            sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#05070f]/95 via-[#05070f]/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/60 to-transparent" />
         </div>
-        
+
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6 lg:px-8">
-          <h1 
-            className="text-5xl md:text-7xl lg:text-8xl font-black uppercase text-white leading-[0.95] font-display"
-          >
+          <h1 className="text-6xl md:text-7xl lg:text-[76px] uppercase text-white leading-[0.95] font-display">
             NEXT UP BOXING LEAGUE<br />CURRENT CHAMPIONS
           </h1>
         </div>
-
-        {/* Diagonal accent line */}
-        <div className="absolute right-0 top-0 bottom-0 w-1 bg-gradient-to-b from-accent via-accent to-transparent" />
       </section>
 
       {/* World Champions Section */}
       <section className="world-champions relative">
-        {/* Background effects */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px]" />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[120px]" />
-        </div>
-
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
             {/* Vertical Title */}
             <div className="vertical-title lg:w-20 flex-shrink-0">
               <div className="vertical-title-container">
-                <h2 
-                  className="text-5xl lg:text-7xl font-black uppercase text-outline-white-heavy font-display"
-                >
+                <h2 className="text-5xl lg:text-7xl uppercase text-outline-white-heavy font-display">
                   NEXT UP BOXING LEAGUE<br />CHAMPIONS
                 </h2>
               </div>
             </div>
 
             {/* Champions Grid */}
-            <div ref={championsRef} className="flex-1">
+            <div className="flex-1">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {worldChampions.map((boxer) => (
-                  <ChampionCard key={boxer.id} boxer={boxer} />
+                {worldChampions.map((boxer, index) => (
+                  <Reveal key={boxer.id} as="fade-up" delay={index * 60}>
+                    <ChampionCard boxer={boxer} />
+                  </Reveal>
                 ))}
               </div>
             </div>
@@ -334,29 +215,27 @@ export default function BoxersPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Header with filters */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
-            <h2 
-              className="text-4xl md:text-5xl font-black uppercase text-ink font-display"
-            >
-              Rising Stars/Contenders
+            <h2 className="text-xl md:text-2xl font-medium uppercase tracking-wide text-gold">
+              Rising Stars / Contenders
             </h2>
 
             <div className="flex flex-wrap items-center gap-3">
               {/* Search */}
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9e9ea0]" />
                 <input
                   type="text"
                   placeholder="Search..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2.5 bg-white border border-gray-200 text-sm font-medium text-[#0d1124] placeholder-gray-400 focus:outline-none focus:border-[#c5203a] transition-colors w-40"
+                  className="pl-10 pr-4 py-2.5 bg-white border border-[#e5e5e5] text-sm font-normal text-[#111111] placeholder-[#9e9ea0] focus:outline-none focus:border-[#707072] transition-colors w-40 rounded-[24px]"
                 />
                 {searchQuery && (
-                  <button 
+                  <button
                     onClick={() => setSearchQuery("")}
-                    className="absolute right-2 top-1/2 -translate-y-1/2"
+                    className="absolute right-3 top-1/2 -translate-y-1/2"
                   >
-                    <X className="w-4 h-4 text-gray-400 hover:text-gray-600" />
+                    <X className="w-4 h-4 text-[#9e9ea0] hover:text-[#111111]" />
                   </button>
                 )}
               </div>
@@ -368,13 +247,13 @@ export default function BoxersPage() {
                     setShowWeightDropdown(!showWeightDropdown)
                     setShowSortDropdown(false)
                   }}
-                  className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 text-sm font-bold uppercase tracking-wider text-[#0d1124] hover:border-gray-300 transition-colors"
+                  className="flex items-center gap-2 px-4 py-2.5 bg-white border border-[#e5e5e5] text-sm font-medium uppercase tracking-wide text-[#111111] hover:border-[#707072] transition-colors rounded-full"
                 >
                   {selectedWeight === "All" ? "Weight" : selectedWeight}
                   <ChevronDown className={`w-4 h-4 transition-transform ${showWeightDropdown ? "rotate-180" : ""}`} />
                 </button>
                 {showWeightDropdown && (
-                  <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 shadow-lg z-50 max-h-64 overflow-y-auto">
+                  <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-[#e5e5e5] z-50 max-h-64 overflow-y-auto">
                     {weightClasses.map((weight) => (
                       <button
                         key={weight}
@@ -382,8 +261,8 @@ export default function BoxersPage() {
                           setSelectedWeight(weight)
                           setShowWeightDropdown(false)
                         }}
-                        className={`w-full text-left px-4 py-2 text-sm font-medium hover:bg-gray-50 transition-colors ${
-                          selectedWeight === weight ? "bg-[#c5203a] text-white" : "text-[#0d1124]"
+                        className={`w-full text-left px-4 py-2 text-sm font-normal transition-colors ${
+                          selectedWeight === weight ? "bg-[#111111] text-white" : "text-[#111111] hover:bg-[#f5f5f5]"
                         }`}
                       >
                         {weight}
@@ -400,13 +279,13 @@ export default function BoxersPage() {
                     setShowSortDropdown(!showSortDropdown)
                     setShowWeightDropdown(false)
                   }}
-                  className="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-200 text-sm font-bold uppercase tracking-wider text-[#0d1124] hover:border-gray-300 transition-colors"
+                  className="flex items-center gap-2 px-4 py-2.5 bg-white border border-[#e5e5e5] text-sm font-medium uppercase tracking-wide text-[#111111] hover:border-[#707072] transition-colors rounded-full"
                 >
                   Sort
                   <ChevronDown className={`w-4 h-4 transition-transform ${showSortDropdown ? "rotate-180" : ""}`} />
                 </button>
                 {showSortDropdown && (
-                  <div className="absolute top-full right-0 mt-1 w-32 bg-white border border-gray-200 shadow-lg z-50">
+                  <div className="absolute top-full right-0 mt-1 w-32 bg-white border border-[#e5e5e5] z-50">
                     {sortOptions.map((option) => (
                       <button
                         key={option}
@@ -414,8 +293,8 @@ export default function BoxersPage() {
                           setSortBy(option)
                           setShowSortDropdown(false)
                         }}
-                        className={`w-full text-left px-4 py-2 text-sm font-medium hover:bg-gray-50 transition-colors ${
-                          sortBy === option ? "bg-[#c5203a] text-white" : "text-[#0d1124]"
+                        className={`w-full text-left px-4 py-2 text-sm font-normal transition-colors ${
+                          sortBy === option ? "bg-[#111111] text-white" : "text-[#111111] hover:bg-[#f5f5f5]"
                         }`}
                       >
                         {option}
@@ -428,15 +307,17 @@ export default function BoxersPage() {
           </div>
 
           {/* Boxers Grid */}
-          <div ref={allBoxersRef} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
-            {filteredBoxers.map((boxer) => (
-              <BoxerCard key={boxer.id} boxer={boxer} />
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
+            {filteredBoxers.map((boxer, index) => (
+              <Reveal key={boxer.id} as="fade-up" delay={(index % 10) * 60}>
+                <BoxerCard boxer={boxer} />
+              </Reveal>
             ))}
           </div>
 
           {filteredBoxers.length === 0 && (
             <div className="text-center py-16">
-              <p className="text-gray-500 text-lg">No boxers found matching your criteria.</p>
+              <p className="text-[#707072] text-lg">No boxers found matching your criteria.</p>
             </div>
           )}
         </div>
@@ -447,7 +328,6 @@ export default function BoxersPage() {
   )
 }
 
-// Champion Card Component
 interface BoxerData {
   id: number
   firstName: string
@@ -461,86 +341,44 @@ interface BoxerData {
   losses: number
 }
 
-function getChampionTitleFromImage(image: string) {
-  const filename = image.split("/").pop()?.replace(/\.[^/.]+$/, "") || ""
-  const parts = filename.split("_")
-  return parts.slice(2).join(" ")
-}
-
 function ChampionCard({ boxer }: { boxer: BoxerData }) {
-  const championTitle = getChampionTitleFromImage(boxer.image)
-
   return (
-    <div 
-      className="champion-card group relative w-full overflow-hidden bg-[#0d1124] transition-all duration-300 hover:shadow-[0_20px_50px_rgba(0,0,0,0.6)] border-b-4 border-secondary border-t border-x border-white/5"
-    >
-      <div className="image-wrap relative aspect-[3/4] w-full overflow-hidden">
+    <div className="boxer-card-mr aspect-[3/4]">
+      <div className="image-wrap">
         <Image
           src={boxer.image}
           alt={`${boxer.firstName} ${boxer.lastName}`}
           fill
-          className="scale-[1.015] object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          className="object-cover object-top"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
-        <div className="gradient-overlay absolute inset-0 bg-gradient-to-t from-[#0d1124] via-transparent to-transparent opacity-85" />
+        <div className="gradient-overlay" />
       </div>
-      
-      <div className="relative p-4 text-left bg-[#0d1124]">
-        <h2 className="text-lg leading-tight text-white font-display tracking-wide uppercase font-black">
-          {boxer.firstName}<br /><span className="text-secondary">{boxer.lastName}</span>
-        </h2>
-        <p className="mt-2 text-[11px] font-bold uppercase tracking-wider text-accent">{championTitle}</p>
+      <div className="card-text">
+        <h2>{boxer.firstName} {boxer.lastName}</h2>
+        <span className="weight-cat champion-badge">{boxer.titles}</span>
       </div>
     </div>
   )
 }
 
-// Regular Boxer Card Component
 function BoxerCard({ boxer }: { boxer: BoxerData }) {
-  const [isHovered, setIsHovered] = useState(false)
-
   return (
-    <div 
-      className="boxer-card relative aspect-[3/4] bg-[#0d1124] overflow-hidden group cursor-pointer border border-white/5 border-b-2 border-b-secondary/50"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-        {boxer.image ? (
-          <div className="absolute inset-0">
-            <Image
-              src={boxer.image}
-              alt={`${boxer.firstName} ${boxer.lastName}`}
-              fill
-              className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-            />
-          </div>
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-[#101424]">
-            <div className="text-center px-4">
-              <p className="text-white font-bold font-display uppercase">{boxer.firstName} {boxer.lastName}</p>
-            </div>
-          </div>
-        )}
-        
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-        
-        {/* Text content */}
-        <div className="absolute bottom-0 left-0 right-0 p-4">
-          <h3 
-            className="text-xl md:text-2xl font-black uppercase text-white leading-[0.95] font-display"
-          >
-            {boxer.firstName}<br />{boxer.lastName}
-          </h3>
-        </div>
-
-        {/* Hover effect - red tint */}
-        <div 
-          className={`absolute inset-0 bg-accent/0 transition-colors duration-300 ${
-            isHovered ? "bg-accent/20" : ""
-          }`}
+    <div className="boxer-card-mr aspect-[3/4]">
+      <div className="image-wrap">
+        <Image
+          src={boxer.image}
+          alt={`${boxer.firstName} ${boxer.lastName}`}
+          fill
+          className="object-cover object-top"
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
         />
+        <div className="gradient-overlay" />
+      </div>
+      <div className="card-text">
+        <h2>{boxer.firstName} {boxer.lastName}</h2>
+        <span className="weight-cat">{boxer.weightClass}</span>
+      </div>
     </div>
   )
 }

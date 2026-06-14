@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 import { Heart, Play, ExternalLink, X, Check, Share2 } from "lucide-react"
+import { Reveal } from "@/components/Reveal"
 
 type MockReel = {
   id: string
@@ -113,24 +113,11 @@ const isVideoUrl = (url: string) => {
 const PlatformBadge = ({ platform }: { platform?: "instagram" | "tiktok" | "youtube" }) => {
   if (!platform) return null
 
-  const getBadgeStyle = () => {
-    switch (platform) {
-      case "instagram":
-        return "bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white"
-      case "tiktok":
-        return "bg-black text-white border border-white/20"
-      case "youtube":
-        return "bg-[#ff0000] text-white"
-      default:
-        return "bg-slate-800 text-white"
-    }
-  }
-
   const renderIcon = () => {
     switch (platform) {
       case "instagram":
         return (
-          <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
@@ -154,7 +141,7 @@ const PlatformBadge = ({ platform }: { platform?: "instagram" | "tiktok" | "yout
   }
 
   return (
-    <div className={`flex h-7 w-7 items-center justify-center rounded-full shadow-lg backdrop-blur-sm ${getBadgeStyle()}`}>
+    <div className="flex h-7 w-7 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white">
       {renderIcon()}
     </div>
   )
@@ -284,6 +271,7 @@ export function SocialWall() {
       clearInterval(id)
     }
   }, [shouldUseInstagramApi])
+
   const handleLike = (id: string, e: React.MouseEvent) => {
     e.stopPropagation()
     e.preventDefault()
@@ -304,138 +292,23 @@ export function SocialWall() {
   const featuredPost = posts[0]
   const gridPosts = posts.slice(1)
 
-  const renderFeedTile = (
-    post: MockReel,
-    className: string
-  ) => (
-    <motion.button
-      key={post.id}
-      type="button"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      onClick={() => setSelectedReel(post)}
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-slate-900 text-left text-white shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-2 hover:border-[#c5203a]/30 hover:shadow-[0_20px_40px_rgba(197,32,58,0.15)] ${className}`}
-    >
-      <div className="relative aspect-[3/4] w-full overflow-hidden">
-        {/* Autoplay Video or Image */}
-        {isVideoUrl(post.mediaUrl) ? (
-          <AutoplayVideo
-            src={post.mediaUrl}
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-        ) : (
-          <img
-            src={post.mediaUrl}
-            alt={post.caption}
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-        )}
-
-        {/* Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0d1124] via-[#0d1124]/10 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-70" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-[#c5203a]/20 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-        {/* Top Badges */}
-        <div className="absolute left-3 top-3 flex items-center gap-2 sm:left-4 sm:top-4">
-          <div className="rounded-full bg-black/60 px-2.5 py-1 text-[0.62rem] font-bold uppercase tracking-[0.22em] text-white backdrop-blur-sm">
-            {post.duration}
-          </div>
-        </div>
-
-        <div className="absolute right-3 top-3 sm:right-4 sm:top-4">
-          <PlatformBadge platform={post.platform} />
-        </div>
-
-        {/* Center Play Button on Hover */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100">
-          <div className="flex h-12 w-12 scale-75 items-center justify-center rounded-full bg-[#c5203a]/90 text-white shadow-[0_0_20px_rgba(197,32,58,0.6)] backdrop-blur-sm transition-all duration-300 group-hover:scale-100 group-hover:bg-[#c5203a]">
-            <Play className="ml-0.5 h-5 w-5 fill-white" />
-          </div>
-        </div>
-
-        {/* Bottom Info */}
-        <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-          <p className="line-clamp-2 text-xs font-bold uppercase leading-tight tracking-[0.06em] text-white/90 group-hover:text-white transition-colors duration-300">
-            {post.caption}
-          </p>
-          <div className="mt-3 flex items-center justify-between text-[0.62rem] font-bold uppercase tracking-[0.15em] text-white/50 group-hover:text-white/80 transition-colors duration-300">
-            <span className="flex items-center gap-1">
-              <Heart className="h-3 w-3 fill-current text-[#c5203a]" />
-              {post.likeCount}
-            </span>
-            <span>{post.category.replace("-", " ")}</span>
-          </div>
-        </div>
-      </div>
-    </motion.button>
-  )
-
   if (!featuredPost) return null
 
   return (
     <section
       id="social-wall"
-      className="relative overflow-hidden border-t border-slate-100 bg-white py-16 sm:py-24 lg:py-32"
+      className="relative overflow-hidden bg-[#111111] py-16 sm:py-24 border-t border-[#e5e5e5]"
     >
-      {/* Futuristic background effects */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        {/* Diagonal speed lines */}
-        <div className="absolute inset-0 opacity-[0.03]">
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className="diagonal-line absolute h-[1px] w-[200%] bg-gradient-to-r from-transparent via-[#c5203a] to-transparent"
-              style={{
-                top: `${10 + i * 12}%`,
-                left: "-100%",
-                transform: "rotate(-15deg)",
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Grid overlay */}
-        <div className="absolute inset-0 futuristic-grid opacity-[0.04]" />
-
-        {/* Glow effects */}
-        <div className="absolute top-1/4 right-0 h-[500px] w-[500px] rounded-full bg-[#c5203a]/5 blur-[150px]" />
-        <div className="absolute bottom-0 left-1/4 h-[400px] w-[400px] rounded-full bg-[#b8962e]/5 blur-[100px]" />
-      </div>
-
-      {/* HUD Frame */}
-      <div className="pointer-events-none absolute inset-0 z-20">
-        {/* Top left accent */}
-        <div className="absolute left-6 top-6">
-          <div className="h-6 w-6 border-l-2 border-t-2 border-[#c5203a]/20" />
-        </div>
-
-        {/* Bottom right accent */}
-        <div className="absolute bottom-6 right-6">
-          <div className="ml-auto h-6 w-6 border-b-2 border-r-2 border-[#b8962e]/20" />
-        </div>
-      </div>
-
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mb-10 sm:mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
-        >
+        <Reveal as="fade-up" className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
-            <div className="flex flex-wrap items-end gap-x-3 gap-y-2 sm:gap-x-4">
-              <span className="font-display text-[clamp(2rem,8vw,4.5rem)] font-bold uppercase leading-none text-slate-950">
-                NEXTUP
-              </span>
-              <span className="pb-0.5 font-sans text-[clamp(1rem,3.5vw,1.75rem)] font-bold uppercase tracking-[0.2em] text-[#c5203a] sm:tracking-[0.26em]">
-                SOCIAL WALL
-              </span>
-            </div>
-
-            <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">
+            <span className="text-xs font-medium uppercase tracking-[0.2em] text-white/50 mb-2 block">
+              Social Wall
+            </span>
+            <h2 className="text-xl md:text-2xl font-medium uppercase tracking-wide text-white">
+              Latest from @NextUpBoxingLeague
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/60">
               Real-time highlights from @nextupboxingleague — fight week, training, promos, and the behind-the-scenes energy that keeps the league moving.
             </p>
           </div>
@@ -444,34 +317,26 @@ export function SocialWall() {
             href="https://www.instagram.com/nextupboxingleague/"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative inline-flex self-start md:self-auto overflow-hidden bg-[#b8962e] px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] text-[#0d1124] transition-all duration-300 hover:shadow-[0_0_20px_rgba(184,150,46,0.2)]"
+            className="inline-flex items-center self-start rounded-full border border-white/20 px-5 py-2.5 text-xs font-medium uppercase tracking-wide text-white transition-colors hover:border-white/40"
           >
-            <span className="relative z-10 transition-colors duration-300 group-hover:text-white">Follow on Instagram</span>
-            <div className="absolute inset-0 translate-x-[-100%] bg-[#0d1124] transition-transform duration-300 group-hover:translate-x-0" />
+            Follow on Instagram
           </a>
-        </motion.div>
+        </Reveal>
 
         {apiMessage && (
-          <p className="mb-6 text-sm text-slate-500" role="status">
+          <p className="mb-6 text-sm text-white/50" role="status">
             {apiMessage}
           </p>
         )}
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
           {/* Featured Large Tile */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="group relative overflow-hidden rounded-2xl border border-slate-100 bg-slate-900 text-white shadow-[0_20px_50px_rgba(0,0,0,0.06)] transition-all duration-500 hover:border-[#c5203a]/30 hover:shadow-[0_30px_60px_rgba(197,32,58,0.15)] sm:rounded-[2rem] sm:col-span-2 lg:col-span-2 xl:col-span-2 xl:row-span-2"
-          >
+          <Reveal as="fade-up" delay={60} className="sm:col-span-2 lg:col-span-2 xl:col-span-2 xl:row-span-2">
             <button
               type="button"
               onClick={() => setSelectedReel(featuredPost)}
-              className="relative block h-full min-h-[320px] w-full overflow-hidden text-left sm:min-h-[420px] lg:min-h-[500px]"
+              className="group relative block h-full min-h-[320px] w-full overflow-hidden bg-[#1a1a1a] text-left text-white sm:min-h-[420px] lg:min-h-[500px]"
             >
-              {/* Autoplay Video or Image */}
               {isVideoUrl(featuredPost.mediaUrl) ? (
                 <AutoplayVideo
                   src={featuredPost.mediaUrl}
@@ -484,20 +349,15 @@ export function SocialWall() {
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               )}
-              
-              {/* Gradients */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0d1124] via-[#0d1124]/40 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-75" />
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#c5203a]/15 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              
-              {/* Glow effects */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(197,32,58,0.15),transparent_60%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/30 to-transparent" />
 
               {/* Top Badges */}
               <div className="absolute left-4 top-4 flex items-center gap-2 sm:left-6 sm:top-6">
-                <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.16em] text-white/80 backdrop-blur-md sm:text-[0.65rem] sm:tracking-[0.18em]">
+                <span className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-white">
                   Featured Reel
                 </span>
-                <span className="rounded-full bg-black/60 px-2.5 py-1.5 text-[0.62rem] font-bold uppercase tracking-[0.22em] text-white backdrop-blur-md">
+                <span className="rounded-full border border-white/15 bg-white/10 px-2.5 py-1.5 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-white">
                   {featuredPost.duration}
                 </span>
               </div>
@@ -507,21 +367,21 @@ export function SocialWall() {
               </div>
 
               {/* Center Play Button on Hover */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100">
-                <div className="flex h-16 w-16 scale-75 items-center justify-center rounded-full bg-[#c5203a]/90 text-white shadow-[0_0_30px_rgba(197,32,58,0.7)] backdrop-blur-sm transition-all duration-300 group-hover:scale-100 group-hover:bg-[#c5203a]">
-                  <Play className="ml-1 h-6 w-6 fill-white" />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-[#111111]">
+                  <Play className="ml-1 h-6 w-6 fill-current" />
                 </div>
               </div>
 
               {/* Bottom Info */}
               <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7 lg:p-8">
-                <h3 className="max-w-lg text-lg font-black uppercase leading-tight text-white group-hover:text-white sm:text-2xl lg:text-[2.2rem]">
+                <h3 className="max-w-lg text-lg font-medium uppercase leading-tight text-white sm:text-2xl lg:text-[2.2rem]">
                   {featuredPost.caption}
                 </h3>
 
-                <div className="mt-4 flex flex-wrap items-center gap-3 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-white/50 group-hover:text-white/80 transition-colors duration-300 sm:mt-6 sm:gap-4 sm:text-[0.74rem] sm:tracking-[0.2em]">
+                <div className="mt-4 flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-[0.18em] text-white/60 sm:mt-6 sm:gap-4">
                   <span className="flex items-center gap-1.5">
-                    <Heart className="h-4.5 w-4.5 fill-current text-[#c5203a]" />
+                    <Heart className="h-4 w-4" />
                     {featuredPost.likeCount} likes
                   </span>
                   <span>•</span>
@@ -529,201 +389,242 @@ export function SocialWall() {
                 </div>
               </div>
             </button>
-          </motion.div>
+          </Reveal>
 
           {/* Grid posts */}
-          {gridPosts.map((post) =>
-            renderFeedTile(
-              post,
-              ""
-            )
-          )}
+          {gridPosts.map((post, index) => (
+            <Reveal key={post.id} as="fade-up" delay={(index + 1) * 60}>
+              <button
+                type="button"
+                onClick={() => setSelectedReel(post)}
+                className="group relative flex w-full flex-col overflow-hidden bg-[#1a1a1a] text-left text-white"
+              >
+                <div className="relative aspect-[3/4] w-full overflow-hidden">
+                  {isVideoUrl(post.mediaUrl) ? (
+                    <AutoplayVideo
+                      src={post.mediaUrl}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  ) : (
+                    <img
+                      src={post.mediaUrl}
+                      alt={post.caption}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  )}
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/20 to-transparent" />
+
+                  {/* Top Badges */}
+                  <div className="absolute left-3 top-3 flex items-center gap-2 sm:left-4 sm:top-4">
+                    <div className="rounded-full border border-white/15 bg-white/10 px-2.5 py-1 text-[0.62rem] font-medium uppercase tracking-[0.18em] text-white">
+                      {post.duration}
+                    </div>
+                  </div>
+
+                  <div className="absolute right-3 top-3 sm:right-4 sm:top-4">
+                    <PlatformBadge platform={post.platform} />
+                  </div>
+
+                  {/* Center Play Button on Hover */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#111111]">
+                      <Play className="ml-0.5 h-5 w-5 fill-current" />
+                    </div>
+                  </div>
+
+                  {/* Bottom Info */}
+                  <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
+                    <p className="line-clamp-2 text-xs font-medium uppercase leading-tight tracking-[0.06em] text-white/90">
+                      {post.caption}
+                    </p>
+                    <div className="mt-3 flex items-center justify-between text-[0.65rem] font-medium uppercase tracking-[0.15em] text-white/50">
+                      <span className="flex items-center gap-1">
+                        <Heart className="h-3 w-3" />
+                        {post.likeCount}
+                      </span>
+                      <span>{post.category.replace("-", " ")}</span>
+                    </div>
+                  </div>
+                </div>
+              </button>
+            </Reveal>
+          ))}
         </div>
       </div>
 
       {/* Lightbox Modal */}
-      <AnimatePresence>
-        {selectedReel && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-end justify-center bg-black/95 p-0 backdrop-blur-md sm:items-center sm:p-4"
-            onClick={() => setSelectedReel(null)}
+      {selectedReel && (
+        <div
+          className="fixed inset-0 z-50 flex items-end justify-center bg-black/90 p-0 animate-fade-in sm:items-center sm:p-4"
+          onClick={() => setSelectedReel(null)}
+        >
+          <div
+            className="relative flex max-h-[95dvh] w-full max-w-[850px] flex-col overflow-hidden bg-[#111111] border border-white/10 animate-fade-in sm:max-h-[92vh] md:flex-row"
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              initial={{ scale: 0.95, y: 24 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 24 }}
-              transition={{ type: "spring", stiffness: 350, damping: 25 }}
-              className="relative flex max-h-[95dvh] w-full max-w-[850px] flex-col overflow-hidden rounded-t-3xl bg-[#0d1124] border border-white/10 shadow-2xl sm:max-h-[92vh] sm:rounded-3xl md:flex-row md:rounded-3xl"
-              onClick={(e) => e.stopPropagation()}
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedReel(null)}
+              className="absolute right-3 top-3 z-30 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 sm:right-4 sm:top-4 sm:h-10 sm:w-10"
+              aria-label="Close reel"
             >
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedReel(null)}
-                className="absolute right-3 top-3 z-30 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-md transition-colors hover:bg-[#c5203a] sm:right-4 sm:top-4 sm:h-10 sm:w-10"
-                aria-label="Close reel"
-              >
-                <X className="h-5 w-5" />
-              </button>
+              <X className="h-5 w-5" />
+            </button>
 
-              {/* Video Player / Image left side */}
-              <div className="relative min-h-[260px] flex-1 bg-black sm:min-h-[320px] md:min-h-0">
-                {isVideoUrl(selectedReel.mediaUrl) ? (
-                  <video
-                    src={selectedReel.mediaUrl}
-                    autoPlay
-                    controls
-                    playsInline
-                    className="h-full w-full object-contain"
-                  />
-                ) : (
-                  <img
-                    src={selectedReel.mediaUrl}
-                    alt={selectedReel.caption}
-                    className="h-full w-full object-cover"
-                  />
-                )}
+            {/* Video Player / Image left side */}
+            <div className="relative min-h-[260px] flex-1 bg-black sm:min-h-[320px] md:min-h-0">
+              {isVideoUrl(selectedReel.mediaUrl) ? (
+                <video
+                  src={selectedReel.mediaUrl}
+                  autoPlay
+                  controls
+                  playsInline
+                  className="h-full w-full object-contain"
+                />
+              ) : (
+                <img
+                  src={selectedReel.mediaUrl}
+                  alt={selectedReel.caption}
+                  className="h-full w-full object-cover"
+                />
+              )}
 
-                {/* Glassy Header Badge overlay (Only for images) */}
-                {!isVideoUrl(selectedReel.mediaUrl) && (
-                  <div className="absolute inset-0 flex flex-col justify-between p-4 sm:p-6">
-                    <div className="flex items-center justify-between">
-                      <span className="rounded-full bg-white/20 px-3 py-1 font-sans text-xs font-bold text-white backdrop-blur-sm">
-                        {selectedReel.duration}
-                      </span>
-
-                      <span className="flex items-center gap-1.5 rounded-full bg-[#c5203a] px-3 py-1 font-sans text-xs font-bold text-white shadow-md">
-                        <span className="h-2 w-2 rounded-full bg-white" />
-                        LIVE PLAYER
-                      </span>
-                    </div>
-
-                    <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-white/30 bg-white/20 text-white backdrop-blur-md transition-transform duration-300 hover:scale-110 sm:h-16 sm:w-16">
-                      <Play className="h-6 w-6 fill-white" />
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-white/30 font-display text-[10px] font-black italic text-white">
-                        NUB
-                      </div>
-                      <span className="font-sans text-sm font-bold text-white">@nextupboxingleague</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Sidebar detail/interaction right side */}
-              <div className="flex min-h-0 w-full flex-col justify-between border-t border-white/10 bg-[#0f132a] p-4 sm:p-6 md:w-[380px] md:border-l md:border-t-0">
-                <div className="max-h-[40dvh] space-y-4 overflow-y-auto pr-1 sm:max-h-none sm:space-y-5 md:max-h-[440px]">
-                  {/* Channel Header */}
-                  <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                    <div className="flex items-center gap-2.5">
-                      <div className="h-7 w-7 rounded-full bg-gradient-to-r from-[#c5203a] to-[#b8962e] p-[1.5px]">
-                        <div className="flex h-full w-full items-center justify-center rounded-full bg-[#0d1124] font-display text-[9px] font-black italic text-white">
-                          NUB
-                        </div>
-                      </div>
-                      <div className="flex flex-col">
-                        <span className="font-sans text-xs font-bold text-white">nextupboxingleague</span>
-                        <span className="text-[9px] text-slate-400 capitalize">{selectedReel.platform || "Instagram"}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Caption & Timestamp */}
-                  <div className="space-y-2">
-                    <p className="font-sans text-xs font-semibold leading-relaxed text-slate-200">
-                      {selectedReel.caption.split(" ").map((word, i) =>
-                        word.startsWith("#") || word.startsWith("@") ? (
-                          <span key={i} className="font-bold text-[#c5203a]">
-                            {word}{" "}
-                          </span>
-                        ) : (
-                          `${word} `
-                        )
-                      )}
-                    </p>
-                    <p className="font-sans text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                      {selectedReel.timestamp ? (
-                        <>Posted {new Date(selectedReel.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}</>
-                      ) : (
-                        <>Posted recently</>
-                      )}
-                    </p>
-                  </div>
-
-                  {/* Dynamic Discussion section if mock comments are present */}
-                  {selectedReel.commentsList.length > 0 && (
-                    <div className="space-y-3">
-                      <h4 className="font-sans text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                        Discussion
-                      </h4>
-
-                      <div className="space-y-3">
-                        {selectedReel.commentsList.map((comment, index) => (
-                          <div key={index} className="rounded-xl bg-[#1d223f] border border-white/5 p-3 text-xs">
-                            <div className="mb-1 flex items-center justify-between">
-                              <span className="font-sans font-bold text-white">@{comment.user}</span>
-                              <span className="text-[9px] text-slate-400">Active</span>
-                            </div>
-                            <p className="font-sans font-medium leading-normal text-slate-300">
-                              {comment.text}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Interaction Actions */}
-                <div className="mt-4 space-y-4 border-t border-white/10 pt-4">
+              {/* Header overlay (Only for images) */}
+              {!isVideoUrl(selectedReel.mediaUrl) && (
+                <div className="absolute inset-0 flex flex-col justify-between p-4 sm:p-6">
                   <div className="flex items-center justify-between">
-                    <button
-                      onClick={(e) => handleLike(selectedReel.id, e)}
-                      className="flex items-center gap-1.5 text-xs font-bold text-slate-200 hover:text-[#c5203a] transition-colors"
-                    >
-                      <Heart
-                        className={`h-4.5 w-4.5 transition-transform ${likedReels[selectedReel.id] ? "scale-125 fill-[#c5203a] text-[#c5203a]" : "text-white hover:scale-110"}`}
-                      />
-                      {likedReels[selectedReel.id] ? selectedReel.likeCount + 1 : selectedReel.likeCount}
-                    </button>
+                    <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-medium text-white">
+                      {selectedReel.duration}
+                    </span>
 
-                    <button
-                      onClick={(e) => handleShare(selectedReel.id, e)}
-                      className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-slate-400 hover:text-white transition-colors"
-                    >
-                      {copiedId === selectedReel.id ? (
-                        <>
-                          <Check className="h-3.5 w-3.5 text-green-500" />
-                          Copied!
-                        </>
-                      ) : (
-                        <>
-                          <Share2 className="h-3.5 w-3.5" />
-                          Share
-                        </>
-                      )}
-                    </button>
+                    <span className="flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-medium text-[#111111]">
+                      <span className="h-2 w-2 rounded-full bg-[#111111]" />
+                      Live Player
+                    </span>
                   </div>
 
-                  <a
-                    href={selectedReel.permalink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#c5203a] to-[#b8962e] py-3 font-sans text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 hover:shadow-[0_0_20px_rgba(197,32,58,0.4)]"
-                  >
-                    View Original Reel
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white transition-transform duration-300 hover:scale-110 sm:h-16 sm:w-16">
+                    <Play className="h-6 w-6 fill-current" />
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 bg-white/10 text-[10px] font-medium text-white">
+                      NUB
+                    </div>
+                    <span className="text-sm font-medium text-white">@nextupboxingleague</span>
+                  </div>
                 </div>
+              )}
+            </div>
+
+            {/* Sidebar detail/interaction right side */}
+            <div className="flex min-h-0 w-full flex-col justify-between border-t border-white/10 bg-[#1a1a1a] p-4 sm:p-6 md:w-[380px] md:border-l md:border-t-0">
+              <div className="max-h-[40dvh] space-y-4 overflow-y-auto pr-1 sm:max-h-none sm:space-y-5 md:max-h-[440px]">
+                {/* Channel Header */}
+                <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-full border border-white/15 bg-white/10 text-[9px] font-medium text-white">
+                      NUB
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-xs font-medium text-white">nextupboxingleague</span>
+                      <span className="text-[9px] text-white/40 capitalize">{selectedReel.platform || "Instagram"}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Caption & Timestamp */}
+                <div className="space-y-2">
+                  <p className="text-xs font-medium leading-relaxed text-white/80">
+                    {selectedReel.caption.split(" ").map((word, i) =>
+                      word.startsWith("#") || word.startsWith("@") ? (
+                        <span key={i} className="font-medium text-white">
+                          {word}{" "}
+                        </span>
+                      ) : (
+                        `${word} `
+                      )
+                    )}
+                  </p>
+                  <p className="text-[10px] font-medium uppercase tracking-widest text-white/40">
+                    {selectedReel.timestamp ? (
+                      <>Posted {new Date(selectedReel.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}</>
+                    ) : (
+                      <>Posted recently</>
+                    )}
+                  </p>
+                </div>
+
+                {/* Dynamic Discussion section if mock comments are present */}
+                {selectedReel.commentsList.length > 0 && (
+                  <div className="space-y-3">
+                    <h4 className="text-[10px] font-medium uppercase tracking-widest text-white/40">
+                      Discussion
+                    </h4>
+
+                    <div className="space-y-3">
+                      {selectedReel.commentsList.map((comment, index) => (
+                        <div key={index} className="border border-white/10 bg-white/5 p-3 text-xs">
+                          <div className="mb-1 flex items-center justify-between">
+                            <span className="font-medium text-white">@{comment.user}</span>
+                            <span className="text-[9px] text-white/40">Active</span>
+                          </div>
+                          <p className="font-normal leading-normal text-white/70">
+                            {comment.text}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
+              {/* Interaction Actions */}
+              <div className="mt-4 space-y-4 border-t border-white/10 pt-4">
+                <div className="flex items-center justify-between">
+                  <button
+                    onClick={(e) => handleLike(selectedReel.id, e)}
+                    className="flex items-center gap-1.5 text-xs font-medium text-white/80 transition-colors hover:text-white"
+                  >
+                    <Heart
+                      className={`h-4 w-4 transition-transform ${likedReels[selectedReel.id] ? "scale-110 fill-white text-white" : "text-white/80"}`}
+                    />
+                    {likedReels[selectedReel.id] ? selectedReel.likeCount + 1 : selectedReel.likeCount}
+                  </button>
+
+                  <button
+                    onClick={(e) => handleShare(selectedReel.id, e)}
+                    className="flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-white/50 transition-colors hover:text-white"
+                  >
+                    {copiedId === selectedReel.id ? (
+                      <>
+                        <Check className="h-3.5 w-3.5" />
+                        Copied!
+                      </>
+                    ) : (
+                      <>
+                        <Share2 className="h-3.5 w-3.5" />
+                        Share
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <a
+                  href={selectedReel.permalink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center gap-2 rounded-full bg-white py-3 text-xs font-medium uppercase tracking-widest text-[#111111] transition-colors hover:bg-[#e5e5e5]"
+                >
+                  View Original Reel
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
