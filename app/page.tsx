@@ -6,6 +6,7 @@ import { YoutubeSection } from "@/components/YoutubeSection"
 import { SponsorsStrip } from "@/components/SponsorsStrip"
 import { Footer } from "@/components/Footer"
 import { NextUpLiveStream } from "@/components/NextUpLiveStream"
+import { NewsletterPopup } from "@/components/NewsletterPopup"
 
 const SocialWall = dynamic(() => import("@/components/SocialWall").then((mod) => mod.SocialWall))
 const MagazineSection = dynamic(() => import("@/components/magazine/magaine-section").then((mod) => mod.MagazineSection))
@@ -22,6 +23,7 @@ export default function Home() {
       <SponsorsStrip />
       <MagazineSection />
       <Footer />
+      <NewsletterPopup />
     </main>
   )
 }
