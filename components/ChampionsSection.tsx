@@ -7,64 +7,74 @@ const champions = [
     firstName: "ARTURO",
     lastName: "ACEVEDO",
     weightClass: "Super-Bantamweight",
-    championship: "SBC Champion",
+    championship: "121 SBC Champion",
     image: "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.webp",
   },
   {
     firstName: "XAVIER",
     lastName: "WILCHER",
     weightClass: "Cruiserweight",
-    championship: "SBC Champion",
+    championship: "198 SBC Champion",
     image: "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.webp",
   },
   {
     firstName: "JADEN",
     lastName: "HARVEY",
     weightClass: "Super-Middleweight",
-    championship: "DAWG Champion",
+    championship: "165 DAWG Champion",
     image: "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.webp",
   },
   {
     firstName: "BRADLEY",
     lastName: "BELT",
     weightClass: "Cruiserweight",
-    championship: "ADC Champion",
+    championship: "198 ADC Champion",
     image: "/champions/BRADLEY_BELT_198_ADC_CHAMPION.webp",
   },
   {
     firstName: "NAIJALIE",
     lastName: "RODRIGUEZ",
     weightClass: "Women's Light-Flyweight",
-    championship: "Women's SBC Champion",
+    championship: "106 Women's SBC Champion",
     image: "/champions/NAIJALIE_RODRIGUEZ_106_WOMENS_SBC_CHAMPION.webp",
   },
   {
     firstName: "KEVIN",
     lastName: "TORRES",
     weightClass: "Super-Middleweight",
-    championship: "SBC Champion",
+    championship: "165 SBC Champion",
     image: "/champions/KEVIN_TORRES_165_SBC_CHAMPION.webp",
   },
   {
     firstName: "KIAMAL",
     lastName: "EVELYN",
     weightClass: "Super-Featherweight",
-    championship: "SBC Champion",
+    championship: "132 SBC Champion",
     image: "/champions/KIAMAL_EVELYN_132_SBC_CHAMPION.webp",
   },
   {
     firstName: "REESE",
     lastName: "MISTRETTA",
     weightClass: "Light-Heavyweight",
-    championship: "SBC Champion",
+    championship: "176 SBC Champion",
     image: "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.webp",
   },
 ]
 
 export function ChampionsSection() {
   return (
-    <section className="bg-white py-16 md:py-24 w-full overflow-hidden border-t border-[#e5e5e5]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="relative bg-white py-16 md:py-24 w-full overflow-hidden border-t border-[#e5e5e5]">
+      {/* Boxer silhouette accent */}
+      <Image
+        src="/boxer-shadow.png"
+        alt=""
+        aria-hidden="true"
+        width={1149}
+        height={1369}
+        className="pointer-events-none absolute -right-16 bottom-0 hidden h-[120%] w-auto opacity-[0.06] mix-blend-multiply md:block"
+      />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <Reveal as="fade-up" className="mb-10 flex items-center justify-between gap-4">
           <h2 className="text-xl md:text-2xl font-medium uppercase tracking-wide text-gold">

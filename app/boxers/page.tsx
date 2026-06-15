@@ -15,7 +15,7 @@ const worldChampions = [
     lastName: "Acevedo",
     image: "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.webp",
     weightClass: "Super-Bantamweight",
-    titles: "SBC SUPER-BANTAMWEIGHT CHAMPION",
+    titles: "121 SBC SUPER-BANTAMWEIGHT CHAMPION",
     record: "23-1-0",
     wins: 23,
     kos: 17,
@@ -27,7 +27,7 @@ const worldChampions = [
     lastName: "Belt",
     image: "/champions/BRADLEY_BELT_198_ADC_CHAMPION.webp",
     weightClass: "Cruiserweight",
-    titles: "ADC CRUISERWEIGHT CHAMPION",
+    titles: "198 ADC CRUISERWEIGHT CHAMPION",
     record: "26-0-0",
     wins: 26,
     kos: 20,
@@ -39,7 +39,7 @@ const worldChampions = [
     lastName: "Harvey",
     image: "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.webp",
     weightClass: "Super-Middleweight",
-    titles: "DAWG SUPER-MIDDLEWEIGHT CHAMPION",
+    titles: "165 DAWG SUPER-MIDDLEWEIGHT CHAMPION",
     record: "22-2-0",
     wins: 22,
     kos: 16,
@@ -51,7 +51,7 @@ const worldChampions = [
     lastName: "Torres",
     image: "/champions/KEVIN_TORRES_165_SBC_CHAMPION.webp",
     weightClass: "Super-Middleweight",
-    titles: "SBC SUPER-MIDDLEWEIGHT CHAMPION",
+    titles: "165 SBC SUPER-MIDDLEWEIGHT CHAMPION",
     record: "24-1-0",
     wins: 24,
     kos: 18,
@@ -63,7 +63,7 @@ const worldChampions = [
     lastName: "Evelyn",
     image: "/champions/KIAMAL_EVELYN_132_SBC_CHAMPION.webp",
     weightClass: "Super-Featherweight",
-    titles: "SBC SUPER-FEATHERWEIGHT CHAMPION",
+    titles: "132 SBC SUPER-FEATHERWEIGHT CHAMPION",
     record: "19-0-0",
     wins: 19,
     kos: 12,
@@ -75,7 +75,7 @@ const worldChampions = [
     lastName: "Rodriguez",
     image: "/champions/NAIJALIE_RODRIGUEZ_106_WOMENS_SBC_CHAMPION.webp",
     weightClass: "Women’s Light-Flyweight",
-    titles: "WOMENS SBC LIGHT-FLYWEIGHT CHAMPION",
+    titles: "106 WOMENS SBC LIGHT-FLYWEIGHT CHAMPION",
     record: "18-0-0",
     wins: 18,
     kos: 10,
@@ -87,7 +87,7 @@ const worldChampions = [
     lastName: "Mistretta",
     image: "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.webp",
     weightClass: "Light-Heavyweight",
-    titles: "SBC LIGHT-HEAVYWEIGHT CHAMPION",
+    titles: "176 SBC LIGHT-HEAVYWEIGHT CHAMPION",
     record: "25-2-0",
     wins: 25,
     kos: 21,
@@ -99,7 +99,7 @@ const worldChampions = [
     lastName: "Wilcher",
     image: "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.webp",
     weightClass: "Cruiserweight",
-    titles: "SBC CRUISERWEIGHT CHAMPION",
+    titles: "198 SBC CRUISERWEIGHT CHAMPION",
     record: "28-1-0",
     wins: 28,
     kos: 23,
@@ -376,7 +376,7 @@ function BoxerCard({ boxer }: { boxer: BoxerData }) {
         <div className="gradient-overlay" />
       </div>
       <div className="card-text">
-        <h2>{boxer.firstName} {boxer.lastName}</h2>
+        <h2 className="!uppercase !font-bold">{boxer.firstName} {boxer.lastName}</h2>
         <span className="weight-cat">{boxer.weightClass}</span>
       </div>
     </div>

@@ -45,9 +45,9 @@ export function HeroSection() {
             </span>
 
             {/* Event Title */}
-            <h1 className="text-[3.2rem] uppercase leading-[0.95] text-white min-[380px]:text-[3.8rem] sm:text-[5.6rem] md:text-[6rem] lg:text-[76px] font-display">
+            <h1 className="text-[3.2rem] uppercase leading-[0.95] text-[var(--gold-light)] min-[380px]:text-[3.8rem] sm:text-[5.6rem] md:text-[6rem] lg:text-[76px] font-display">
               Strong Island
-              <span className="block">Fight Night 11</span>
+              <span className="block text-[var(--crimson-light)]">Fight Night 11</span>
             </h1>
 
             {/* Time Info */}

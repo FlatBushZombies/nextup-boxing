@@ -28,25 +28,25 @@ const championsData = [
   },
   {
     division: "CRUISERWEIGHT",
-    name: "TYLER JOHNSON",
+    name: "XAVIER WILCHER",
     record: "21-2-0",
     image: "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.webp",
   },
   {
     division: "LIGHT HEAVYWEIGHT",
-    name: "DMITRI VOLKOV",
+    name: "REESE MISTRETTA",
     record: "18-1-0",
     image: "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.webp",
   },
   {
     division: "MIDDLEWEIGHT",
-    name: "CARLOS MENDOZA",
+    name: "KEVIN TORRES",
     record: "20-1-1",
     image: "/champions/KEVIN_TORRES_165_SBC_CHAMPION.webp",
   },
   {
     division: "WELTERWEIGHT",
-    name: "ISAAC BROWN",
+    name: "ARTURO ACEVEDO",
     record: "22-0-0",
     image: "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.webp",
   },
@@ -54,10 +54,10 @@ const championsData = [
 
 const p4pRankings = [
   { rank: 1, name: "JEREMY RODRIGUEZ", flag: "🇺🇸", record: "14-0-0", image: "/fighter-1.png" },
-  { rank: 2, name: "TYLER JOHNSON", flag: "🇺🇸", record: "21-2-0", image: "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.webp" },
-  { rank: 3, name: "DMITRI VOLKOV", flag: "🇷🇺", record: "18-1-0", image: "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.webp" },
-  { rank: 4, name: "CARLOS MENDOZA", flag: "🇲🇽", record: "20-1-1", image: "/champions/KEVIN_TORRES_165_SBC_CHAMPION.webp" },
-  { rank: 5, name: "ISAAC BROWN", flag: "🇺🇸", record: "22-0-0", image: "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.webp" },
+  { rank: 2, name: "XAVIER WILCHER", flag: "🇺🇸", record: "21-2-0", image: "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.webp" },
+  { rank: 3, name: "REESE MISTRETTA", flag: "🇷🇺", record: "18-1-0", image: "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.webp" },
+  { rank: 4, name: "KEVIN TORRES", flag: "🇲🇽", record: "20-1-1", image: "/champions/KEVIN_TORRES_165_SBC_CHAMPION.webp" },
+  { rank: 5, name: "ARTURO ACEVEDO", flag: "🇺🇸", record: "22-0-0", image: "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.webp" },
 ]
 
 const methodology = [
@@ -124,37 +124,37 @@ const rankingData: Record<string, any> = {
   HEAVYWEIGHT: [
     { rank: 1, name: "JEREMY RODRIGUEZ", flag: "🇺🇸", country: "United States", record: "14-0-0", points: "1,250", lastFight: "W · May 24, 2026 vs Michael Smith", change: "—", image: "/fighter-1.png" },
     { rank: 2, name: "MICHAEL SMITH", flag: "🇬🇧", country: "United Kingdom", record: "22-1-0", points: "1,180", lastFight: "L · May 24, 2026 vs Jeremy Rodriguez", change: "—", image: "/fighter-2.png" },
-    { rank: 3, name: "DERRICK MARTIN", flag: "🇨🇦", country: "Canada", record: "19-2-0", points: "1,050", lastFight: "W · May 10, 2026 vs Alexander Petrov", change: "↑ 1", image: "/champions/BRADLEY_BELT_198_ADC_CHAMPION.webp" },
-    { rank: 4, name: "ALEXANDER PETROV", flag: "🇷🇺", country: "Russia", record: "18-3-0", points: "980", lastFight: "L · May 10, 2026 vs Derrick Martin", change: "↓ 1", image: "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.webp" },
-    { rank: 5, name: "JASON WILLIAMS", flag: "🇺🇸", country: "United States", record: "17-2-0", points: "860", lastFight: "W · Apr 26, 2026 vs Lopez Anderson", change: "—", image: "/champions/KIAMAL_EVELYN_132_SBC_CHAMPION.webp" },
+    { rank: 3, name: "BRADLEY BELT", flag: "🇨🇦", country: "Canada", record: "19-2-0", points: "1,050", lastFight: "W · May 10, 2026 vs Jaden Harvey", change: "↑ 1", image: "/champions/BRADLEY_BELT_198_ADC_CHAMPION.webp" },
+    { rank: 4, name: "JADEN HARVEY", flag: "🇷🇺", country: "Russia", record: "18-3-0", points: "980", lastFight: "L · May 10, 2026 vs Bradley Belt", change: "↓ 1", image: "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.webp" },
+    { rank: 5, name: "KIAMAL EVELYN", flag: "🇺🇸", country: "United States", record: "17-2-0", points: "860", lastFight: "W · Apr 26, 2026 vs Lopez Anderson", change: "—", image: "/champions/KIAMAL_EVELYN_132_SBC_CHAMPION.webp" },
   ],
   CRUISERWEIGHT: [
-    { rank: 1, name: "TYLER JOHNSON", flag: "🇺🇸", country: "United States", record: "21-2-0", points: "1,220", lastFight: "W · Apr 15, 2026 vs Dan Harrison", change: "—", image: "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.webp" },
+    { rank: 1, name: "TYLER JOHNSON", flag: "🇺🇸", country: "United States", record: "21-2-0", points: "1,220", lastFight: "W · Apr 15, 2026 vs Dan Harrison", change: "—", image: "/fighter-1.png" },
     { rank: 2, name: "BRADLEY BELT", flag: "🇺🇸", country: "United States", record: "26-0-0", points: "1,190", lastFight: "W · Mar 20, 2026 vs James Cook", change: "—", image: "/champions/BRADLEY_BELT_198_ADC_CHAMPION.webp" },
     { rank: 3, name: "XAVIER WILCHER", flag: "🇺🇸", country: "United States", record: "28-1-0", points: "1,110", lastFight: "W · Feb 12, 2026 vs Leo Cruz", change: "↑ 2", image: "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.webp" },
     { rank: 4, name: "MARCUS STEEL", flag: "🇨🇦", country: "Canada", record: "15-2-0", points: "940", lastFight: "L · Feb 12, 2026 vs Xavier Wilcher", change: "↓ 1", image: "/fighter-1.png" },
     { rank: 5, name: "DANIEL HARRISON", flag: "🇬🇧", country: "United Kingdom", record: "19-3-0", points: "880", lastFight: "L · Apr 15, 2026 vs Tyler Johnson", change: "—", image: "/fighter-2.png" },
   ],
   "LIGHT HEAVYWEIGHT": [
-    { rank: 1, name: "DMITRI VOLKOV", flag: "🇷🇺", country: "Russia", record: "18-1-0", points: "1,240", lastFight: "W · May 02, 2026 vs Reese Mistretta", change: "—", image: "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.webp" },
+    { rank: 1, name: "DMITRI VOLKOV", flag: "🇷🇺", country: "Russia", record: "18-1-0", points: "1,240", lastFight: "W · May 02, 2026 vs Reese Mistretta", change: "—", image: "/fighter-1.png" },
     { rank: 2, name: "REESE MISTRETTA", flag: "🇺🇸", country: "United States", record: "25-2-0", points: "1,160", lastFight: "L · May 02, 2026 vs Dmitri Volkov", change: "—", image: "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.webp" },
-    { rank: 3, name: "VIKTOR DRAGO", flag: "🇺🇦", country: "Ukraine", record: "21-1-0", points: "1,070", lastFight: "W · Apr 10, 2026 vs Ivan Petrov", change: "—", image: "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.webp" },
+    { rank: 3, name: "JADEN HARVEY", flag: "🇺🇦", country: "Ukraine", record: "21-1-0", points: "1,070", lastFight: "W · Apr 10, 2026 vs Ivan Petrov", change: "—", image: "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.webp" },
     { rank: 4, name: "ANDRE WARD", flag: "🇺🇸", country: "United States", record: "32-0-0", points: "1,010", lastFight: "W · Nov 19, 2025 vs Sergey Kovalev", change: "—", image: "/fighter-1.png" },
-    { rank: 5, name: "IVAN PETROV", flag: "🇷🇺", country: "Russia", record: "20-4-0", points: "850", lastFight: "L · Apr 10, 2026 vs Viktor Drago", change: "—", image: "/fighter-2.png" },
+    { rank: 5, name: "IVAN PETROV", flag: "🇷🇺", country: "Russia", record: "20-4-0", points: "850", lastFight: "L · Apr 10, 2026 vs Jaden Harvey", change: "—", image: "/fighter-2.png" },
   ],
   MIDDLEWEIGHT: [
-    { rank: 1, name: "CARLOS MENDOZA", flag: "🇲🇽", country: "Mexico", record: "20-1-1", points: "1,200", lastFight: "W · May 18, 2026 vs Kevin Torres", change: "—", image: "/champions/KEVIN_TORRES_165_SBC_CHAMPION.webp" },
+    { rank: 1, name: "CARLOS MENDOZA", flag: "🇲🇽", country: "Mexico", record: "20-1-1", points: "1,200", lastFight: "W · May 18, 2026 vs Kevin Torres", change: "—", image: "/fighter-1.png" },
     { rank: 2, name: "JADEN HARVEY", flag: "🇨🇦", country: "Canada", record: "22-2-0", points: "1,150", lastFight: "W · Apr 22, 2026 vs Leo Ortiz", change: "↑ 1", image: "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.webp" },
     { rank: 3, name: "KEVIN TORRES", flag: "🇺🇸", country: "United States", record: "24-1-0", points: "1,110", lastFight: "L · May 18, 2026 vs Carlos Mendoza", change: "↓ 1", image: "/champions/KEVIN_TORRES_165_SBC_CHAMPION.webp" },
     { rank: 4, name: "GENNADY GOLOVKIN", flag: "🇰🇿", country: "Kazakhstan", record: "42-2-1", points: "990", lastFight: "W · Sep 17, 2025 vs Ryota Murata", change: "—", image: "/fighter-1.png" },
     { rank: 5, name: "CANELO ALVAREZ", flag: "🇲🇽", country: "Mexico", record: "61-2-2", points: "950", lastFight: "W · May 04, 2026 vs Jaime Munguia", change: "—", image: "/fighter-2.png" },
   ],
   WELTERWEIGHT: [
-    { rank: 1, name: "ISAAC BROWN", flag: "🇺🇸", country: "United States", record: "22-0-0", points: "1,280", lastFight: "W · May 30, 2026 vs Errol Spence", change: "—", image: "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.webp" },
+    { rank: 1, name: "ARTURO ACEVEDO", flag: "🇺🇸", country: "United States", record: "22-0-0", points: "1,280", lastFight: "W · May 30, 2026 vs Errol Spence", change: "—", image: "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.webp" },
     { rank: 2, name: "TERENCE CRAWFORD", flag: "🇺🇸", country: "United States", record: "40-0-0", points: "1,270", lastFight: "W · Jul 29, 2025 vs Errol Spence", change: "—", image: "/fighter-1.png" },
-    { rank: 3, name: "ERROL SPENCE", flag: "🇺🇸", country: "United States", record: "28-2-0", points: "1,090", lastFight: "L · May 30, 2026 vs Isaac Brown", change: "—", image: "/fighter-2.png" },
-    { rank: 4, name: "MANNY PACQUIAO", flag: "🇵🇭", country: "Philippines", record: "62-8-2", points: "960", lastFight: "L · Aug 21, 2024 vs Yordenis Ugas", change: "—", image: "/champions/KIAMAL_EVELYN_132_SBC_CHAMPION.webp" },
-    { rank: 5, name: "FLOYD MAYWEATHER", flag: "🇺🇸", country: "United States", record: "50-0-0", points: "900", lastFight: "W · Aug 26, 2017 vs Conor McGregor", change: "—", image: "/champions/BRADLEY_BELT_198_ADC_CHAMPION.webp" },
+    { rank: 3, name: "ERROL SPENCE", flag: "🇺🇸", country: "United States", record: "28-2-0", points: "1,090", lastFight: "L · May 30, 2026 vs Arturo Acevedo", change: "—", image: "/fighter-2.png" },
+    { rank: 4, name: "KIAMAL EVELYN", flag: "🇵🇭", country: "Philippines", record: "62-8-2", points: "960", lastFight: "L · Aug 21, 2024 vs Yordenis Ugas", change: "—", image: "/champions/KIAMAL_EVELYN_132_SBC_CHAMPION.webp" },
+    { rank: 5, name: "BRADLEY BELT", flag: "🇺🇸", country: "United States", record: "50-0-0", points: "900", lastFight: "W · Aug 26, 2017 vs Conor McGregor", change: "—", image: "/champions/BRADLEY_BELT_198_ADC_CHAMPION.webp" },
   ],
 }
 

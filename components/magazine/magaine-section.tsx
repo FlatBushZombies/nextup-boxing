@@ -24,9 +24,9 @@ export function MagazineSection() {
             Magazine
           </span>
 
-          <h2 className="text-[64px] uppercase leading-[0.95] font-display">
+          <h2 className="text-[64px] uppercase leading-[0.95] font-display text-[var(--gold-light)]">
             Inside The
-            <span className="block text-white/60">Fight Issue</span>
+            <span className="block text-[var(--crimson-light)]">Fight Issue</span>
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-white/60 sm:text-base">

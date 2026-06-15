@@ -67,10 +67,10 @@ export default function EventsPage() {
               </span>
             </div>
 
-            <h1 className="text-6xl sm:text-7xl lg:text-[76px] uppercase tracking-wide leading-[0.95] font-display mb-4 text-white">
+            <h1 className="text-6xl sm:text-7xl lg:text-[76px] uppercase tracking-wide leading-[0.95] font-display mb-4 text-[var(--gold-light)]">
               Rodriguez
-              <span className="block text-3xl sm:text-4xl my-1 text-white/60">vs</span>
-              Williams
+              <span className="block text-3xl sm:text-4xl my-1 text-[var(--crimson-light)]">vs</span>
+              <span className="text-[var(--crimson-light)]">Williams</span>
             </h1>
 
             <p className="text-sm sm:text-base font-medium uppercase tracking-[0.15em] text-white/70 mb-6">
@@ -84,13 +84,13 @@ export default function EventsPage() {
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                <span>Harare Arena</span>
+                <span>MSG Arena</span>
               </div>
             </div>
 
             <a
               href="#watch-live"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-medium uppercase tracking-wide text-[#111111] transition-colors hover:bg-[#e5e5e5]"
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--gold-light)] px-8 py-3.5 text-sm font-medium uppercase tracking-wide text-[#111111] transition-colors hover:bg-gold"
             >
               <Play className="w-4 h-4 fill-current" />
               Watch Live
