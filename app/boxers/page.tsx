@@ -377,7 +377,6 @@ function BoxerCard({ boxer }: { boxer: BoxerData }) {
       </div>
       <div className="card-text">
         <h2 className="!uppercase !font-bold">{boxer.firstName} {boxer.lastName}</h2>
-        <span className="weight-cat">{boxer.weightClass}</span>
       </div>
     </div>
   )
