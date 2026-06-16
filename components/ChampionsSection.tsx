@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Reveal } from "@/components/Reveal"
+import { AnimatedLine } from "@/components/AnimatedLine"
 
 const champions = [
   {
@@ -76,22 +77,25 @@ export function ChampionsSection() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <Reveal as="fade-up" className="mb-10 flex items-center justify-between gap-4">
-          <h2 className="text-xl md:text-2xl font-medium uppercase tracking-wide text-gold">
-            Current Champions
-          </h2>
-          <Link
-            href="/boxers"
-            className="hidden sm:inline-flex items-center rounded-full border border-[#e5e5e5] px-5 py-2.5 text-xs font-medium uppercase tracking-wide text-[#111111] transition-colors hover:border-[#707072]"
-          >
-            View All Boxers
-          </Link>
-        </Reveal>
+        <div className="mb-10">
+          <Reveal as="slide-jab" className="flex items-center justify-between gap-4">
+            <h2 className="text-xl md:text-2xl font-semibold uppercase tracking-wide text-gold font-sans">
+              Current Champions
+            </h2>
+            <Link
+              href="/boxers"
+              className="hidden sm:inline-flex items-center border border-[#e5e5e5] px-5 py-2.5 text-xs font-semibold uppercase tracking-wide text-[#111111] transition-colors hover:border-[#707072] font-sans"
+            >
+              View All Boxers
+            </Link>
+          </Reveal>
+          <AnimatedLine color="gold" delay={100} className="mt-3" />
+        </div>
 
-        {/* Cards */}
+        {/* Cards — clip-up reveal staggered */}
         <div className="relative mx-auto grid w-full grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
           {champions.map((fighter, index) => (
-            <Reveal key={fighter.image} as="fade-up" delay={index * 60}>
+            <Reveal key={fighter.image} as="clip-up" delay={index * 70}>
               <div className="boxer-card-mr aspect-[3/4]">
                 <div className="image-wrap">
                   <Image
@@ -104,7 +108,7 @@ export function ChampionsSection() {
                   <div className="gradient-overlay" />
                 </div>
                 <div className="card-text">
-                  <h2>{fighter.firstName} {fighter.lastName}</h2>
+                  <h2 className="font-sans font-semibold">{fighter.firstName} {fighter.lastName}</h2>
                   <span className="weight-cat champion-badge">{fighter.championship}</span>
                 </div>
               </div>
@@ -115,14 +119,14 @@ export function ChampionsSection() {
         {/* Rising Stars Banner */}
         <Reveal as="fade-up" className="mt-12 flex flex-col items-center justify-center gap-4 border border-[#e5e5e5] px-6 py-10 text-center sm:flex-row sm:justify-between sm:text-left">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-[#707072]">The next wave of talent</p>
-            <p className="mt-1 text-base md:text-lg font-medium uppercase tracking-wide text-gold">
+            <p className="text-xs uppercase tracking-[0.2em] text-[#707072] font-sans">The next wave of talent</p>
+            <p className="mt-1 text-base md:text-lg font-semibold uppercase tracking-wide text-gold font-sans">
               Rising Stars &amp; Contenders
             </p>
           </div>
           <Link
             href="/boxers"
-            className="inline-flex items-center rounded-full bg-[#111111] px-6 py-3 text-xs font-medium uppercase tracking-wide text-white transition-colors hover:bg-[#1a1a1a]"
+            className="inline-flex items-center bg-[#111111] px-6 py-3 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-[#1a1a1a] font-sans"
           >
             View All Boxers
           </Link>

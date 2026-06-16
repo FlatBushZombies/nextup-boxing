@@ -31,7 +31,7 @@ export function HeroSection() {
           <Reveal as="fade-up" className="flex flex-col items-start gap-2 sm:gap-3">
             {/* Date Eyebrow */}
             <div className="flex items-center gap-3">
-              <span className="inline-flex items-center rounded-full bg-white px-3 py-1 text-xs font-medium uppercase tracking-[0.15em] text-[#111111]">
+              <span className="inline-flex items-center bg-white px-3 py-1 text-xs font-medium uppercase tracking-[0.15em] text-[#111111]">
                 Sat
               </span>
               <span className="text-sm font-medium uppercase tracking-[0.15em] text-white">
@@ -51,7 +51,7 @@ export function HeroSection() {
             </h1>
 
             {/* Time Info */}
-            <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-2">
+            <div className="mt-2 inline-flex items-center gap-2 border border-white/20 px-4 py-2">
               <span className="pulse-glow h-2 w-2 rounded-full bg-white" />
               <span className="text-sm font-medium uppercase tracking-[0.15em] text-white">
                 5 PM Sharp
@@ -65,14 +65,14 @@ export function HeroSection() {
               href="https://www.simpletix.com/e/strong-island-fight-night-11-tickets-254611"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex min-h-12 w-full sm:w-auto items-center justify-center rounded-full bg-white px-8 py-3 text-center text-sm font-medium uppercase tracking-wide text-[#111111] transition-colors hover:bg-[#e5e5e5]"
+              className="flex min-h-12 w-full sm:w-auto items-center justify-center bg-white px-8 py-3 text-center text-sm font-medium uppercase tracking-wide text-[#111111] transition-colors hover:bg-[#e5e5e5]"
             >
               Get Tickets
             </a>
 
             <a
               href="#youtube"
-              className="flex min-h-12 w-full sm:w-auto items-center justify-center rounded-full border border-white/30 bg-transparent px-8 py-3 text-center text-sm font-medium uppercase tracking-wide text-white transition-colors hover:border-white"
+              className="flex min-h-12 w-full sm:w-auto items-center justify-center border border-white/30 bg-transparent px-8 py-3 text-center text-sm font-medium uppercase tracking-wide text-white transition-colors hover:border-white"
             >
               Free Livestream
             </a>

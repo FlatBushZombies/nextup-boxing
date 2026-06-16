@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
 import { Reveal } from "@/components/Reveal"
+import { AnimatedLine } from "@/components/AnimatedLine"
 import { ChevronDown, Search, X } from "lucide-react"
 
 // Boxers data - World Champions
@@ -200,7 +201,7 @@ export default function BoxersPage() {
             <div className="flex-1">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {worldChampions.map((boxer, index) => (
-                  <Reveal key={boxer.id} as="fade-up" delay={index * 60}>
+                  <Reveal key={boxer.id} as="clip-up" delay={index * 70}>
                     <ChampionCard boxer={boxer} />
                   </Reveal>
                 ))}
@@ -214,12 +215,14 @@ export default function BoxersPage() {
       <section className="all-boxers py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Header with filters */}
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
-            <h2 className="text-xl md:text-2xl font-medium uppercase tracking-wide text-gold">
-              Rising Stars / Contenders
-            </h2>
-
-            <div className="flex flex-wrap items-center gap-3">
+          <div className="mb-10">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-3">
+              <Reveal as="slide-jab">
+                <h2 className="text-xl md:text-2xl font-semibold uppercase tracking-wide text-gold font-sans">
+                  Rising Stars / Contenders
+                </h2>
+              </Reveal>
+              <div className="flex flex-wrap items-center gap-3">
               {/* Search */}
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9e9ea0]" />
@@ -228,7 +231,7 @@ export default function BoxersPage() {
                   placeholder="Search..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2.5 bg-white border border-[#e5e5e5] text-sm font-normal text-[#111111] placeholder-[#9e9ea0] focus:outline-none focus:border-[#707072] transition-colors w-40 rounded-[24px]"
+                  className="pl-10 pr-4 py-2.5 bg-white border border-[#e5e5e5] text-sm font-normal text-[#111111] placeholder-[#9e9ea0] focus:outline-none focus:border-[#707072] transition-colors w-40 rounded-none"
                 />
                 {searchQuery && (
                   <button
@@ -247,7 +250,7 @@ export default function BoxersPage() {
                     setShowWeightDropdown(!showWeightDropdown)
                     setShowSortDropdown(false)
                   }}
-                  className="flex items-center gap-2 px-4 py-2.5 bg-white border border-[#e5e5e5] text-sm font-medium uppercase tracking-wide text-[#111111] hover:border-[#707072] transition-colors rounded-full"
+                  className="flex items-center gap-2 px-4 py-2.5 bg-white border border-[#e5e5e5] text-sm font-medium uppercase tracking-wide text-[#111111] hover:border-[#707072] transition-colors rounded-none"
                 >
                   {selectedWeight === "All" ? "Weight" : selectedWeight}
                   <ChevronDown className={`w-4 h-4 transition-transform ${showWeightDropdown ? "rotate-180" : ""}`} />
@@ -279,7 +282,7 @@ export default function BoxersPage() {
                     setShowSortDropdown(!showSortDropdown)
                     setShowWeightDropdown(false)
                   }}
-                  className="flex items-center gap-2 px-4 py-2.5 bg-white border border-[#e5e5e5] text-sm font-medium uppercase tracking-wide text-[#111111] hover:border-[#707072] transition-colors rounded-full"
+                  className="flex items-center gap-2 px-4 py-2.5 bg-white border border-[#e5e5e5] text-sm font-medium uppercase tracking-wide text-[#111111] hover:border-[#707072] transition-colors rounded-none"
                 >
                   Sort
                   <ChevronDown className={`w-4 h-4 transition-transform ${showSortDropdown ? "rotate-180" : ""}`} />
@@ -305,11 +308,13 @@ export default function BoxersPage() {
               </div>
             </div>
           </div>
+          <AnimatedLine color="gold" delay={150} />
+          </div>
 
           {/* Boxers Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
             {filteredBoxers.map((boxer, index) => (
-              <Reveal key={boxer.id} as="fade-up" delay={(index % 10) * 60}>
+              <Reveal key={boxer.id} as="clip-up" delay={(index % 8) * 60}>
                 <BoxerCard boxer={boxer} />
               </Reveal>
             ))}

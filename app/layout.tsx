@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Bebas_Neue } from 'next/font/google'
+import { Inter, Bebas_Neue, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { AuthProvider } from '@/lib/auth-context'
 import './globals.css'
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-ui',
   display: 'swap',
 })
@@ -15,6 +15,14 @@ const bebasNeue = Bebas_Neue({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-bebas-neue',
+  display: 'swap',
+})
+
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-playfair',
   display: 'swap',
 })
 
@@ -57,7 +65,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${bebasNeue.variable} bg-white`}
+      className={`${inter.variable} ${bebasNeue.variable} ${playfairDisplay.variable} bg-white`}
     >
       <body className="overflow-x-hidden font-sans antialiased">
         <AuthProvider>{children}</AuthProvider>

@@ -65,10 +65,10 @@
   --input:             var(--soft-mist);
   --ring:              var(--faint-gray);
   --radius:            0px;
-  --radius-button:     30px;
-  --radius-search:     24px;
+  --radius-button:     0px;
+  --radius-search:     0px;
   --radius-card:       0px;
-  --radius-tag:        30px;
+  --radius-tag:        0px;
 
   --chart-1: var(--obsidian);
   --chart-2: var(--steel);
@@ -93,12 +93,16 @@
 }
 
 @theme inline {
-  /* Global Tailwind font mappings — Inter (UI) + Bebas Neue (display, hero only) */
-  --font-sans:    var(--font-ui), 'Helvetica Neue', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono:    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --font-display: var(--font-bebas-neue), 'Arial Narrow', sans-serif;
-  --font-heading: var(--font-ui), 'Helvetica Neue', sans-serif;
-  --font-barlow:  var(--font-ui), sans-serif;
+  /* Global Tailwind font mappings — 3-font system */
+  /* Inter: nav, body, UI labels          */
+  /* Bebas Neue: hero display titles only */
+  /* Playfair Display: editorial headings */
+  --font-sans:      var(--font-ui), 'Helvetica Neue', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono:      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-display:   var(--font-bebas-neue), 'Arial Narrow', sans-serif;
+  --font-editorial: var(--font-playfair), Georgia, 'Times New Roman', serif;
+  --font-heading:   var(--font-ui), 'Helvetica Neue', sans-serif;
+  --font-barlow:    var(--font-ui), sans-serif;
 
   /* Monochrome palette */
   --color-obsidian:     var(--obsidian);
@@ -457,19 +461,38 @@
   align-items: center;
   font-family: var(--font-sans);
   font-weight: var(--font-medium);
-  font-size: 0.75rem;
-  text-transform: none;
-  letter-spacing: 0;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: #ffffff;
   background: var(--obsidian);
-  border-radius: 9999px;
-  padding: 4px 10px;
+  border-radius: 0;
+  padding: 3px 8px;
 }
 
 /* Gold championship-belt accent — title badges only */
 .boxer-card-mr .card-text .weight-cat.champion-badge {
   color: var(--obsidian);
   background: var(--gold);
+}
+
+/* Sharp crimson edge reveal on card hover */
+.boxer-card-mr::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--crimson);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 20;
+}
+
+.boxer-card-mr:hover::after {
+  transform: scaleX(1);
 }
 
 /* ═══════════════════════════════════════════════════════

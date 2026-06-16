@@ -7,41 +7,41 @@ import {
   useState,
   type ReactNode,
 } from "react"
+import type { User } from "@supabase/supabase-js"
+import { supabaseBrowser } from "@/lib/supabase-browser"
 
 export type Member = {
+  id: string
   firstName: string
   lastName: string
   email: string
-  country: string
   memberSince: string
-  magazineSubscribed: boolean
-  merchDropNotifications: boolean
 }
 
 type AuthContextType = {
   member: Member | null
   isLoading: boolean
-  signIn: (email: string) => void
-  signOut: () => void
-  updateMember: (updates: Partial<Member>) => void
+  signIn: (email: string, password: string) => Promise<{ error?: string }>
+  signUp: (
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string
+  ) => Promise<{ error?: string }>
+  signOut: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | null>(null)
 
-const STORAGE_KEY = "nextup_member"
-
-// Mock member returned on sign in. Real auth will replace this later.
-function createMockMember(email: string): Member {
-  const namePart = email.split("@")[0] ?? "member"
-  const firstName = namePart.charAt(0).toUpperCase() + namePart.slice(1)
+function memberFromUser(user: User): Member {
+  const meta = user.user_metadata ?? {}
+  const namePart = (user.email ?? "member").split("@")[0]
   return {
-    firstName,
-    lastName: "Carter",
-    email,
-    country: "United States",
-    memberSince: "2026",
-    magazineSubscribed: true,
-    merchDropNotifications: false,
+    id: user.id,
+    firstName: meta.first_name ?? namePart.charAt(0).toUpperCase() + namePart.slice(1),
+    lastName: meta.last_name ?? "",
+    email: user.email ?? "",
+    memberSince: new Date(user.created_at).getFullYear().toString(),
   }
 }
 
@@ -50,44 +50,50 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(STORAGE_KEY)
-      if (stored) setMember(JSON.parse(stored) as Member)
-    } catch {
-      // ignore parse errors
-    }
-    setIsLoading(false)
+    supabaseBrowser.auth.getSession().then(({ data }) => {
+      setMember(data.session?.user ? memberFromUser(data.session.user) : null)
+      setIsLoading(false)
+    })
+
+    const { data: { subscription } } = supabaseBrowser.auth.onAuthStateChange(
+      (_event, session) => {
+        setMember(session?.user ? memberFromUser(session.user) : null)
+      }
+    )
+
+    return () => subscription.unsubscribe()
   }, [])
 
-  const persist = (next: Member | null) => {
-    setMember(next)
-    try {
-      if (next) window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
-      else window.localStorage.removeItem(STORAGE_KEY)
-    } catch {
-      // ignore storage errors
-    }
+  const signIn = async (email: string, password: string): Promise<{ error?: string }> => {
+    const { error } = await supabaseBrowser.auth.signInWithPassword({ email, password })
+    if (error) return { error: error.message }
+    return {}
   }
 
-  const signIn = (email: string) => persist(createMockMember(email))
-  const signOut = () => persist(null)
-  const updateMember = (updates: Partial<Member>) => {
-    setMember((prev) => {
-      if (!prev) return prev
-      const next = { ...prev, ...updates }
-      try {
-        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
-      } catch {
-        // ignore
-      }
-      return next
+  const signUp = async (
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string
+  ): Promise<{ error?: string }> => {
+    const { error } = await supabaseBrowser.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { first_name: firstName, last_name: lastName },
+      },
     })
+    if (error) return { error: error.message }
+    return {}
+  }
+
+  const signOut = async () => {
+    await supabaseBrowser.auth.signOut()
+    setMember(null)
   }
 
   return (
-    <AuthContext.Provider
-      value={{ member, isLoading, signIn, signOut, updateMember }}
-    >
+    <AuthContext.Provider value={{ member, isLoading, signIn, signUp, signOut }}>
       {children}
     </AuthContext.Provider>
   )

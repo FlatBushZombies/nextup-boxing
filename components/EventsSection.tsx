@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { MapPin, Ticket } from "lucide-react"
 import { Reveal } from "@/components/Reveal"
+import { AnimatedLine } from "@/components/AnimatedLine"
 
 const events = [
   {
@@ -25,11 +26,12 @@ export function EventsSection() {
   return (
     <section id="events" className="relative w-full scroll-mt-20 overflow-hidden bg-white">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        <Reveal as="fade-up" className="mb-10">
-          <h2 className="text-xl md:text-2xl font-medium uppercase tracking-wide text-crimson">
+        <Reveal as="slide-jab" className="mb-2">
+          <h2 className="text-xl md:text-2xl font-semibold uppercase tracking-wide text-crimson font-sans">
             Upcoming Events
           </h2>
         </Reveal>
+        <AnimatedLine color="crimson" delay={80} className="mb-10" />
       </div>
 
       <div className="flex flex-col">
@@ -37,7 +39,7 @@ export function EventsSection() {
           const isDark = index % 2 === 1
 
           return (
-            <Reveal key={event.id} as="fade-up" delay={index * 60}>
+            <Reveal key={event.id} as="clip-up" delay={index * 90}>
               <div className={`${isDark ? "bg-[#111111]" : "bg-white"} border-t border-[#e5e5e5]`}>
                 <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10">
                   <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -76,7 +78,7 @@ export function EventsSection() {
                     {/* Button */}
                     <div className="flex w-full shrink-0 md:ml-4 md:w-auto">
                       <button
-                        className={`flex h-[50px] md:h-[60px] w-full md:w-[180px] items-center justify-center gap-2 rounded-full text-sm font-medium uppercase tracking-wide transition-colors ${
+                        className={`flex h-[50px] md:h-[60px] w-full md:w-[180px] items-center justify-center gap-2 rounded-none text-sm font-medium uppercase tracking-wide transition-colors ${
                           isDark ? "bg-white text-[#111111] hover:bg-[#e5e5e5]" : "bg-[#111111] text-white hover:bg-[#1a1a1a]"
                         }`}
                       >

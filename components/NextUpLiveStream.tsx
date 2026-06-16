@@ -87,7 +87,7 @@ function FeaturedVideoPlayer({
               ) : null}
               <div className="absolute inset-0 bg-[#111111]/30 transition-colors duration-300 group-hover:bg-[#111111]/10" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:scale-105">
+                <div className="flex h-16 w-16 items-center justify-center rounded-none bg-white transition-transform duration-300 group-hover:scale-105">
                   <Play className="ml-1 h-6 w-6 fill-[#111111] text-[#111111]" />
                 </div>
               </div>
@@ -180,14 +180,14 @@ export function NextUpLiveStream() {
         <Reveal as="fade-up" className="mb-10 flex flex-col gap-4">
           <div className="flex flex-wrap items-center gap-3">
             <div
-              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium uppercase tracking-wide ${
+              className={`inline-flex items-center gap-1.5 rounded-none px-3 py-1.5 text-xs font-medium uppercase tracking-wide ${
                 isStreamLive ? "bg-crimson text-white" : "border border-white/20 text-white/70"
               }`}
             >
               <Radio className="h-3.5 w-3.5" />
               {isStreamLive ? "Live Now" : "Scheduled"}
             </div>
-            <div className="inline-flex items-center gap-1.5 rounded-full border border-white/20 px-3 py-1.5 text-xs font-medium uppercase tracking-wide text-white/70">
+            <div className="inline-flex items-center gap-1.5 rounded-none border border-white/20 px-3 py-1.5 text-xs font-medium uppercase tracking-wide text-white/70">
               <ShieldCheck className="h-3.5 w-3.5" />
               Official Broadcast
             </div>
