@@ -29,7 +29,7 @@ export default function SignInPage() {
       {/* Visual side */}
       <div className="relative hidden overflow-hidden bg-[#111111] lg:block">
         <Image
-          src="/hero-bg.png"
+          src="/hero-boxers.webp"
           alt="Boxing arena"
           fill
           priority
