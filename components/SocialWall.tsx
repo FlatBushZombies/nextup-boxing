@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from "react"
 import { Heart, Play, ExternalLink, X, Check, Share2 } from "lucide-react"
-import { Reveal } from "@/components/Reveal"
 
 type MockReel = {
   id: string
@@ -300,7 +299,7 @@ export function SocialWall() {
       className="relative overflow-hidden bg-[#111111] py-16 sm:py-24 border-t border-[#e5e5e5]"
     >
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <Reveal as="fade-up" className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div className="mb-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <span className="text-xs font-medium uppercase tracking-[0.2em] text-white/50 mb-2 block">
               Social Wall
@@ -321,7 +320,7 @@ export function SocialWall() {
           >
             Follow on Instagram
           </a>
-        </Reveal>
+        </div>
 
         {apiMessage && (
           <p className="mb-6 text-sm text-white/50" role="status">
@@ -331,7 +330,7 @@ export function SocialWall() {
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
           {/* Featured Large Tile */}
-          <Reveal as="fade-up" delay={60} className="sm:col-span-2 lg:col-span-2 xl:col-span-2 xl:row-span-2">
+          <div className="sm:col-span-2 lg:col-span-2 xl:col-span-2 xl:row-span-2">
             <button
               type="button"
               onClick={() => setSelectedReel(featuredPost)}
@@ -389,11 +388,11 @@ export function SocialWall() {
                 </div>
               </div>
             </button>
-          </Reveal>
+          </div>
 
           {/* Grid posts */}
           {gridPosts.map((post, index) => (
-            <Reveal key={post.id} as="fade-up" delay={(index + 1) * 60}>
+            <div key={post.id}>
               <button
                 type="button"
                 onClick={() => setSelectedReel(post)}
@@ -448,7 +447,7 @@ export function SocialWall() {
                   </div>
                 </div>
               </button>
-            </Reveal>
+            </div>
           ))}
         </div>
       </div>
