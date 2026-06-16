@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from "react"
 import type { User } from "@supabase/supabase-js"
-import { supabaseBrowser } from "@/lib/supabase-browser"
+import { getSupabaseBrowser } from "@/lib/supabase-browser"
 
 export type Member = {
   id: string
@@ -50,12 +50,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    supabaseBrowser.auth.getSession().then(({ data }) => {
+    const client = getSupabaseBrowser()
+
+    if (!client) {
+      setIsLoading(false)
+      return
+    }
+
+    client.auth.getSession().then(({ data }) => {
       setMember(data.session?.user ? memberFromUser(data.session.user) : null)
       setIsLoading(false)
     })
 
-    const { data: { subscription } } = supabaseBrowser.auth.onAuthStateChange(
+    const { data: { subscription } } = client.auth.onAuthStateChange(
       (_event, session) => {
         setMember(session?.user ? memberFromUser(session.user) : null)
       }
@@ -65,7 +72,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const signIn = async (email: string, password: string): Promise<{ error?: string }> => {
-    const { error } = await supabaseBrowser.auth.signInWithPassword({ email, password })
+    const client = getSupabaseBrowser()
+    if (!client) return { error: "Authentication is not configured yet." }
+    const { error } = await client.auth.signInWithPassword({ email, password })
     if (error) return { error: error.message }
     return {}
   }
@@ -76,7 +85,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     firstName: string,
     lastName: string
   ): Promise<{ error?: string }> => {
-    const { error } = await supabaseBrowser.auth.signUp({
+    const client = getSupabaseBrowser()
+    if (!client) return { error: "Authentication is not configured yet." }
+    const { error } = await client.auth.signUp({
       email,
       password,
       options: {
@@ -88,7 +99,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const signOut = async () => {
-    await supabaseBrowser.auth.signOut()
+    const client = getSupabaseBrowser()
+    if (client) await client.auth.signOut()
     setMember(null)
   }
 
