@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer"
 import { Reveal } from "@/components/Reveal"
 import { AnimatedLine } from "@/components/AnimatedLine"
 import { ChevronDown, Search, X } from "lucide-react"
+import { BookingSection } from "@/components/BookingSection"
 
 // Boxers data - World Champions
 const worldChampions = [
@@ -327,6 +328,8 @@ export default function BoxersPage() {
           )}
         </div>
       </section>
+
+      <BookingSection />
 
       <Footer />
     </main>

@@ -24,6 +24,11 @@ CREATE INDEX IF NOT EXISTS idx_user_profiles_user_id ON user_profiles(user_id);
 
 ALTER TABLE user_profiles ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can view their own profile"       ON user_profiles;
+DROP POLICY IF EXISTS "Users can update their own profile"     ON user_profiles;
+DROP POLICY IF EXISTS "Users can insert their own profile"     ON user_profiles;
+DROP POLICY IF EXISTS "Service role full access to profiles"   ON user_profiles;
+
 CREATE POLICY "Users can view their own profile"
     ON user_profiles FOR SELECT
     USING (auth.uid() = user_id);
@@ -89,6 +94,9 @@ CREATE INDEX IF NOT EXISTS idx_fighters_champion  ON fighters(is_champion);
 
 ALTER TABLE fighters ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Anyone can view fighters"              ON fighters;
+DROP POLICY IF EXISTS "Service role full access to fighters"  ON fighters;
+
 CREATE POLICY "Anyone can view fighters"
     ON fighters FOR SELECT USING (true);
 
@@ -117,6 +125,9 @@ CREATE INDEX IF NOT EXISTS idx_events_date    ON events(event_date);
 CREATE INDEX IF NOT EXISTS idx_events_status  ON events(status);
 
 ALTER TABLE events ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Anyone can view events"              ON events;
+DROP POLICY IF EXISTS "Service role full access to events"  ON events;
 
 CREATE POLICY "Anyone can view events"
     ON events FOR SELECT USING (true);
@@ -148,6 +159,9 @@ CREATE INDEX IF NOT EXISTS idx_fight_results_loser   ON fight_results(loser_id);
 
 ALTER TABLE fight_results ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Anyone can view fight results"              ON fight_results;
+DROP POLICY IF EXISTS "Service role full access to fight results"  ON fight_results;
+
 CREATE POLICY "Anyone can view fight results"
     ON fight_results FOR SELECT USING (true);
 
@@ -178,6 +192,9 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_rankings_unique
 
 ALTER TABLE rankings ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Anyone can view rankings"              ON rankings;
+DROP POLICY IF EXISTS "Service role full access to rankings"  ON rankings;
+
 CREATE POLICY "Anyone can view rankings"
     ON rankings FOR SELECT USING (true);
 
@@ -203,6 +220,10 @@ CREATE INDEX IF NOT EXISTS idx_notifications_user  ON notifications(user_id);
 CREATE INDEX IF NOT EXISTS idx_notifications_read  ON notifications(user_id, read);
 
 ALTER TABLE notifications ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Users can view their own notifications"    ON notifications;
+DROP POLICY IF EXISTS "Users can mark their notifications read"   ON notifications;
+DROP POLICY IF EXISTS "Service role full access to notifications" ON notifications;
 
 CREATE POLICY "Users can view their own notifications"
     ON notifications FOR SELECT
