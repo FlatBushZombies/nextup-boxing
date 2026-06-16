@@ -57,7 +57,7 @@ export function Reveal({
               delay: delayS,
               ease: "power3.out",
               scrollTrigger: triggerCfg,
-              onComplete: () => gsap.set(el, { willChange: "auto" }),
+              onComplete: () => { gsap.set(el, { willChange: "auto" }) },
             }
           )
           break
@@ -74,7 +74,7 @@ export function Reveal({
               delay: delayS,
               ease: "power4.out",
               scrollTrigger: triggerCfg,
-              onComplete: () => gsap.set(el, { willChange: "auto" }),
+              onComplete: () => { gsap.set(el, { willChange: "auto" }) },
             }
           )
           break
@@ -90,7 +90,7 @@ export function Reveal({
               delay: delayS,
               ease: "power2.out",
               scrollTrigger: triggerCfg,
-              onComplete: () => gsap.set(el, { willChange: "auto" }),
+              onComplete: () => { gsap.set(el, { willChange: "auto" }) },
             }
           )
           break
@@ -105,7 +105,7 @@ export function Reveal({
               delay: delayS,
               ease: "power2.out",
               scrollTrigger: triggerCfg,
-              onComplete: () => gsap.set(el, { willChange: "auto" }),
+              onComplete: () => { gsap.set(el, { willChange: "auto" }) },
             }
           )
           break
@@ -122,7 +122,7 @@ export function Reveal({
               delay: delayS,
               ease: "power2.out",
               scrollTrigger: triggerCfg,
-              onComplete: () => gsap.set(el, { willChange: "auto" }),
+              onComplete: () => { gsap.set(el, { willChange: "auto" }) },
             }
           )
           break

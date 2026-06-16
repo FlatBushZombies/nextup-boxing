@@ -48,7 +48,7 @@ export function AnimatedLine({
             start: "top 90%",
             once: true,
           },
-          onComplete: () => gsap.set(el, { willChange: "auto" }),
+          onComplete: () => { gsap.set(el, { willChange: "auto" }) },
         }
       )
     }, el)
@@ -63,7 +63,7 @@ export function AnimatedLine({
       style={{
         height: `${thickness}px`,
         backgroundColor: colorMap[color],
-        scaleX: 0,
+        transform: "scaleX(0)",
       }}
     />
   )
