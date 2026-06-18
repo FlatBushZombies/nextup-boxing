@@ -9,30 +9,22 @@ const eras = [
     year: "2025",
     label: "Season III",
     champions: [
-      { name: "BRADLEY BELT", title: "SBC Heavyweight Champion", record: "27-1-0", image: "/champions/BRADLEY_BELT_198_ADC_CHAMPION.webp" },
-      { name: "XAVIER WILCHER", title: "ADC Cruiserweight Champion", record: "24-2-0", image: "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.webp" },
-      { name: "REESE MISTRETTA", title: "SBC Light-Heavyweight Champion", record: "21-0-0", image: "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.webp" },
-      { name: "NAIJALIE RODRIGUEZ", title: "Women's SBC Flyweight Champion", record: "16-1-0", image: "/champions/NAIJALIE_RODRIGUEZ_106_WOMENS_SBC_CHAMPION.webp" },
+      { name: "BRADLEY BELT", title: "SBC  Champion", record: "27-1-0", image: "/champions/BRADLEY_BELT_198_ADC_CHAMPION.webp" },
+      { name: "XAVIER WILCHER", title: "ADC  Champion", record: "24-2-0", image: "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.webp" },
+      { name: "REESE MISTRETTA", title: "SBC Champion", record: "21-0-0", image: "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.webp" },
+      { name: "NAIJALIE RODRIGUEZ", title: "Women's SBC Champion", record: "16-1-0", image: "/champions/NAIJALIE_RODRIGUEZ_106_WOMENS_SBC_CHAMPION.webp" },
     ],
   },
   {
     year: "2024",
     label: "Season II",
     champions: [
-      { name: "JADEN HARVEY", title: "DAWG Super-Middleweight Champion", record: "20-1-0", image: "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.webp" },
-      { name: "KIAMAL EVELYN", title: "SBC Super-Featherweight Champion", record: "17-0-0", image: "/champions/KIAMAL_EVELYN_132_SBC_CHAMPION.webp" },
-      { name: "KEVIN TORRES", title: "SBC Super-Middleweight Champion", record: "22-2-0", image: "/champions/KEVIN_TORRES_165_SBC_CHAMPION.webp" },
-      { name: "ARTURO ACEVEDO", title: "SBC Super-Bantamweight Champion", record: "19-1-0", image: "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.webp" },
+      { name: "JADEN HARVEY", title: "DAWG  Champion", record: "20-1-0", image: "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.webp" },
+      { name: "KIAMAL EVELYN", title: "SBC  Champion", record: "17-0-0", image: "/champions/KIAMAL_EVELYN_132_SBC_CHAMPION.webp" },
+      { name: "KEVIN TORRES", title: "SBC  Champion", record: "22-2-0", image: "/champions/KEVIN_TORRES_165_SBC_CHAMPION.webp" },
+      { name: "ARTURO ACEVEDO", title: "SBC  Champion", record: "19-1-0", image: "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.webp" },
     ],
-  },
-  {
-    year: "2023",
-    label: "Inaugural Season",
-    champions: [
-      { name: "JEREMY RODRIGUEZ", title: "SBC Heavyweight Champion", record: "14-0-0", image: "/fighter-1.png" },
-      { name: "ANTHONY VASQUEZ", title: "SBC Cruiserweight Champion", record: "16-0-0", image: "/fighter-2.png" },
-    ],
-  },
+  }
 ]
 
 export default function ChampionsHistoryPage() {

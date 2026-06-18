@@ -27,7 +27,7 @@ type AuthContextType = {
     password: string,
     firstName: string,
     lastName: string
-  ) => Promise<{ error?: string }>
+  ) => Promise<{ error?: string; needsConfirmation?: boolean }>
   signOut: () => Promise<void>
 }
 
@@ -84,10 +84,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     password: string,
     firstName: string,
     lastName: string
-  ): Promise<{ error?: string }> => {
+  ): Promise<{ error?: string; needsConfirmation?: boolean }> => {
     const client = getSupabaseBrowser()
     if (!client) return { error: "Authentication is not configured yet." }
-    const { error } = await client.auth.signUp({
+    const { data, error } = await client.auth.signUp({
       email,
       password,
       options: {
@@ -95,7 +95,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
     })
     if (error) return { error: error.message }
-    return {}
+    // session is null when Supabase requires email confirmation
+    return { needsConfirmation: !data.session }
   }
 
   const signOut = async () => {

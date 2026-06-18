@@ -19,6 +19,7 @@ export function SignUpForm() {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
+  const [needsConfirmation, setNeedsConfirmation] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -47,7 +48,11 @@ export function SignUpForm() {
     }
 
     setSuccess(true)
-    setTimeout(() => router.push("/account/dashboard"), 2000)
+    if (result.needsConfirmation) {
+      setNeedsConfirmation(true)
+    } else {
+      setTimeout(() => router.push("/account/dashboard"), 2000)
+    }
   }
 
   if (success) {
@@ -55,9 +60,24 @@ export function SignUpForm() {
       <div className="flex w-full flex-col gap-4 text-center py-8">
         <div className="text-4xl">🥊</div>
         <h2 className="text-2xl font-display uppercase text-[#111111]">You&apos;re In</h2>
-        <p className="text-sm text-[#707072] font-sans">
-          Account created. Check your email to confirm, then we&apos;ll take you to your dashboard.
-        </p>
+        {needsConfirmation ? (
+          <>
+            <p className="text-sm text-[#707072] font-sans">
+              Account created. Check your email and click the confirmation link to activate your account.
+            </p>
+            <p className="text-xs text-[#9e9ea0] font-sans">
+              Once confirmed,{" "}
+              <Link href="/sign-in" className="font-semibold text-[#111111] hover:text-crimson transition-colors">
+                sign in here
+              </Link>
+              {" "}to access your dashboard.
+            </p>
+          </>
+        ) : (
+          <p className="text-sm text-[#707072] font-sans">
+            Account created. Taking you to your dashboard…
+          </p>
+        )}
       </div>
     )
   }

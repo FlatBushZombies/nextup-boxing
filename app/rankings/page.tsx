@@ -20,7 +20,6 @@ const divisions = [
 ]
 
 const championsData = [
-  { division: "HEAVYWEIGHT", name: "JEREMY RODRIGUEZ", record: "14-0-0", image: "/fighter-1.png" },
   { division: "CRUISERWEIGHT", name: "XAVIER WILCHER", record: "21-2-0", image: "/champions/XAVIER_WILCHER_198_SBC_CHAMPION.webp" },
   { division: "LIGHT HEAVYWEIGHT", name: "REESE MISTRETTA", record: "18-1-0", image: "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.webp" },
   { division: "MIDDLEWEIGHT", name: "KEVIN TORRES", record: "20-1-1", image: "/champions/KEVIN_TORRES_165_SBC_CHAMPION.webp" },
@@ -29,8 +28,6 @@ const championsData = [
 
 const rankingData: Record<string, Array<{ rank: number; name: string; flag: string; country: string; record: string; lastFight: string; change: string; image: string }>> = {
   HEAVYWEIGHT: [
-    { rank: 1, name: "JEREMY RODRIGUEZ", flag: "🇺🇸", country: "United States", record: "14-0-0", lastFight: "W · May 24, 2026 vs Michael Smith", change: "—", image: "/fighter-1.png" },
-    { rank: 2, name: "MICHAEL SMITH", flag: "🇬🇧", country: "United Kingdom", record: "22-1-0", lastFight: "L · May 24, 2026 vs Jeremy Rodriguez", change: "—", image: "/fighter-2.png" },
     { rank: 3, name: "BRADLEY BELT", flag: "🇨🇦", country: "Canada", record: "19-2-0", lastFight: "W · May 10, 2026 vs Jaden Harvey", change: "↑ 1", image: "/champions/BRADLEY_BELT_198_ADC_CHAMPION.webp" },
     { rank: 4, name: "JADEN HARVEY", flag: "🇺🇸", country: "United States", record: "18-3-0", lastFight: "L · May 10, 2026 vs Bradley Belt", change: "↓ 1", image: "/champions/JADEN_HARVEY_165_DAWG_CHAMPION.webp" },
     { rank: 5, name: "KIAMAL EVELYN", flag: "🇺🇸", country: "United States", record: "17-2-0", lastFight: "W · Apr 26, 2026 vs Lopez Anderson", change: "—", image: "/champions/KIAMAL_EVELYN_132_SBC_CHAMPION.webp" },
