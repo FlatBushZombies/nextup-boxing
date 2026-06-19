@@ -1,14 +1,7 @@
 "use client"
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react"
-import type { User } from "@supabase/supabase-js"
-import { getSupabaseBrowser } from "@/lib/supabase-browser"
+import { createContext, useContext, type ReactNode } from "react"
+import { useUser, useClerk } from "@clerk/nextjs"
 
 export type Member = {
   id: string
@@ -21,92 +14,31 @@ export type Member = {
 type AuthContextType = {
   member: Member | null
   isLoading: boolean
-  signIn: (email: string, password: string) => Promise<{ error?: string }>
-  signUp: (
-    email: string,
-    password: string,
-    firstName: string,
-    lastName: string
-  ) => Promise<{ error?: string; needsConfirmation?: boolean }>
   signOut: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | null>(null)
 
-function memberFromUser(user: User): Member {
-  const meta = user.user_metadata ?? {}
-  const namePart = (user.email ?? "member").split("@")[0]
-  return {
-    id: user.id,
-    firstName: meta.first_name ?? namePart.charAt(0).toUpperCase() + namePart.slice(1),
-    lastName: meta.last_name ?? "",
-    email: user.email ?? "",
-    memberSince: new Date(user.created_at).getFullYear().toString(),
-  }
-}
-
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [member, setMember] = useState<Member | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const { user, isLoaded } = useUser()
+  const { signOut: clerkSignOut } = useClerk()
 
-  useEffect(() => {
-    const client = getSupabaseBrowser()
-
-    if (!client) {
-      setIsLoading(false)
-      return
-    }
-
-    client.auth.getSession().then(({ data }) => {
-      setMember(data.session?.user ? memberFromUser(data.session.user) : null)
-      setIsLoading(false)
-    })
-
-    const { data: { subscription } } = client.auth.onAuthStateChange(
-      (_event, session) => {
-        setMember(session?.user ? memberFromUser(session.user) : null)
+  const member: Member | null = user
+    ? {
+        id: user.id,
+        firstName: user.firstName ?? "",
+        lastName: user.lastName ?? "",
+        email: user.primaryEmailAddress?.emailAddress ?? "",
+        memberSince: new Date(user.createdAt!).getFullYear().toString(),
       }
-    )
-
-    return () => subscription.unsubscribe()
-  }, [])
-
-  const signIn = async (email: string, password: string): Promise<{ error?: string }> => {
-    const client = getSupabaseBrowser()
-    if (!client) return { error: "Authentication is not configured yet." }
-    const { error } = await client.auth.signInWithPassword({ email, password })
-    if (error) return { error: error.message }
-    return {}
-  }
-
-  const signUp = async (
-    email: string,
-    password: string,
-    firstName: string,
-    lastName: string
-  ): Promise<{ error?: string; needsConfirmation?: boolean }> => {
-    const client = getSupabaseBrowser()
-    if (!client) return { error: "Authentication is not configured yet." }
-    const { data, error } = await client.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { first_name: firstName, last_name: lastName },
-      },
-    })
-    if (error) return { error: error.message }
-    // session is null when Supabase requires email confirmation
-    return { needsConfirmation: !data.session }
-  }
+    : null
 
   const signOut = async () => {
-    const client = getSupabaseBrowser()
-    if (client) await client.auth.signOut()
-    setMember(null)
+    await clerkSignOut()
   }
 
   return (
-    <AuthContext.Provider value={{ member, isLoading, signIn, signUp, signOut }}>
+    <AuthContext.Provider value={{ member, isLoading: !isLoaded, signOut }}>
       {children}
     </AuthContext.Provider>
   )

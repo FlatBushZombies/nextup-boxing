@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Bebas_Neue, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { ClerkProvider } from '@clerk/nextjs'
 import { AuthProvider } from '@/lib/auth-context'
 import './globals.css'
 
@@ -68,7 +69,9 @@ export default function RootLayout({
       className={`${inter.variable} ${bebasNeue.variable} ${playfairDisplay.variable} bg-white`}
     >
       <body className="overflow-x-hidden font-sans antialiased">
-        <AuthProvider>{children}</AuthProvider>
+        <ClerkProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </ClerkProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
