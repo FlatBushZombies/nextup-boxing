@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { getSupabaseAdmin } from "@/lib/supabase"
 
 export const runtime = "nodejs"
 
@@ -28,6 +29,27 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please fill in all required fields." }, { status: 400 })
   }
 
+  // Insert into Supabase
+  try {
+    const supabase = getSupabaseAdmin()
+    const { error: dbError } = await supabase.from("fight_bookings").insert({
+      first_name: body.firstName,
+      last_name: body.lastName,
+      email: body.email,
+      phone: body.phone || null,
+      weight_class: body.weightClass,
+      record: body.record || null,
+      gym: body.gym || null,
+      message: body.message || null,
+    })
+    if (dbError) {
+      console.error("Supabase booking insert error:", dbError)
+    }
+  } catch (err) {
+    console.error("Supabase error:", err)
+  }
+
+  // Send email notification
   const resendKey = process.env.RESEND_API_KEY
   const fromEmail = process.env.RESEND_FROM_EMAIL ?? "noreply@nextupboxingleague.com"
 

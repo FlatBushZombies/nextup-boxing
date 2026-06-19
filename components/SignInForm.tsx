@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Eye, EyeOff, Loader2 } from "lucide-react"
-import { useSignIn } from "@clerk/nextjs"
+import { useSignIn } from "@clerk/nextjs/legacy"
 
 export function SignInForm() {
   const router = useRouter()
