@@ -15,7 +15,7 @@ const navLinks = [
   { label: "Events", href: "/events" },
   { label: "Rankings", href: "/rankings" },
   { label: "Champions", href: "/champions" },
-  { label: "Stream", href: "/#youtube" },
+  { label: "Stream", href: "/#livestream" },
 ]
 
 export function Navbar() {
@@ -227,7 +227,7 @@ export function Navbar() {
               ) : (
                 <Link
                   href="/sign-in"
-                  className="inline-flex items-center gap-2 skew-x-[-8deg] bg-[#111111] px-5 py-2.5 text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1a1a1a] mr-4"
+                  className="inline-flex items-center gap-2 skew-x-[-8deg] bg-[#111111] px-5 py-2.5 text-white shadow-[0_0_0_2px_var(--gold)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1a1a1a] mr-4"
                 >
                   <span className="skew-x-[8deg] flex items-center gap-2 font-sans text-[0.7rem] font-semibold uppercase tracking-[0.18em]">
                     <User className="h-4 w-4" />

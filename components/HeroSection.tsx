@@ -65,7 +65,7 @@ export function HeroSection() {
               href="https://www.simpletix.com/e/strong-island-fight-night-11-tickets-254611"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex min-h-12 w-full sm:w-auto items-center justify-center bg-white px-8 py-3 text-center text-sm font-medium uppercase tracking-wide text-[#111111] transition-colors hover:bg-[#e5e5e5]"
+              className="flex min-h-12 w-full sm:w-auto items-center justify-center bg-white px-8 py-3 text-center text-sm font-medium uppercase tracking-wide text-[#111111] transition-colors hover:bg-gold hover:text-[#111111]"
             >
               Get Tickets
             </a>
