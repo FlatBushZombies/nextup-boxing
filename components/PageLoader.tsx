@@ -25,7 +25,7 @@ export function PageLoader() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="fixed inset-0 z-[300] flex flex-col items-center justify-center bg-[#111111]"
+          className="fixed inset-0 z-[300] flex flex-col items-center justify-center bg-white"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -56,7 +56,7 @@ export function PageLoader() {
               />
             </div>
 
-            <span className="mt-5 text-[10px] font-semibold uppercase tracking-[0.3em] text-white/35 font-sans">
+            <span className="mt-5 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#111111] font-sans">
               Showcasing Elite Amateurs
             </span>
           </motion.div>
