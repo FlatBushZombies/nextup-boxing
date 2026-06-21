@@ -3,6 +3,8 @@ import { Inter, Bebas_Neue, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ClerkProvider } from '@clerk/nextjs'
 import { AuthProvider } from '@/lib/auth-context'
+import { OnboardingGate } from '@/components/OnboardingGate'
+import { PageLoader } from '@/components/PageLoader'
 import './globals.css'
 
 const inter = Inter({
@@ -69,8 +71,12 @@ export default function RootLayout({
       className={`${inter.variable} ${bebasNeue.variable} ${playfairDisplay.variable} bg-white`}
     >
       <body className="overflow-x-hidden font-sans antialiased">
+        <PageLoader />
         <ClerkProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            {children}
+            <OnboardingGate />
+          </AuthProvider>
         </ClerkProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
