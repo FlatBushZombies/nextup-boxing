@@ -71,7 +71,7 @@ export function HeroSection() {
             </a>
 
             <a
-              href="#youtube"
+              href="#livestream"
               className="flex min-h-12 w-full sm:w-auto items-center justify-center border border-white/30 bg-transparent px-8 py-3 text-center text-sm font-medium uppercase tracking-wide text-white transition-colors hover:border-white"
             >
               Free Livestream
