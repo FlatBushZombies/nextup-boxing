@@ -24,6 +24,7 @@ const championsData = [
   { division: "LIGHT HEAVYWEIGHT", name: "REESE MISTRETTA", record: "18-1-0", image: "/champions/REESE_MISTRETTA_176_SBC_CHAMPION.webp" },
   { division: "MIDDLEWEIGHT", name: "KEVIN TORRES", record: "20-1-1", image: "/champions/KEVIN_TORRES_165_SBC_CHAMPION.webp" },
   { division: "WELTERWEIGHT", name: "ARTURO ACEVEDO", record: "22-0-0", image: "/champions/ARTURO_ACEVEDO_121_SBC_CHAMPION.webp" },
+  { division: "LIGHT FLYWEIGHT", name: "NAIJALIE RODRIGUEZ", record: "18-0-0", image: "/champions/NAIJALIE_RODRIGUEZ_106_WOMENS_SBC_CHAMPION.webp" },
 ]
 
 const rankingData: Record<string, Array<{ rank: number; name: string; flag: string; country: string; record: string; lastFight: string; change: string; image: string }>> = {

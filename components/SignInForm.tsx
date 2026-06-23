@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Loader2 } from "lucide-react"
 import { useSignIn } from "@clerk/nextjs/legacy"
 
@@ -34,12 +35,19 @@ export function SignInForm() {
           Members Area
         </p>
         <h1 className="text-4xl sm:text-5xl font-display uppercase tracking-tight leading-none text-[#111111]">
-          Sign In
+          Login
         </h1>
         <p className="text-sm leading-relaxed text-[#707072] font-sans">
           Access your dashboard, upcoming events, and fight-night notifications.
         </p>
       </div>
+
+      <p className="text-center text-xs text-[#707072] font-sans">
+        Don&apos;t have an account?{" "}
+        <Link href="/sign-up" className="font-semibold text-[#111111] hover:text-crimson transition-colors">
+          Sign Up
+        </Link>
+      </p>
 
       <button
         type="button"

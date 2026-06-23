@@ -328,10 +328,11 @@ export function YoutubeSection() {
               href={channelUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-4 flex items-center justify-center gap-2 rounded-full bg-[#111111] py-3 text-xs font-medium uppercase tracking-wide text-white transition-colors hover:bg-[#1a1a1a]"
+              className="group relative mt-4 flex items-center justify-center gap-2 overflow-hidden bg-[#111111] py-3 text-xs font-medium uppercase tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
             >
-              Watch More on YouTube
-              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <span className="absolute inset-0 -translate-x-full bg-crimson transition-transform duration-300 ease-out group-hover:translate-x-0" />
+              <span className="relative z-10">Watch More on YouTube</span>
+              <ArrowUpRight className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </div>
         </div>

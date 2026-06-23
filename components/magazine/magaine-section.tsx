@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react"
 import { Reveal } from "@/components/Reveal"
 import { MagazineCard } from "./magazine-card"
 
@@ -58,8 +59,10 @@ export function MagazineSection() {
               analysis behind boxing&apos;s biggest moments.
             </p>
             <div className="mt-2 flex w-full flex-col justify-center gap-3 sm:flex-row">
-              <button className="rounded-full bg-white px-8 py-3.5 text-xs font-medium uppercase tracking-widest text-[#111111] transition-colors hover:bg-[#e5e5e5] cursor-pointer">
-                Read The Issue
+              <button className="group relative flex items-center justify-center gap-2 overflow-hidden bg-white px-8 py-3.5 text-xs font-medium uppercase tracking-widest text-[#111111] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(255,255,255,0.18)] cursor-pointer">
+                <span className="absolute inset-0 -translate-x-full bg-[#e5e5e5] transition-transform duration-300 ease-out group-hover:translate-x-0" />
+                <span className="relative z-10">Read The Issue</span>
+                <ArrowUpRight className="relative z-10 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </button>
               <button className="rounded-full border border-white/20 bg-transparent px-8 py-3.5 text-xs font-medium uppercase tracking-widest text-white transition-colors hover:border-white/40 cursor-pointer">
                 Join The List

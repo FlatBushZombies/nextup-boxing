@@ -1,10 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { z } from "zod"
-import { Phone, MapPin, ShieldCheck, CheckCircle2, Loader2, ShieldAlert } from "lucide-react"
+import { Phone, MapPin, ShieldCheck, CheckCircle2, Loader2, ShieldAlert, X } from "lucide-react"
 
 interface OnboardingModalProps {
   isOpen: boolean
@@ -40,6 +40,7 @@ export function OnboardingModal({ isOpen, firstName, onComplete, onSkip }: Onboa
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [serverError, setServerError] = useState<string | null>(null)
   const [isSuccess, setIsSuccess] = useState(false)
+  const successTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : ""
@@ -47,6 +48,24 @@ export function OnboardingModal({ isOpen, firstName, onComplete, onSkip }: Onboa
       document.body.style.overflow = ""
     }
   }, [isOpen])
+
+  useEffect(() => {
+    return () => {
+      if (successTimeoutRef.current) clearTimeout(successTimeoutRef.current)
+    }
+  }, [])
+
+  const handleClose = () => {
+    if (successTimeoutRef.current) {
+      clearTimeout(successTimeoutRef.current)
+      successTimeoutRef.current = null
+    }
+    if (isSuccess) {
+      onComplete()
+    } else {
+      onSkip()
+    }
+  }
 
   const validateField = (field: keyof FormErrors, value: string) => {
     try {
@@ -101,7 +120,7 @@ export function OnboardingModal({ isOpen, firstName, onComplete, onSkip }: Onboa
       }
 
       setIsSuccess(true)
-      setTimeout(onComplete, 1100)
+      successTimeoutRef.current = setTimeout(onComplete, 1100)
     } catch (error) {
       setServerError(error instanceof Error ? error.message : "An unexpected error occurred.")
     } finally {
@@ -125,11 +144,20 @@ export function OnboardingModal({ isOpen, firstName, onComplete, onSkip }: Onboa
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}
             transition={{ type: "spring", duration: 0.45 }}
-            className="relative z-10 w-full max-w-md overflow-hidden border border-white/10 bg-[#0c0f1e] shadow-2xl"
+            className="relative z-10 w-full max-w-[440px] overflow-hidden border border-white/10 bg-[#0c0f1e] shadow-[0_25px_70px_-15px_rgba(0,0,0,0.6)]"
           >
             <div className="absolute left-0 right-0 top-0 h-[3px] bg-gradient-to-r from-[#c5203a] via-[#b8962e] to-[#c5203a]" />
 
-            <div className="px-7 pb-7 pt-8">
+            <button
+              type="button"
+              onClick={handleClose}
+              aria-label="Close"
+              className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center text-white/35 transition-colors hover:text-white cursor-pointer"
+            >
+              <X size={18} />
+            </button>
+
+            <div className="px-7 pb-7 pt-9">
               <AnimatePresence mode="wait">
                 {!isSuccess ? (
                   <motion.div
@@ -139,14 +167,14 @@ export function OnboardingModal({ isOpen, firstName, onComplete, onSkip }: Onboa
                     exit={{ opacity: 0, x: -12 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <div className="mb-6">
+                    <div className="mb-6 pr-6">
                       <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-crimson font-sans">
                         One Last Step
                       </span>
                       <h4 className="mt-2 text-2xl font-display uppercase tracking-tight text-white">
                         {firstName ? `Welcome, ${firstName}` : "Complete Your Profile"}
                       </h4>
-                      <p className="mt-1 text-sm text-white/50 font-sans">
+                      <p className="mt-1 text-sm leading-relaxed text-white/50 font-sans">
                         Tell us where you&apos;re fighting from so we can send you the right event alerts.
                       </p>
                     </div>
@@ -216,7 +244,7 @@ export function OnboardingModal({ isOpen, firstName, onComplete, onSkip }: Onboa
                         )}
                       </div>
 
-                      <label className="flex cursor-pointer items-start gap-3 border border-white/10 bg-white/4 p-3.5">
+                      <label className="flex cursor-pointer items-start gap-3 border border-white/10 bg-white/[0.04] p-3.5 transition-colors hover:border-white/20">
                         <input
                           type="checkbox"
                           checked={policyAccepted}
@@ -249,7 +277,7 @@ export function OnboardingModal({ isOpen, firstName, onComplete, onSkip }: Onboa
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 bg-gradient-to-r from-[#b8962e] via-[#d4b65a] to-[#b8962e] py-3.5 text-xs font-bold uppercase tracking-widest text-black shadow-[0_4px_20px_rgba(184,150,46,0.2)] transition-all hover:shadow-[0_4px_28px_rgba(184,150,46,0.35)] disabled:pointer-events-none disabled:opacity-60 font-sans"
+                        className="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 bg-gradient-to-r from-[#b8962e] via-[#d4b65a] to-[#b8962e] py-3.5 text-xs font-bold uppercase tracking-widest text-black shadow-[0_4px_20px_rgba(184,150,46,0.2)] transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(184,150,46,0.4)] disabled:pointer-events-none disabled:translate-y-0 disabled:opacity-60 font-sans"
                       >
                         {isSubmitting ? (
                           <>
@@ -262,12 +290,16 @@ export function OnboardingModal({ isOpen, firstName, onComplete, onSkip }: Onboa
                       </button>
                     </form>
 
-                    <button
-                      onClick={onSkip}
-                      className="mt-4 w-full text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30 transition-colors hover:text-white/55 font-sans"
-                    >
-                      Maybe later
-                    </button>
+                    <div className="mt-5 flex items-center gap-3">
+                      <span className="h-px flex-1 bg-white/10" />
+                      <button
+                        onClick={onSkip}
+                        className="text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30 transition-colors hover:text-white/55 font-sans cursor-pointer"
+                      >
+                        Maybe later
+                      </button>
+                      <span className="h-px flex-1 bg-white/10" />
+                    </div>
                   </motion.div>
                 ) : (
                   <motion.div
@@ -275,17 +307,17 @@ export function OnboardingModal({ isOpen, firstName, onComplete, onSkip }: Onboa
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ type: "spring", duration: 0.5 }}
-                    className="flex flex-col items-center py-6 text-center"
+                    className="flex flex-col items-center py-8 text-center"
                   >
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.1 }}
-                      className="border border-emerald-500/25 bg-emerald-500/10 p-3 text-emerald-400"
+                      className="border border-emerald-500/25 bg-emerald-500/10 p-4 text-emerald-400 shadow-[0_0_0_6px_rgba(16,185,129,0.06)]"
                     >
                       <CheckCircle2 size={36} />
                     </motion.div>
-                    <h4 className="mt-4 text-xl font-display uppercase text-white">You&apos;re All Set</h4>
+                    <h4 className="mt-5 text-xl font-display uppercase text-white">You&apos;re All Set</h4>
                     <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/55 font-sans">
                       Your profile is complete. Welcome to the league.
                     </p>

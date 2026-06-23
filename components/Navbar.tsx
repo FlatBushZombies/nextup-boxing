@@ -190,7 +190,11 @@ export function Navbar() {
                 <div className="relative">
                   <button
                     onClick={() => setAccountOpen((o) => !o)}
-                    className="inline-flex items-center gap-2 px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.15em] font-sans text-[#111111] hover:text-[#707072] transition-colors cursor-pointer"
+                    className={`inline-flex items-center gap-2 px-4 py-2 text-[0.7rem] font-semibold uppercase tracking-[0.15em] font-sans transition-colors cursor-pointer ${
+                      isSolid
+                        ? "text-[#111111] hover:text-[#707072]"
+                        : "text-white drop-shadow-md hover:text-white/80"
+                    }`}
                   >
                     <User className="h-4 w-4" />
                     {member.firstName}
