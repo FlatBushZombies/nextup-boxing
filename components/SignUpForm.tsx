@@ -1,12 +1,18 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Loader2 } from "lucide-react"
 import { useSignIn } from "@clerk/nextjs/legacy"
+import { useUser, useClerk } from "@clerk/nextjs"
+import { AccountExistsModal } from "@/components/AccountExistsModal"
 
 export function SignUpForm() {
   const { signIn, isLoaded } = useSignIn()
+  const { user, isLoaded: isUserLoaded } = useUser()
+  const { signOut } = useClerk()
+  const router = useRouter()
 
   const [googleLoading, setGoogleLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -29,6 +35,7 @@ export function SignUpForm() {
   }
 
   return (
+    <>
     <div className="flex w-full flex-col gap-8">
       <div className="space-y-2">
         <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-crimson font-sans">
@@ -74,5 +81,17 @@ export function SignUpForm() {
         </Link>
       </p>
     </div>
+
+    <AccountExistsModal
+      isOpen={isUserLoaded && !!user}
+      avatarUrl={user?.imageUrl}
+      name={[user?.firstName, user?.lastName].filter(Boolean).join(" ") || "Member"}
+      email={user?.primaryEmailAddress?.emailAddress ?? ""}
+      memberSince={user?.createdAt ? new Date(user.createdAt).getFullYear().toString() : undefined}
+      onContinue={() => router.push("/account/dashboard")}
+      onSwitchAccount={signOut}
+      onClose={() => router.push("/")}
+    />
+    </>
   )
 }

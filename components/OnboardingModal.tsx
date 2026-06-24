@@ -144,7 +144,7 @@ export function OnboardingModal({ isOpen, firstName, onComplete, onSkip }: Onboa
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}
             transition={{ type: "spring", duration: 0.45 }}
-            className="relative z-10 w-full max-w-[440px] overflow-hidden border border-white/10 bg-[#0c0f1e] shadow-[0_25px_70px_-15px_rgba(0,0,0,0.6)]"
+            className="relative z-10 w-full max-w-[480px] overflow-hidden border border-white/10 bg-[#0c0f1e] shadow-[0_25px_70px_-15px_rgba(0,0,0,0.6)]"
           >
             <div className="absolute left-0 right-0 top-0 h-[3px] bg-gradient-to-r from-[#c5203a] via-[#b8962e] to-[#c5203a]" />
 
@@ -167,17 +167,23 @@ export function OnboardingModal({ isOpen, firstName, onComplete, onSkip }: Onboa
                     exit={{ opacity: 0, x: -12 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <div className="mb-6 pr-6">
-                      <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-crimson font-sans">
-                        One Last Step
-                      </span>
-                      <h4 className="mt-2 text-2xl font-display uppercase tracking-tight text-white">
-                        {firstName ? `Welcome, ${firstName}` : "Complete Your Profile"}
-                      </h4>
-                      <p className="mt-1 text-sm leading-relaxed text-white/50 font-sans">
-                        Tell us where you&apos;re fighting from so we can send you the right event alerts.
-                      </p>
+                    <div className="mb-7 flex items-start gap-4 pr-6">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#b8962e]/30 bg-[#b8962e]/10 text-[#b8962e]">
+                        <MapPin size={20} />
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-crimson font-sans">
+                          One Last Step
+                        </span>
+                        <h4 className="mt-1.5 text-2xl font-display uppercase tracking-tight text-white">
+                          {firstName ? `Welcome, ${firstName}` : "Complete Your Profile"}
+                        </h4>
+                      </div>
                     </div>
+
+                    <p className="mb-6 text-sm leading-relaxed text-white/50 font-sans">
+                      Tell us where you&apos;re fighting from so we can send you the right event alerts.
+                    </p>
 
                     {serverError && (
                       <motion.div
@@ -190,17 +196,21 @@ export function OnboardingModal({ isOpen, firstName, onComplete, onSkip }: Onboa
                       </motion.div>
                     )}
 
-                    <form onSubmit={handleSubmit} className="space-y-3">
-                      <div className="space-y-1">
-                        <div className="relative">
-                          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/25">
-                            <Phone size={15} />
-                          </span>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="space-y-1.5">
+                          <label
+                            htmlFor="onboarding-phone"
+                            className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/40 font-sans"
+                          >
+                            <Phone size={11} />
+                            Phone
+                          </label>
                           <input
                             id="onboarding-phone"
                             type="tel"
                             autoComplete="tel"
-                            placeholder="Phone number"
+                            placeholder="(555) 123-4567"
                             value={phone}
                             onChange={(e) => {
                               setPhone(e.target.value)
@@ -210,19 +220,21 @@ export function OnboardingModal({ isOpen, firstName, onComplete, onSkip }: Onboa
                             disabled={isSubmitting}
                             className={`w-full border ${
                               errors.phone ? "border-red-500/40 bg-red-500/5" : "border-white/10 bg-white/5"
-                            } py-3 pl-10 pr-4 text-sm text-white placeholder-white/25 outline-none transition-colors focus:border-[#b8962e]/50 disabled:opacity-50 font-sans`}
+                            } px-3.5 py-3 text-sm text-white placeholder-white/25 outline-none transition-colors focus:border-[#b8962e]/50 disabled:opacity-50 font-sans`}
                           />
+                          {errors.phone && (
+                            <p className="text-[10px] font-semibold text-red-400 font-sans">{errors.phone}</p>
+                          )}
                         </div>
-                        {errors.phone && (
-                          <p className="pl-1 text-[10px] font-semibold text-red-400 font-sans">{errors.phone}</p>
-                        )}
-                      </div>
 
-                      <div className="space-y-1">
-                        <div className="relative">
-                          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/25">
-                            <MapPin size={15} />
-                          </span>
+                        <div className="space-y-1.5">
+                          <label
+                            htmlFor="onboarding-location"
+                            className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/40 font-sans"
+                          >
+                            <MapPin size={11} />
+                            Location
+                          </label>
                           <input
                             id="onboarding-location"
                             type="text"
@@ -236,12 +248,12 @@ export function OnboardingModal({ isOpen, firstName, onComplete, onSkip }: Onboa
                             disabled={isSubmitting}
                             className={`w-full border ${
                               errors.location ? "border-red-500/40 bg-red-500/5" : "border-white/10 bg-white/5"
-                            } py-3 pl-10 pr-4 text-sm text-white placeholder-white/25 outline-none transition-colors focus:border-[#b8962e]/50 disabled:opacity-50 font-sans`}
+                            } px-3.5 py-3 text-sm text-white placeholder-white/25 outline-none transition-colors focus:border-[#b8962e]/50 disabled:opacity-50 font-sans`}
                           />
+                          {errors.location && (
+                            <p className="text-[10px] font-semibold text-red-400 font-sans">{errors.location}</p>
+                          )}
                         </div>
-                        {errors.location && (
-                          <p className="pl-1 text-[10px] font-semibold text-red-400 font-sans">{errors.location}</p>
-                        )}
                       </div>
 
                       <label className="flex cursor-pointer items-start gap-3 border border-white/10 bg-white/[0.04] p-3.5 transition-colors hover:border-white/20">
@@ -277,7 +289,7 @@ export function OnboardingModal({ isOpen, firstName, onComplete, onSkip }: Onboa
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 bg-gradient-to-r from-[#b8962e] via-[#d4b65a] to-[#b8962e] py-3.5 text-xs font-bold uppercase tracking-widest text-black shadow-[0_4px_20px_rgba(184,150,46,0.2)] transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(184,150,46,0.4)] disabled:pointer-events-none disabled:translate-y-0 disabled:opacity-60 font-sans"
+                        className="flex w-full cursor-pointer items-center justify-center gap-2 bg-gradient-to-r from-[#b8962e] via-[#d4b65a] to-[#b8962e] py-3.5 text-xs font-bold uppercase tracking-widest text-black shadow-[0_4px_20px_rgba(184,150,46,0.2)] transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(184,150,46,0.4)] disabled:pointer-events-none disabled:translate-y-0 disabled:opacity-60 font-sans"
                       >
                         {isSubmitting ? (
                           <>
