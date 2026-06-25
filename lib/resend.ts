@@ -126,40 +126,58 @@ export async function sendReminderEmail({
   const { apiKey, fromEmail, siteUrl } = getResendConfig()
   const copy = buildEmailCopy(reminderType)
   const eventUrl = new URL(EVENT_CONFIG.homepagePath, siteUrl).toString()
+  const logoUrl = new URL("/logo.png", siteUrl).toString()
 
   const html = `
-    <div style="background:#f5efe4;padding:32px 16px;font-family:Inter,Arial,sans-serif;color:#0d1124;">
-      <div style="max-width:640px;margin:0 auto;background:#ffffff;border:1px solid rgba(13,17,36,0.08);border-radius:20px;overflow:hidden;">
-        <div style="height:4px;background:#c5203a;"></div>
-        <div style="padding:32px 28px;">
-          <p style="margin:0 0 12px;font-size:11px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:#c5203a;">
+    <div style="background:#0c0f1e;padding:40px 16px;font-family:Inter,Arial,sans-serif;color:#ffffff;">
+      <div style="max-width:600px;margin:0 auto;background:#0c0f1e;border:1px solid rgba(255,255,255,0.1);overflow:hidden;">
+        <div style="height:4px;background:linear-gradient(90deg,#c5203a,#b8962e,#c5203a);"></div>
+
+        <div style="background:#111111;padding:32px 0;text-align:center;">
+          <img src="${logoUrl}" width="150" alt="Next Up Boxing League" style="display:inline-block;height:auto;" />
+        </div>
+
+        <div style="padding:40px 32px;">
+          <p style="margin:0 0 14px;font-size:11px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:#c5203a;">
             ${copy.eyebrow}
           </p>
-          <h1 style="margin:0 0 16px;font-size:34px;line-height:0.95;font-family:Impact,'Arial Narrow Bold',sans-serif;text-transform:uppercase;color:#0d1124;">
+          <h1 style="margin:0 0 18px;font-size:32px;line-height:1.05;font-family:Impact,'Arial Narrow Bold',sans-serif;text-transform:uppercase;color:#ffffff;">
             ${EVENT_CONFIG.name}
           </h1>
-          <p style="margin:0 0 24px;font-size:16px;line-height:1.7;color:rgba(13,17,36,0.72);">
+          <p style="margin:0 0 28px;font-size:15px;line-height:1.7;color:rgba(255,255,255,0.55);">
             ${copy.intro}
           </p>
-          <div style="border:1px solid rgba(13,17,36,0.1);border-radius:16px;padding:20px 18px;background:#faf8f3;">
-            <p style="margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#b8962e;">
+
+          <div style="border:1px solid rgba(184,150,46,0.25);background:rgba(184,150,46,0.06);padding:22px 20px;">
+            <p style="margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#b8962e;">
               Event Details
             </p>
-            <p style="margin:0 0 8px;font-size:16px;font-weight:700;color:#0d1124;">
+            <p style="margin:0 0 8px;font-size:17px;font-weight:700;color:#ffffff;">
               ${EVENT_CONFIG.displayDate}
             </p>
-            <p style="margin:0 0 8px;font-size:15px;color:rgba(13,17,36,0.72);">
+            <p style="margin:0 0 6px;font-size:14px;color:rgba(255,255,255,0.6);">
               ${EVENT_CONFIG.displayTime}
             </p>
-            <p style="margin:0;font-size:15px;color:rgba(13,17,36,0.72);">
+            <p style="margin:0;font-size:14px;color:rgba(255,255,255,0.6);">
               ${EVENT_CONFIG.venue}, ${EVENT_CONFIG.city}
             </p>
           </div>
-          <div style="margin-top:28px;">
-            <a href="${eventUrl}" style="display:inline-block;background:#0d1124;color:#ffffff;text-decoration:none;padding:14px 22px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;">
-              View Event
-            </a>
-          </div>
+
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:28px;">
+            <tr>
+              <td align="center" style="background:linear-gradient(90deg,#b8962e,#d4b65a,#b8962e);background-color:#b8962e;">
+                <a href="${eventUrl}" style="display:block;color:#111111;text-decoration:none;padding:16px 0;font-size:13px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;">
+                  View Event
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="background:#111111;padding:22px 32px;text-align:center;border-top:1px solid rgba(255,255,255,0.06);">
+          <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.05em;">
+            &copy; ${new Date().getFullYear()} Next Up Boxing League. You're receiving this because you signed up for fight night alerts.
+          </p>
         </div>
       </div>
     </div>
