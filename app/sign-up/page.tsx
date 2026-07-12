@@ -4,8 +4,15 @@ import Link from "next/link"
 import { SignUpForm } from "@/components/SignUpForm"
 
 export const metadata: Metadata = {
-  title: "Create Account | Next Up Boxing League",
-  description: "Join Next Up Boxing League — get event access, fight notifications, and your member dashboard.",
+  title: "Create Account",
+  description: "Join Next Up Boxing League — get event access, fight night notifications, and your own member dashboard.",
+  alternates: {
+    canonical: "/sign-up",
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
 }
 
 export default function SignUpPage() {

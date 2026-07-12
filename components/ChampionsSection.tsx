@@ -107,6 +107,12 @@ export function ChampionsSection() {
                   />
                   <div className="gradient-overlay" />
                 </div>
+                {/* Hover overlay — clip-path wipe from left */}
+                <div className="card-hover-overlay">
+                  <span className="card-hover-weight">{fighter.weightClass}</span>
+                  <span className="card-hover-record">{fighter.firstName}<br />{fighter.lastName}</span>
+                  <span className="card-hover-kos">{fighter.championship}</span>
+                </div>
                 <div className="card-text">
                   <h2 className="font-sans font-semibold">{fighter.firstName} {fighter.lastName}</h2>
                   <span className="weight-cat champion-badge">{fighter.championship}</span>

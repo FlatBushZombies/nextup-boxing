@@ -338,14 +338,163 @@
   filter: blur(46px);
 }
 
+/* ═══════════════════════════════════════════════════════
+   SCROLL HINT — animated indicator in hero
+   ═══════════════════════════════════════════════════════ */
+.scroll-hint-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.scroll-hint-label {
+  font-family: var(--font-sans);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.scroll-hint-line {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom, rgba(184, 150, 46, 0.7), transparent);
+  animation: scroll-caret 1.8s ease-in-out infinite;
+}
+
+@keyframes scroll-caret {
+  0%   { opacity: 0.3; transform: scaleY(0.5) translateY(-8px); }
+  50%  { opacity: 1;   transform: scaleY(1)   translateY(0px); }
+  100% { opacity: 0.3; transform: scaleY(0.5) translateY(-8px); }
+}
+
+/* ═══════════════════════════════════════════════════════
+   CARD HOVER OVERLAY — clip-path wipe reveal
+   ═══════════════════════════════════════════════════════ */
+.boxer-card-mr .card-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.78);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 11;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 20px;
+  text-align: center;
+}
+
+.boxer-card-mr:hover .card-hover-overlay {
+  clip-path: inset(0 0% 0 0);
+}
+
+.card-hover-record {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.card-hover-kos {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.card-hover-weight {
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   LUXURY HOVER — boxer cards, gold CTA shimmer
+   ═══════════════════════════════════════════════════════ */
+
+/* Slower, weightier image scale on card hover */
+.boxer-card-mr img {
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.boxer-card-mr:hover img {
+  transform: scale(1.05);
+}
+
+/* Gradient overlay deepens on hover — creates cinematic spotlight feel */
+.boxer-card-mr .gradient-overlay {
+  transition: opacity 500ms ease;
+}
+.boxer-card-mr:hover .gradient-overlay {
+  opacity: 1.3; /* clips at 1, but makes the overlay feel more intense on hover */
+}
+
+/* Gold shimmer keyframe — used on primary CTA buttons */
+@keyframes gold-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.cta-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--gold) 0%,
+    var(--gold-light) 40%,
+    var(--gold) 60%,
+    var(--gold-light) 80%,
+    var(--gold) 100%
+  );
+  background-size: 200% auto;
+  animation: gold-shimmer 3.5s linear infinite;
+}
+
+/* Crimson edge bottom stripe — faster and sharper on luxury tier */
+.boxer-card-mr::after {
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Section heading underline — gold pulse */
+@keyframes line-pulse {
+  0%, 100% { opacity: 0.7; }
+  50%       { opacity: 1; }
+}
+
+.animated-line-gold {
+  animation: line-pulse 3s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
   .pulse-glow,
-  .scroll-glow-indicator::after {
+  .scroll-glow-indicator::after,
+  .cta-shimmer,
+  .animated-line-gold {
     animation: none;
+  }
+
+  .boxer-card-mr img,
+  .boxer-card-mr::after {
+    transition: none;
   }
 }
 
@@ -625,6 +774,134 @@
     animation: none;
     opacity: 1;
     transform: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   PREMIUM MOTION SYSTEM — GSAP + CSS coordination
+   ═══════════════════════════════════════════════════════ */
+
+/* Focus ring — gold accent replaces default blue */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* Premium button lift — used on CTA buttons that don't already have it */
+.btn-lift {
+  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 240ms cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 240ms ease,
+              border-color 240ms ease,
+              color 240ms ease;
+}
+.btn-lift:hover {
+  transform: translateY(-2px);
+}
+.btn-lift:active {
+  transform: translateY(0);
+  transition-duration: 100ms;
+}
+
+/* Slide underline — for nav links and footer links */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Card hover lift — media cards, video thumbnails */
+.card-lift {
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.22);
+}
+
+/* Section soft divider — smooth fade between bg-white and bg-[#111111] sections */
+.section-fade-out-bottom {
+  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+}
+
+.section-fade-in-top {
+  -webkit-mask-image: linear-gradient(to top, #000 80%, transparent 100%);
+  mask-image: linear-gradient(to top, #000 80%, transparent 100%);
+}
+
+/* Image parallax container — overflow hidden needed for parallax to stay clipped */
+.parallax-container {
+  overflow: hidden;
+  position: relative;
+}
+
+/* Stagger list — children start invisible for GSAP to animate */
+.stagger-list > * {
+  opacity: 0;
+}
+
+/* Video & image hover — subtle scale without transform on the wrapper */
+.media-hover {
+  overflow: hidden;
+}
+.media-hover img,
+.media-hover video {
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.media-hover:hover img,
+.media-hover:hover video {
+  transform: scale(1.04);
+}
+.media-hover img,
+.media-hover video {
+  will-change: auto;
+}
+
+/* Social icon subtle bounce on hover */
+.social-icon {
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms ease;
+  display: inline-block;
+}
+.social-icon:hover {
+  transform: translateY(-3px);
+}
+
+/* ═══════════════════════════════════════════════════════
+   FORM INPUTS — premium focus transitions
+   ═══════════════════════════════════════════════════════ */
+input,
+textarea,
+select {
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+
+/* ═══════════════════════════════════════════════════════
+   REDUCED MOTION — disable all added effects
+   ═══════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .btn-lift,
+  .card-lift,
+  .social-icon,
+  .link-underline::after,
+  .media-hover img,
+  .media-hover video {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
   }
 }
 

@@ -3,8 +3,11 @@ import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Next Up Boxing League",
-  description: "How Next Up Boxing League collects, uses, and protects your member data.",
+  title: "Privacy Policy",
+  description: "How Next Up Boxing League collects, uses, and protects your personal data — including what we gather, why we need it, and your rights as a member.",
+  alternates: {
+    canonical: "/privacy-policy",
+  },
 }
 
 const sections = [

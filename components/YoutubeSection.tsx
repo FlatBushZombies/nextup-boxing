@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { AlertCircle, ArrowUpRight, Play } from "lucide-react"
+import { Reveal } from "@/components/Reveal"
+import { AnimatedLine } from "@/components/AnimatedLine"
 
 type YoutubeFeedVideo = {
   id: string
@@ -255,15 +257,21 @@ export function YoutubeSection() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="mb-10">
-          <span className="mb-2 block text-xs font-medium uppercase tracking-[0.2em] text-[#707072]">
-            On YouTube
-          </span>
-          <h2 className="text-xl md:text-2xl font-medium uppercase tracking-wide text-crimson">
-            Latest Videos
-          </h2>
+          <Reveal as="fade-up">
+            <span className="mb-2 block text-xs font-medium uppercase tracking-[0.2em] text-[#707072]">
+              On YouTube
+            </span>
+          </Reveal>
+          <Reveal as="text-reveal" delay={60}>
+            <h2 className="text-xl md:text-2xl font-medium uppercase tracking-wide text-crimson">
+              Latest Videos
+            </h2>
+          </Reveal>
+          <AnimatedLine color="crimson" delay={120} className="mt-3" />
         </div>
 
         {/* Main Content Grid */}
+        <Reveal as="fade-up" delay={80}>
         <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
           {/* Left: Featured Video */}
           <div className="flex flex-col">
@@ -328,7 +336,7 @@ export function YoutubeSection() {
               href={channelUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative mt-4 flex items-center justify-center gap-2 overflow-hidden bg-[#111111] py-3 text-xs font-medium uppercase tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
+              className="group relative mt-4 flex items-center justify-center gap-2 overflow-hidden bg-[#111111] py-3 text-xs font-medium uppercase tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(0,0,0,0.35)] focus-visible:outline-gold"
             >
               <span className="absolute inset-0 -translate-x-full bg-crimson transition-transform duration-300 ease-out group-hover:translate-x-0" />
               <span className="relative z-10">Watch More on YouTube</span>
@@ -336,6 +344,7 @@ export function YoutubeSection() {
             </a>
           </div>
         </div>
+        </Reveal>
       </div>
     </section>
   )

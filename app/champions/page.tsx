@@ -1,8 +1,27 @@
+import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
 import { Reveal } from "@/components/Reveal"
+import { JsonLd } from "@/components/JsonLd"
+
+const siteUrl = process.env.SITE_URL || "http://localhost:3000"
+
+export const metadata: Metadata = {
+  title: "Champions History",
+  description:
+    "Complete Next Up Boxing League champions history — every titleholder across all weight divisions, season by season. Hall of Champions.",
+  alternates: {
+    canonical: "/champions",
+  },
+  openGraph: {
+    title: "Champions History | Next Up Boxing League",
+    description:
+      "Every NUBL titleholder across all weight divisions, season by season. Explore the Hall of Champions.",
+    url: "/champions",
+  },
+}
 
 const eras = [
   {
@@ -30,6 +49,16 @@ const eras = [
 export default function ChampionsHistoryPage() {
   return (
     <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-white">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+            { "@type": "ListItem", position: 2, name: "Champions", item: `${siteUrl}/champions` },
+          ],
+        }}
+      />
       <Navbar />
 
       {/* HERO */}

@@ -180,7 +180,12 @@ export default function BoxersPage() {
 
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6 lg:px-8">
           <h1 className="text-6xl md:text-7xl lg:text-[76px] uppercase text-white leading-[0.95] font-display">
-            NEXT UP BOXING LEAGUE<br />CURRENT CHAMPIONS
+            <Reveal as="text-reveal" delay={200}>
+              NEXT UP BOXING LEAGUE
+            </Reveal>
+            <Reveal as="text-reveal" delay={340}>
+              CURRENT CHAMPIONS
+            </Reveal>
           </h1>
         </div>
       </section>
@@ -362,6 +367,12 @@ function ChampionCard({ boxer }: { boxer: BoxerData }) {
         />
         <div className="gradient-overlay" />
       </div>
+      {/* Hover overlay — stats revealed via clip-path wipe */}
+      <div className="card-hover-overlay">
+        <span className="card-hover-weight">{boxer.weightClass}</span>
+        <span className="card-hover-record">{boxer.record}</span>
+        <span className="card-hover-kos">{boxer.kos} KOs</span>
+      </div>
       <div className="card-text">
         <h2>{boxer.firstName} {boxer.lastName}</h2>
         <span className="weight-cat champion-badge">{boxer.titles}</span>
@@ -382,6 +393,12 @@ function BoxerCard({ boxer }: { boxer: BoxerData }) {
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
         />
         <div className="gradient-overlay" />
+      </div>
+      {/* Hover overlay — record revealed via clip-path wipe */}
+      <div className="card-hover-overlay">
+        <span className="card-hover-weight">{boxer.weightClass}</span>
+        <span className="card-hover-record">{boxer.record}</span>
+        <span className="card-hover-kos">{boxer.kos} KOs</span>
       </div>
       <div className="card-text">
         <h2 className="!uppercase !font-bold">{boxer.firstName} {boxer.lastName}</h2>

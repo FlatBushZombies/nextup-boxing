@@ -2,6 +2,8 @@
 
 import { useState, type FormEvent } from "react"
 import { ArrowRight, CheckCircle } from "lucide-react"
+import { Reveal } from "@/components/Reveal"
+import { useStaggerReveal, useScrollReveal } from "@/lib/useAnimations"
 
 const weightClasses = [
   "Heavyweight",
@@ -40,6 +42,35 @@ export function BookingSection() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const [errorMsg, setErrorMsg] = useState("")
 
+  // ── Animation refs ────────────────────────────────────────────────────
+  // List items stagger — each <li> will animate in with delay
+  const listRef = useStaggerReveal<HTMLUListElement>("li", {
+    y: 20,
+    stagger: 0.07,
+    duration: 0.65,
+    delay: 0.15,
+    start: "top 88%",
+  })
+
+  // Form panel slides in from right
+  const formRef = useScrollReveal<HTMLDivElement>({
+    x: 48,
+    y: 0,
+    duration: 0.9,
+    ease: "power3.out",
+    delay: 0.08,
+    start: "top 88%",
+  })
+
+  // Contact info block
+  const contactRef = useScrollReveal<HTMLDivElement>({
+    y: 24,
+    duration: 0.7,
+    ease: "power3.out",
+    delay: 0.3,
+    start: "top 88%",
+  })
+
   const set = (field: keyof typeof form) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => setForm((prev) => ({ ...prev, [field]: e.target.value }))
@@ -75,32 +106,53 @@ export function BookingSection() {
 
           {/* Left — Copy */}
           <div className="lg:sticky lg:top-32">
-            <span className="text-[10px] font-semibold uppercase tracking-[0.35em] text-crimson block mb-6 font-sans">
-              Next Up Boxing League
-            </span>
-            <h2 className="text-6xl md:text-7xl lg:text-[80px] font-display uppercase leading-none text-white mb-8">
-              Book<br />Your<br />Spot.
-            </h2>
-            <div className="w-12 h-[3px] bg-crimson mb-8" />
-            <p className="text-sm text-white/50 font-sans leading-relaxed max-w-xs mb-10">
-              Ready to compete on Long Island's premier boxing stage? Submit your details and our team will contact you within 48 hours.
-            </p>
+            {/* Eyebrow */}
+            <Reveal as="slide-jab">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.35em] text-crimson block mb-6 font-sans">
+                Next Up Boxing League
+              </span>
+            </Reveal>
 
-            <ul className="space-y-3.5 mb-12">
+            {/* Heading — clip-up reveal for impactful entry */}
+            <Reveal as="clip-up" delay={60} duration={0.9}>
+              <h2 className="text-6xl md:text-7xl lg:text-[80px] font-display uppercase leading-none text-white mb-8">
+                Book<br />Your<br />Spot.
+              </h2>
+            </Reveal>
+
+            {/* Crimson rule */}
+            <Reveal as="fade-in" delay={200}>
+              <div className="w-12 h-[3px] bg-crimson mb-8" />
+            </Reveal>
+
+            {/* Description */}
+            <Reveal as="fade-up" delay={220}>
+              <p className="text-sm text-white/50 font-sans leading-relaxed max-w-xs mb-10">
+                Ready to compete on Long Island's premier boxing stage? Submit your details and our team will contact you within 48 hours.
+              </p>
+            </Reveal>
+
+            {/* List — each <li> staggers in via useStaggerReveal */}
+            <ul ref={listRef} className="space-y-3.5 mb-12">
               {[
                 "Amateur & professional fighters welcome",
                 "All weight classes considered",
                 "Fight nights at Stereo Garden, Patchogue NY",
                 "Fair matchmaking, full support",
               ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-white/40 font-sans">
+                <li
+                  key={item}
+                  style={{ opacity: 0 }}
+                  className="flex items-start gap-3 text-sm text-white/40 font-sans"
+                >
                   <span className="w-[5px] h-[5px] bg-crimson mt-1.5 shrink-0 block" />
                   {item}
                 </li>
               ))}
             </ul>
 
-            <div className="border-t border-white/10 pt-8">
+            {/* Contact */}
+            <div ref={contactRef} style={{ opacity: 0 }} className="border-t border-white/10 pt-8">
               <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/30 font-sans mb-2">
                 Inquiries
               </p>
@@ -108,8 +160,8 @@ export function BookingSection() {
             </div>
           </div>
 
-          {/* Right — Form */}
-          <div>
+          {/* Right — Form panel slides in from right */}
+          <div ref={formRef} style={{ opacity: 0 }}>
             {status === "success" ? (
               <div className="flex flex-col items-start gap-6 py-16">
                 <CheckCircle className="w-10 h-10 text-crimson" strokeWidth={1.5} />
@@ -242,7 +294,7 @@ export function BookingSection() {
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="group w-full flex items-center justify-between bg-crimson px-7 py-4 text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-white transition-all duration-300 hover:bg-[#a50d24] disabled:opacity-50 disabled:cursor-not-allowed font-sans mt-2"
+                  className="group w-full flex items-center justify-between bg-crimson px-7 py-4 text-[0.7rem] font-semibold uppercase tracking-[0.25em] text-white transition-all duration-300 hover:bg-[#a50d24] hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(197,32,58,0.35)] disabled:opacity-50 disabled:cursor-not-allowed font-sans mt-2"
                 >
                   {status === "loading" ? "Sending…" : "Book My Spot"}
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />

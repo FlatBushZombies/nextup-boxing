@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
@@ -20,10 +20,12 @@ const navLinks = [
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [navHidden, setNavHidden] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("hero")
   const [scrollProgress, setScrollProgress] = useState(0)
   const [accountOpen, setAccountOpen] = useState(false)
+  const lastScrollY = useRef(0)
   const pathname = usePathname()
   const router = useRouter()
   const { member, isLoading, signOut } = useAuth()
@@ -54,8 +56,12 @@ export function Navbar() {
     const updateScrollState = () => {
       const scrollTop = window.scrollY
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight
+      const isScrollingDown = scrollTop > lastScrollY.current
       setScrolled(scrollTop > 50)
+      // Hide nav only when scrolling down past 180px — never during open menus
+      setNavHidden(scrollTop > 180 && isScrollingDown)
       setScrollProgress(maxScroll > 0 ? scrollTop / maxScroll : 0)
+      lastScrollY.current = scrollTop
       scrollTicking = false
     }
     const handleScroll = () => {
@@ -94,8 +100,10 @@ export function Navbar() {
 
   const isSolid = scrolled || !isHome
   const shellClass = isSolid
-    ? "bg-white border-b border-[#e5e5e5]"
+    ? "bg-white/92 backdrop-blur-md border-b border-[#e5e5e5]/70 shadow-[0_1px_0_0_rgba(0,0,0,0.04)]"
     : "bg-transparent border-b border-transparent"
+  // Hide nav on scroll-down; always show if mobile menu or account dropdown is open
+  const isHidden = navHidden && !mobileOpen && !accountOpen
 
   const handleSignOut = async () => {
     await signOut()
@@ -106,7 +114,7 @@ export function Navbar() {
   return (
     <nav
       id="main-navbar"
-      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ease-out ${shellClass}`}
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ease-in-out ${shellClass} ${isHidden ? "-translate-y-full" : "translate-y-0"}`}
     >
       {/* Top Accent Line */}
       <div className={`h-[3px] transition-all duration-500 ${isSolid ? "bg-crimson" : "bg-transparent"}`} />

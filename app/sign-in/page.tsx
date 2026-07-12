@@ -4,8 +4,15 @@ import Link from "next/link"
 import { SignInForm } from "@/components/SignInForm"
 
 export const metadata: Metadata = {
-  title: "Sign In | Next Up Boxing League",
-  description: "Sign in to your Next Up Boxing League member account.",
+  title: "Sign In",
+  description: "Sign in to your Next Up Boxing League member account to access your dashboard, fight night notifications, and event schedule.",
+  alternates: {
+    canonical: "/sign-in",
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
 }
 
 export default function SignInPage() {

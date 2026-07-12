@@ -14,7 +14,7 @@ export function MagazineCard({
   releaseDate,
 }: MagazineCardProps) {
   return (
-    <div className="group relative">
+    <div className="group relative card-lift">
       <div className="relative overflow-hidden border border-white/15 bg-[#1a1a1a] p-3">
         <div className="relative aspect-[0.74] overflow-hidden bg-[#0a0a0a]">
           <Image
