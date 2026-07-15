@@ -4,7 +4,7 @@ import { fetchYoutubeFeed } from "@/lib/youtube"
 
 // Default to the event's Strong Island Fight Night channel
 const DEFAULT_CHANNEL_URL = "https://www.youtube.com/channel/UCo1IceoT57YLFphnf3Iqj5A"
-const DEFAULT_TICKET_PURCHASE_URL = "https://www.simpletix.com/e/strong-island-fight-night-11-tickets-254611"
+const DEFAULT_TICKET_PURCHASE_URL = "https://strongislandfights.com"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"

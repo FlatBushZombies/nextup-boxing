@@ -7,6 +7,8 @@ import { OnboardingGate } from '@/components/OnboardingGate'
 import { PageLoader } from '@/components/PageLoader'
 import { SmoothScroll } from '@/components/SmoothScroll'
 import { JsonLd } from '@/components/JsonLd'
+import MagneticCursor from '@/components/MagneticCursor'
+import { PageTransition } from '@/components/PageTransition'
 import './globals.css'
 
 const siteUrl = process.env.SITE_URL || 'http://localhost:3000'
@@ -145,9 +147,12 @@ export default function RootLayout({
         />
         <PageLoader />
         <SmoothScroll />
+        <MagneticCursor />
         <ClerkProvider>
           <AuthProvider>
-            {children}
+            <PageTransition>
+              {children}
+            </PageTransition>
             <OnboardingGate />
           </AuthProvider>
         </ClerkProvider>

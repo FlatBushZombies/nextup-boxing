@@ -3,9 +3,10 @@
 import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { SplitText } from "gsap/SplitText"
 
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger, SplitText)
 }
 
 export type RevealType =
@@ -18,6 +19,7 @@ export type RevealType =
   | "slide-jab"     // section titles: fast left-side punch-in
   | "text-reveal"   // masked line-by-line reveal — wrap children in overflow:hidden, inner content rises
   | "image-reveal"  // clip-path + scale compound image entrance
+  | "word-reveal"   // SplitText per-word staggered rise (XNRGY-style)
 
 type RevealProps = {
   children: React.ReactNode
@@ -47,9 +49,11 @@ export function Reveal({
 
     const triggerCfg: ScrollTrigger.Vars = {
       trigger: outer,
-      start: "top 92%",
+      start: "top bottom",
       once: true,
     }
+
+    let split: InstanceType<typeof SplitText> | null = null
 
     const ctx = gsap.context(() => {
       if (reduced) {
@@ -59,6 +63,24 @@ export function Reveal({
       }
 
       switch (as) {
+
+        case "word-reveal": {
+          // SplitText per-word staggered rise on the outer element's text
+          split = new SplitText(outer, { type: "words" })
+          const words: Element[] = split.words
+          if (words.length === 0) break
+          gsap.set(words, { y: 34, opacity: 0 })
+          gsap.to(words, {
+            y: 0,
+            opacity: 1,
+            duration: 0.55,
+            delay: delayS,
+            stagger: 0.05,
+            ease: "power3.out",
+            scrollTrigger: triggerCfg,
+          })
+          break
+        }
 
         case "text-reveal":
           // Outer div is the overflow:hidden mask; inner div rises from below
@@ -209,7 +231,10 @@ export function Reveal({
       }
     }, outer)
 
-    return () => ctx.revert()
+    return () => {
+      split?.revert()
+      ctx.revert()
+    }
   }, [as, delay, duration])
 
   // ── Initial styles — prevent flash before GSAP fires ──────────────
@@ -218,6 +243,7 @@ export function Reveal({
       case "clip-up":      return { clipPath: "inset(100% 0 0 0)" }
       case "image-reveal": return { clipPath: "inset(8% 0 8% 0)", overflow: "hidden" }
       case "text-reveal":  return { overflow: "hidden" }
+      case "word-reveal":  return { opacity: 1 }
       case "fade-in":
       case "fade-up":
       case "scale-up":

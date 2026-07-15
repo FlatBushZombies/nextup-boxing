@@ -182,7 +182,7 @@ export async function fetchInstagramReels(
   const mockReels: InstagramReel[] = [
     {
       id: "reel-1",
-      caption: "STILL HUNGRY. ⚡️ @marcus_steel gears up for the main event on June 6. Six weeks of relentless camp boils down to one night. Are you ready? #NextUpBoxing #FightCamp #MainEvent #BoxerLife",
+      caption: "STILL HUNGRY. ⚡️ @marcus_steel gears up for the main event on Sept 12. Six weeks of relentless camp boils down to one night. Are you ready? #NextUpBoxing #FightCamp #MainEvent #BoxerLife",
       permalink: `https://www.instagram.com/${handle}/`,
       mediaType: "VIDEO",
       mediaUrl: "https://assets.mixkit.co/videos/preview/mixkit-boxer-training-with-a-punching-bag-40232-large.mp4",
@@ -194,7 +194,7 @@ export async function fetchInstagramReels(
       duration: "0:45",
       commentsList: [
         { user: "champ_boxing", text: "Marcus is looking in absolute peak condition! 💪" },
-        { user: "iron_fist99", text: "That heavy bag work is pure speed. June 6 cannot come soon enough." },
+        { user: "iron_fist99", text: "That heavy bag work is pure speed. Sept 12 cannot come soon enough." },
         { user: "fight_analyst", text: "Steele's jab is looking noticeably sharper this camp." }
       ],
       platform: "instagram"
@@ -258,7 +258,7 @@ export async function fetchInstagramReels(
     },
     {
       id: "reel-5",
-      caption: "A look inside the tunnel. 🚶‍♂️ The heavy silence before the storm. Visualizing the victory. Experience the live walkouts exclusively on nextupboxing.com on June 6. #NextUpBoxing #FighterWalkout #BehindTheScenes",
+      caption: "A look inside the tunnel. 🚶‍♂️ The heavy silence before the storm. Visualizing the victory. Experience the live walkouts exclusively on nextupboxing.com on Sept 12. #NextUpBoxing #FighterWalkout #BehindTheScenes",
       permalink: `https://www.instagram.com/${handle}/`,
       mediaType: "VIDEO",
       mediaUrl: "https://assets.mixkit.co/videos/preview/mixkit-boxer-guy-doing-shadow-boxing-in-the-gym-40229-large.mp4",

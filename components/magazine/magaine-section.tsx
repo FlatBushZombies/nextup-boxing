@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react"
 import { Reveal } from "@/components/Reveal"
 import { MagazineCard } from "./magazine-card"
+import WordReveal from "@/components/WordReveal"
 
 const magazines = [
   {
@@ -25,9 +26,9 @@ export function MagazineSection() {
             Magazine
           </span>
 
-          <h2 className="text-[64px] uppercase leading-[0.95] font-display text-[var(--gold-light)]">
-            Inside The
-            <span className="block text-[var(--crimson-light)]">Fight Issue</span>
+          <h2 className="text-[64px] uppercase leading-[0.95] font-display">
+            <WordReveal as="span" className="block text-[var(--gold-light)]">Inside The</WordReveal>
+            <WordReveal as="span" className="block text-[var(--crimson-light)]" delay={150}>Fight Issue</WordReveal>
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-white/60 sm:text-base">

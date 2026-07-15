@@ -92,7 +92,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       {
-        message: `Welcome, ${fullName}! You are locked in for the June 6 event updates. Check your inbox for your premium invite!`,
+        message: `Welcome, ${fullName}! You are locked in for the September 12 event updates. Check your inbox for your premium invite!`,
         success: true,
       },
       { status: 201 }

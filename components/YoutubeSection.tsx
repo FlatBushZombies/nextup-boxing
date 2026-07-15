@@ -262,7 +262,7 @@ export function YoutubeSection() {
               On YouTube
             </span>
           </Reveal>
-          <Reveal as="text-reveal" delay={60}>
+          <Reveal as="word-reveal" delay={60}>
             <h2 className="text-xl md:text-2xl font-medium uppercase tracking-wide text-crimson">
               Latest Videos
             </h2>

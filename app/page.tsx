@@ -24,28 +24,28 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Next Up Boxing League — Fight Night XI",
+    title: "Next Up Boxing League — Fight Night XII",
     description:
-      "Strong Island Fight Night 11 — June 6, 2026 at Stereo Garden, Patchogue NY. Watch live or get your tickets now.",
+      "Strong Island Fight Night 12 — Sept 12, 2026 at Stereo Garden, Patchogue NY. Watch live or get your tickets now.",
     url: "/",
   },
 }
 
 export default function Home() {
   return (
-    <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-white">
+    <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-[#111111]">
       <JsonLd
         data={[
           {
             "@context": "https://schema.org",
             "@type": "SportsEvent",
-            name: "Strong Island Fight Night 11",
+            name: "Strong Island Fight Night Series 12",
             sport: "Boxing",
-            startDate: "2026-06-06T19:00:00-04:00",
+            startDate: "2026-09-12T18:00:00-04:00",
             url: `${siteUrl}/events`,
             image: `${siteUrl}/event-poster.png`,
             description:
-              "Next Up Boxing League presents Strong Island Fight Night 11, featuring elite amateur boxers competing across multiple weight divisions.",
+              "Next Up Boxing League presents Strong Island Fight Night Series 12, featuring elite amateur boxers competing across multiple weight divisions.",
             organizer: {
               "@type": "Organization",
               "@id": `${siteUrl}/#organization`,
@@ -65,7 +65,7 @@ export default function Home() {
             },
             offers: {
               "@type": "Offer",
-              url: "https://www.simpletix.com/e/strong-island-fight-night-11-tickets-254611",
+              url: "https://strongislandfights.com",
               availability: "https://schema.org/InStock",
               priceCurrency: "USD",
             },

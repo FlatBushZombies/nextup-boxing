@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react"
 import { Heart, Play, ExternalLink, X, Check, Share2 } from "lucide-react"
+import WordReveal from "@/components/WordReveal"
 
 type MockReel = {
   id: string
@@ -19,7 +20,7 @@ type MockReel = {
 const MOCK_REELS: MockReel[] = [
   {
     id: "reel-1",
-    caption: "STILL HUNGRY. ⚡️ @marcus_steel gears up for the main event on June 6. Six weeks of relentless camp boils down to one night. Are you ready? #NextUpBoxing #FightCamp #MainEvent #BoxerLife",
+    caption: "STILL HUNGRY. ⚡️ @marcus_steel gears up for the main event on Sept 12. Six weeks of relentless camp boils down to one night. Are you ready? #NextUpBoxing #FightCamp #MainEvent #BoxerLife",
     permalink: "https://www.instagram.com/nextupboxingleague/",
     mediaUrl: "https://assets.mixkit.co/videos/preview/mixkit-boxer-training-with-a-punching-bag-40232-large.mp4",
     timestamp: "2026-05-18T18:00:00Z",
@@ -28,7 +29,7 @@ const MOCK_REELS: MockReel[] = [
     duration: "0:45",
     commentsList: [
       { user: "champ_boxing", text: "Marcus is looking in absolute peak condition! 💪" },
-      { user: "iron_fist99", text: "That heavy bag work is pure speed. June 6 cannot come soon enough." },
+      { user: "iron_fist99", text: "That heavy bag work is pure speed. Sept 12 cannot come soon enough." },
       { user: "fight_analyst", text: "Steele's jab is looking noticeably sharper this camp." }
     ],
     platform: "instagram"
@@ -83,7 +84,7 @@ const MOCK_REELS: MockReel[] = [
   },
   {
     id: "reel-5",
-    caption: "A look inside the tunnel. 🚶‍♂️ The heavy silence before the storm. Visualizing the victory. Experience the live walkouts exclusively on nextupboxing.com on June 6. #NextUpBoxing #FighterWalkout #BehindTheScenes",
+    caption: "A look inside the tunnel. 🚶‍♂️ The heavy silence before the storm. Visualizing the victory. Experience the live walkouts exclusively on nextupboxing.com on Sept 12. #NextUpBoxing #FighterWalkout #BehindTheScenes",
     permalink: "https://www.instagram.com/nextupboxingleague/",
     mediaUrl: "https://assets.mixkit.co/videos/preview/mixkit-boxer-guy-doing-shadow-boxing-in-the-gym-40229-large.mp4",
     timestamp: "2026-05-12T14:40:00Z",
@@ -291,6 +292,27 @@ export function SocialWall() {
   const featuredPost = posts[0]
   const gridPosts = posts.slice(1)
 
+  // 3D tilt helpers — applied per-card via currentTarget (no refs needed)
+  const onTiltEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    e.currentTarget.style.transition = "transform 0.1s ease-out"
+    e.currentTarget.style.willChange = "transform"
+  }
+  const onTiltMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    const el = e.currentTarget
+    const rect = el.getBoundingClientRect()
+    const x = (e.clientX - rect.left - rect.width  / 2) / (rect.width  / 2)
+    const y = (e.clientY - rect.top  - rect.height / 2) / (rect.height / 2)
+    el.style.transform = `perspective(900px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg) scale3d(1.01,1.01,1.01)`
+  }
+  const onTiltLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const el = e.currentTarget
+    el.style.transition = "transform 0.55s cubic-bezier(0.16,1,0.3,1)"
+    el.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)"
+    setTimeout(() => { if (el) el.style.willChange = "auto" }, 560)
+  }
+
   if (!featuredPost) return null
 
   return (
@@ -304,9 +326,12 @@ export function SocialWall() {
             <span className="text-xs font-medium uppercase tracking-[0.2em] text-white/50 mb-2 block">
               Social Wall
             </span>
-            <h2 className="text-xl md:text-2xl font-medium uppercase tracking-wide text-white">
+            <WordReveal
+              as="h2"
+              className="text-xl md:text-2xl font-medium uppercase tracking-wide text-white"
+            >
               Latest from @NextUpBoxingLeague
-            </h2>
+            </WordReveal>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/60">
               Real-time highlights from @nextupboxingleague — fight week, training, promos, and the behind-the-scenes energy that keeps the league moving.
             </p>
@@ -396,6 +421,9 @@ export function SocialWall() {
               <button
                 type="button"
                 onClick={() => setSelectedReel(post)}
+                onMouseEnter={onTiltEnter}
+                onMouseMove={onTiltMove}
+                onMouseLeave={onTiltLeave}
                 className="group relative flex w-full flex-col overflow-hidden bg-[#1a1a1a] text-left text-white"
               >
                 <div className="relative aspect-[3/4] w-full overflow-hidden">

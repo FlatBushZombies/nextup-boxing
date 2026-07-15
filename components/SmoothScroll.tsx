@@ -15,8 +15,11 @@ export function SmoothScroll() {
   const pathname = usePathname()
 
   useEffect(() => {
+    // Never skip trigger callbacks, even when user scrolls very fast
+    ScrollTrigger.config({ limitCallbacks: false, ignoreMobileResize: true })
+
     const lenis = new Lenis({
-      lerp: 0.1,
+      lerp: 0.08,
       smoothWheel: true,
       syncTouch: false, // native scroll on touch devices
     })

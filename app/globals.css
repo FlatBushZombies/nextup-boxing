@@ -837,6 +837,40 @@
   mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
 }
 
+/* ═══════════════════════════════════════════════════════
+   FILM GRAIN — static cinematic texture, no animation cost
+   ═══════════════════════════════════════════════════════ */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  opacity: 0.032;
+  mix-blend-mode: overlay;
+}
+
+/* ═══════════════════════════════════════════════════════
+   CUSTOM CURSOR — hide system cursor when JS cursor active
+   ═══════════════════════════════════════════════════════ */
+html.custom-cursor-active,
+html.custom-cursor-active * {
+  cursor: none !important;
+}
+
+/* Magnetic target indicator — scale breathing on hover */
+[data-magnetic] {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::after { display: none; }
+  [data-magnetic] { transition: none; }
+}
+
 .section-fade-in-top {
   -webkit-mask-image: linear-gradient(to top, #000 80%, transparent 100%);
   mask-image: linear-gradient(to top, #000 80%, transparent 100%);

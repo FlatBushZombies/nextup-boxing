@@ -1,4 +1,13 @@
+"use client"
+
 import Image from "next/image"
+import { useEffect, useRef } from "react"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 interface MagazineCardProps {
   coverImage: string
@@ -13,8 +22,67 @@ export function MagazineCard({
   issueNumber,
   releaseDate,
 }: MagazineCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  // Subtle scroll-driven parallax — cover settles from 1.04 to 1.0 as card enters
+  useEffect(() => {
+    const card = cardRef.current
+    const img = card?.querySelector("img")
+    if (!card || !img) return
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+
+    const tween = gsap.fromTo(img,
+      { scale: 1.04 },
+      {
+        scale: 1.0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: card,
+          start: "top bottom",
+          end: "center center",
+          scrub: true,
+        },
+      }
+    )
+
+    return () => {
+      tween.scrollTrigger?.kill()
+      tween.kill()
+    }
+  }, [])
+
+  const onMouseEnter = () => {
+    const el = cardRef.current
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    el.style.transition = "transform 0.1s ease-out"
+    el.style.willChange = "transform"
+  }
+
+  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = cardRef.current
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    const rect = el.getBoundingClientRect()
+    const x = (e.clientX - rect.left - rect.width  / 2) / (rect.width  / 2)
+    const y = (e.clientY - rect.top  - rect.height / 2) / (rect.height / 2)
+    el.style.transform = `perspective(900px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg) scale3d(1.012,1.012,1.012)`
+  }
+
+  const onMouseLeave = () => {
+    const el = cardRef.current
+    if (!el) return
+    el.style.transition = "transform 0.55s cubic-bezier(0.16,1,0.3,1)"
+    el.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)"
+    setTimeout(() => { if (el) el.style.willChange = "auto" }, 560)
+  }
+
   return (
-    <div className="group relative card-lift">
+    <div
+      ref={cardRef}
+      className="group relative card-lift"
+      onMouseEnter={onMouseEnter}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+    >
       <div className="relative overflow-hidden border border-white/15 bg-[#1a1a1a] p-3">
         <div className="relative aspect-[0.74] overflow-hidden bg-[#0a0a0a]">
           <Image

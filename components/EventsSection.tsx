@@ -26,7 +26,7 @@ export function EventsSection() {
   return (
     <section id="events" className="relative w-full scroll-mt-20 overflow-hidden bg-white">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        <Reveal as="slide-jab" className="mb-2">
+        <Reveal as="word-reveal" className="mb-2">
           <h2 className="text-xl md:text-2xl font-semibold uppercase tracking-wide text-crimson font-sans">
             Upcoming Events
           </h2>

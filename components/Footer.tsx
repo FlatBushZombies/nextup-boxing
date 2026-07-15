@@ -102,12 +102,12 @@ export function Footer() {
           {/* Tickets */}
           <Reveal as="fade-up" delay={160} duration={0.8}>
             <div>
-              <h3 className="text-base font-medium text-white">Fight Night 11</h3>
+              <h3 className="text-base font-medium text-white">Fight Night 12</h3>
               <p className="mt-4 text-base font-normal text-white/60">
                 Get your tickets for the next event.
               </p>
               <a
-                href="https://www.simpletix.com/e/strong-island-fight-night-11-tickets-254611"
+                href="https://strongislandfights.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-6 inline-flex items-center rounded-full bg-gold px-6 py-3 text-xs font-medium uppercase tracking-wide text-[#111111] transition-all duration-300 hover:bg-[var(--gold-light)] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(184,150,46,0.35)]"

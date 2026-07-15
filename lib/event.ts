@@ -1,10 +1,13 @@
 export const EVENT_CONFIG = {
-  name: "Next Up Boxing League Fight Night",
-  venue: "Madison Square Garden",
-  city: "New York, NY",
-  startIso: "2026-06-06T19:00:00-04:00",
-  displayDate: "June 6, 2026",
-  displayTime: "7:00 PM ET",
+  name: "Strong Island Fight Night Series 12",
+  venue: "Stereo Garden",
+  city: "Patchogue, NY",
+  address: "9 Railroad Ave, Patchogue, NY",
+  startIso: "2026-09-12T18:00:00-04:00",
+  doorsIso: "2026-09-12T16:30:00-04:00",
+  displayDate: "September 12, 2026",
+  displayTime: "6:00 PM ET",
+  doorsTime: "4:30 PM",
   homepagePath: "/",
 } as const
 

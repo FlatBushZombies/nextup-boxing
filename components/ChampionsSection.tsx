@@ -78,7 +78,7 @@ export function ChampionsSection() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-10">
-          <Reveal as="slide-jab" className="flex items-center justify-between gap-4">
+          <Reveal as="word-reveal" className="flex items-center justify-between gap-4">
             <h2 className="text-xl md:text-2xl font-semibold uppercase tracking-wide text-gold font-sans">
               Current Champions
             </h2>

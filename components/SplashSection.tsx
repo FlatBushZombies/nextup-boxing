@@ -119,7 +119,7 @@ export function SplashSection() {
           >
             <span className="flex-1 h-px bg-[#1e2d5e]/15" />
             <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#1e2d5e]/60 whitespace-nowrap">
-              June 6, 2026 · Madison Square Garden
+              Sept 12, 2026 · Stereo Garden, Patchogue NY
             </span>
             <span className="flex-1 h-px bg-[#1e2d5e]/15" />
           </motion.div>

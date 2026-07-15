@@ -210,14 +210,14 @@ export function PremiumModal({ isOpen, onClose }: PremiumModalProps) {
                         Livestream access and event updates straight to your inbox
                       </p>
                       <p className="mt-1 text-sm text-white/50">
-                        June 6th fight night 11 livestream
+                        Sept 12th Fight Night 12 livestream
                       </p>
                     </div>
 
                     <div className="mb-6 flex items-center gap-3 rounded-xl border border-white/8 bg-white/4 px-4 py-3">
                       <Clock size={13} className="shrink-0 text-[#d4ae44]" />
                       <span className="text-[11px] font-medium uppercase tracking-wider text-white/50">
-                        June 6 · Stereo Garden
+                        Sept 12 · Stereo Garden
                       </span>
                       <div className="ml-auto flex gap-2">
                         {[

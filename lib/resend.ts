@@ -214,7 +214,7 @@ export async function sendPremiumWelcomeEmail({
             Hello ${name},
           </p>
           <p style="margin:0 0 24px;font-size:15px;line-height:1.7;color:rgba(255,255,255,0.76);">
-            You have successfully joined the premium notification list. The highly anticipated <strong>${EVENT_CONFIG.name}</strong> on June 6 is rapidly approaching, and you're officially locked in to receive exclusive alerts before fight night.
+            You have successfully joined the premium notification list. The highly anticipated <strong>${EVENT_CONFIG.name}</strong> on September 12 is rapidly approaching, and you're officially locked in to receive exclusive alerts before fight night.
           </p>
           
           <div style="border:1px solid rgba(212,174,68,0.25);border-radius:18px;padding:24px 20px;background:rgba(212,174,68,0.04);margin-bottom:32px;">
@@ -222,7 +222,7 @@ export async function sendPremiumWelcomeEmail({
               EVENT DETAILS
             </p>
             <p style="margin:0 0 8px;font-size:18px;font-weight:700;color:#ffffff;">
-              Sat June 6th
+              Sat Sept 12th
             </p>
             <p style="margin:0 0 8px;font-size:15px;color:rgba(255,255,255,0.85);">
               Starts at ${EVENT_CONFIG.displayTime}
