@@ -45,15 +45,25 @@ export function AnimatedLine({
           ease: "power3.inOut",
           scrollTrigger: {
             trigger: el,
-            start: "top 90%",
+            start: "top bottom",
             once: true,
+            invalidateOnRefresh: true,
           },
           onComplete: () => { gsap.set(el, { willChange: "auto" }) },
         }
       )
     }, el)
 
-    return () => ctx.revert()
+    const snapRaf = requestAnimationFrame(() => {
+      if (!el) return
+      const rect = el.getBoundingClientRect()
+      if (rect.bottom <= 0) gsap.set(el, { scaleX: 1, willChange: "auto" })
+    })
+
+    return () => {
+      cancelAnimationFrame(snapRaf)
+      ctx.revert()
+    }
   }, [delay])
 
   return (

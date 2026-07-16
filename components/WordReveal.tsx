@@ -57,11 +57,24 @@ export default function WordReveal({
           trigger: outerRef.current,
           start,
           once: true,
+          invalidateOnRefresh: true,
         },
       }
     )
 
+    // If already scrolled past, snap words to final state immediately
+    const snapRaf = requestAnimationFrame(() => {
+      const outer = outerRef.current
+      if (!outer) return
+      const rect = outer.getBoundingClientRect()
+      if (rect.bottom <= 0) {
+        gsap.killTweensOf(targets)
+        gsap.set(targets, { y: "0%" })
+      }
+    })
+
     return () => {
+      cancelAnimationFrame(snapRaf)
       tween.scrollTrigger?.kill()
       tween.kill()
     }

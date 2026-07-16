@@ -51,6 +51,7 @@ export function Reveal({
       trigger: outer,
       start: "top bottom",
       once: true,
+      invalidateOnRefresh: true,
     }
 
     let split: InstanceType<typeof SplitText> | null = null
@@ -231,7 +232,22 @@ export function Reveal({
       }
     }, outer)
 
+    // Safety net: if the element was already scrolled past before this effect ran
+    // (page load mid-scroll, fast scroll between RAF ticks), snap it to its final
+    // visible state so it never stays invisible forever.
+    const snapRaf = requestAnimationFrame(() => {
+      if (!outer) return
+      const rect = outer.getBoundingClientRect()
+      if (rect.bottom <= 0) {
+        gsap.killTweensOf([outer, ...(inner ? [inner] : [])])
+        gsap.set(outer, { opacity: 1, x: 0, y: 0, scale: 1, clipPath: "none", willChange: "auto" })
+        if (inner) gsap.set(inner, { y: "0%", scale: 1, clipPath: "none" })
+        if (split) gsap.set(split.words as Element[], { y: 0, opacity: 1 })
+      }
+    })
+
     return () => {
+      cancelAnimationFrame(snapRaf)
       split?.revert()
       ctx.revert()
     }
