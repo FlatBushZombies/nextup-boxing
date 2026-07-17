@@ -49,6 +49,8 @@ export function PageLoader() {
   // After the collapse animation completes: fade wrapper, then remove from DOM
   useEffect(() => {
     if (phase !== "collapsing") return
+    // Fire at the START of collapse so hero entrance overlaps with curtain lifting
+    window.dispatchEvent(new CustomEvent("loader:revealed"))
     const fadeTimer = setTimeout(() => setFaded(true), COLLAPSE_TOTAL_MS)
     const goneTimer = setTimeout(() => {
       setPhase("gone")

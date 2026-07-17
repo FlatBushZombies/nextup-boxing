@@ -353,13 +353,13 @@ export function SocialWall() {
           </p>
         )}
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-[3px] sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {/* Featured Large Tile */}
-          <div className="sm:col-span-2 lg:col-span-2 xl:col-span-2 xl:row-span-2">
+          <div className="col-span-2 row-span-2">
             <button
               type="button"
               onClick={() => setSelectedReel(featuredPost)}
-              className="group relative block h-full min-h-[320px] w-full overflow-hidden bg-[#1a1a1a] text-left text-white sm:min-h-[420px] lg:min-h-[500px]"
+              className="group relative block h-full min-h-[220px] w-full overflow-hidden bg-[#1a1a1a] text-left text-white sm:min-h-[300px] lg:min-h-[360px]"
             >
               {isVideoUrl(featuredPost.mediaUrl) ? (
                 <AutoplayVideo

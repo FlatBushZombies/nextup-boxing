@@ -16,7 +16,8 @@ export function SmoothScroll() {
 
   useEffect(() => {
     // Never skip trigger callbacks on fast scroll; detect "jumped past" triggers
-    ScrollTrigger.config({ limitCallbacks: false, ignoreMobileResize: true, fastScrollEnd: 300 })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ScrollTrigger.config({ limitCallbacks: false, ignoreMobileResize: true, fastScrollEnd: 300 } as any)
 
     const lenis = new Lenis({
       lerp: 0.08,
@@ -27,7 +28,13 @@ export function SmoothScroll() {
     lenisRef.current = lenis
 
     // Keep ScrollTrigger position in sync with Lenis on every scroll frame
-    lenis.on("scroll", () => ScrollTrigger.update())
+    // Also drive a velocity-proportional skewY on anything tagged [data-skew]
+    const skewSetter = gsap.quickSetter("[data-skew]", "skewY", "deg")
+    const clamp = gsap.utils.clamp(-5, 5)
+    lenis.on("scroll", (e: { velocity: number }) => {
+      ScrollTrigger.update()
+      skewSetter(clamp(e.velocity * 0.35))
+    })
 
     // Drive Lenis from GSAP ticker so ScrollTrigger scrub stays frame-perfect
     const tick = (time: number) => { lenis.raf(time * 1000) }

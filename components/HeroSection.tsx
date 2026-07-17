@@ -10,8 +10,9 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, SplitText)
 }
 
-// Matches PageLoader total (1700ms) + cinematic slide-exit (650ms)
-const HERO_DELAY = 2.1
+// No longer used as a numeric delay — entrance is now event-driven via "loader:revealed"
+// Kept as a fallback cap (ms) in case the event never fires (e.g. HMR, no loader)
+const HERO_DELAY_FALLBACK_MS = 400
 
 const SLIDE_HOLD_MS = 8000
 const FIRST_ADVANCE_MS = 5000
@@ -31,6 +32,7 @@ export function HeroSection() {
   const ctaRef        = useRef<HTMLDivElement>(null)
   const scrollHintRef = useRef<HTMLDivElement>(null)
   const dotsRef       = useRef<HTMLDivElement>(null)
+  const flashRef      = useRef<HTMLDivElement>(null)
 
   const [activeSlide, setActiveSlide] = useState<0 | 1>(0)
   const [dotKey, setDotKey] = useState(0)
@@ -94,6 +96,18 @@ export function HeroSection() {
 
     let split1: InstanceType<typeof SplitText> | null = null
     let split2: InstanceType<typeof SplitText> | null = null
+    // Held outside the GSAP context so cleanup can removeEventListener
+    let entrancePlay: (() => void) | null = null
+
+    // Bell impact: white flash + elastic shake on the hero frame
+    const triggerBell = () => {
+      if (flashRef.current) {
+        gsap.fromTo(flashRef.current, { opacity: 0.1 }, { opacity: 0, duration: 0.3, ease: "power2.out" })
+      }
+      if (heroFrameRef.current) {
+        gsap.fromTo(heroFrameRef.current, { x: 5 }, { x: 0, duration: 0.45, ease: "elastic.out(2.5, 0.35)" })
+      }
+    }
 
     const ctx = gsap.context(() => {
       if (reduced) {
@@ -101,21 +115,33 @@ export function HeroSection() {
           [dateRowRef.current, leagueRef.current, badgeRef.current, ctaRef.current, scrollHintRef.current, dotsRef.current],
           { opacity: 1, y: 0 }
         )
-        gsap.set([line1Ref.current, line2Ref.current], { y: "0%" })
+        // line1/line2 start opacity:0 in JSX — snap them visible immediately
+        gsap.set([line1Ref.current, line2Ref.current], { opacity: 1 })
         return
       }
 
-      // ── 1. Reverse Ken Burns — image settles in as loader exits ─────
+      // ── 1. Ken Burns — delayed so it plays AS the loader curtain lifts ──
       const img = bgWrapRef.current?.querySelector("img")
       if (img) {
         gsap.fromTo(img,
-          { scale: 1.08 },
-          { scale: 1.0, duration: 2.4, ease: "power2.out" }
+          { scale: 1.05 },
+          { scale: 1.0, duration: 1.6, ease: "power2.out", delay: 0.3 }
         )
       }
 
-      // ── 2. Staggered text entrance — fires as loader curtain clears ──
-      const entranceTl = gsap.timeline({ delay: HERO_DELAY })
+      // ── 2. Staggered text entrance — build paused, fire on loader event ──
+      const entranceTl = gsap.timeline({ paused: true })
+
+      // Split early so words are hidden before the loader lifts
+      if (line1Ref.current && line2Ref.current) {
+        // Reveal parent spans (opacity:0 in JSX) so the split words inside them
+        // are composited correctly once they animate in
+        gsap.set([line1Ref.current, line2Ref.current], { opacity: 1 })
+        split1 = new SplitText(line1Ref.current, { type: "words" })
+        split2 = new SplitText(line2Ref.current, { type: "words" })
+        gsap.set([...split1.words, ...split2.words], { y: 100, opacity: 0 })
+      }
+
       entranceTl
         .fromTo(dateRowRef.current,
           { y: 22, opacity: 0 },
@@ -127,15 +153,10 @@ export function HeroSection() {
           "-=0.38"
         )
 
-      // Per-word SplitText headline reveal — same timeline slot as before
-      if (line1Ref.current && line2Ref.current) {
-        split1 = new SplitText(line1Ref.current, { type: "words" })
-        split2 = new SplitText(line2Ref.current, { type: "words" })
-        gsap.set([...split1.words, ...split2.words], { y: 100, opacity: 0 })
-
+      if (split1 && split2) {
         entranceTl
           .to(split1.words, { y: 0, opacity: 1, duration: 0.6, stagger: 0.04, ease: "power3.out" }, ">-0.25")
-          .to(split2.words, { y: 0, opacity: 1, duration: 0.6, stagger: 0.04, ease: "power3.out" }, "-=0.2")
+          .to(split2.words, { y: 0, opacity: 1, duration: 0.32, stagger: 0.015, ease: "expo.out", onComplete: triggerBell }, "-=0.2")
       }
 
       entranceTl
@@ -159,6 +180,9 @@ export function HeroSection() {
           { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
           "-=0.35"
         )
+
+      // Store play fn where cleanup can reach it
+      entrancePlay = () => { entranceTl.play() }
 
       // Scroll parallax — headline drifts up as hero exits viewport
       if (line1Ref.current && !reduced) {
@@ -191,7 +215,7 @@ export function HeroSection() {
       pinTl
         .fromTo(pinOverlayRef.current,
           { opacity: 0 },
-          { opacity: 0.28, ease: "none" },
+          { opacity: 0.85, ease: "none" },
           0
         )
         .fromTo(bgWrapRef.current,
@@ -242,10 +266,21 @@ export function HeroSection() {
       }
     }, sectionRef)
 
+    // Wire entrance playback outside the GSAP context so we can clean it up
+    if (entrancePlay) {
+      if (!document.documentElement.classList.contains("is-loading")) {
+        // No loader present (dev HMR, fast-refresh, etc.) — small defer for DOM readiness
+        setTimeout(entrancePlay, HERO_DELAY_FALLBACK_MS)
+      } else {
+        window.addEventListener("loader:revealed", entrancePlay, { once: true })
+      }
+    }
+
     return () => {
       split1?.revert()
       split2?.revert()
       ctx.revert()
+      if (entrancePlay) window.removeEventListener("loader:revealed", entrancePlay)
     }
   }, [])
 
@@ -315,6 +350,13 @@ export function HeroSection() {
 
           {/* Grid texture */}
           <div className="futuristic-grid absolute inset-0 opacity-20" style={{ zIndex: 4 }} />
+
+          {/* Bell impact flash */}
+          <div
+            ref={flashRef}
+            className="pointer-events-none absolute inset-0 bg-white"
+            style={{ opacity: 0, zIndex: 5 }}
+          />
         </div>
 
         {/* Main content — sits above frame, not subject to clip-path */}
@@ -344,15 +386,17 @@ export function HeroSection() {
             <h1 className="text-[3.2rem] uppercase leading-[0.95] min-[380px]:text-[3.8rem] sm:text-[5.6rem] md:text-[6rem] lg:text-[76px] font-display">
               <span
                 ref={line1Ref}
+                data-skew
                 className="block"
-                style={{ color: "var(--gold-light)" }}
+                style={{ color: "var(--gold-light)", opacity: 0 }}
               >
                 Strong Island
               </span>
               <span
                 ref={line2Ref}
+                data-skew
                 className="block"
-                style={{ color: "var(--crimson-light)" }}
+                style={{ color: "var(--crimson-light)", opacity: 0 }}
               >
                 Fight Night 12
               </span>
@@ -381,16 +425,24 @@ export function HeroSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-magnetic
-                className="flex min-h-12 w-full sm:w-auto items-center justify-center bg-white px-8 py-3 text-center text-sm font-medium uppercase tracking-wide text-[#111111] transition-colors hover:bg-gold hover:text-[#111111]"
+                className="cta-cinematic cta-primary-c flex min-h-12 w-full sm:w-auto items-center justify-center bg-white px-8 py-3 font-sans text-sm font-medium uppercase tracking-wide text-[#111111]"
               >
-                Get Tickets
+                <span className="cta-sweep" />
+                <span className="cta-inner">
+                  <span className="cta-label cta-label-top">Get Tickets</span>
+                  <span className="cta-label cta-label-bot">Get Tickets</span>
+                </span>
               </a>
               <a
                 href="#livestream"
                 data-magnetic
-                className="flex min-h-12 w-full sm:w-auto items-center justify-center border border-white/30 bg-transparent px-8 py-3 text-center text-sm font-medium uppercase tracking-wide text-white transition-colors hover:border-white"
+                className="cta-cinematic cta-secondary-c flex min-h-12 w-full sm:w-auto items-center justify-center border border-white/30 bg-transparent px-8 py-3 font-sans text-sm font-medium uppercase tracking-wide text-white"
               >
-                Free Livestream
+                <span className="cta-sweep" />
+                <span className="cta-inner">
+                  <span className="cta-label cta-label-top">Free Livestream</span>
+                  <span className="cta-label cta-label-bot">Free Livestream</span>
+                </span>
               </a>
             </div>
           </div>
@@ -412,7 +464,8 @@ export function HeroSection() {
                   style={{
                     background: "var(--gold)",
                     transformOrigin: "left",
-                    animation: "dot-fill 8s linear forwards",
+                    // dotKey===0 is the very first slide-0 fill, which lasts FIRST_ADVANCE_MS
+                    animation: `dot-fill ${dotKey === 0 ? FIRST_ADVANCE_MS : SLIDE_HOLD_MS}ms linear forwards`,
                   }}
                 />
               )}

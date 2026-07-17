@@ -9,6 +9,7 @@ import { SponsorsStrip } from "@/components/SponsorsStrip"
 import { Footer } from "@/components/Footer"
 import { NextUpLiveStream } from "@/components/NextUpLiveStream"
 import { JsonLd } from "@/components/JsonLd"
+import { SectionWipe } from "@/components/SectionWipe"
 
 const SocialWall = dynamic(() => import("@/components/SocialWall").then((mod) => mod.SocialWall))
 const MagazineSection = dynamic(() => import("@/components/magazine/magaine-section").then((mod) => mod.MagazineSection))
@@ -77,12 +78,12 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <VideoScrollSection />
-      <NextUpLiveStream />
-      <ChampionsSection />
-      <SocialWall /> 
-      <YoutubeSection />
-      <SponsorsStrip />
-      <MagazineSection />
+      <SectionWipe><NextUpLiveStream /></SectionWipe>
+      <SectionWipe><ChampionsSection /></SectionWipe>
+      <SectionWipe><SocialWall /></SectionWipe>
+      <SectionWipe><YoutubeSection /></SectionWipe>
+      <SectionWipe><SponsorsStrip /></SectionWipe>
+      <SectionWipe><MagazineSection /></SectionWipe>
       <Footer />
     </main>
   )

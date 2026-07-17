@@ -145,6 +145,7 @@ export default function RootLayout({
             },
           ]}
         />
+        <div className="film-grain" aria-hidden="true" />
         <PageLoader />
         <SmoothScroll />
         <MagneticCursor />
