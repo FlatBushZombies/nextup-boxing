@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useCallback, useEffect } from "react"
+import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
@@ -139,7 +139,7 @@ const weightClasses = [
 const sortOptions = ["A-Z", "Z-A", "Record"]
 
 const BOXER_GAP = 16
-const AUTO_MS = 4200
+const LOOP_SECONDS = 18 // full set scrolls past in 18 s
 
 function boxerCardWidth() {
   if (typeof window === "undefined") return 200
@@ -154,16 +154,16 @@ export default function BoxersPage() {
   const [sortBy, setSortBy] = useState("A-Z")
   const [showWeightDropdown, setShowWeightDropdown] = useState(false)
   const [showSortDropdown, setShowSortDropdown] = useState(false)
-  const [active, setActive] = useState(0)
-  const [dotKey, setDotKey] = useState(0)
 
-  const trackRef     = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const sectionRef   = useRef<HTMLElement>(null)
-  const timerRef     = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const dragStartX   = useRef(0)
-  const dragging     = useRef(false)
-  const didDrag      = useRef(false)
+  const trackRef       = useRef<HTMLDivElement>(null)
+  const containerRef   = useRef<HTMLDivElement>(null)
+  const phaseRef       = useRef(0.5)          // 0–1 position within one full set
+  const nRef           = useRef(0)            // current filteredBoxers.length for tick
+  const isHoveredRef   = useRef(false)
+  const dragging       = useRef(false)
+  const didDrag        = useRef(false)
+  const dragStartX     = useRef(0)
+  const dragStartPhase = useRef(0)
 
   const filteredBoxers = allBoxers
     .filter((boxer) => {
@@ -182,45 +182,11 @@ export default function BoxersPage() {
 
   const N = filteredBoxers.length
 
-  // Reset carousel when filters/sort change
+  // Keep nRef in sync with current filtered count so the tick always has accurate N
   useEffect(() => {
-    setActive(0)
-    setDotKey(k => k + 1)
-  }, [searchQuery, selectedWeight, sortBy])
-
-  const centerActive = useCallback((instant = false) => {
-    const track = trackRef.current
-    const ctr   = containerRef.current
-    if (!track || !ctr) return
-    const cw      = boxerCardWidth()
-    const pitch   = cw + BOXER_GAP
-    const targetX = ctr.offsetWidth / 2 - active * pitch - cw / 2
-    if (instant) {
-      gsap.set(track, { x: targetX })
-    } else {
-      gsap.to(track, { x: targetX, duration: 0.7, ease: "power3.out", overwrite: true })
-    }
-  }, [active])
-
-  useEffect(() => { centerActive(false) }, [centerActive])
-
-  // Initial position after layout
-  useEffect(() => {
-    const raf = requestAnimationFrame(() => centerActive(true))
-    return () => cancelAnimationFrame(raf)
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Re-center when filtered list changes
-  useEffect(() => {
-    const raf = requestAnimationFrame(() => centerActive(true))
-    return () => cancelAnimationFrame(raf)
-  }, [N, centerActive])
-
-  useEffect(() => {
-    const handle = () => centerActive(true)
-    window.addEventListener("resize", handle, { passive: true })
-    return () => window.removeEventListener("resize", handle)
-  }, [centerActive])
+    nRef.current = N
+    phaseRef.current = 0.5 // restart from middle on filter change
+  }, [N])
 
   // Fade-in on scroll
   useEffect(() => {
@@ -236,65 +202,49 @@ export default function BoxersPage() {
     })
   }, [])
 
-  const goTo = useCallback((idx: number) => {
-    if (N === 0) return
-    const next = ((idx % N) + N) % N
-    setActive(next)
-    setDotKey(k => k + 1)
-  }, [N])
-
-  // Auto-advance
+  // Continuous loop driven by gsap.ticker
   useEffect(() => {
-    if (N === 0) return
-    if (timerRef.current) clearTimeout(timerRef.current)
-    timerRef.current = setTimeout(() => goTo(active + 1), AUTO_MS)
-    return () => { if (timerRef.current) clearTimeout(timerRef.current) }
-  }, [active, goTo, N])
+    const SPEED = 1 / (LOOP_SECONDS * 60)
 
-  // Cursor parallax
-  const onMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    const track = trackRef.current
-    const ctr   = containerRef.current
-    if (!track || !ctr) return
-    const ref   = sectionRef.current ?? ctr
-    const { left, width } = ref.getBoundingClientRect()
-    const pct   = (e.clientX - left) / width - 0.5
-    const cw    = boxerCardWidth()
-    const baseX = ctr.offsetWidth / 2 - active * (cw + BOXER_GAP) - cw / 2
-    gsap.to(track, { x: baseX + pct * -36, duration: 1.0, ease: "power2.out", overwrite: "auto" })
-  }, [active])
+    const tick = () => {
+      const track = trackRef.current
+      const ctr   = containerRef.current
+      const n     = nRef.current
+      if (!track || !ctr || n === 0) return
 
-  const onMouseLeave = useCallback(() => { centerActive(false) }, [centerActive])
+      if (!isHoveredRef.current && !dragging.current) {
+        phaseRef.current = (phaseRef.current + SPEED) % 1
+      }
+
+      const cw    = boxerCardWidth()
+      const pitch = cw + BOXER_GAP
+      const total = n * pitch
+      const baseX = ctr.offsetWidth / 2 - n * pitch - cw / 2
+      gsap.set(track, { x: baseX - phaseRef.current * total })
+    }
+
+    gsap.ticker.add(tick)
+    return () => gsap.ticker.remove(tick)
+  }, [])
 
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    dragging.current   = true
-    didDrag.current    = false
-    dragStartX.current = e.clientX
+    dragging.current       = true
+    didDrag.current        = false
+    dragStartX.current     = e.clientX
+    dragStartPhase.current = phaseRef.current
     ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
   }
 
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!dragging.current) return
-    const dx = e.clientX - dragStartX.current
-    if (Math.abs(dx) > 8) didDrag.current = true
-    const track = trackRef.current
-    const ctr   = containerRef.current
-    if (!track || !ctr) return
-    const cw    = boxerCardWidth()
-    const baseX = ctr.offsetWidth / 2 - active * (cw + BOXER_GAP) - cw / 2
-    gsap.set(track, { x: baseX + dx })
+    const dx = dragStartX.current - e.clientX       // positive = drag left = advance
+    if (Math.abs(dx) > 6) didDrag.current = true
+    const n     = nRef.current
+    const total = n * (boxerCardWidth() + BOXER_GAP)
+    if (total > 0) phaseRef.current = ((dragStartPhase.current + dx / total) % 1 + 1) % 1
   }
 
-  const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!dragging.current) return
-    dragging.current = false
-    const dx = e.clientX - dragStartX.current
-    if (Math.abs(dx) > 44) {
-      goTo(active + (dx > 0 ? -1 : 1))
-    } else {
-      centerActive(false)
-    }
-  }
+  const onPointerUp = () => { dragging.current = false }
 
   return (
     <main className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-white">
@@ -353,14 +303,8 @@ export default function BoxersPage() {
         </div>
       </section>
 
-      {/* All Boxers Section — carousel */}
-      <section
-        ref={sectionRef}
-        className="all-boxers py-16 md:py-24 overflow-hidden"
-        onMouseMove={onMouseMove}
-        onMouseLeave={onMouseLeave}
-      >
-        <style>{`@keyframes dot-fill { from { transform: scaleX(0) } to { transform: scaleX(1) } }`}</style>
+      {/* All Boxers Section — continuous loop carousel */}
+      <section className="all-boxers py-16 md:py-24 overflow-hidden">
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Header with filters */}
@@ -466,102 +410,64 @@ export default function BoxersPage() {
             <p className="text-[#707072] text-lg">No boxers found matching your criteria.</p>
           </div>
         ) : (
-          <>
-            {/* Full-width carousel track */}
+          /* Full-width continuous loop carousel */
+          <div
+            ref={containerRef}
+            className="relative w-full overflow-hidden"
+            style={{ cursor: "grab", userSelect: "none" }}
+            onMouseEnter={() => { isHoveredRef.current = true }}
+            onMouseLeave={() => { isHoveredRef.current = false }}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={onPointerUp}
+          >
             <div
-              ref={containerRef}
-              className="relative w-full overflow-hidden"
-              style={{ cursor: "grab", userSelect: "none" }}
-              onPointerDown={onPointerDown}
-              onPointerMove={onPointerMove}
-              onPointerUp={onPointerUp}
+              className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 z-10"
+              style={{ background: "linear-gradient(to right, rgba(255,255,255,0.95), transparent)" }}
+            />
+            <div
+              className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 z-10"
+              style={{ background: "linear-gradient(to left, rgba(255,255,255,0.95), transparent)" }}
+            />
+
+            <div
+              ref={trackRef}
+              className="flex items-stretch py-4"
+              style={{ gap: BOXER_GAP, willChange: "transform" }}
             >
-              {/* Edge fade masks */}
-              <div
-                className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 z-10"
-                style={{ background: "linear-gradient(to right, rgba(255,255,255,0.95) 0%, transparent 100%)" }}
-              />
-              <div
-                className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 z-10"
-                style={{ background: "linear-gradient(to left, rgba(255,255,255,0.95) 0%, transparent 100%)" }}
-              />
-
-              {/* Sliding track */}
-              <div
-                ref={trackRef}
-                className="flex items-stretch py-4"
-                style={{ gap: BOXER_GAP, willChange: "transform" }}
-              >
-                {filteredBoxers.map((boxer, i) => {
-                  const isActive = i === active
-                  return (
-                    <div
-                      key={boxer.id}
-                      className="boxer-card-mr flex-none"
-                      style={{
-                        width: "clamp(158px, 18vw, 220px)",
-                        aspectRatio: "3/4",
-                        opacity: isActive ? 1 : 0.6,
-                        outline: isActive ? "2px solid var(--gold)" : "2px solid transparent",
-                        transition: "opacity 0.4s ease, outline 0.4s ease",
-                      }}
-                      onClick={() => { if (!didDrag.current) goTo(i) }}
-                    >
-                      <div className="image-wrap">
-                        <Image
-                          src={boxer.image}
-                          alt={`${boxer.firstName} ${boxer.lastName}`}
-                          fill
-                          sizes="(min-width: 1024px) 220px, (min-width: 640px) 190px, 158px"
-                          className="object-cover object-top"
-                          draggable={false}
-                        />
-                        <div className="gradient-overlay" />
-                      </div>
-                      <div className="card-hover-overlay">
-                        <span className="card-hover-weight">{boxer.weightClass}</span>
-                        <span className="card-hover-record">{boxer.record}</span>
-                        <span className="card-hover-kos">{boxer.kos} KOs</span>
-                      </div>
-                      <div className="card-text">
-                        <h2 className="!uppercase !font-bold">{boxer.firstName} {boxer.lastName}</h2>
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
+              {/* Triple the array for seamless infinite loop */}
+              {[...filteredBoxers, ...filteredBoxers, ...filteredBoxers].map((boxer, i) => (
+                <div
+                  key={`${boxer.id}-${i}`}
+                  className="boxer-card-mr flex-none"
+                  style={{
+                    width: "clamp(158px, 18vw, 220px)",
+                    aspectRatio: "3/4",
+                  }}
+                >
+                  <div className="image-wrap">
+                    <Image
+                      src={boxer.image}
+                      alt={`${boxer.firstName} ${boxer.lastName}`}
+                      fill
+                      sizes="(min-width: 1024px) 220px, (min-width: 640px) 190px, 158px"
+                      className="object-cover object-top"
+                      draggable={false}
+                    />
+                    <div className="gradient-overlay" />
+                  </div>
+                  <div className="card-hover-overlay">
+                    <span className="card-hover-weight">{boxer.weightClass}</span>
+                    <span className="card-hover-record">{boxer.record}</span>
+                    <span className="card-hover-kos">{boxer.kos} KOs</span>
+                  </div>
+                  <div className="card-text">
+                    <h2 className="!uppercase !font-bold">{boxer.firstName} {boxer.lastName}</h2>
+                  </div>
+                </div>
+              ))}
             </div>
-
-            {/* Dot indicators */}
-            <div className="max-w-7xl mx-auto px-6 lg:px-8">
-              <div className="mt-6 flex justify-center items-center gap-2">
-                {filteredBoxers.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => goTo(i)}
-                    aria-label={`Boxer ${i + 1}`}
-                    className="relative overflow-hidden bg-[#e0e0e0]"
-                    style={{
-                      height: 3,
-                      width: i === active ? 28 : 14,
-                      transition: "width 0.3s ease",
-                    }}
-                  >
-                    {i === active && (
-                      <span
-                        key={dotKey}
-                        className="absolute inset-0 origin-left"
-                        style={{
-                          background: "var(--gold)",
-                          animation: `dot-fill ${AUTO_MS}ms linear forwards`,
-                        }}
-                      />
-                    )}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </>
+          </div>
         )}
       </section>
 

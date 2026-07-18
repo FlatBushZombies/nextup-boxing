@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { gsap } from "gsap"
@@ -24,8 +24,9 @@ const champions = [
 ]
 
 const N = champions.length
-const AUTO_MS = 4800
-const GAP = 20 // px between cards
+const looped = [...champions, ...champions, ...champions]
+const GAP = 20
+const LOOP_SECONDS = 20 // full set scrolls past in 20 s
 
 function cardWidth() {
   if (typeof window === "undefined") return 240
@@ -35,47 +36,17 @@ function cardWidth() {
 }
 
 export function ChampionsSection() {
-  const [active, setActive] = useState(0)
-  const [dotKey, setDotKey] = useState(0)
+  const [active, setActive] = useState(Math.floor(N / 2))
 
-  const trackRef     = useRef<HTMLDivElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const sectionRef   = useRef<HTMLElement>(null)
-  const timerRef     = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const dragStartX   = useRef(0)
-  const dragging     = useRef(false)
-  const didDrag      = useRef(false)
-
-  // ── Center the active card inside the container ───────────────────
-  const centerActive = useCallback((instant = false) => {
-    const track = trackRef.current
-    const ctr   = containerRef.current
-    if (!track || !ctr) return
-    const cw    = cardWidth()
-    const pitch = cw + GAP
-    const targetX = ctr.offsetWidth / 2 - active * pitch - cw / 2
-    if (instant) {
-      gsap.set(track, { x: targetX })
-    } else {
-      gsap.to(track, { x: targetX, duration: 0.7, ease: "power3.out", overwrite: true })
-    }
-  }, [active])
-
-  // Animate on active change
-  useEffect(() => { centerActive(false) }, [centerActive])
-
-  // Instant position on mount (layout not yet measured → use rAF)
-  useEffect(() => {
-    const raf = requestAnimationFrame(() => centerActive(true))
-    return () => cancelAnimationFrame(raf)
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Recenter on resize
-  useEffect(() => {
-    const handle = () => centerActive(true)
-    window.addEventListener("resize", handle, { passive: true })
-    return () => window.removeEventListener("resize", handle)
-  }, [centerActive])
+  const trackRef       = useRef<HTMLDivElement>(null)
+  const containerRef   = useRef<HTMLDivElement>(null)
+  const phaseRef       = useRef(0.5)           // 0–1 position within one full set
+  const isHoveredRef   = useRef(false)
+  const dragging       = useRef(false)
+  const didDrag        = useRef(false)
+  const dragStartX     = useRef(0)
+  const dragStartPhase = useRef(0)
+  const lastActiveRef  = useRef(Math.floor(N / 2))
 
   // Fade-in on scroll
   useEffect(() => {
@@ -91,75 +62,63 @@ export function ChampionsSection() {
     })
   }, [])
 
-  // ── Navigate ──────────────────────────────────────────────────────
-  const goTo = useCallback((idx: number) => {
-    const next = ((idx % N) + N) % N
-    setActive(next)
-    setDotKey(k => k + 1)
+  // Continuous loop driven by gsap.ticker
+  useEffect(() => {
+    const SPEED = 1 / (LOOP_SECONDS * 60) // phase per frame
+
+    const tick = () => {
+      const track = trackRef.current
+      const ctr   = containerRef.current
+      if (!track || !ctr) return
+
+      if (!isHoveredRef.current && !dragging.current) {
+        phaseRef.current = (phaseRef.current + SPEED) % 1
+      }
+
+      const cw    = cardWidth()
+      const pitch = cw + GAP
+      const total = N * pitch
+      // x when phase=0: the first card of the middle set (index N) is centered
+      const baseX = ctr.offsetWidth / 2 - N * pitch - cw / 2
+      gsap.set(track, { x: baseX - phaseRef.current * total })
+
+      // Which original card is closest to center?
+      const ci = Math.round(((phaseRef.current * N) % N + N) % N)
+      if (ci !== lastActiveRef.current) {
+        lastActiveRef.current = ci
+        setActive(ci)
+      }
+    }
+
+    gsap.ticker.add(tick)
+    return () => gsap.ticker.remove(tick)
   }, [])
 
-  // Auto-advance
-  useEffect(() => {
-    if (timerRef.current) clearTimeout(timerRef.current)
-    timerRef.current = setTimeout(() => goTo(active + 1), AUTO_MS)
-    return () => { if (timerRef.current) clearTimeout(timerRef.current) }
-  }, [active, goTo])
+  const onMouseEnter = () => { isHoveredRef.current = true }
+  const onMouseLeave = () => { isHoveredRef.current = false }
 
-  // ── Cursor parallax — nudges the track by ±30 px ─────────────────
-  const onMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    const track = trackRef.current
-    const ctr   = containerRef.current
-    if (!track || !ctr) return
-    const { left, width } = (sectionRef.current ?? ctr).getBoundingClientRect()
-    const pct    = (e.clientX - left) / width - 0.5          // −0.5 … 0.5
-    const cw     = cardWidth()
-    const baseX  = ctr.offsetWidth / 2 - active * (cw + GAP) - cw / 2
-    gsap.to(track, { x: baseX + pct * -36, duration: 1.0, ease: "power2.out", overwrite: "auto" })
-  }, [active])
-
-  const onMouseLeave = useCallback(() => { centerActive(false) }, [centerActive])
-
-  // ── Drag ──────────────────────────────────────────────────────────
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    dragging.current  = true
-    didDrag.current   = false
-    dragStartX.current = e.clientX
+    dragging.current       = true
+    didDrag.current        = false
+    dragStartX.current     = e.clientX
+    dragStartPhase.current = phaseRef.current
     ;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
   }
 
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!dragging.current) return
-    const dx = e.clientX - dragStartX.current
-    if (Math.abs(dx) > 8) didDrag.current = true
-    // Live drag: shift track with finger
-    const track = trackRef.current
-    const ctr   = containerRef.current
-    if (!track || !ctr) return
-    const cw    = cardWidth()
-    const baseX = ctr.offsetWidth / 2 - active * (cw + GAP) - cw / 2
-    gsap.set(track, { x: baseX + dx })
+    const dx = dragStartX.current - e.clientX        // positive = drag left = advance
+    if (Math.abs(dx) > 6) didDrag.current = true
+    const total = N * (cardWidth() + GAP)
+    phaseRef.current = ((dragStartPhase.current + dx / total) % 1 + 1) % 1
   }
 
-  const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!dragging.current) return
-    dragging.current = false
-    const dx = e.clientX - dragStartX.current
-    if (Math.abs(dx) > 44) {
-      goTo(active + (dx > 0 ? -1 : 1))
-    } else {
-      centerActive(false) // snap back
-    }
-  }
+  const onPointerUp = () => { dragging.current = false }
 
   return (
     <section
-      ref={sectionRef}
       className="relative bg-white py-16 md:py-24 w-full overflow-hidden border-t border-[#e5e5e5]"
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
     >
-      <style>{`@keyframes dot-fill { from { transform: scaleX(0) } to { transform: scaleX(1) } }`}</style>
-
       <Image
         src="/boxer-shadow.png"
         alt=""
@@ -169,7 +128,7 @@ export function ChampionsSection() {
         className="pointer-events-none absolute -right-16 bottom-0 hidden h-[120%] w-auto opacity-[0.06] mix-blend-multiply md:block"
       />
 
-      {/* Ghost typography — huge outlined active fighter name */}
+      {/* Ghost typography — huge outlined name of the card nearest center */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 overflow-hidden text-center"
@@ -185,7 +144,6 @@ export function ChampionsSection() {
             userSelect: "none",
             letterSpacing: "0.05em",
             whiteSpace: "nowrap",
-            transition: "opacity 0.4s ease",
           }}
         >
           {champions[active].lastName}
@@ -193,7 +151,6 @@ export function ChampionsSection() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
         {/* Header */}
         <div className="mb-10">
           <Reveal as="word-reveal" className="flex items-center justify-between gap-4">
@@ -209,35 +166,34 @@ export function ChampionsSection() {
           </Reveal>
           <AnimatedLine color="gold" delay={100} className="mt-3" />
         </div>
-
       </div>
 
-      {/* Full-width carousel — no max-w constraint so cards bleed to edges */}
+      {/* Full-width continuous carousel */}
       <div
         ref={containerRef}
         className="relative w-full overflow-hidden"
         style={{ cursor: "grab", userSelect: "none" }}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
       >
-        {/* Edge fade masks */}
         <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 z-10"
-          style={{ background: "linear-gradient(to right, rgba(255,255,255,0.95) 0%, transparent 100%)" }} />
+          style={{ background: "linear-gradient(to right, rgba(255,255,255,0.95), transparent)" }} />
         <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 z-10"
-          style={{ background: "linear-gradient(to left, rgba(255,255,255,0.95) 0%, transparent 100%)" }} />
+          style={{ background: "linear-gradient(to left, rgba(255,255,255,0.95), transparent)" }} />
 
-        {/* Sliding track — all cards in one flex row at the same height */}
         <div
           ref={trackRef}
           className="flex items-stretch py-4"
           style={{ gap: GAP, willChange: "transform" }}
         >
-          {champions.map((fighter, i) => {
-            const isActive = i === active
+          {looped.map((fighter, i) => {
+            const isActive = i % N === active
             return (
               <div
-                key={fighter.image}
+                key={`${fighter.image}-${i}`}
                 className="boxer-card-mr flex-none"
                 style={{
                   width: "clamp(178px, 20vw, 258px)",
@@ -249,7 +205,11 @@ export function ChampionsSection() {
                   outline: isActive ? "2px solid var(--gold)" : "2px solid transparent",
                   transition: "filter 0.5s ease, transform 0.5s ease, outline 0.4s ease",
                 }}
-                onClick={() => { if (!didDrag.current) goTo(i) }}
+                onClick={() => {
+                  if (!didDrag.current) {
+                    phaseRef.current = (i % N) / N
+                  }
+                }}
               >
                 <div className="image-wrap">
                   <Image
@@ -278,36 +238,6 @@ export function ChampionsSection() {
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-        {/* Dot indicators */}
-        <div className="mt-6 flex justify-center items-center gap-2">
-          {champions.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              aria-label={`${champions[i].firstName} ${champions[i].lastName}`}
-              className="relative overflow-hidden bg-[#e0e0e0]"
-              style={{
-                height: 3,
-                width: i === active ? 28 : 14,
-                transition: "width 0.3s ease",
-              }}
-            >
-              {i === active && (
-                <span
-                  key={dotKey}
-                  className="absolute inset-0 origin-left"
-                  style={{
-                    background: "var(--gold)",
-                    animation: `dot-fill ${AUTO_MS}ms linear forwards`,
-                  }}
-                />
-              )}
-            </button>
-          ))}
-        </div>
-
-        {/* Rising Stars Banner */}
         <Reveal
           as="fade-up"
           className="mt-12 flex flex-col items-center justify-center gap-4 border border-[#e5e5e5] px-6 py-10 text-center sm:flex-row sm:justify-between sm:text-left"
@@ -325,7 +255,6 @@ export function ChampionsSection() {
             View All Boxers
           </Link>
         </Reveal>
-
       </div>
     </section>
   )
