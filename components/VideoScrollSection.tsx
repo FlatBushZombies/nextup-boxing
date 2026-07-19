@@ -66,8 +66,8 @@ export function VideoScrollSection() {
         scrollTrigger: {
           trigger: section,
           start:   "top top",
-          end:     "+=180%",
-          scrub:   1.5,
+          end:     "+=100%",
+          scrub:   1,
           pin:     true,
           anticipatePin: 1,
           onEnter: () => {

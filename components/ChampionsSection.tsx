@@ -26,7 +26,7 @@ const champions = [
 const N = champions.length
 const looped = [...champions, ...champions, ...champions]
 const GAP = 20
-const LOOP_SECONDS = 20 // full set scrolls past in 20 s
+const LOOP_SECONDS = 35 // full set scrolls past in 35 s
 
 function cardWidth() {
   if (typeof window === "undefined") return 240

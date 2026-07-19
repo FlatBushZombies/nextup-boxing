@@ -139,7 +139,7 @@ const weightClasses = [
 const sortOptions = ["A-Z", "Z-A", "Record"]
 
 const BOXER_GAP = 16
-const LOOP_SECONDS = 18 // full set scrolls past in 18 s
+const LOOP_SECONDS = 30 // full set scrolls past in 30 s
 
 function boxerCardWidth() {
   if (typeof window === "undefined") return 200
