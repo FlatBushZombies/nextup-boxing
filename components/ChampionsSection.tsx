@@ -82,8 +82,9 @@ export function ChampionsSection() {
       const baseX = ctr.offsetWidth / 2 - N * pitch - cw / 2
       gsap.set(track, { x: baseX - phaseRef.current * total })
 
-      // Which original card is closest to center?
-      const ci = Math.round(((phaseRef.current * N) % N + N) % N)
+      // Which original card is currently under the center?
+      // Use floor (not round) so the result is always in [0, N-1]
+      const ci = Math.floor(((phaseRef.current * N) % N + N) % N) % N
       if (ci !== lastActiveRef.current) {
         lastActiveRef.current = ci
         setActive(ci)
