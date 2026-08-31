@@ -150,31 +150,45 @@ const PlatformBadge = ({ platform }: { platform?: "instagram" | "tiktok" | "yout
 const AutoplayVideo = ({ src, className }: { src: string; className?: string }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
 
+  // Only decode/play while the tile is actually on screen — playing every
+  // reel at once (even off-screen ones) was competing with scroll for the
+  // main thread and GPU.
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
 
-    // Explicitly set muted to bypass React-specific rendering quirks
     video.muted = true
     video.defaultMuted = true
 
+    let visible = false
+
     const attemptPlay = () => {
+      if (!visible) return
       video.play().catch((err: any) => {
-        // Suppress known browser policy errors (NotSupportedError, NotAllowedError)
-        // These are expected and don't break functionality
         if (err.name !== "NotSupportedError" && err.name !== "NotAllowedError") {
           console.warn("Video playback error:", err.message)
         }
       })
     }
 
-    attemptPlay()
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting
+        if (visible) {
+          attemptPlay()
+        } else {
+          video.pause()
+        }
+      },
+      { threshold: 0.25 }
+    )
+    observer.observe(video)
 
-    // Retry triggers
     video.addEventListener("loadedmetadata", attemptPlay)
     video.addEventListener("canplay", attemptPlay)
 
     return () => {
+      observer.disconnect()
       video.removeEventListener("loadedmetadata", attemptPlay)
       video.removeEventListener("canplay", attemptPlay)
     }

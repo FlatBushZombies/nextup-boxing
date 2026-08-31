@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import Image from "next/image"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -15,15 +15,10 @@ if (typeof window !== "undefined") {
 // Kept as a fallback cap (ms) in case the event never fires (e.g. HMR, no loader)
 const HERO_DELAY_FALLBACK_MS = 400
 
-const SLIDE_HOLD_MS = 8000
-const FIRST_ADVANCE_MS = 5000
-
 export function HeroSection() {
   const sectionRef    = useRef<HTMLElement>(null)
   const heroFrameRef  = useRef<HTMLDivElement>(null)
   const bgWrapRef     = useRef<HTMLDivElement>(null)
-  const videoLayerRef = useRef<HTMLDivElement>(null)
-  const videoRef      = useRef<HTMLVideoElement>(null)
   const pinOverlayRef = useRef<HTMLDivElement>(null)
   const dateRowRef    = useRef<HTMLDivElement>(null)
   const leagueRef     = useRef<HTMLSpanElement>(null)
@@ -33,64 +28,7 @@ export function HeroSection() {
   const venueRef      = useRef<HTMLDivElement>(null)
   const ctaRef        = useRef<HTMLDivElement>(null)
   const scrollHintRef = useRef<HTMLDivElement>(null)
-  const dotsRef       = useRef<HTMLDivElement>(null)
   const flashRef      = useRef<HTMLDivElement>(null)
-
-  const [activeSlide, setActiveSlide] = useState<0 | 1>(0)
-  const [dotKey, setDotKey] = useState(0)
-  // Mirrors activeSlide — avoids stale closures inside timer callbacks
-  const activeSlideRef = useRef<number>(0)
-
-  // Slider: image (base) → video (crossfade in) → image (crossfade out) → …
-  useEffect(() => {
-    const video = videoRef.current
-    const videoLayer = videoLayerRef.current
-    if (!video || !videoLayer) return
-
-    // Ensure video layer starts hidden
-    gsap.set(videoLayer, { opacity: 0 })
-
-    // Color grade only on desktop
-    if (window.innerWidth >= 768) {
-      video.style.filter = "contrast(1.12) saturate(1.3) brightness(0.82)"
-    }
-
-    let timer: ReturnType<typeof setTimeout>
-
-    const advance = () => {
-      const next: 0 | 1 = activeSlideRef.current === 0 ? 1 : 0
-      activeSlideRef.current = next
-      setActiveSlide(next)
-      setDotKey((k) => k + 1)
-
-      if (next === 1) {
-        // Fade video IN over the static image
-        video.currentTime = 0
-        video.play().catch(() => {})
-        gsap.to(videoLayer, {
-          opacity: 1,
-          duration: 1.0,
-          ease: "power2.inOut",
-          onComplete: () => { timer = setTimeout(advance, SLIDE_HOLD_MS) },
-        })
-      } else {
-        // Fade video OUT — image underneath is always visible
-        gsap.to(videoLayer, {
-          opacity: 0,
-          duration: 1.0,
-          ease: "power2.inOut",
-          onComplete: () => { video.pause(); timer = setTimeout(advance, SLIDE_HOLD_MS) },
-        })
-      }
-    }
-
-    timer = setTimeout(advance, FIRST_ADVANCE_MS)
-
-    return () => {
-      clearTimeout(timer)
-      gsap.killTweensOf(videoLayer)
-    }
-  }, [])
 
   // Main GSAP context: entrance, pin, clip-path warp, parallax
   useEffect(() => {
@@ -114,7 +52,7 @@ export function HeroSection() {
     const ctx = gsap.context(() => {
       if (reduced) {
         gsap.set(
-          [dateRowRef.current, leagueRef.current, badgeRef.current, venueRef.current, ctaRef.current, scrollHintRef.current, dotsRef.current],
+          [dateRowRef.current, leagueRef.current, badgeRef.current, venueRef.current, ctaRef.current, scrollHintRef.current],
           { opacity: 1, y: 0 }
         )
         // line1/line2 start opacity:0 in JSX — snap them visible immediately
@@ -182,11 +120,6 @@ export function HeroSection() {
           { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
           "-=0.1"
         )
-        .fromTo(dotsRef.current,
-          { opacity: 0, y: 8 },
-          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
-          "-=0.35"
-        )
 
       // Store play fn where cleanup can reach it
       entrancePlay = () => { entranceTl.play() }
@@ -232,10 +165,6 @@ export function HeroSection() {
         )
         .to(scrollHintRef.current,
           { opacity: 0, y: -14, ease: "power2.in", duration: 0.3 },
-          0.5
-        )
-        .to(dotsRef.current,
-          { opacity: 0, duration: 0.3 },
           0.5
         )
 
@@ -293,7 +222,6 @@ export function HeroSection() {
 
   return (
     <>
-      <style>{`@keyframes dot-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }`}</style>
       <section
         id="hero"
         ref={sectionRef}
@@ -318,34 +246,6 @@ export function HeroSection() {
               className="object-contain object-top sm:object-cover sm:object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-[#111111]/20" />
-          </div>
-
-          {/* Slide 1: video layer — crossfades in over the image */}
-          <div
-            ref={videoLayerRef}
-            className="absolute inset-0"
-            style={{ zIndex: 2, opacity: 0 }}
-          >
-            <video
-              ref={videoRef}
-              src="/videos/hero.mp4"
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              poster="/hero-boxers.webp"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-            {/* Gradient keeps headline legible over video */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/50 to-[#111111]/15" />
-            {/* Radial vignette for cinematic depth */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "radial-gradient(ellipse at center, transparent 35%, rgba(17,17,17,0.65) 100%)",
-              }}
-            />
           </div>
 
           {/* Scroll-driven darkening overlay */}
@@ -462,31 +362,6 @@ export function HeroSection() {
               </a>
             </div>
           </div>
-        </div>
-
-        {/* Slide indicators — sharp 28×3px bars, active fills gold over hold */}
-        <div
-          ref={dotsRef}
-          style={{ opacity: 0 }}
-          className="pointer-events-none absolute bottom-6 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 sm:bottom-8"
-          aria-hidden="true"
-        >
-          {([0, 1] as const).map((i) => (
-            <div key={i} className="relative h-[3px] w-7 overflow-hidden bg-white/25">
-              {activeSlide === i && (
-                <span
-                  key={dotKey}
-                  className="absolute inset-0"
-                  style={{
-                    background: "var(--gold)",
-                    transformOrigin: "left",
-                    // dotKey===0 is the very first slide-0 fill, which lasts FIRST_ADVANCE_MS
-                    animation: `dot-fill ${dotKey === 0 ? FIRST_ADVANCE_MS : SLIDE_HOLD_MS}ms linear forwards`,
-                  }}
-                />
-              )}
-            </div>
-          ))}
         </div>
 
         {/* Scroll hint — fades in after entrance, fades out as pin progresses */}

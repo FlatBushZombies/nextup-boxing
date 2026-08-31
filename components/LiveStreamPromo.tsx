@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
+import Image from "next/image"
 import { ArrowDown, Play, Radio, ScanLine, Sparkles, Zap } from "lucide-react"
 
 const factoids = [
@@ -28,89 +29,20 @@ const storyBeats = [
   },
 ]
 
-const STREAM_VIDEO_URL =
-  "https://videos.pexels.com/video-files/8611533/8611533-hd_1920_1080_25fps.mp4"
-
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max)
 }
 
-function formatClock(seconds: number) {
-  const safeSeconds = Math.max(0, Math.floor(seconds))
-  const mins = Math.floor(safeSeconds / 60)
-  const secs = safeSeconds % 60
-
-  return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`
-}
-
 export function LiveStreamPromo() {
   const sectionRef = useRef<HTMLElement | null>(null)
-  const videoRef = useRef<HTMLVideoElement | null>(null)
   const introRef = useRef<HTMLDivElement | null>(null)
   const frameRef = useRef<HTMLDivElement | null>(null)
   const scanlineRef = useRef<HTMLDivElement | null>(null)
   const progressBarRef = useRef<HTMLDivElement | null>(null)
-  const [duration, setDuration] = useState(0)
-  const [currentTime, setCurrentTime] = useState(0)
   const [scrubProgress, setScrubProgress] = useState(0)
-  const [videoReady, setVideoReady] = useState(false)
   const [prefersReducedMotion] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
   )
-
-  useEffect(() => {
-    const video = videoRef.current
-
-    if (!video) {
-      return
-    }
-
-    const syncMetadata = () => {
-      setDuration(Number.isFinite(video.duration) ? video.duration : 0)
-      setVideoReady(true)
-
-      if (prefersReducedMotion) {
-        const playPromise = video.play()
-        playPromise?.catch(() => {})
-        return
-      }
-
-      video.pause()
-      video.currentTime = 0
-    }
-
-    const syncCurrentTime = () => {
-      if (prefersReducedMotion) {
-        setCurrentTime(video.currentTime)
-      }
-    }
-
-    video.addEventListener("loadedmetadata", syncMetadata)
-    video.addEventListener("durationchange", syncMetadata)
-    video.addEventListener("timeupdate", syncCurrentTime)
-
-    return () => {
-      video.removeEventListener("loadedmetadata", syncMetadata)
-      video.removeEventListener("durationchange", syncMetadata)
-      video.removeEventListener("timeupdate", syncCurrentTime)
-    }
-  }, [prefersReducedMotion])
-
-  useEffect(() => {
-    const video = videoRef.current
-
-    if (!video || !videoReady) {
-      return
-    }
-
-    if (prefersReducedMotion) {
-      const playPromise = video.play()
-      playPromise?.catch(() => {})
-      return
-    }
-
-    video.pause()
-  }, [prefersReducedMotion, videoReady])
 
   useEffect(() => {
     let ctx: any = null
@@ -182,7 +114,6 @@ export function LiveStreamPromo() {
           scrub: 0.5,
           onUpdate: (self) => {
             const normalizedProgress = clamp((self.progress - 0.08) / 0.84, 0, 1)
-            const video = videoRef.current
 
             gsap.set(scanline, {
               opacity: gsap.utils.interpolate(0.18, 0.08, normalizedProgress),
@@ -190,18 +121,6 @@ export function LiveStreamPromo() {
             gsap.set(progressBar, { scaleX: normalizedProgress, transformOrigin: "left center" })
 
             setScrubProgress(normalizedProgress)
-
-            if (!video || !duration) {
-              return
-            }
-
-            const nextTime = normalizedProgress * Math.max(duration - 0.12, 0)
-
-            if (Math.abs(video.currentTime - nextTime) > 0.04) {
-              video.currentTime = nextTime
-            }
-
-            setCurrentTime(nextTime)
           },
         })
       }, section)
@@ -213,7 +132,7 @@ export function LiveStreamPromo() {
       cancelled = true
       ctx?.revert?.()
     }
-  }, [duration, prefersReducedMotion])
+  }, [prefersReducedMotion])
 
   const activeBeat = useMemo(() => {
     for (let index = storyBeats.length - 1; index >= 0; index -= 1) {
@@ -335,22 +254,17 @@ export function LiveStreamPromo() {
                   </div>
 
                   <div className="rounded-full border border-white/10 bg-black/28 px-4 py-2 backdrop-blur-md">
-                    <span className="editorial-meta text-white/72">
-                      {videoReady ? formatClock(currentTime) : "--:--"} / {duration ? formatClock(duration) : "--:--"}
-                    </span>
+                    <span className="editorial-meta text-white/72">Preview</span>
                   </div>
                 </div>
 
                 <div className="relative aspect-[16/10] overflow-hidden rounded-[1.55rem] bg-black">
-                  <video
-                    ref={videoRef}
-                    src={STREAM_VIDEO_URL}
-                    poster="/broadcast-scene.png"
-                    muted
-                    playsInline
-                    loop={prefersReducedMotion}
-                    preload="metadata"
-                    className="h-full w-full object-cover"
+                  <Image
+                    src="/broadcast-scene.png"
+                    alt="Broadcast scene preview"
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-cover"
                   />
 
                   <div
