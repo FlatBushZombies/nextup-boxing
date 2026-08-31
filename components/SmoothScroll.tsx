@@ -20,7 +20,7 @@ export function SmoothScroll() {
     ScrollTrigger.config({ limitCallbacks: false, ignoreMobileResize: true, fastScrollEnd: 300 } as any)
 
     const lenis = new Lenis({
-      lerp: 0.08,
+      lerp: 0.15,
       smoothWheel: true,
       syncTouch: false, // native scroll on touch devices
     })

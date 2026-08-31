@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 
 // Minimum time the loader holds before the collapse starts
-const MIN_HOLD_MS = 1100
+const MIN_HOLD_MS = 450
 // Longest column delay (0.5s) + collapse duration (0.32s) + small buffer
 const COLLAPSE_TOTAL_MS = 850
 // Wrapper fade duration window before DOM removal

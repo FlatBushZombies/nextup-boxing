@@ -5,6 +5,7 @@ import Image from "next/image"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { SplitText } from "gsap/SplitText"
+import { EVENT_CONFIG } from "@/lib/event"
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, SplitText)
@@ -29,6 +30,7 @@ export function HeroSection() {
   const line1Ref      = useRef<HTMLSpanElement>(null)
   const line2Ref      = useRef<HTMLSpanElement>(null)
   const badgeRef      = useRef<HTMLDivElement>(null)
+  const venueRef      = useRef<HTMLDivElement>(null)
   const ctaRef        = useRef<HTMLDivElement>(null)
   const scrollHintRef = useRef<HTMLDivElement>(null)
   const dotsRef       = useRef<HTMLDivElement>(null)
@@ -112,7 +114,7 @@ export function HeroSection() {
     const ctx = gsap.context(() => {
       if (reduced) {
         gsap.set(
-          [dateRowRef.current, leagueRef.current, badgeRef.current, ctaRef.current, scrollHintRef.current, dotsRef.current],
+          [dateRowRef.current, leagueRef.current, badgeRef.current, venueRef.current, ctaRef.current, scrollHintRef.current, dotsRef.current],
           { opacity: 1, y: 0 }
         )
         // line1/line2 start opacity:0 in JSX — snap them visible immediately
@@ -165,6 +167,11 @@ export function HeroSection() {
           { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" },
           "-=0.42"
         )
+        .fromTo(venueRef.current,
+          { y: 12, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" },
+          "-=0.38"
+        )
         .fromTo(ctaRef.current,
           { y: 20, opacity: 0 },
           { y: 0, opacity: 1, duration: 0.65, ease: "power3.out" },
@@ -206,9 +213,9 @@ export function HeroSection() {
         scrollTrigger: {
           trigger: sectionRef.current,
           pin: true,
-          scrub: 1.5,
+          scrub: 0.5,
           start: "top top",
-          end: "+=75%",
+          end: "+=50%",
           anticipatePin: 1,
         },
       })
@@ -245,8 +252,8 @@ export function HeroSection() {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top top",
-            end: "+=75%",
-            scrub: 1.5,
+            end: "+=50%",
+            scrub: 0.5,
           },
         })
       }
@@ -410,8 +417,17 @@ export function HeroSection() {
             >
               <span className="pulse-glow h-2 w-2 rounded-full bg-white" />
               <span className="text-sm font-medium uppercase tracking-[0.15em] text-white">
-                Doors 4:30 · Fights 6 PM
+                Doors {EVENT_CONFIG.doorsTime} · Fights {EVENT_CONFIG.displayTime}
               </span>
+            </div>
+
+            {/* Venue */}
+            <div
+              ref={venueRef}
+              style={{ opacity: 0 }}
+              className="text-xs font-medium uppercase tracking-[0.15em] text-white/60"
+            >
+              {EVENT_CONFIG.venue} · {EVENT_CONFIG.address}
             </div>
 
             {/* CTAs */}

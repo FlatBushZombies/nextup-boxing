@@ -6,8 +6,8 @@ import { gsap } from "gsap"
 
 const INTERACTIVE_SELECTOR = "a, button, [data-magnetic]"
 const MAGNETIC_RADIUS = 80
-const RING_IDLE_BORDER = "rgba(255, 255, 255, 0.1)"
-const RING_HOVER_BORDER = "rgba(184, 150, 46, 0.6)"
+const RING_IDLE_BORDER = "#ffffff"
+const RING_HOVER_BORDER = "#b8962e"
 
 // Active only on fine-pointer devices without reduced motion.
 // useSyncExternalStore keeps SSR at `false` and reacts to media changes.
@@ -57,13 +57,22 @@ export default function MagneticCursor() {
     const magnetized = new Set<HTMLElement>()
     let hovered: Element | null = null
 
+    // Cached instead of re-queried every mousemove — [data-magnetic] elements
+    // don't change often, so a MutationObserver keeps this fresh cheaply.
+    let magnets: HTMLElement[] = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-magnetic]")
+    )
+    const magnetsObserver = new MutationObserver(() => {
+      magnets = Array.from(document.querySelectorAll<HTMLElement>("[data-magnetic]"))
+    })
+    magnetsObserver.observe(document.body, { childList: true, subtree: true })
+
     const onMouseMove = (e: MouseEvent) => {
       dotX(e.clientX)
       dotY(e.clientY)
       ringX(e.clientX)
       ringY(e.clientY)
 
-      const magnets = document.querySelectorAll<HTMLElement>("[data-magnetic]")
       magnets.forEach((el) => {
         const rect = el.getBoundingClientRect()
         // Subtract the current translation so the resting center stays stable.
@@ -137,6 +146,7 @@ export default function MagneticCursor() {
 
     return () => {
       document.documentElement.classList.remove("custom-cursor-active")
+      magnetsObserver.disconnect()
       document.removeEventListener("mousemove", onMouseMove)
       document.removeEventListener("mouseover", onMouseOver)
       document.removeEventListener("mousedown", onMouseDown)
@@ -169,6 +179,7 @@ export default function MagneticCursor() {
           borderRadius: 3,
           pointerEvents: "none",
           zIndex: 9998,
+          mixBlendMode: "difference",
         }}
       />
       <div
@@ -185,6 +196,7 @@ export default function MagneticCursor() {
           borderRadius: 2,
           pointerEvents: "none",
           zIndex: 9999,
+          mixBlendMode: "difference",
         }}
       />
     </>
