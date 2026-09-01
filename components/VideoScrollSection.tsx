@@ -66,7 +66,7 @@ export function VideoScrollSection() {
         scrollTrigger: {
           trigger: section,
           start:   "top top",
-          end:     "+=80%",
+          end:     "+=45%",
           scrub:   0.5,
           pin:     true,
           anticipatePin: 1,
@@ -87,20 +87,21 @@ export function VideoScrollSection() {
       tl.to(barTopRef.current, { y: "0%", duration: 0.45, ease: "power3.out" }, 0)
       tl.to(barBotRef.current, { y: "0%", duration: 0.45, ease: "power3.out" }, 0)
 
-      // Spotlight mask expands from below center
+      // Spotlight mask expands from below center — starts right as the bars
+      // land instead of leaving a dead scroll gap before anything else moves
       tl.to(textReveal, {
         WebkitMaskImage: MASK_VISIBLE,
         maskImage:       MASK_VISIBLE,
-        duration: 2,
+        duration: 1.3,
         ease: "power2.inOut",
-      }, 2)
+      }, 0.5)
 
       // Words rise inside the spotlight
-      tl.to(labelRef.current,    { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 1.85)
-      tl.to(word1Ref.current,    { opacity: 1, y: 0, duration: 0.7, ease: "power4.out" }, 2.05)
-      tl.to(word2Ref.current,    { opacity: 1, y: 0, duration: 0.7, ease: "power4.out" }, 2.25)
-      tl.to(word3Ref.current,    { opacity: 1, y: 0, duration: 0.7, ease: "power4.out" }, 2.45)
-      tl.to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 2.65)
+      tl.to(labelRef.current,    { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.6)
+      tl.to(word1Ref.current,    { opacity: 1, y: 0, duration: 0.55, ease: "power4.out" }, 0.8)
+      tl.to(word2Ref.current,    { opacity: 1, y: 0, duration: 0.55, ease: "power4.out" }, 1.0)
+      tl.to(word3Ref.current,    { opacity: 1, y: 0, duration: 0.55, ease: "power4.out" }, 1.2)
+      tl.to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 1.4)
     }, sectionRef)
 
     return () => { ctx.revert() }
