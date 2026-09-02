@@ -91,7 +91,7 @@ export function LiveStreamPromo() {
             trigger: section,
             start: "top top",
             end: "bottom bottom",
-            scrub: 0.5,
+            scrub: 0.35,
           },
         })
 
@@ -103,7 +103,7 @@ export function LiveStreamPromo() {
             trigger: section,
             start: "top top",
             end: "bottom bottom",
-            scrub: 0.5,
+            scrub: 0.35,
           },
         })
 
@@ -111,7 +111,7 @@ export function LiveStreamPromo() {
           trigger: section,
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.5,
+          scrub: 0.35,
           onUpdate: (self) => {
             const normalizedProgress = clamp((self.progress - 0.08) / 0.84, 0, 1)
 

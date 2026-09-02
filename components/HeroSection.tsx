@@ -124,23 +124,6 @@ export function HeroSection() {
       // Store play fn where cleanup can reach it
       entrancePlay = () => { entranceTl.play() }
 
-      // Scroll parallax — headline drifts up as hero exits viewport
-      if (line1Ref.current && !reduced) {
-        gsap.fromTo(line1Ref.current,
-          { yPercent: 0 },
-          {
-            yPercent: 100,
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top top",
-              end: "bottom center",
-              scrub: true,
-            },
-          }
-        )
-      }
-
       // ── 3. Section pin — hero holds while scroll-driven effects play ─
       const pinTl = gsap.timeline({
         scrollTrigger: {

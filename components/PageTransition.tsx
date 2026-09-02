@@ -29,7 +29,19 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
       el.style.transform = "translateY(0px)"
     })
 
-    return () => cancelAnimationFrame(id)
+    // Any non-"none" transform on this wrapper — even a no-op translateY(0px)
+    // — becomes the containing block for `position: fixed` descendants (the
+    // Navbar included), so it stops tracking the viewport and scrolls away
+    // with the page instead. Clear it once the entrance animation settles.
+    const clearTransform = (e: TransitionEvent) => {
+      if (e.propertyName === "transform") el.style.transform = "none"
+    }
+    el.addEventListener("transitionend", clearTransform)
+
+    return () => {
+      cancelAnimationFrame(id)
+      el.removeEventListener("transitionend", clearTransform)
+    }
   }, [pathname])
 
   // The inline opacity: 0 prevents a flash of unstyled content before JS runs.

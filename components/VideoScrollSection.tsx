@@ -67,7 +67,7 @@ export function VideoScrollSection() {
           trigger: section,
           start:   "top top",
           end:     "+=45%",
-          scrub:   0.5,
+          scrub:   0.35,
           pin:     true,
           anticipatePin: 1,
           onEnter: () => {
@@ -83,9 +83,13 @@ export function VideoScrollSection() {
         },
       })
 
-      // Letterbox bars glide in at start of pin
-      tl.to(barTopRef.current, { y: "0%", duration: 0.45, ease: "power3.out" }, 0)
-      tl.to(barBotRef.current, { y: "0%", duration: 0.45, ease: "power3.out" }, 0)
+      // Letterbox bars glide in at start of pin.
+      // ease: "none" throughout — this timeline is scrub-driven, so its own
+      // scrub value already provides the smoothing; a non-linear ease inside
+      // a scrubbed tween fights the scrub and makes progress lag then jump
+      // to catch up with the scrollbar instead of tracking it directly.
+      tl.to(barTopRef.current, { y: "0%", duration: 0.45, ease: "none" }, 0)
+      tl.to(barBotRef.current, { y: "0%", duration: 0.45, ease: "none" }, 0)
 
       // Spotlight mask expands from below center — starts right as the bars
       // land instead of leaving a dead scroll gap before anything else moves
@@ -93,15 +97,15 @@ export function VideoScrollSection() {
         WebkitMaskImage: MASK_VISIBLE,
         maskImage:       MASK_VISIBLE,
         duration: 1.3,
-        ease: "power2.inOut",
+        ease: "none",
       }, 0.5)
 
       // Words rise inside the spotlight
-      tl.to(labelRef.current,    { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.6)
-      tl.to(word1Ref.current,    { opacity: 1, y: 0, duration: 0.55, ease: "power4.out" }, 0.8)
-      tl.to(word2Ref.current,    { opacity: 1, y: 0, duration: 0.55, ease: "power4.out" }, 1.0)
-      tl.to(word3Ref.current,    { opacity: 1, y: 0, duration: 0.55, ease: "power4.out" }, 1.2)
-      tl.to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 1.4)
+      tl.to(labelRef.current,    { opacity: 1, y: 0, duration: 0.5, ease: "none" }, 0.6)
+      tl.to(word1Ref.current,    { opacity: 1, y: 0, duration: 0.55, ease: "none" }, 0.8)
+      tl.to(word2Ref.current,    { opacity: 1, y: 0, duration: 0.55, ease: "none" }, 1.0)
+      tl.to(word3Ref.current,    { opacity: 1, y: 0, duration: 0.55, ease: "none" }, 1.2)
+      tl.to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "none" }, 1.4)
     }, sectionRef)
 
     return () => { ctx.revert() }
