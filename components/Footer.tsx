@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Reveal } from "@/components/Reveal"
+import { EVENT_CONFIG } from "@/lib/event"
 
 const SOCIAL_LINKS = [
   {
@@ -35,19 +36,18 @@ const SOCIAL_LINKS = [
   },
 ]
 
-const EXPLORE_LINKS = [
+const QUICK_LINKS = [
   { label: "Boxers", href: "/boxers" },
   { label: "Events", href: "/events" },
   { label: "Rankings", href: "/rankings" },
   { label: "Champions", href: "/champions" },
-  { label: "Stream", href: "/#youtube" },
 ]
 
 export function Footer() {
   return (
     <footer id="about" className="footer-nike">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-[2fr_1fr_1fr] md:gap-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.3fr_1fr] md:gap-16 lg:gap-24">
 
           {/* Brand */}
           <Reveal as="fade-up" delay={0} duration={0.8}>
@@ -59,10 +59,11 @@ export function Footer() {
                 height={56}
                 className="h-auto w-28 sm:w-32"
               />
-              <p className="mt-4 max-w-sm text-sm font-normal leading-relaxed text-white/60">
-                Premium boxing events, live fight nights, and fighter stories.
+              <p className="mt-5 max-w-sm text-sm font-normal leading-relaxed text-white/55">
+                Premium boxing events, live fight nights, and fighter stories — showcasing elite amateurs on Long Island.
               </p>
-              <div className="mt-6 flex items-center gap-4">
+
+              <div className="mt-8 flex items-center gap-5">
                 {SOCIAL_LINKS.map(({ label, href, icon }) => (
                   <a
                     key={label}
@@ -70,49 +71,50 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="text-white/50 transition-all duration-300 hover:text-white hover:-translate-y-0.5"
+                    data-magnetic
+                    className="text-white/50 transition-colors duration-300 hover:text-white"
                   >
                     <span className="block h-5 w-5">{icon}</span>
                   </a>
                 ))}
               </div>
-            </div>
-          </Reveal>
 
-          {/* Explore */}
-          <Reveal as="fade-up" delay={80} duration={0.8}>
-            <div>
-              <h3 className="text-base font-medium text-white">Explore</h3>
-              <ul className="mt-4 space-y-3">
-                {EXPLORE_LINKS.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="group relative inline-flex items-center text-base font-normal text-white/60 transition-colors duration-300 hover:text-white"
-                    >
-                      <span className="absolute -bottom-px left-0 h-px w-0 bg-white/40 transition-all duration-300 group-hover:w-full" />
-                      {link.label}
-                    </Link>
-                  </li>
+              <nav aria-label="Quick links" className="mt-10 flex flex-wrap gap-x-6 gap-y-3">
+                {QUICK_LINKS.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="editorial-meta text-white/45 transition-colors duration-300 hover:text-white"
+                  >
+                    {link.label}
+                  </Link>
                 ))}
-              </ul>
+              </nav>
             </div>
           </Reveal>
 
-          {/* Tickets */}
-          <Reveal as="fade-up" delay={160} duration={0.8}>
-            <div>
-              <h3 className="text-base font-medium text-white">Fight Night 12</h3>
-              <p className="mt-4 text-base font-normal text-white/60">
-                Get your tickets for the next event.
+          {/* Next event */}
+          <Reveal as="fade-up" delay={120} duration={0.8}>
+            <div className="border border-white/10 bg-white/[0.02] p-7 sm:p-9">
+              <span className="section-eyebrow text-[var(--gold)]">Next Event</span>
+              <h3 className="mt-3 font-display text-3xl uppercase leading-[0.95] text-white sm:text-4xl">
+                {EVENT_CONFIG.name}
+              </h3>
+              <p className="mt-4 text-sm text-white/55">
+                {EVENT_CONFIG.displayDate} · {EVENT_CONFIG.venue}, {EVENT_CONFIG.city}
               </p>
               <a
                 href="https://strongislandfights.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center rounded-full bg-gold px-6 py-3 text-xs font-medium uppercase tracking-wide text-[#111111] transition-all duration-300 hover:bg-[var(--gold-light)] hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(184,150,46,0.35)]"
+                data-magnetic
+                className="cta-cinematic cta-primary-c mt-7 flex h-12 w-full items-center justify-center bg-white px-8 font-sans text-sm font-medium uppercase tracking-wide text-[#111111] sm:w-auto"
               >
-                Buy Tickets
+                <span className="cta-sweep" />
+                <span className="cta-inner">
+                  <span className="cta-label cta-label-top">Buy Tickets</span>
+                  <span className="cta-label cta-label-bot">Buy Tickets</span>
+                </span>
               </a>
             </div>
           </Reveal>
@@ -120,19 +122,17 @@ export function Footer() {
 
         {/* Bottom bar */}
         <Reveal as="fade-up" delay={200} duration={0.7}>
-          <div className="mt-12 flex flex-col-reverse items-center justify-between gap-6 border-t border-white/10 pt-6 sm:flex-row">
-            <p className="text-xs font-normal text-white/50">
-              © 2026 NextUp Boxing League. All rights reserved.
+          <div className="mt-14 flex flex-col-reverse items-center justify-between gap-6 border-t border-white/10 pt-8 sm:flex-row">
+            <p className="text-xs font-normal text-white/40">
+              © {new Date().getFullYear()} NextUp Boxing League. All rights reserved.
             </p>
-            <div className="rounded-full px-3 py-1.5">
-              <Image
-                src="/usa-boxing-metro-logo.png"
-                alt="USA Boxing Metro"
-                width={72}
-                height={28}
-                className="h-auto opacity-80"
-              />
-            </div>
+            <Image
+              src="/usa-boxing-metro-logo.png"
+              alt="USA Boxing Metro"
+              width={72}
+              height={28}
+              className="h-auto opacity-70"
+            />
           </div>
         </Reveal>
       </div>

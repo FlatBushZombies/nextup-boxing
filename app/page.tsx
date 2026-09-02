@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   // title.default in layout.tsx handles the root title; this keeps it clean.
   title: "Next Up Boxing League — Showcasing Elite Amateurs™",
   description:
-    "Live amateur boxing events on Long Island. Watch Fight Night XI live — upcoming bouts, fighter rankings, and champion history. Next Up Boxing League.",
+    "Live amateur boxing events on Long Island. Watch Fight Night XII live — upcoming bouts, fighter rankings, and champion history. Next Up Boxing League.",
   alternates: {
     canonical: "/",
   },

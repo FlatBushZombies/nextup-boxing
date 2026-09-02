@@ -822,7 +822,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.12s ease;
+  /* No transform transition here — [data-magnetic] elements have their
+     transform driven continuously by GSAP (MagneticCursor.tsx); a CSS
+     transition on the same property fights it and makes hover/press feel
+     laggy. Press feedback for magnetic targets is applied via GSAP instead. */
 }
 
 .cta-cinematic .cta-sweep {

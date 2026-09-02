@@ -131,12 +131,26 @@ export default function MagneticCursor() {
       }
     }
 
+    // Tracks the pressed [data-magnetic] target across mousedown → mouseup —
+    // its transform is GSAP-driven (magnetic pull), so CSS `:active` scale
+    // rules never win against that inline style; press feedback has to
+    // happen here instead.
+    let pressedTarget: HTMLElement | null = null
+
     const onMouseDown = () => {
       gsap.to(dot, { scale: 0.7, duration: 0.15, ease: "power2.out", overwrite: "auto" })
+      pressedTarget = hovered instanceof HTMLElement ? hovered.closest<HTMLElement>("[data-magnetic]") : null
+      if (pressedTarget) {
+        gsap.to(pressedTarget, { scale: 0.96, duration: 0.12, ease: "power2.out", overwrite: "auto" })
+      }
     }
 
     const onMouseUp = () => {
       gsap.to(dot, { scale: 1, duration: 0.2, ease: "power2.out", overwrite: "auto" })
+      if (pressedTarget) {
+        gsap.to(pressedTarget, { scale: 1, duration: 0.25, ease: "power2.out", overwrite: "auto" })
+        pressedTarget = null
+      }
     }
 
     document.addEventListener("mousemove", onMouseMove)
@@ -154,9 +168,14 @@ export default function MagneticCursor() {
       gsap.killTweensOf([dot, ring])
       magnetized.forEach((el) => {
         gsap.killTweensOf(el)
-        gsap.set(el, { x: 0, y: 0 })
+        gsap.set(el, { x: 0, y: 0, scale: 1 })
       })
       magnetized.clear()
+      if (pressedTarget) {
+        gsap.killTweensOf(pressedTarget)
+        gsap.set(pressedTarget, { scale: 1 })
+        pressedTarget = null
+      }
     }
   }, [active])
 
