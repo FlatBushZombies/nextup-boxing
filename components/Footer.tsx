@@ -1,5 +1,4 @@
 import Image from "next/image"
-import Link from "next/link"
 
 const SOCIAL_LINKS = [
   {
@@ -34,19 +33,11 @@ const SOCIAL_LINKS = [
   },
 ]
 
-const EXPLORE_LINKS = [
-  { label: "Boxers", href: "/boxers" },
-  { label: "Events", href: "/events" },
-  { label: "Rankings", href: "/rankings" },
-  { label: "Champions", href: "/champions" },
-  { label: "Stream", href: "/#youtube" },
-]
-
 export function Footer() {
   return (
     <footer id="about" className="footer-nike">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-[2fr_1fr_1fr] md:gap-16">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-[2fr_1fr] md:gap-16">
           {/* Brand */}
           <div>
             <Image
@@ -73,20 +64,6 @@ export function Footer() {
                 </a>
               ))}
             </div>
-          </div>
-
-          {/* Explore */}
-          <div>
-            <h3 className="text-base font-medium text-white">Explore</h3>
-            <ul className="mt-4 space-y-3">
-              {EXPLORE_LINKS.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="text-base font-normal text-white/60 transition-colors hover:text-white">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
 
           {/* Tickets */}

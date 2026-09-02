@@ -35,7 +35,7 @@ export function HeroSection() {
                 Sat
               </span>
               <span className="text-sm font-medium uppercase tracking-[0.15em] text-white">
-                June 6th
+                Sept 12th
               </span>
             </div>
 
@@ -47,22 +47,27 @@ export function HeroSection() {
             {/* Event Title */}
             <h1 className="text-[3.2rem] uppercase leading-[0.95] text-[var(--gold-light)] min-[380px]:text-[3.8rem] sm:text-[5.6rem] md:text-[6rem] lg:text-[76px] font-display">
               Strong Island
-              <span className="block text-[var(--crimson-light)]">Fight Night 11</span>
+              <span className="block text-[var(--crimson-light)]">Fight Night 12</span>
             </h1>
 
             {/* Time Info */}
             <div className="mt-2 inline-flex items-center gap-2 border border-white/20 px-4 py-2">
               <span className="pulse-glow h-2 w-2 rounded-full bg-white" />
               <span className="text-sm font-medium uppercase tracking-[0.15em] text-white">
-                5 PM Sharp
+                Doors 4:30 · Fights 6 PM
               </span>
             </div>
+
+            {/* Venue */}
+            <span className="text-xs font-medium uppercase tracking-[0.15em] text-white/60">
+              Stereo Garden · 9 Railroad Ave, Patchogue NY
+            </span>
           </Reveal>
 
           {/* CTA Buttons */}
           <Reveal as="fade-up" delay={120} className="relative z-30 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center">
             <a
-              href="https://www.simpletix.com/e/strong-island-fight-night-11-tickets-254611"
+              href="https://strongislandfights.com"
               target="_blank"
               rel="noopener noreferrer"
               className="flex min-h-12 w-full sm:w-auto items-center justify-center bg-white px-8 py-3 text-center text-sm font-medium uppercase tracking-wide text-[#111111] transition-colors hover:bg-gold hover:text-[#111111]"
