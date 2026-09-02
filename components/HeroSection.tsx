@@ -340,7 +340,6 @@ export function HeroSection() {
                 href="https://strongislandfights.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                data-magnetic
                 className="cta-cinematic cta-primary-c flex min-h-12 w-full sm:w-auto items-center justify-center bg-white px-8 py-3 font-sans text-sm font-medium uppercase tracking-wide text-[#111111]"
               >
                 <span className="cta-sweep" />
@@ -351,7 +350,6 @@ export function HeroSection() {
               </a>
               <a
                 href="#livestream"
-                data-magnetic
                 className="cta-cinematic cta-secondary-c flex min-h-12 w-full sm:w-auto items-center justify-center border border-white/30 bg-transparent px-8 py-3 font-sans text-sm font-medium uppercase tracking-wide text-white"
               >
                 <span className="cta-sweep" />

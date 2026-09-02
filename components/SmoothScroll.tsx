@@ -15,9 +15,11 @@ export function SmoothScroll() {
   const pathname = usePathname()
 
   useEffect(() => {
-    // Never skip trigger callbacks on fast scroll; detect "jumped past" triggers
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ScrollTrigger.config({ limitCallbacks: false, ignoreMobileResize: true, fastScrollEnd: 300 } as any)
+    // Never skip trigger callbacks on fast scroll; detect "jumped past" triggers.
+    // fastScrollEnd deliberately left at GSAP's default (off) — a low threshold
+    // here was snapping scrubbed animations (incl. full-screen black overlays)
+    // straight to their end state on any moderately fast flick, flashing black.
+    ScrollTrigger.config({ limitCallbacks: false, ignoreMobileResize: true })
 
     const lenis = new Lenis({
       lerp: 0.15,

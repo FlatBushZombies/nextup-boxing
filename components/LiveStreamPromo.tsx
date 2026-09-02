@@ -148,7 +148,7 @@ export function LiveStreamPromo() {
     <section
       id="livestream"
       ref={sectionRef}
-      className="relative min-h-[220vh] overflow-hidden bg-[#050811]"
+      className="relative min-h-[150vh] overflow-hidden bg-[#050811]"
     >
       <div className="futuristic-grid absolute inset-0 opacity-40" />
       <div className="scanline-overlay absolute inset-0 opacity-50" />
