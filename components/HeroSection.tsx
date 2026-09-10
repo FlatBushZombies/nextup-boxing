@@ -220,8 +220,8 @@ export function HeroSection() {
             style={{ top: "-14%", bottom: "-14%", zIndex: 1 }}
           >
             <Image
-              src="/hero-boxers.webp"
-              alt="Main event fighters"
+              src="/12-sept-poster.webp"
+              alt="Strong Island Fight Night 12 — September 12 event poster"
               fill
               priority
               sizes="100vw"
