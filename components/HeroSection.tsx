@@ -10,13 +10,12 @@ export function HeroSection() {
       {/* Background image */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <Image
-          src="/hero-boxers.webp"
-          alt="Main event fighters"
+          src="/12-sept-poster.webp"
+          alt="Strong Island Fight Night 12 — September 12 event poster"
           fill
           priority
           sizes="100vw"
-          style={{ objectPosition: "center 20%" }}
-          className="object-contain object-top sm:object-cover sm:object-center"
+          className="object-contain object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-[#111111]/20" />
       </div>
