@@ -225,8 +225,7 @@ export function HeroSection() {
               fill
               priority
               sizes="100vw"
-              style={{ objectPosition: "center 20%" }}
-              className="object-contain object-top sm:object-cover sm:object-center"
+              className="object-contain object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-[#111111]/20" />
           </div>
