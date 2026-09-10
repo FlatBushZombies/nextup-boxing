@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic"
+// import dynamic from "next/dynamic"
 import { Navbar } from "@/components/Navbar"
 import { HeroSection } from "@/components/HeroSection"
 import { ChampionsSection } from "@/components/ChampionsSection"
@@ -7,8 +7,8 @@ import { SponsorsStrip } from "@/components/SponsorsStrip"
 import { Footer } from "@/components/Footer"
 import { NextUpLiveStream } from "@/components/NextUpLiveStream"
 
-const SocialWall = dynamic(() => import("@/components/SocialWall").then((mod) => mod.SocialWall))
-const MagazineSection = dynamic(() => import("@/components/magazine/magaine-section").then((mod) => mod.MagazineSection))
+// const SocialWall = dynamic(() => import("@/components/SocialWall").then((mod) => mod.SocialWall))
+// const MagazineSection = dynamic(() => import("@/components/magazine/magaine-section").then((mod) => mod.MagazineSection))
 
 export default function Home() {
   return (
@@ -17,10 +17,10 @@ export default function Home() {
       <HeroSection />
       <NextUpLiveStream />
       <ChampionsSection />
-      <SocialWall /> 
+      {/* <SocialWall /> */}
       <YoutubeSection />
       <SponsorsStrip />
-      <MagazineSection />
+      {/* <MagazineSection /> */}
       <Footer />
     </main>
   )
