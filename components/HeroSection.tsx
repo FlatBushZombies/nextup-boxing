@@ -15,7 +15,7 @@ export function HeroSection() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-contain object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-[#111111]/20" />
       </div>
@@ -25,7 +25,7 @@ export function HeroSection() {
 
       {/* Main content */}
       <div className="relative z-20 mx-auto flex min-h-[100dvh] w-full max-w-7xl items-center justify-center px-4 pb-8 pt-28 sm:block sm:h-full sm:min-h-0 sm:px-8 sm:pb-0 sm:pt-0 lg:px-16">
-        <div className="relative z-30 flex w-full max-w-[calc(100vw-2rem)] flex-col items-start gap-4 text-left sm:absolute sm:inset-x-auto sm:left-[6%] sm:bottom-10 sm:w-auto sm:max-w-[36rem] sm:gap-7 md:left-[7%] md:max-w-[40rem] lg:left-[8%] lg:bottom-16 xl:left-[9%]">
+        <div className="relative z-30 flex w-full max-w-[calc(100vw-2rem)] flex-col items-start gap-4 text-left sm:absolute sm:inset-x-auto sm:left-0 sm:bottom-10 sm:w-auto sm:max-w-[36rem] sm:gap-7 md:max-w-[40rem] lg:bottom-16">
           {/* Event details */}
           <Reveal as="fade-up" className="flex flex-col items-start gap-2 sm:gap-3">
             {/* Date Eyebrow */}
