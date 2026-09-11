@@ -10,11 +10,11 @@ import { Menu, X, User, LogOut, ChevronDown } from "lucide-react"
 import { useAuth } from "@/lib/auth-context"
 
 const navLinks = [
-  { label: "Home", href: "/#hero" },
-  { label: "Boxers", href: "/boxers" },
-  { label: "Events", href: "/events" },
-  { label: "Rankings", href: "/rankings" },
-  { label: "Champions", href: "/champions" },
+  // { label: "Home", href: "/#hero" },
+  // { label: "Boxers", href: "/boxers" },
+  // { label: "Events", href: "/events" },
+  // { label: "Rankings", href: "/rankings" },
+  // { label: "Champions", href: "/champions" },
   { label: "Stream", href: "/#livestream" },
 ]
 
