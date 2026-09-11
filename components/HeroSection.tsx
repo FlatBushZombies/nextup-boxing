@@ -73,14 +73,14 @@ export function HeroSection() {
 
         {/* Poster */}
         <Reveal as="fade-in" className="order-1 lg:order-2">
-          <div className="relative h-[46vh] w-full sm:h-[54vh] lg:h-[78vh]">
+          <div className="relative w-full aspect-[2011/782]">
             <Image
               src="/12-sept-poster.webp"
               alt="Strong Island Fight Night 12 — September 12 event poster"
               fill
               priority
               sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-contain object-center"
+              className="object-cover object-center"
             />
           </div>
         </Reveal>
