@@ -1,7 +1,7 @@
 // import dynamic from "next/dynamic"
 import { Navbar } from "@/components/Navbar"
 import { HeroSection } from "@/components/HeroSection"
-import { ChampionsSection } from "@/components/ChampionsSection"
+// import { ChampionsSection } from "@/components/ChampionsSection"
 import { YoutubeSection } from "@/components/YoutubeSection"
 import { SponsorsStrip } from "@/components/SponsorsStrip"
 import { Footer } from "@/components/Footer"
@@ -16,7 +16,7 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <NextUpLiveStream />
-      <ChampionsSection />
+      {/* <ChampionsSection /> */}
       {/* <SocialWall /> */}
       <YoutubeSection />
       <SponsorsStrip />
